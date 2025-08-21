@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xat Classic - Authentic Experience</title>
+  <meta name="description" content="Authentic xat.com classic chat experience">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/chat.css">
+  <style>
+    /* Authentic Xat.com Classic Theme */
+    :root {
+      --xat-bg: #1a1a2e;
+      --xat-sidebar: #16213e;
+      --xat-header: #0f3460;
+      --xat-text: #e94560;
+      --xat-text-light: #ffffff;
+      --xat-border: #533483;
+      --xat-highlight: #ff6b6b;
+      --xat-purple: #8b5cf6;
+      --xat-blue: #3b82f6;
+      --xat-pink: #ec4899;
+      --xat-green: #10b981;
+      --xat-yellow: #f59e0b;
+      --xat-orange: #f97316;
+      --xat-grey: #6b7280;
+    }
+
+    body {
+      background: var(--xat-bg);
+      color: var(--xat-text-light);
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    /* Classic Xat Layout */
+    .xat-container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* Main Chat Area (Left) */
+    .xat-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--xat-bg);
+      border-right: 2px solid var(--xat-border);
+    }
+
+    /* Header */
+    .xat-header {
+      background: var(--xat-header);
+      padding: 10px 20px;
+      border-bottom: 2px solid var(--xat-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 50px;
+    }
+
+    .xat-title {
+      color: var(--xat-highlight);
+      font-size: 18px;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+
+    .xat-room-info {
+      color: var(--xat-text-light);
+      font-size: 14px;
+    }
+
+    .xat-connection {
+      color: var(--xat-green);
+      font-size: 12px;
+    }
+
+    /* Messages Area */
+    .xat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      background: var(--xat-bg);
+    }
+
+    .xat-message {
+      margin-bottom: 8px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      background: rgba(255,255,255,0.05);
+      border-left: 3px solid var(--xat-purple);
+    }
+
+    .xat-message-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 3px;
+    }
+
+    .xat-username {
+      color: var(--xat-highlight);
+      font-weight: bold;
+      margin-right: 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .xat-username:hover {
+      text-decoration: underline;
+    }
+
+    .xat-timestamp {
+      color: var(--xat-text);
+      font-size: 11px;
+    }
+
+    .xat-message-content {
+      color: var(--xat-text-light);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .xat-system-message {
+      background: rgba(139, 92, 246, 0.2);
+      border-left-color: var(--xat-purple);
+      text-align: center;
+      font-style: italic;
+    }
+
+    .xat-join-message {
+      background: rgba(16, 185, 129, 0.2);
+      border-left-color: var(--xat-green);
+    }
+
+    .xat-leave-message {
+      background: rgba(239, 68, 68, 0.2);
+      border-left-color: var(--xat-highlight);
+    }
+
+    /* Smiley Bar (Below Input) */
+    .xat-smiley-bar {
+      background: var(--xat-header);
+      padding: 8px 15px;
+      border-top: 1px solid var(--xat-border);
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 50px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+    }
+
+    .xat-smiley-item {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--xat-border);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all 0.2s;
+      background: var(--xat-bg);
+      flex-shrink: 0;
+    }
+
+    .xat-smiley-item:hover {
+      border-color: var(--xat-highlight);
+      transform: scale(1.2);
+      background: var(--xat-purple);
+    }
+
+    /* Input Area */
+    .xat-input-area {
+      background: var(--xat-header);
+      padding: 10px 15px;
+      border-top: 1px solid var(--xat-border);
+    }
+
+    .xat-input-container {
+      display: flex;
+      gap: 0;
+    }
+
+    .xat-message-input {
+      flex: 1;
+      background: var(--xat-bg);
+      border: 1px solid var(--xat-border);
+      border-radius: 3px;
+      color: var(--xat-text-light);
+      padding: 8px 12px;
+      font-size: 13px;
+      resize: none;
+      height: 40px;
+      font-family: Arial, sans-serif;
+    }
+
+    .xat-message-input:focus {
+      outline: none;
+      border-color: var(--xat-highlight);
+    }
+
+    /* Control Bar (Below Input) */
+    .xat-control-bar {
+      background: var(--xat-header);
+      padding: 10px 15px;
+      border-top: 1px solid var(--xat-border);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      height: 50px;
+    }
+
+    .xat-control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .xat-control-btn {
+      background: var(--xat-bg);
+      border: 1px solid var(--xat-border);
+      border-radius: 3px;
+      color: var(--xat-text-light);
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .xat-control-btn:hover {
+      background: var(--xat-purple);
+      border-color: var(--xat-highlight);
+    }
+
+    .xat-control-btn.active {
+      background: var(--xat-highlight);
+      border-color: var(--xat-highlight);
+    }
+
+    .xat-8ball {
+      background: var(--xat-grey);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: white;
+    }
+
+    .xat-radio {
+      background: var(--xat-blue);
+      border-radius: 3px;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: white;
+    }
+
+    .xat-message-icon {
+      background: var(--xat-green);
+      border-radius: 3px;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: white;
+    }
+
+    /* Action Buttons */
+    .xat-action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .xat-create-chat {
+      background: var(--xat-green);
+      color: white;
+      border: none;
+      border-radius: 3px;
+      padding: 8px 15px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .xat-create-chat:hover {
+      background: #059669;
+    }
+
+    .xat-sign-btn {
+      background: var(--xat-orange);
+      color: white;
+      border: none;
+      border-radius: 3px;
+      padding: 8px 15px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .xat-sign-btn:hover {
+      background: #ea580c;
+    }
+
+    .xat-sign-btn.disconnected {
+      background: var(--xat-highlight);
+    }
+
+    /* Tab System - Small tabs at bottom */
+    .xat-tabs {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--xat-border);
+      padding: 5px 15px;
+      margin-top: auto;
+    }
+
+    .xat-tab {
+      background: var(--xat-bg);
+      border: 1px solid var(--xat-border);
+      border-top: none;
+      color: var(--xat-text-light);
+      padding: 4px 12px;
+      cursor: pointer;
+      font-size: 10px;
+      border-radius: 0 0 3px 3px;
+      margin-right: 2px;
+    }
+
+    .xat-tab.active {
+      background: var(--xat-sidebar);
+      border-color: var(--xat-highlight);
+      color: var(--xat-highlight);
+    }
+
+    /* Sidebar (Right) */
+    .xat-sidebar {
+      width: 250px;
+      background: var(--xat-sidebar);
+      border-left: 2px solid var(--xat-border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* User List */
+    .xat-user-section {
+      flex: 1;
+      padding: 10px;
+    }
+
+    .xat-section-title {
+      color: var(--xat-highlight);
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .xat-user-list {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .xat-user-item {
+      display: flex;
+      align-items: center;
+      padding: 5px 8px;
+      margin-bottom: 3px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.05);
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .xat-user-item:hover {
+      background: rgba(139, 92, 246, 0.2);
+    }
+
+    .xat-user-avatar {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: var(--xat-purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    .xat-user-name {
+      color: var(--xat-text-light);
+      flex: 1;
+    }
+
+    .xat-user-status {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--xat-green);
+    }
+
+    /* Power Bar */
+    .xat-power-section {
+      padding: 15px;
+      border-bottom: 2px solid var(--xat-border);
+    }
+
+    .xat-power-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+    }
+
+    .xat-power-item {
+      background: var(--xat-bg);
+      border: 1px solid var(--xat-border);
+      border-radius: 3px;
+      padding: 8px 5px;
+      color: var(--xat-text-light);
+      cursor: pointer;
+      font-size: 11px;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .xat-power-item:hover {
+      background: var(--xat-purple);
+      border-color: var(--xat-highlight);
+    }
+
+    .xat-power-item.active {
+      background: var(--xat-highlight);
+      border-color: var(--xat-highlight);
+    }
+
+    /* Sidebar Actions */
+    .xat-sidebar-actions {
+      padding: 15px;
+      border-top: 1px solid var(--xat-border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .xat-sidebar-btn {
+      background: var(--xat-bg);
+      border: 1px solid var(--xat-border);
+      border-radius: 3px;
+      color: var(--xat-text-light);
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .xat-sidebar-btn:hover {
+      background: var(--xat-purple);
+      border-color: var(--xat-highlight);
+    }
+
+    .xat-sidebar-btn.primary {
+      background: var(--xat-blue);
+      border-color: var(--xat-blue);
+      color: white;
+    }
+
+    .xat-sidebar-btn.primary:hover {
+      background: #2563eb;
+    }
+
+    /* Power Notification */
+    .xat-power-notification {
+      background: var(--xat-blue);
+      color: white;
+      padding: 15px;
+      margin: 15px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .power-icon {
+      font-size: 20px;
+    }
+
+    .power-name {
+      flex: 1;
+    }
+
+    /* User Profile Modal */
+    .xat-profile-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+    }
+
+    .xat-profile-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--xat-sidebar);
+      border: 2px solid var(--xat-border);
+      border-radius: 8px;
+      width: 400px;
+      max-width: 90vw;
+      color: var(--xat-text-light);
+    }
+
+    .xat-profile-header {
+      background: var(--xat-header);
+      padding: 15px;
+      border-bottom: 1px solid var(--xat-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .xat-profile-title {
+      color: var(--xat-highlight);
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .xat-profile-close {
+      background: none;
+      border: none;
+      color: var(--xat-text-light);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .xat-profile-close:hover {
+      color: var(--xat-highlight);
+    }
+
+    .xat-profile-info {
+      padding: 20px;
+      border-bottom: 1px solid var(--xat-border);
+    }
+
+    .xat-profile-avatar-section {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .xat-profile-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--xat-purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin-right: 15px;
+    }
+
+    .xat-profile-details h3 {
+      color: var(--xat-highlight);
+      margin: 0 0 5px 0;
+      font-size: 18px;
+    }
+
+    .xat-profile-stats {
+      display: flex;
+      gap: 15px;
+      font-size: 14px;
+    }
+
+    .xat-profile-stat {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .xat-profile-badges {
+      display: flex;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .xat-profile-badge {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .xat-profile-fields {
+      padding: 20px;
+      border-bottom: 1px solid var(--xat-border);
+    }
+
+    .xat-profile-field {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .xat-profile-field label {
+      color: var(--xat-text-light);
+      font-size: 14px;
+    }
+
+    .xat-profile-field input {
+      background: var(--xat-bg);
+      border: 1px solid var(--xat-border);
+      border-radius: 3px;
+      color: var(--xat-text-light);
+      padding: 5px 10px;
+      font-size: 14px;
+      width: 200px;
+    }
+
+    .xat-profile-actions {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .xat-profile-btn {
+      background: var(--xat-bg);
+      border: 1px solid var(--xat-border);
+      border-radius: 3px;
+      color: var(--xat-text-light);
+      padding: 10px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .xat-profile-btn:hover {
+      background: var(--xat-purple);
+      border-color: var(--xat-highlight);
+    }
+
+    .xat-profile-btn.primary {
+      background: var(--xat-green);
+      border-color: var(--xat-green);
+    }
+
+    .xat-profile-btn.primary:hover {
+      background: #059669;
+    }
+
+    /* Typing Indicator */
+    .xat-typing {
+      padding: 5px 10px;
+      color: var(--xat-text);
+      font-size: 12px;
+      font-style: italic;
+    }
+
+    .xat-typing-dots {
+      display: inline-block;
+    }
+
+    .xat-typing-dots span {
+      animation: typing 1.4s infinite;
+      display: inline-block;
+      margin: 0 1px;
+    }
+
+    .xat-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .xat-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing {
+      0%, 60%, 100% { opacity: 0.3; }
+      30% { opacity: 1; }
+    }
+
+    /* Power Effects */
+    .xat-rainbow-text {
+      background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+      background-size: 400% 400%;
+      animation: rainbow 2s ease-in-out infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .xat-sparkle-text {
+      text-shadow: 0 0 5px var(--xat-yellow), 0 0 10px var(--xat-yellow), 0 0 15px var(--xat-yellow);
+      animation: sparkle 1s ease-in-out infinite alternate;
+    }
+
+    @keyframes sparkle {
+      0% { text-shadow: 0 0 5px var(--xat-yellow), 0 0 10px var(--xat-yellow), 0 0 15px var(--xat-yellow); }
+      100% { text-shadow: 0 0 10px var(--xat-yellow), 0 0 20px var(--xat-yellow), 0 0 30px var(--xat-yellow); }
+    }
+
+    .xat-fire-text {
+      color: var(--xat-orange);
+      text-shadow: 0 0 5px var(--xat-orange), 0 0 10px var(--xat-orange);
+      animation: fire 0.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes fire {
+      0% { text-shadow: 0 0 5px var(--xat-orange), 0 0 10px var(--xat-orange); }
+      100% { text-shadow: 0 0 10px var(--xat-orange), 0 0 20px var(--xat-orange), 0 0 30px var(--xat-orange); }
+    }
+
+    .xat-ice-text {
+      color: var(--xat-blue);
+      text-shadow: 0 0 5px var(--xat-blue), 0 0 10px var(--xat-blue);
+      animation: ice 2s ease-in-out infinite;
+    }
+
+    @keyframes ice {
+      0%, 100% { text-shadow: 0 0 5px var(--xat-blue), 0 0 10px var(--xat-blue); }
+      50% { text-shadow: 0 0 10px var(--xat-blue), 0 0 20px var(--xat-blue), 0 0 30px var(--xat-blue); }
+    }
+
+    .xat-lightning-text {
+      color: var(--xat-yellow);
+      text-shadow: 0 0 5px var(--xat-yellow), 0 0 10px var(--xat-yellow);
+      animation: lightning 0.3s ease-in-out infinite;
+    }
+
+    @keyframes lightning {
+      0%, 100% { text-shadow: 0 0 5px var(--xat-yellow), 0 0 10px var(--xat-yellow); }
+      50% { text-shadow: 0 0 20px var(--xat-yellow), 0 0 40px var(--xat-yellow), 0 0 60px var(--xat-yellow); }
+    }
+
+    .xat-diamond-text {
+      color: var(--xat-purple);
+      text-shadow: 0 0 5px var(--xat-purple), 0 0 10px var(--xat-purple);
+      animation: diamond 1.5s ease-in-out infinite;
+    }
+
+    @keyframes diamond {
+      0%, 100% { text-shadow: 0 0 5px var(--xat-purple), 0 0 10px var(--xat-purple); }
+      50% { text-shadow: 0 0 15px var(--xat-purple), 0 0 25px var(--xat-purple), 0 0 35px var(--xat-purple); }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--xat-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--xat-border);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--xat-highlight);
+    }
+
+    /* Welcome Message */
+    .xat-welcome {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--xat-text-light);
+    }
+
+    .xat-welcome h2 {
+      color: var(--xat-highlight);
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    }
+
+    .xat-welcome p {
+      font-size: 16px;
+      margin-bottom: 30px;
+      color: var(--xat-text);
+    }
+
+    .xat-features {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .xat-feature {
+      background: var(--xat-header);
+      border: 1px solid var(--xat-border);
+      border-radius: 5px;
+      padding: 10px 15px;
+      font-size: 14px;
+      color: var(--xat-text-light);
+    }
+  </style>
+</head>
+<body>
+  <div class="xat-container">
+    <!-- Main Chat Area (Left) -->
+    <div class="xat-main">
+      <!-- Header -->
+      <div class="xat-header">
+        <div class="xat-title">Xat Classic - Authentic Experience</div>
+        <div class="xat-room-info">
+          <span id="room-name">Welcome to Xat Classic</span>
+          <span class="xat-connection" id="connection-status">Connecting...</span>
+          </div>
+        </div>
+
+      <!-- Messages Area -->
+      <div class="xat-messages" id="message-list">
+        <div class="xat-welcome">
+          <h2>🎭 Welcome to Xat Classic! 🎭</h2>
+          <p>Experience the authentic xat.com chat from 2007-2016</p>
+          <div class="xat-features">
+            <div class="xat-feature">🎭 Custom Avatars</div>
+            <div class="xat-feature">✨ Special Powers</div>
+            <div class="xat-feature">😊 Classic Smilies</div>
+            <div class="xat-feature">�� Background Music</div>
+            <div class="xat-feature">💬 Real-time Chat</div>
+            <div class="xat-feature">🎨 Visual Effects</div>
+          </div>
+          </div>
+        </div>
+
+      <!-- Typing Indicator -->
+      <div class="xat-typing" id="typing-indicator" style="display: none;">
+        <span class="xat-typing-dots">
+          <span>●</span>
+          <span>●</span>
+          <span>●</span>
+        </span>
+        <span>Someone is typing...</span>
+        </div>
+
+      <!-- Smiley Bar (Between Chat and Input) -->
+      <div class="xat-smiley-bar" id="smiley-bar">
+        <!-- Smilies will be loaded dynamically -->
+        </div>
+
+      <!-- Input Area -->
+      <div class="xat-input-area">
+        <div class="xat-input-container">
+          <textarea 
+            id="message-input" 
+            class="xat-message-input" 
+            placeholder="Type your message here..."
+            rows="2"
+          ></textarea>
+        </div>
+          </div>
+        </div>
+
+    <!-- Sidebar (Right) -->
+    <div class="xat-sidebar">
+      <!-- User List -->
+      <div class="xat-user-section">
+        <div class="xat-user-list" id="user-list">
+          <div class="xat-user-item">
+            <div class="xat-user-avatar">👤</div>
+            <div class="xat-user-name">Loading users...</div>
+            <div class="xat-user-status"></div>
+              </div>
+            </div>
+          </div>
+          
+      <!-- Tabs at Bottom -->
+      <div class="xat-tabs">
+        <div class="xat-tab active" data-tab="visitors">Visitors</div>
+        <div class="xat-tab" data-tab="friends">Friends</div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="xat-sidebar-actions">
+        <button class="xat-sidebar-btn primary" id="get-chatbox-btn">Get a Chat Box</button>
+        <button class="xat-sidebar-btn" id="sign-out-btn">Sign Out</button>
+      </div>
+
+      <!-- Power Notification -->
+      <div class="xat-power-notification" id="power-notification" style="display: none;">
+        <div class="power-icon">🔇</div>
+        <div class="power-name">SILENTG power</div>
+          </div>
+        </div>
+
+  <!-- User Profile Modal -->
+  <div class="xat-profile-modal" id="profile-modal">
+    <div class="xat-profile-content">
+      <div class="xat-profile-header">
+        <div class="xat-profile-title" id="profile-title">User Profile</div>
+        <button class="xat-profile-close" id="profile-close">&times;</button>
+        </div>
+      
+      <div class="xat-profile-info">
+        <div class="xat-profile-avatar-section">
+          <div class="xat-profile-avatar" id="profile-avatar">👤</div>
+          <div class="xat-profile-details">
+            <h3 id="profile-name">Username</h3>
+            <div class="xat-profile-stats">
+              <div class="xat-profile-stat">
+                <span>💰</span>
+                <span id="profile-xats">0 xats</span>
+              </div>
+              <div class="xat-profile-stat">
+                <span>⭐</span>
+                <span id="profile-days">0 days</span>
+              </div>
+            </div>
+            <div class="xat-profile-badges">
+              <div class="xat-profile-badge" style="background: var(--xat-grey);">⭐</div>
+              <div class="xat-profile-badge" style="background: var(--xat-highlight);">❤️</div>
+              <div class="xat-profile-badge" style="background: var(--xat-purple);">🌈</div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+      <div class="xat-profile-fields" id="profile-fields">
+        <div class="xat-profile-field">
+          <label>Name:</label>
+          <input type="text" id="profile-name-input" value="Username">
+        </div>
+        <div class="xat-profile-field">
+          <label>Avatar:</label>
+          <input type="text" id="profile-avatar-input" value="855">
+        </div>
+        <div class="xat-profile-field">
+          <label>Status:</label>
+          <input type="text" id="profile-status-input" placeholder="Enter status...">
+      </div>
+        <div class="xat-profile-field">
+          <label>Home Page:</label>
+          <input type="text" id="profile-homepage-input" placeholder="Enter homepage...">
+      </div>
+      </div>
+
+      <div class="xat-profile-actions" id="profile-actions">
+        <!-- Actions will be loaded dynamically based on if it's own profile or other user -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bg-music" loop>
+    <source src="/audio/bg-music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="/socket.io/socket.io.js"></script>
+</body>
+</html>

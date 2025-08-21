@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xat Chat</title>
+  <meta name="description" content="Real-time chat platform">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/chat.css">
+</head>
+<body>
+  <div class="chat-layout">
+    <!-- Header -->
+    <header class="chat-header">
+      <div class="header-left">
+        <h1>Xat Chat</h1>
+        <div id="connection-status" class="status connected">Connected</div>
+      </div>
+      <div class="header-right">
+        <div id="user-info" class="user-info">
+          <span class="username">Loading...</span>
+        </div>
+        <a href="/" class="btn-home">Home</a>
+        <a href="/classic.html" class="btn-classic">Classic</a>
+      </div>
+    </header>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main">
+      <!-- Sidebar -->
+      <aside class="chat-sidebar">
+        <div class="sidebar-section">
+          <h3>Room Selection</h3>
+          <select id="room-select" class="room-select">
+            <option value="">Select a room...</option>
+            <option value="general">General</option>
+            <option value="gaming">Gaming</option>
+            <option value="music">Music</option>
+            <option value="random">Random</option>
+          </select>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Room Info</h3>
+          <div id="room-info" class="room-info">
+            <h4>Select a room</h4>
+            <span class="user-count">0 users</span>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Users Online</h3>
+          <div id="user-list" class="user-list">
+            <div class="user-item">No users online</div>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Avatar</h3>
+          <select id="avatar-select" class="avatar-select">
+            <option value="">Default</option>
+            <option value="cat">Cat</option>
+            <option value="dog">Dog</option>
+            <option value="robot">Robot</option>
+          </select>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Powers</h3>
+          <select id="power-select" class="power-select">
+            <option value="">No power</option>
+            <option value="rainbow">Rainbow Text</option>
+            <option value="sparkle">Sparkle Effect</option>
+            <option value="sound">Sound Effect</option>
+          </select>
+        </div>
+      </aside>
+
+      <!-- Chat Container -->
+      <div class="chat-container" id="chat-container">
+        <!-- Messages Area -->
+        <div class="messages-area">
+          <div id="message-list" class="message-list">
+            <div class="welcome-message">
+              <h2>Welcome to Xat Chat!</h2>
+              <p>Select a room to start chatting.</p>
+            </div>
+          </div>
+          
+          <!-- Typing Indicator -->
+          <div id="typing-indicator" class="typing-indicator" style="display: none;">
+            Someone is typing...
+          </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+          <div class="input-container">
+            <textarea 
+              id="message-input" 
+              class="message-input" 
+              placeholder="Type your message here..."
+              rows="3"
+            ></textarea>
+            <button id="send-button" class="send-button">Send</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Power Animation Container -->
+  <div id="power-animations" class="power-animations"></div>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Settings</h2>
+      <div class="settings-section">
+        <h3>Sound</h3>
+        <label>
+          <input type="checkbox" id="sound-enabled" checked>
+          Enable sounds
+        </label>
+        <label>
+          Volume: <input type="range" id="sound-volume" min="0" max="100" value="50">
+        </label>
+      </div>
+      <div class="settings-section">
+        <h3>Notifications</h3>
+        <label>
+          <input type="checkbox" id="notifications-enabled" checked>
+          Enable notifications
+        </label>
+      </div>
+      <div class="settings-section">
+        <h3>Theme</h3>
+        <select id="theme-select">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="classic">Classic</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+</body>
+</html>

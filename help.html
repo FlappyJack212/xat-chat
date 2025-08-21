@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #0066cc;
+        }
+        .help-section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        .help-section:last-child {
+            border-bottom: none;
+        }
+        .question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .answer {
+            margin-left: 20px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #0055aa;
+        }
+    </style>
+</head>
+<body>
+    <h1>Help Center</h1>
+    
+    <div class="help-section">
+        <h2>Getting Started</h2>
+        <div class="question">How do I create an account?</div>
+        <div class="answer">
+            Click on the "Sign In" button in the bottom right corner of the chat interface. 
+            From there, you can create a new account by providing a username, email, and password.
+        </div>
+        
+        <div class="question">How do I join a chat?</div>
+        <div class="answer">
+            Once you're signed in, you can join any chat by clicking on the chat name in the list.
+            If you know the specific chat ID, you can enter it directly in the address bar.
+        </div>
+    </div>
+    
+    <div class="help-section">
+        <h2>Chat Features</h2>
+        <div class="question">How do I send a private message?</div>
+        <div class="answer">
+            To send a private message, click on a user's name in the visitors list, then select "Private Message" from the menu.
+            You can also use the /p command followed by the username and your message.
+        </div>
+        
+        <div class="question">How do I use smileys?</div>
+        <div class="answer">
+            Click on the smiley icon above the text input area to open the smiley selector.
+            You can also type the smiley code directly, such as (smile) or (cool).
+        </div>
+        
+        <div class="question">How do I format my text?</div>
+        <div class="answer">
+            You can use the formatting tools by selecting text and clicking on the formatting options.
+            You can also use markdown-style formatting:
+            <ul>
+                <li>*text* for bold</li>
+                <li>_text_ for italic</li>
+                <li>~text~ for strikethrough</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="help-section">
+        <h2>Account Management</h2>
+        <div class="question">How do I change my password?</div>
+        <div class="answer">
+            Go to Settings > Account > Change Password. You'll need to enter your current password and then your new password.
+        </div>
+        
+        <div class="question">How do I change my display name?</div>
+        <div class="answer">
+            Go to Settings > Profile > Display Name. Enter your new display name and save the changes.
+        </div>
+    </div>
+    
+    <div class="help-section">
+        <h2>Troubleshooting</h2>
+        <div class="question">I can't connect to the chat</div>
+        <div class="answer">
+            Make sure your internet connection is working properly. Try refreshing the page or clearing your browser cache.
+            If the problem persists, try using a different browser.
+        </div>
+        
+        <div class="question">I'm experiencing lag or slow performance</div>
+        <div class="answer">
+            This could be due to a slow internet connection or high server load. Try closing other applications that might be using your internet connection.
+            If you're in a very active chat with many users, consider joining a less crowded chat.
+        </div>
+    </div>
+    
+    <a href="javascript:history.back()" class="back-link">Back to Chat</a>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xat Recreation - Modern Chat Platform</title>
+  <meta name="description" content="Experience the nostalgia of xat.com with modern features - Real-time chat, avatars, powers, and more!">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-header">
+        <a href="/" class="nav-brand">
+          <i class="fas fa-comments"></i>
+          <span>Xat Recreation</span>
+        </a>
+        <div class="nav-welcome">
+          <div class="welcome-title">Welcome to Xat Recreation</div>
+          <div class="welcome-subtitle">Connect with people around the world</div>
+        </div>
+      </div>
+      <div class="nav-menu">
+        <a href="/chat.html" class="nav-link"><i class="fas fa-comments"></i> Chat</a>
+        <a href="/classic.html" class="nav-link"><i class="fas fa-star"></i> Classic</a>
+                 <a href="#" class="nav-link" id="powers-link"><i class="fas fa-magic"></i> Powers</a>
+         <a href="#" class="nav-link d-none" id="create-room-button"><i class="fas fa-plus"></i> Create Room</a>
+         <a href="#" class="nav-link" id="register-button"><i class="fas fa-user-plus"></i> Register</a>
+         <a href="#" class="nav-link" id="login-button"><i class="fas fa-sign-in-alt"></i> Login</a>
+         <a href="#" class="nav-link d-none" id="profile-link"><i class="fas fa-user"></i> Profile</a>
+         <a href="#" class="nav-link d-none" id="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-left">
+          <div class="chat-preview">
+            <div class="chat-header">
+              <div class="chat-title">
+                <i class="fas fa-comments"></i>
+                <span>Live Chat Preview</span>
+              </div>
+              <div class="chat-status">
+                <span class="status-dot"></span>
+                <span>Online</span>
+              </div>
+            </div>
+            <div class="chat-messages">
+              <div class="message">
+                <div class="message-avatar">😎</div>
+                <div class="message-content">
+                  <div class="message-user">CoolUser</div>
+                  <div class="message-text">Welcome to Xat Recreation! 🌟</div>
+                </div>
+              </div>
+              <div class="message">
+                <div class="message-avatar">🎮</div>
+                <div class="message-content">
+                  <div class="message-user">Gamer123</div>
+                  <div class="message-text">Anyone up for some retro gaming? 🎮</div>
+                </div>
+              </div>
+              <div class="message">
+                <div class="message-avatar">🎵</div>
+                <div class="message-content">
+                  <div class="message-user">MusicLover</div>
+                  <div class="message-text">The music player is working great! 🎵</div>
+                </div>
+              </div>
+            </div>
+            <div class="chat-input">
+              <input type="text" placeholder="Type your message..." disabled>
+              <button class="chat-send" disabled><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-text">
+            <h1 class="hero-title">New to Xat Recreation?</h1>
+            <p class="hero-description">
+              Experience the nostalgia of the classic xat.com chat platform with modern features. 
+              Register an account, join chat rooms, customize your avatar, collect powers, and make new friends!
+            </p>
+            <div class="hero-features">
+              <div class="feature-item">
+                <i class="fas fa-users"></i>
+                <span>Join Communities</span>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-magic"></i>
+                <span>Collect Powers</span>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-palette"></i>
+                <span>Customize Avatars</span>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-gamepad"></i>
+                <span>Play Games</span>
+              </div>
+            </div>
+            <div class="hero-buttons">
+              <a href="/classic.html" class="btn btn-primary">
+                <i class="fas fa-star"></i>
+                <span>Try Classic Mode</span>
+              </a>
+              <a href="/chat.html" class="btn btn-secondary">
+                <i class="fas fa-comments"></i>
+                <span>Modern Chat</span>
+              </a>
+            </div>
+            <div class="hero-social">
+              <span>Follow us on:</span>
+              <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Carousel -->
+  <section class="features-carousel">
+    <div class="carousel-container">
+      <div class="carousel-track">
+        <!-- Slide 1: Powers -->
+        <div class="carousel-slide active">
+          <div class="slide-content">
+            <div class="slide-left">
+              <h2>Powers & Effects</h2>
+              <p>Collect and use special powers to enhance your chat experience. From rainbow text effects to sparkle animations, make your messages stand out!</p>
+              <a href="/classic.html" class="btn btn-primary">
+                <i class="fas fa-magic"></i>
+                <span>Explore Powers</span>
+              </a>
+            </div>
+            <div class="slide-right">
+              <div class="power-showcase">
+                <div class="power-item rainbow">🌈 Rainbow Text</div>
+                <div class="power-item sparkle">⭐ Sparkle Effect</div>
+                <div class="power-item fire">🔥 Fire Effect</div>
+                <div class="power-item ice">❄️ Ice Effect</div>
+                <div class="power-item lightning">⚡ Lightning Effect</div>
+                <div class="power-item diamond">💎 Diamond Effect</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Avatars -->
+        <div class="carousel-slide">
+          <div class="slide-content">
+            <div class="slide-left">
+              <h2>Custom Avatars</h2>
+              <p>Design your own animated character! Choose from hundreds of avatars, customize colors, add accessories, and watch your character respond to chat.</p>
+              <a href="/classic.html" class="btn btn-primary">
+                <i class="fas fa-palette"></i>
+                <span>Create Avatar</span>
+              </a>
+            </div>
+            <div class="slide-right">
+              <div class="avatar-showcase">
+                <div class="avatar-grid">
+                  <div class="avatar-item">😎</div>
+                  <div class="avatar-item">🎮</div>
+                  <div class="avatar-item">🎵</div>
+                  <div class="avatar-item">🌸</div>
+                  <div class="avatar-item">🦄</div>
+                  <div class="avatar-item">👻</div>
+                  <div class="avatar-item">🐱</div>
+                  <div class="avatar-item">🐶</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Commands -->
+        <div class="carousel-slide">
+          <div class="slide-content">
+            <div class="slide-left">
+              <h2>Powerful Commands</h2>
+              <p>Use slash commands to enhance your chat experience. From moderation tools to fun effects, there's a command for everything!</p>
+              <a href="/classic.html" class="btn btn-primary">
+                <i class="fas fa-terminal"></i>
+                <span>Learn Commands</span>
+              </a>
+            </div>
+            <div class="slide-right">
+              <div class="command-showcase">
+                <div class="command-item">
+                  <code>/me</code>
+                  <span>Perform actions</span>
+                </div>
+                <div class="command-item">
+                  <code>/rainbow</code>
+                  <span>Rainbow text effect</span>
+                </div>
+                <div class="command-item">
+                  <code>/bg space</code>
+                  <span>Change background</span>
+                </div>
+                <div class="command-item">
+                  <code>/music</code>
+                  <span>Play background music</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="carousel-controls">
+        <button class="carousel-btn prev" id="carousel-prev">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="carousel-dots">
+          <span class="dot active" data-slide="0"></span>
+          <span class="dot" data-slide="1"></span>
+          <span class="dot" data-slide="2"></span>
+        </div>
+        <button class="carousel-btn next" id="carousel-next">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Rooms -->
+  <section class="popular-rooms">
+    <div class="rooms-container">
+      <div class="rooms-header">
+        <h2>Popular Chat Rooms</h2>
+        <p>Join the most active communities and start chatting!</p>
+      </div>
+      
+      <div class="rooms-grid" id="popular-rooms-list">
+        <!-- Rooms will be loaded dynamically -->
+        <div class="loading-rooms">
+          <div class="loading-spinner"></div>
+          <p>Loading popular rooms...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Xat Recreation</h3>
+          <p>Experience the nostalgia of xat.com with modern features and enhanced functionality.</p>
+          <div class="footer-social">
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Features</h4>
+          <ul>
+            <li><a href="/chat.html">Modern Chat</a></li>
+            <li><a href="/classic.html">Classic Mode</a></li>
+            <li><a href="#">Powers & Effects</a></li>
+            <li><a href="#">Avatar Customization</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Xat Recreation. This is a fan recreation and is not affiliated with xat.com.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Login Modal -->
+  <div class="modal" id="login-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Welcome Back</h2>
+        <span class="close">&times;</span>
+      </div>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Login</button>
+      </form>
+      <div class="modal-footer">
+        <p>Don't have an account? <a href="#" id="switch-to-register">Register here</a></p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Register Modal -->
+  <div class="modal" id="register-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Join Xat Recreation</h2>
+        <span class="close">&times;</span>
+      </div>
+      <form id="register-form">
+        <div class="form-group">
+          <label for="register-username">Username</label>
+          <input type="text" id="register-username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="register-email">Email</label>
+          <input type="email" id="register-email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="register-password">Password</label>
+          <input type="password" id="register-password" name="password" required>
+        </div>
+        <div class="form-group">
+          <label for="register-confirm-password">Confirm Password</label>
+          <input type="password" id="register-confirm-password" name="confirmPassword" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+      </form>
+      <div class="modal-footer">
+        <p>Already have an account? <a href="#" id="switch-to-login">Login here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Room Modal -->
+  <div class="modal" id="create-room-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Create New Room</h2>
+        <span class="close">&times;</span>
+      </div>
+      <form id="create-room-form">
+        <div class="form-group">
+          <label for="room-name">Room Name</label>
+          <input type="text" id="room-name" name="name" required minlength="3" maxlength="30">
+        </div>
+        <div class="form-group">
+          <label for="room-description">Description (Optional)</label>
+          <textarea id="room-description" name="description" maxlength="200" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="max-users">Max Users</label>
+          <select id="max-users" name="maxUsers">
+            <option value="10">10 users</option>
+            <option value="25">25 users</option>
+            <option value="50" selected>50 users</option>
+            <option value="100">100 users</option>
+            <option value="200">200 users</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="is-private" name="isPrivate">
+            Private Room (invite only)
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Create Room</button>
+      </form>
+      <div class="modal-footer">
+        <p>Room will be created and you'll be redirected to it automatically.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

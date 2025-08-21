@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's New</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #0066cc;
+        }
+        .news-item {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        .date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #e0f7fa;
+            color: #0097a7;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+        .tag.feature {
+            background-color: #e8f5e9;
+            color: #388e3c;
+        }
+        .tag.improvement {
+            background-color: #fff8e1;
+            color: #ffa000;
+        }
+        .tag.bugfix {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #0055aa;
+        }
+    </style>
+</head>
+<body>
+    <h1>What's New</h1>
+    <p>Stay up to date with the latest features, improvements, and bug fixes for our chat platform.</p>
+    
+    <div class="news-item">
+        <h2>Version 2.5.0</h2>
+        <div class="date">January 15, 2023</div>
+        <div>
+            <span class="tag feature">New Feature</span>
+            <span class="tag improvement">Improvement</span>
+            <span class="tag bugfix">Bug Fix</span>
+        </div>
+        <h3>New Features</h3>
+        <ul>
+            <li><strong>Reactions System:</strong> You can now react to messages with emojis. Simply hover over a message and click the reaction button.</li>
+            <li><strong>Voice Messages:</strong> Record and send voice messages in chat rooms. Look for the microphone icon in the message input area.</li>
+            <li><strong>Dark Mode:</strong> We've added a dark mode option for those who prefer a darker interface. Toggle it in your settings.</li>
+        </ul>
+        <h3>Improvements</h3>
+        <ul>
+            <li><strong>Performance:</strong> Significantly improved loading times and reduced memory usage.</li>
+            <li><strong>Mobile Experience:</strong> Redesigned the mobile interface for better usability on smaller screens.</li>
+            <li><strong>Notifications:</strong> More customization options for notification settings.</li>
+        </ul>
+        <h3>Bug Fixes</h3>
+        <ul>
+            <li>Fixed an issue where messages would sometimes appear out of order.</li>
+            <li>Resolved a problem with image uploads failing on certain browsers.</li>
+            <li>Fixed several UI glitches in the settings menu.</li>
+        </ul>
+    </div>
+    
+    <div class="news-item">
+        <h2>Version 2.4.0</h2>
+        <div class="date">November 5, 2022</div>
+        <div>
+            <span class="tag feature">New Feature</span>
+            <span class="tag improvement">Improvement</span>
+        </div>
+        <h3>New Features</h3>
+        <ul>
+            <li><strong>GIF Support:</strong> You can now search and send GIFs directly from the chat interface.</li>
+            <li><strong>Message Translation:</strong> Translate messages to your preferred language with a single click.</li>
+            <li><strong>Custom Themes:</strong> Create and apply custom themes to personalize your chat experience.</li>
+        </ul>
+        <h3>Improvements</h3>
+        <ul>
+            <li><strong>Search Functionality:</strong> Enhanced search capabilities to find messages more easily.</li>
+            <li><strong>Emoji Picker:</strong> Redesigned emoji picker with categories and search.</li>
+            <li><strong>Accessibility:</strong> Improved keyboard navigation and screen reader support.</li>
+        </ul>
+    </div>
+    
+    <div class="news-item">
+        <h2>Version 2.3.0</h2>
+        <div class="date">September 20, 2022</div>
+        <div>
+            <span class="tag feature">New Feature</span>
+            <span class="tag bugfix">Bug Fix</span>
+        </div>
+        <h3>New Features</h3>
+        <ul>
+            <li><strong>File Sharing:</strong> Share files of up to 100MB directly in chat rooms.</li>
+            <li><strong>Message Formatting:</strong> Added support for markdown formatting in messages.</li>
+            <li><strong>User Profiles:</strong> Enhanced user profiles with customizable avatars and status messages.</li>
+        </ul>
+        <h3>Bug Fixes</h3>
+        <ul>
+            <li>Fixed an issue where private messages would sometimes be sent to the wrong recipient.</li>
+            <li>Resolved a problem with notifications not appearing on some devices.</li>
+            <li>Fixed a bug that caused the app to crash when uploading certain image types.</li>
+        </ul>
+    </div>
+    
+    <div class="news-item">
+        <h2>Version 2.2.0</h2>
+        <div class="date">August 1, 2022</div>
+        <div>
+            <span class="tag improvement">Improvement</span>
+            <span class="tag bugfix">Bug Fix</span>
+        </div>
+        <h3>Improvements</h3>
+        <ul>
+            <li><strong>User Interface:</strong> Refreshed design with improved navigation and layout.</li>
+            <li><strong>Message History:</strong> Increased message history limit to 10,000 messages per chat.</li>
+            <li><strong>Connection Stability:</strong> Improved handling of unstable network connections.</li>
+        </ul>
+        <h3>Bug Fixes</h3>
+        <ul>
+            <li>Fixed several memory leaks that could cause performance degradation over time.</li>
+            <li>Resolved issues with message timestamps displaying incorrectly in different time zones.</li>
+            <li>Fixed a bug that prevented some users from changing their profile settings.</li>
+        </ul>
+    </div>
+    
+    <a href="javascript:history.back()" class="back-link">Back to Chat</a>
+</body>
+</html>

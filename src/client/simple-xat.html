@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xat Chat - Simple & Working</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background: #1a1a2e;
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    .xat-container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+    
+    /* Main chat area */
+    .xat-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #16213e;
+    }
+    
+    .xat-header {
+      background: #0f3460;
+      padding: 10px;
+      border-bottom: 1px solid #533483;
+      text-align: center;
+      font-weight: bold;
+    }
+    
+    .xat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      background: #1a1a2e;
+    }
+    
+    .message {
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+    
+    .message .username {
+      color: #ff6b6b;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .message .timestamp {
+      color: #888;
+      font-size: 10px;
+    }
+    
+    .message .text {
+      color: white;
+      margin-left: 5px;
+    }
+    
+    .message.system {
+      color: #10b981;
+      font-style: italic;
+    }
+    
+    /* Smiley bar */
+    .xat-smiley-bar {
+      height: 40px;
+      background: #333;
+      border-top: 1px solid #555;
+      border-bottom: 1px solid #555;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      overflow-x: auto;
+      gap: 5px;
+    }
+    
+    .smiley-item {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #555;
+      border-radius: 15px;
+      background: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    
+    .smiley-item:hover {
+      background: #666;
+      border-color: #ff6b6b;
+    }
+    
+    /* Input area */
+    .xat-input-area {
+      background: #2a2a3e;
+      padding: 10px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .xat-message-input {
+      flex: 1;
+      background: #1a1a2e;
+      border: 1px solid #555;
+      color: white;
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    
+    .xat-send-btn {
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .xat-send-btn:hover {
+      background: #ff5252;
+    }
+    
+    /* Sidebar */
+    .xat-sidebar {
+      width: 160px;
+      background: #16213e;
+      border-left: 1px solid #533483;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .xat-user-list {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
+    
+    .user-item {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      margin-bottom: 2px;
+      cursor: pointer;
+      border-radius: 3px;
+      font-size: 11px;
+    }
+    
+    .user-item:hover {
+      background: rgba(255,107,107,0.2);
+    }
+    
+    .user-avatar {
+      margin-right: 8px;
+      font-size: 14px;
+    }
+    
+    .user-name {
+      color: white;
+      flex: 1;
+    }
+    
+    .user-status {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+    }
+    
+    .xat-tabs {
+      height: 30px;
+      display: flex;
+      border-top: 1px solid #533483;
+    }
+    
+    .xat-tab {
+      flex: 1;
+      background: #333;
+      border-right: 1px solid #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 10px;
+      color: #ccc;
+    }
+    
+    .xat-tab.active {
+      background: #ff6b6b;
+      color: white;
+    }
+    
+    .xat-sidebar-actions {
+      padding: 10px;
+      border-top: 1px solid #533483;
+    }
+    
+    .xat-sidebar-btn {
+      width: 100%;
+      background: #444;
+      border: 1px solid #666;
+      color: white;
+      padding: 6px;
+      margin-bottom: 5px;
+      cursor: pointer;
+      font-size: 10px;
+      border-radius: 2px;
+    }
+    
+    .xat-sidebar-btn:hover {
+      background: #666;
+    }
+    
+    .xat-sidebar-btn.primary {
+      background: #3b82f6;
+      border-color: #3b82f6;
+    }
+    
+    .xat-sidebar-btn.primary:hover {
+      background: #2563eb;
+    }
+    
+    .typing-indicator {
+      color: #888;
+      font-style: italic;
+      font-size: 11px;
+      padding: 5px 10px;
+      display: none;
+    }
+    
+    .connection-status {
+      background: #10b981;
+      color: white;
+      padding: 2px 8px;
+      font-size: 10px;
+      border-radius: 10px;
+      margin-left: 10px;
+    }
+    
+    .connection-status.offline {
+      background: #ef4444;
+    }
+    
+    /* User Profile Modal */
+    .user-profile-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10000;
+    }
+    
+    .modal-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+    }
+    
+    .modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #2a2a3e;
+      border: 2px solid #533483;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    
+    .modal-header {
+      background: #1a1a2e;
+      padding: 12px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #533483;
+    }
+    
+    .modal-header h3 {
+      margin: 0;
+      color: #ff6b6b;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+    
+    .modal-close:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .modal-body {
+      padding: 20px;
+    }
+    
+    .profile-avatar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .avatar-display {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #ff6b6b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: 0 auto 10px;
+      border: 3px solid #533483;
+    }
+    
+    .avatar-name {
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    
+    .profile-info {
+      margin-bottom: 20px;
+    }
+    
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(83,52,131,0.3);
+    }
+    
+    .info-row:last-child {
+      border-bottom: none;
+    }
+    
+    .info-row .label {
+      color: #ccc;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    
+    .info-row .value {
+      color: #fff;
+      font-size: 12px;
+    }
+    
+    .info-row .value.online {
+      color: #10b981;
+      font-weight: bold;
+    }
+    
+    .profile-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    
+    .action-btn {
+      background: #444;
+      border: 1px solid #666;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 11px;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    
+    .action-btn:hover {
+      background: #666;
+      transform: translateY(-1px);
+    }
+    
+    .action-btn.primary {
+      background: #3b82f6;
+      border-color: #3b82f6;
+    }
+    
+    .action-btn.primary:hover {
+      background: #2563eb;
+    }
+    
+    .action-btn.danger {
+      background: #ef4444;
+      border-color: #ef4444;
+    }
+    
+    .action-btn.danger:hover {
+      background: #dc2626;
+    }
+    
+    /* Nickname Change Button */
+    .change-nickname-btn {
+      background: #3b82f6;
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 11px;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    
+    .change-nickname-btn:hover {
+      background: #2563eb;
+    }
+    
+    /* Nickname Change Modal */
+    .nickname-change-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10001;
+    }
+    
+    .modal-content.small {
+      max-width: 350px;
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+    }
+    
+    .input-group label {
+      display: block;
+      color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    
+    .nickname-input {
+      width: 100%;
+      background: #1a1a2e;
+      border: 1px solid #533483;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+      box-sizing: border-box;
+    }
+    
+    .nickname-input:focus {
+      outline: none;
+      border-color: #ff6b6b;
+      box-shadow: 0 0 0 2px rgba(255,107,107,0.2);
+    }
+    
+    .input-group small {
+      display: block;
+      color: #ccc;
+      font-size: 10px;
+      margin-top: 4px;
+      font-style: italic;
+    }
+    
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+    
+    .action-btn.cancel {
+      background: #666;
+      border-color: #666;
+    }
+    
+    .action-btn.cancel:hover {
+      background: #777;
+    }
+    
+    .action-btn.confirm {
+      min-width: 80px;
+    }
+    
+    /* Error message styling */
+    .message.error {
+      color: #ef4444;
+      font-weight: bold;
+    }
+    
+    /* Power message styling */
+    .message.power {
+      color: #ff6b00;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(255, 107, 0, 0.3);
+      background: linear-gradient(90deg, rgba(255, 107, 0, 0.1), transparent);
+      border-left: 3px solid #ff6b00;
+      padding-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="xat-container">
+    <!-- Main Chat Area -->
+    <div class="xat-main">
+      <div class="xat-header">
+        🎭 Xat Chat - Room: General
+        <span class="connection-status" id="connectionStatus">Connecting...</span>
+      </div>
+      
+      <div class="xat-messages" id="messages">
+        <!-- Messages will appear here -->
+      </div>
+      
+      <div class="typing-indicator" id="typingIndicator">
+        Someone is typing...
+      </div>
+      
+      <!-- Smiley Bar -->
+      <div class="xat-smiley-bar" id="smileyBar">
+        <div class="smiley-item" data-smiley="(smile)" title="(smile)">😊</div>
+        <div class="smiley-item" data-smiley="(wink)" title="(wink)">😉</div>
+        <div class="smiley-item" data-smiley="(laugh)" title="(laugh)">😂</div>
+        <div class="smiley-item" data-smiley="(heart)" title="(heart)">❤️</div>
+        <div class="smiley-item" data-smiley="(star)" title="(star)">⭐</div>
+        <div class="smiley-item" data-smiley="(fire)" title="(fire)">🔥</div>
+        <div class="smiley-item" data-smiley="(diamond)" title="(diamond)">💎</div>
+        <div class="smiley-item" data-smiley="(music)" title="(music)">🎵</div>
+        <div class="smiley-item" data-smiley="(cool)" title="(cool)">😎</div>
+        <div class="smiley-item" data-smiley="(angel)" title="(angel)">😇</div>
+        <div class="smiley-item" data-smiley="(devil)" title="(devil)">😈</div>
+        <div class="smiley-item" data-smiley="(kiss)" title="(kiss)">😘</div>
+      </div>
+      
+      <!-- Input Area -->
+      <div class="xat-input-area">
+        <input type="text" class="xat-message-input" id="messageInput" placeholder="Type your message..." maxlength="200">
+        <button class="xat-send-btn" id="sendBtn">Send</button>
+      </div>
+    </div>
+    
+    <!-- Sidebar -->
+    <div class="xat-sidebar">
+      <div class="xat-user-list" id="userList">
+        <!-- Users will appear here -->
+      </div>
+      
+      <div class="xat-tabs">
+        <div class="xat-tab active" data-tab="visitors">Visitors</div>
+        <div class="xat-tab" data-tab="friends">Friends</div>
+      </div>
+      
+      <div class="xat-sidebar-actions">
+        <button class="xat-sidebar-btn primary">Get a Chat Box</button>
+        <button class="xat-sidebar-btn">Sign Out</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    class SimpleXat {
+      constructor() {
+        this.socket = null;
+        this.username = 'ACE'; // Set default to ACE for testing
+        this.userId = Math.random().toString(36).substr(2, 9);
+        this.currentRoom = 'general';
+        this.isConnected = false;
+        this.userXats = 50000; // iXat currency
+        this.userDays = 365;
+        this.userPowers = []; // Will be loaded from server
+        
+        this.smilies = {
+          '(smile)': '😊', '(wink)': '😉', '(laugh)': '😂', '(heart)': '❤️',
+          '(star)': '⭐', '(fire)': '🔥', '(diamond)': '💎', '(music)': '🎵',
+          '(cool)': '😎', '(angel)': '😇', '(devil)': '😈', '(kiss)': '😘',
+          '(frown)': '😢', '(big_smile)': '😃', '(tongue)': '😛', '(surprised)': '😮',
+          '(upset)': '😠', '(cry)': '😭', '(sick)': '🤢', '(sleepy)': '😴'
+        };
+        
+        this.elements = {
+          messages: document.getElementById('messages'),
+          messageInput: document.getElementById('messageInput'),
+          sendBtn: document.getElementById('sendBtn'),
+          userList: document.getElementById('userList'),
+          typingIndicator: document.getElementById('typingIndicator'),
+          connectionStatus: document.getElementById('connectionStatus'),
+          smileyBar: document.getElementById('smileyBar')
+        };
+        
+        this.init();
+      }
+      
+      init() {
+        this.bindEvents();
+        this.connectToServer();
+        this.loadUserData();
+        this.addMessage('System', 'Welcome to Xat Chat! 🎭', 'system');
+      }
+      
+      bindEvents() {
+        // Send message
+        this.elements.sendBtn.addEventListener('click', () => this.sendMessage());
+        this.elements.messageInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            this.sendMessage();
+          }
+        });
+        
+        // Smiley clicks
+        this.elements.smileyBar.addEventListener('click', (e) => {
+          const smileyItem = e.target.closest('.smiley-item');
+          if (smileyItem) {
+            const smileyCode = smileyItem.dataset.smiley;
+            this.insertSmiley(smileyCode);
+          }
+        });
+        
+        // Tab switching
+        document.querySelectorAll('.xat-tab').forEach(tab => {
+          tab.addEventListener('click', () => {
+            document.querySelectorAll('.xat-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+          });
+        });
+      }
+      
+      connectToServer() {
+        try {
+          this.socket = io();
+          
+          this.socket.on('connect', () => {
+            console.log('🎭 Connected to server');
+            this.isConnected = true;
+            this.updateConnectionStatus('Connected', true);
+            
+            // Join room
+            this.socket.emit('join-room', {
+              roomId: this.currentRoom,
+              userId: this.userId,
+              username: this.username
+            });
+            
+            this.addMessage('System', 'Connected to server! 🎉', 'system');
+            this.addDemoUsers();
+          });
+          
+          this.socket.on('disconnect', () => {
+            this.isConnected = false;
+            this.updateConnectionStatus('Disconnected', false);
+            this.addMessage('System', 'Disconnected from server 😞', 'system');
+          });
+          
+          this.socket.on('message', (data) => {
+            this.addMessage(data.username, data.text, 'user', data.timestamp);
+          });
+          
+          this.socket.on('user-joined', (user) => {
+            this.addMessage('System', `${user.username} joined the chat`, 'system');
+            this.addUserToList(user);
+          });
+          
+          this.socket.on('user-left', (userId) => {
+            this.removeUserFromList(userId);
+          });
+          
+          this.socket.on('nickname-changed', (data) => {
+            this.addMessage('System', `${data.oldNickname} changed their nickname to ${data.newNickname}`, 'system');
+            
+            // Update user list
+            const userItems = document.querySelectorAll('.user-item');
+            userItems.forEach(item => {
+              const nameElement = item.querySelector('.user-name');
+              if (nameElement && nameElement.textContent === data.oldNickname) {
+                nameElement.textContent = data.newNickname;
+              }
+            });
+          });
+          
+        } catch (error) {
+          console.error('Connection failed:', error);
+          this.updateConnectionStatus('Failed', false);
+          this.addMessage('System', 'Failed to connect to server', 'error');
+        }
+      }
+      
+      sendMessage() {
+        const text = this.elements.messageInput.value.trim();
+        if (!text || !this.isConnected) return;
+        
+        // Check for power commands
+        if (text.startsWith('/')) {
+          this.handleCommand(text);
+          this.elements.messageInput.value = '';
+          return;
+        }
+        
+        // Process smilies and powers
+        const processedText = this.processSmilies(text);
+        const powerText = this.processPowers(processedText);
+        
+        // Show your own message immediately
+        this.addMessage(this.username, powerText, 'user');
+        
+        if (this.socket) {
+          this.socket.emit('send-message', {
+            text: powerText,
+            roomId: this.currentRoom,
+            userId: this.userId,
+            username: this.username
+          });
+        }
+        
+        this.elements.messageInput.value = '';
+      }
+      
+      addMessage(username, text, type = 'user', timestamp = null) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${type}`;
+        
+        const time = timestamp ? new Date(timestamp) : new Date();
+        const timeStr = time.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        
+        if (type === 'system' || type === 'error') {
+          messageDiv.innerHTML = `<span class="timestamp">[${timeStr}]</span> ${text}`;
+        } else {
+          messageDiv.innerHTML = `
+            <span class="username" onclick="window.xat.showUserProfile('${username}')">${username}</span>
+            <span class="timestamp">(${timeStr})</span>
+            <span class="text">${text}</span>
+          `;
+        }
+        
+        this.elements.messages.appendChild(messageDiv);
+        this.elements.messages.scrollTop = this.elements.messages.scrollHeight;
+      }
+      
+      processSmilies(text) {
+        let processed = text;
+        Object.entries(this.smilies).forEach(([code, emoji]) => {
+          const regex = new RegExp(code.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+          processed = processed.replace(regex, emoji);
+        });
+        return processed;
+      }
+      
+      insertSmiley(code) {
+        const input = this.elements.messageInput;
+        const cursorPos = input.selectionStart;
+        const textBefore = input.value.substring(0, cursorPos);
+        const textAfter = input.value.substring(cursorPos);
+        
+        input.value = textBefore + code + textAfter;
+        input.focus();
+        input.setSelectionRange(cursorPos + code.length, cursorPos + code.length);
+      }
+      
+      updateConnectionStatus(status, connected) {
+        this.elements.connectionStatus.textContent = status;
+        this.elements.connectionStatus.className = connected ? 'connection-status' : 'connection-status offline';
+      }
+      
+      async loadUserData() {
+        try {
+          // Load user powers from server
+          const response = await fetch('/api/powers');
+          const data = await response.json();
+          if (data.success) {
+            this.availablePowers = data.powers;
+            console.log('📦 Loaded powers:', this.availablePowers.length);
+          }
+          
+          // Load user's owned powers (mock for now)
+          this.userPowers = [
+            { powerId: 13, count: 5, name: 'red' },     // red power
+            { powerId: 14, count: 3, name: 'green' },   // green power  
+            { powerId: 15, count: 2, name: 'blue' },    // blue power
+            { powerId: 17, count: 1, name: 'heart' },   // heart power
+            { powerId: 22, count: 1, name: 'cycle' }    // cycle power
+          ];
+          
+          this.addMessage('System', `💎 You have ${this.userXats} xats and ${this.userDays} days!`, 'system');
+          this.addMessage('System', `⚡ Powers loaded: ${this.userPowers.length} powers available`, 'system');
+        } catch (error) {
+          console.error('Failed to load user data:', error);
+        }
+      }
+      
+      handleCommand(command) {
+        const parts = command.slice(1).split(' ');
+        const cmd = parts[0].toLowerCase();
+        const args = parts.slice(1);
+        
+        switch (cmd) {
+          case 'powers':
+          case 'p':
+            this.showUserPowers();
+            break;
+          case 'xats':
+            this.addMessage('System', `💎 You have ${this.userXats} xats and ${this.userDays} days`, 'system');
+            break;
+          case 'red':
+          case 'green': 
+          case 'blue':
+          case 'heart':
+          case 'cycle':
+            this.usePower(cmd, args.join(' '));
+            break;
+          case 'help':
+            this.showHelp();
+            break;
+          default:
+            this.addMessage('System', `❌ Unknown command: ${cmd}. Type /help for available commands.`, 'error');
+        }
+      }
+      
+      processPowers(text) {
+        // Apply power effects to smilies based on user's powers
+        let result = text;
+        
+        // Example: if user has red power, make smilies red
+        if (this.userPowers.some(p => p.name === 'red')) {
+          result = result.replace(/😊/g, '🔴😊');
+          result = result.replace(/😉/g, '🔴😉');
+        }
+        
+        // Heart power effect
+        if (this.userPowers.some(p => p.name === 'heart')) {
+          result = result.replace(/😊/g, '💖');
+          result = result.replace(/😉/g, '💕');
+        }
+        
+        return result;
+      }
+      
+      usePower(powerName, message = '') {
+        const power = this.userPowers.find(p => p.name === powerName);
+        if (!power) {
+          this.addMessage('System', `❌ You don't have the ${powerName} power!`, 'error');
+          return;
+        }
+        
+        if (power.count <= 0) {
+          this.addMessage('System', `❌ You're out of ${powerName} power uses!`, 'error');
+          return;
+        }
+        
+        // Use power
+        power.count--;
+        
+        switch (powerName) {
+          case 'red':
+            this.addMessage('System', `🔴 RED POWER ACTIVATED! ${message}`, 'power');
+            break;
+          case 'green':
+            this.addMessage('System', `🟢 GREEN POWER ACTIVATED! ${message}`, 'power');
+            break;
+          case 'blue':
+            this.addMessage('System', `🔵 BLUE POWER ACTIVATED! ${message}`, 'power');
+            break;
+          case 'heart':
+            this.addMessage('System', `💖 HEART POWER ACTIVATED! ${message}`, 'power');
+            break;
+          case 'cycle':
+            this.addMessage('System', `🌈 CYCLE POWER ACTIVATED! ${message}`, 'power');
+            break;
+        }
+        
+        this.addMessage('System', `⚡ ${powerName} power used. ${power.count} uses remaining.`, 'system');
+      }
+      
+      showUserPowers() {
+        this.addMessage('System', '💎 Your Powers:', 'system');
+        this.userPowers.forEach(power => {
+          this.addMessage('System', `  ${power.name}: ${power.count} uses`, 'system');
+        });
+      }
+      
+      showHelp() {
+        this.addMessage('System', '📖 Available Commands:', 'system');
+        this.addMessage('System', '  /powers - Show your powers', 'system');
+        this.addMessage('System', '  /xats - Show your currency', 'system');
+        this.addMessage('System', '  /red [message] - Use red power', 'system');
+        this.addMessage('System', '  /green [message] - Use green power', 'system');
+        this.addMessage('System', '  /blue [message] - Use blue power', 'system');
+        this.addMessage('System', '  /heart [message] - Use heart power', 'system');
+        this.addMessage('System', '  /cycle [message] - Use cycle power', 'system');
+      }
+      
+      addDemoUsers() {
+        // Add yourself first
+        this.addUserToList({
+          id: this.userId,
+          username: this.username,
+          avatar: '🤖'
+        });
+        
+        // Add other demo users
+        const demoUsers = [
+          { id: 2, username: 'IM-Emo', avatar: '😈' },
+          { id: 3, username: 'Guest123', avatar: '😊' }
+        ];
+        
+        demoUsers.forEach(user => this.addUserToList(user));
+      }
+      
+      addUserToList(user) {
+        const userDiv = document.createElement('div');
+        userDiv.className = 'user-item';
+        userDiv.dataset.userId = user.id;
+        userDiv.innerHTML = `
+          <span class="user-avatar">${user.avatar || '👤'}</span>
+          <span class="user-name">${user.username}</span>
+          <span class="user-status"></span>
+        `;
+        
+        userDiv.addEventListener('click', () => this.showUserProfile(user.username));
+        this.elements.userList.appendChild(userDiv);
+      }
+      
+      removeUserFromList(userId) {
+        const userElement = this.elements.userList.querySelector(`[data-user-id="${userId}"]`);
+        if (userElement) {
+          userElement.remove();
+        }
+      }
+      
+      showUserProfile(username) {
+        this.createUserProfileModal(username);
+      }
+      
+      createUserProfileModal(username) {
+        // Remove existing modal
+        const existing = document.querySelector('.user-profile-modal');
+        if (existing) existing.remove();
+        
+        const isOwnProfile = username === this.username;
+        
+        const modal = document.createElement('div');
+        modal.className = 'user-profile-modal';
+        modal.innerHTML = `
+          <div class="modal-backdrop"></div>
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>${username}'s Profile</h3>
+              <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="profile-avatar">
+                <div class="avatar-display">👤</div>
+                <div class="avatar-name">${username}</div>
+                ${isOwnProfile ? '<button class="change-nickname-btn">Change Nickname</button>' : ''}
+              </div>
+              <div class="profile-info">
+                <div class="info-row">
+                  <span class="label">Status:</span>
+                  <span class="value online">Online</span>
+                </div>
+                <div class="info-row">
+                  <span class="label">Xats:</span>
+                  <span class="value">1,234</span>
+                </div>
+                <div class="info-row">
+                  <span class="label">Days:</span>
+                  <span class="value">45</span>
+                </div>
+                <div class="info-row">
+                  <span class="label">Powers:</span>
+                  <span class="value">🌈 ⭐ 🔥</span>
+                </div>
+              </div>
+              <div class="profile-actions">
+                ${isOwnProfile ? `
+                  <button class="action-btn primary">Settings</button>
+                  <button class="action-btn">Change Avatar</button>
+                  <button class="action-btn">Manage Powers</button>
+                  <button class="action-btn danger">Sign Out</button>
+                ` : `
+                  <button class="action-btn primary">Private Chat</button>
+                  <button class="action-btn">Add Friend</button>
+                  <button class="action-btn">Send Gift</button>
+                  <button class="action-btn danger">Report User</button>
+                `}
+              </div>
+            </div>
+          </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Add event listeners
+        modal.addEventListener('click', (e) => {
+          if (e.target.classList.contains('modal-close') || 
+              e.target.classList.contains('modal-backdrop')) {
+            modal.remove();
+          }
+          
+          if (e.target.classList.contains('change-nickname-btn')) {
+            this.showNicknameChangeModal();
+          }
+          
+          if (e.target.classList.contains('action-btn')) {
+            const action = e.target.textContent;
+            this.handleProfileAction(username, action);
+          }
+        });
+      }
+      
+      showNicknameChangeModal() {
+        // Remove existing modal
+        const existing = document.querySelector('.nickname-change-modal');
+        if (existing) existing.remove();
+        
+        const modal = document.createElement('div');
+        modal.className = 'nickname-change-modal';
+        modal.innerHTML = `
+          <div class="modal-backdrop"></div>
+          <div class="modal-content small">
+            <div class="modal-header">
+              <h3>Change Nickname</h3>
+              <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="input-group">
+                <label for="nicknameInput">New Nickname:</label>
+                <input type="text" id="nicknameInput" class="nickname-input" 
+                       value="${this.username}" maxlength="20" placeholder="Enter new nickname">
+                <small>3-20 characters, letters and numbers only</small>
+              </div>
+              <div class="modal-actions">
+                <button class="action-btn cancel">Cancel</button>
+                <button class="action-btn primary confirm">Change</button>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Focus the input
+        setTimeout(() => {
+          const input = modal.querySelector('#nicknameInput');
+          input.focus();
+          input.select();
+        }, 100);
+        
+        // Add event listeners
+        modal.addEventListener('click', (e) => {
+          if (e.target.classList.contains('modal-close') || 
+              e.target.classList.contains('modal-backdrop') ||
+              e.target.classList.contains('cancel')) {
+            modal.remove();
+          }
+          
+          if (e.target.classList.contains('confirm')) {
+            this.changeNickname();
+          }
+        });
+        
+        // Enter key to confirm
+        modal.querySelector('#nicknameInput').addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            this.changeNickname();
+          }
+        });
+      }
+      
+      changeNickname() {
+        const input = document.querySelector('#nicknameInput');
+        const newNickname = input.value.trim();
+        
+        // Validation
+        if (newNickname.length < 3) {
+          this.addMessage('System', 'Nickname must be at least 3 characters long!', 'error');
+          return;
+        }
+        
+        if (newNickname.length > 20) {
+          this.addMessage('System', 'Nickname must be 20 characters or less!', 'error');
+          return;
+        }
+        
+        if (!/^[a-zA-Z0-9_-]+$/.test(newNickname)) {
+          this.addMessage('System', 'Nickname can only contain letters, numbers, _ and -', 'error');
+          return;
+        }
+        
+        if (newNickname === this.username) {
+          this.addMessage('System', 'That\'s already your nickname!', 'error');
+          return;
+        }
+        
+        // Change nickname
+        const oldNickname = this.username;
+        this.username = newNickname;
+        
+        // Update user list
+        const userItems = document.querySelectorAll('.user-item');
+        userItems.forEach(item => {
+          const nameElement = item.querySelector('.user-name');
+          if (nameElement && nameElement.textContent === oldNickname) {
+            nameElement.textContent = newNickname;
+          }
+        });
+        
+        // Notify server and chat
+        if (this.socket) {
+          this.socket.emit('nickname-change', {
+            oldNickname: oldNickname,
+            newNickname: newNickname,
+            userId: this.userId
+          });
+        }
+        
+        this.addMessage('System', `${oldNickname} changed their nickname to ${newNickname}`, 'system');
+        
+        // Close modal
+        const modal = document.querySelector('.nickname-change-modal');
+        if (modal) modal.remove();
+        
+        // Close profile modal too
+        const profileModal = document.querySelector('.user-profile-modal');
+        if (profileModal) profileModal.remove();
+      }
+      
+      handleProfileAction(username, action) {
+        switch (action) {
+          case 'Private Chat':
+            this.addMessage('System', `Starting private chat with ${username}...`, 'system');
+            break;
+          case 'Add Friend':
+            this.addMessage('System', `Friend request sent to ${username}!`, 'system');
+            break;
+          case 'Send Gift':
+            this.addMessage('System', `Gift menu for ${username} would open here.`, 'system');
+            break;
+          case 'Report User':
+            this.addMessage('System', `Report form for ${username} would open here.`, 'system');
+            break;
+          case 'Settings':
+            this.addMessage('System', 'Settings panel would open here.', 'system');
+            break;
+          case 'Change Avatar':
+            this.addMessage('System', 'Avatar selection would open here.', 'system');
+            break;
+          case 'Manage Powers':
+            this.addMessage('System', 'Power management would open here.', 'system');
+            break;
+          case 'Sign Out':
+            this.addMessage('System', 'Signing out...', 'system');
+            setTimeout(() => location.reload(), 1000);
+            break;
+        }
+        
+        // Close modal
+        const modal = document.querySelector('.user-profile-modal');
+        if (modal) modal.remove();
+      }
+    }
+    
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      window.xat = new SimpleXat();
+      console.log('🎭 Simple Xat Chat Initialized!');
+    });
+  </script>
+</body>
+</html>
