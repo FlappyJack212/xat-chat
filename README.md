@@ -23,8 +23,8 @@ This is a recreation of the classic xat.com chat platform from 2007-2016, built 
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd chat
+   git clone https://github.com/FlappyJack212/xat-chat.git
+   cd xat-chat
    ```
 
 2. **Install dependencies**
