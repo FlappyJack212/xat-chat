@@ -501,7 +501,7 @@ class AuthenticXatClassic {
     welcomeElement.className = 'xat-welcome';
     welcomeElement.innerHTML = `
       <h2>🎭 Welcome to Xat Classic! 🎭</h2>
-      <p>Experience the authentic xat.com chat from 2007-2016</p>
+      <p>Experience the authentic xat-recreation chat from 2007-2016</p>
       <div class="xat-features">
         <div class="xat-feature">🎭 Custom Avatars</div>
         <div class="xat-feature">✨ Special Powers</div>
@@ -596,8 +596,8 @@ class AuthenticXatClassic {
 
   // Sidebar button functions
   getChatBox() {
-    this.addSystemMessage('Get a Chat Box - Visit xat.com to get your own chatbox!');
-    // In a real implementation, this would redirect to xat.com's chat box page
+    this.addSystemMessage('Get a Chat Box - Visit our website to get your own chatbox!');
+    // In a real implementation, this would redirect to the main page
   }
 
   signOut() {

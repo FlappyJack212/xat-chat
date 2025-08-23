@@ -123,7 +123,7 @@ const initializeDatabase = async () => {
     const users = [
       {
         username: 'admin',
-        email: 'admin@xat.com',
+        email: 'admin@example.com',
         passwordHash: hashedPassword,
         displayName: 'Admin',
         avatarId: 'robot',
@@ -133,7 +133,7 @@ const initializeDatabase = async () => {
       },
       {
         username: 'user1',
-        email: 'user1@xat.com',
+        email: 'user1@example.com',
         passwordHash: hashedPassword,
         displayName: 'User One',
         avatarId: 'cat',
@@ -143,7 +143,7 @@ const initializeDatabase = async () => {
       },
       {
         username: 'user2',
-        email: 'user2@xat.com',
+        email: 'user2@example.com',
         passwordHash: hashedPassword,
         displayName: 'User Two',
         avatarId: 'dog',
