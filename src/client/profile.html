@@ -3,730 +3,726 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - Xat Recreation</title>
+    <title>🎭 ixchats - Profile Settings</title>
     <style>
-        body, html {
-            width: 100%;
-            height: 100%;
-            margin: 0px;
-            padding: 0px;
-            background-color: #000000;
-            font-family: Arial, sans-serif;
+        * {
+            box-sizing: border-box;
         }
 
-        .siteWrapper {
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            margin: 0;
+            padding: 20px;
             min-height: 100vh;
         }
-
-        .siteHeader {
-            width: 100%;
-            height: 60px;
-            background: linear-gradient(to bottom, #333333, #222222);
-            border-bottom: 2px solid #0066ff;
-        }
-
-        .center {
-            max-width: 1200px;
+        
+        .profile-container {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-
-        .logo {
-            float: left;
-            display: block;
-            width: 120px;
-            height: 40px;
-            margin: 10px 0;
-            background: linear-gradient(45deg, #0066ff, #00ccff);
-            border-radius: 5px;
-            text-decoration: none;
+        
+        .profile-header {
             text-align: center;
-            line-height: 40px;
-            color: white;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .profile-header h1 {
+            color: #0066cc;
+            margin: 0 0 10px 0;
+            font-size: 32px;
             font-weight: bold;
-            font-size: 18px;
         }
-
-        .navigation {
-            float: right;
-            list-style: none;
+        
+        .profile-header p {
+            color: #666;
             margin: 0;
-            padding: 0;
+            font-size: 16px;
         }
-
-        .navigation li {
-            display: inline-block;
-            position: relative;
+        
+        .profile-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
         }
-
-        .navigation a {
-            display: block;
-            padding: 15px 20px;
-            color: #cccccc;
-            text-decoration: none;
-            font-size: 13px;
+        
+        .profile-tab {
+            flex: 1;
+            padding: 15px;
             text-align: center;
-            transition: color 0.3s;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            background: #f8f9fa;
+            color: #666;
         }
-
-        .navigation a:hover {
-            color: #ffffff;
+        
+        .profile-tab.active {
+            border-bottom-color: #0066cc;
+            color: #0066cc;
+            background: #ffffff;
         }
-
-        .navigation a strong {
+        
+        .profile-tab:hover {
+            background: #e9ecef;
+        }
+        
+        .profile-section {
+            display: none;
+        }
+        
+        .profile-section.active {
             display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
             font-size: 14px;
             font-weight: bold;
-        }
-
-        .navigation a span {
-            display: block;
-            font-size: 11px;
-            opacity: 0.8;
-        }
-
-        .block {
-            display: inline-block;
-            vertical-align: top;
-            margin: 0.5%;
-            padding: 0.5%;
-            border: 3px solid #0066ff;
-            font-size: 13px;
-            word-wrap: break-word;
-            font-family: Arial;
-            background: #111111;
-        }
-
-        .block.c3 { width: 31.3%; }
-        .block.c5 { width: 18%; }
-        .block.c4-5 { width: 72%; }
-        .block.fr { float: right; }
-
-        .heading {
-            display: inline-block;
-            font-size: 16px;
-            width: 100%;
-            border-bottom: 2px solid #ffffff;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-
-        .tc { text-align: center; }
-        .tr { text-align: right; }
-        .tl { text-align: left; }
-        .pnt { cursor: pointer; }
-        .hus:hover { text-decoration: underline; }
-
-        input[type="text"], input[type="password"], input[type="email"], textarea {
-            border: 1px solid #adaba3;
-            padding: 2px 2px;
-            text-align: center;
-            background: #222222;
-            color: #ffffff;
-        }
-
-        input[type="submit"] {
-            border: 1px solid #adaba3;
-            padding: 1px 6px;
-            text-align: center;
-            background-color: #f0f0f0;
             cursor: pointer;
-            margin-left: -6px;
-            margin-right: -6px;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #e0e0e0;
-        }
-
-        table {
-            width: 100%;
-            color: #ffffff;
-        }
-
-        table td {
-            padding: 5px;
-        }
-
-        .message {
-            width: 98%;
-            padding: 0.5% 1%;
-            background-color: #000000;
-            font-size: 13px;
-            color: #ffffff;
-            font-family: Arial;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
             text-align: center;
-            margin-bottom: 5px;
-            border: 1px solid #0066ff;
         }
-
-        .siteFooterBar {
-            background: #222222;
-            border-top: 2px solid #0066ff;
-            padding: 20px 0;
-            margin-top: 40px;
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0066cc, #0052a3);
+            color: white;
         }
-
-        .backToTop {
-            color: #0066ff;
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0052a3, #004080);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        .avatar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .avatar-option {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .avatar-option:hover {
+            border-color: #0066cc;
+            transform: scale(1.05);
+        }
+        
+        .avatar-option.selected {
+            border-color: #0066cc;
+            box-shadow: 0 0 10px rgba(0, 102, 204, 0.3);
+        }
+        
+        .pawn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .pawn-option {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .pawn-option:hover {
+            border-color: #0066cc;
+            transform: scale(1.1);
+        }
+        
+        .pawn-option.selected {
+            border-color: #0066cc;
+            box-shadow: 0 0 8px rgba(0, 102, 204, 0.4);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+        
+        .stat-card h3 {
+            color: #0066cc;
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+        
+        .stat-card .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0066cc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0066cc;
             text-decoration: none;
             font-weight: bold;
         }
-
-        .profile-container {
-            display: flex;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .profile-sidebar {
-            flex: 0 0 300px;
-        }
-
-        .profile-main {
-            flex: 1;
-        }
-
-        .custom-pawn-preview {
-            width: 50px;
-            height: 50px;
-            border: 2px solid #0066ff;
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 24px;
+        
+        .back-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <!-- Site Wrapper Start -->
-    <div class="siteWrapper">
-        <!-- Site Header -->
-        <div class="siteHeader">
-            <div class="center">
-                <a class="logo" href="/">XAT</a>
-                <ul class="navigation">
-                    <li><a href="/"><strong>Home</strong><br><span>Main-Chat</span></a></li>
-                    <li><a href="/powers.html"><strong>Powers</strong><br><span>Buy Powers!</span></a></li>
-                    <li><a href="/trade.html"><strong>Trade</strong><br><span>Sell/List Powers</span></a></li>
-                    <li><a href="/groups.html"><strong>Groups</strong><br><span>Edit Group/Create</span></a></li>
-                    <li><a href="/profile.html" style="color: #ffffff;"><strong>Profile</strong><br><span>Register/Login!</span></a></li>
-                    <li><a href="/donate.html"><strong>Donate</strong><br><span>Support us!</span></a></li>
-                </ul>
-            </div>
+    <div class="profile-container">
+        <a href="/" class="back-link">← Back to Home</a>
+        
+        <div class="profile-header">
+            <h1>Profile Settings</h1>
+            <p>Manage your ixchats account and preferences</p>
         </div>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-
-        <center>
-            <div id="main">
-                <div id="messages"></div>
+        
+        <div class="message" id="successMessage"></div>
+        <div class="message" id="errorMessage"></div>
+        <div class="loading" id="loading"></div>
+        
+        <div class="profile-tabs">
+            <div class="profile-tab active" onclick="switchTab('account')">Account</div>
+            <div class="profile-tab" onclick="switchTab('appearance')">Appearance</div>
+            <div class="profile-tab" onclick="switchTab('security')">Security</div>
+            <div class="profile-tab" onclick="switchTab('stats')">Statistics</div>
+        </div>
+        
+        <!-- Account Section -->
+        <div class="profile-section active" id="accountSection">
+            <h2>Account Information</h2>
+            <form id="accountForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" readonly>
+                </div>
                 
-                <div id="profile-content">
-                    <!-- Login/Register Form (shown when not logged in) -->
-                    <div id="auth-forms" style="width: 100%;text-align: center;">
-                        <div class="block c3 tl">
-                            <div class="heading">Login to your account</div>
-                            <table style="width: 99%">
-                                <form id="login-form">
-                                    <tr>
-                                        <td class="tl">Username</td>
-                                        <td><input style="width: 100%" type="text" name="user" required autocomplete="username" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tl">Password</td>
-                                        <td><input style="width: 100%" type="password" name="pass" required autocomplete="current-password" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"><input type="submit" value="Login" class="fr" /></td>
-                                    </tr>
-                                </form>
-                            </table>
-                            <div style="text-align: center; margin-top: 10px;">
-                                <a href="#" onclick="showForgotPassword()" style="color: #0066ff; text-decoration: none; font-size: 12px;">Forgot Password?</a>
-                            </div>
-                        </div>
-                        
-                        <!-- Forgot Password Form -->
-                        <div id="forgot-password-form" class="block c3 tl" style="display: none;">
-                            <div class="heading">Reset Password</div>
-                            <table style="width: 99%">
-                                <form id="forgot-form">
-                                    <tr>
-                                        <td class="tl">Email</td>
-                                        <td><input style="width: 100%" type="email" name="email" required autocomplete="email" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"><input type="submit" value="Send Reset Email" class="fr" /></td>
-                                    </tr>
-                                </form>
-                            </table>
-                            <div style="text-align: center; margin-top: 10px;">
-                                <a href="#" onclick="hideForgotPassword()" style="color: #0066ff; text-decoration: none; font-size: 12px;">Back to Login</a>
-                            </div>
-                        </div>
-                        
-                        <div style="width: 10%; display: inline-block;"><!-- Spacer --></div>
-                        
-                        <div class="block c3 tl">
-                            <div class="heading">Register for an account</div>
-                            <table style="width: 99%">
-                                <form id="register-form">
-                                    <tr>
-                                        <td class="tl">Username</td>
-                                        <td><input style="width: 100%" type="text" name="user" required autocomplete="username" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tl">Nickname</td>
-                                        <td><input style="width: 100%" type="text" name="nickname" required autocomplete="nickname" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tl">Password</td>
-                                        <td><input style="width: 100%" type="password" name="pass" required autocomplete="new-password" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tl">Email</td>
-                                        <td><input style="width: 100%" type="email" name="mail" required autocomplete="email" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"><input type="submit" value="Register" class="fr" /></td>
-                                    </tr>
-                                </form>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Profile Content (shown when logged in) -->
-                    <div id="profile-info" style="display: none;">
-                        <div class="profile-container">
-                            <div class="profile-sidebar">
-                                <div class="block c5">
-                                    <div class="heading" id="profile-nickname">Loading...</div>
-                                    <table style="width: 99%">
-                                        <tr>
-                                            <td>Xats</td>
-                                            <td class="tr" id="profile-xats">0</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Days</td>
-                                            <td class="tr" id="profile-days">0</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Powers</td>
-                                            <td class="tr" id="profile-powers">0</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Credit</td>
-                                            <td class="tr" id="profile-credit">0</td>
-                                        </tr>
-                                    </table>
-                                    <div style="width: 100%" class="tc">
-                                        <input type="submit" class="claimCredit" value="Claim Credit" onclick="claimCredit()" />
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="submit" class="relogin" value="Relogin" onclick="relogin()" />
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="submit" class="logout" value="Logout" onclick="logout()" style="background: #dc3545; color: white;" />
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="profile-main">
-                                <div class="block c4-5 fr">
-                                    <div class="heading">Custom Pawn <small style="font-size: 10px">[Hex 6 characters example: #000000, just type "off" to turn your custom pawn off]</small></div>
-                                    <form id="pawn-form">
-                                        <input style="width: 99%;text-align: center;" type="text" autocomplete="off" name="update_pawn" id="custom-pawn-input" value="off" />
-                                        <div style="width: 99%;text-align: center">
-                                            <input type="submit" value="Update" />
-                                        </div>
-                                    </form>
-                                    <div class="custom-pawn-preview" id="pawn-preview">😎</div>
-                                    
-                                    <div class="heading">Referral Link <a href="/faq#referrals">(click for explanation)</a></div>
-                                    <input type="text" style="width: 99%;text-align: center;" id="referral-link" value="Loading..." readonly />
-                                    <br />
-                                    <br />
-                                    
-                                    <div class="heading">Bio [ <a href="#" id="bio-preview-link">Preview</a> ]</div>
-                                    <div id="bio-edit">
-                                        <small style="cursor:pointer" title="[br], [center], [b], [h1], [h2], [h3]">BB CODES (hover)</small>
-                                        <form id="bio-form">
-                                            <textarea name="bio" id="bio-textarea" style="width: 99%;resize: none" rows="15"></textarea>
-                                            <div style="width: 99%;text-align: center">
-                                                <input type="submit" value="Update" />
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div id="bio-display" style="display: none;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="nickname">Nickname</label>
+                    <input type="text" id="nickname" placeholder="Enter your nickname">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bio">Bio</label>
+                    <textarea id="bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Update Account</button>
+            </form>
+        </div>
+        
+        <!-- Appearance Section -->
+        <div class="profile-section" id="appearanceSection">
+            <h2>Appearance Settings</h2>
+            
+            <div class="form-group">
+                <label>Avatar</label>
+                <div class="avatar-grid" id="avatarGrid">
+                    <!-- Avatars will be loaded here -->
                 </div>
             </div>
-        </center>
-    </div>
-
-    <!-- Site Footer -->
-    <div class="siteFooterBar">
-        <div class="center">
-            <center>
-                <a class="backToTop" href="#">xat-recreation.com</a>
-                <p style="color: #cccccc; margin-top: 10px;">Complete Xat recreation with all 325+ authentic powers</p>
-            </center>
+            
+            <div class="form-group">
+                <label>Custom Pawn (Hex Color)</label>
+                <input type="text" id="customPawn" placeholder="#000000 or 'off' to disable">
+                <div class="pawn-grid" id="pawnGrid">
+                    <!-- Pawn colors will be loaded here -->
+                </div>
+            </div>
+            
+            <button onclick="saveAppearance()" class="btn btn-primary">Save Appearance</button>
+        </div>
+        
+        <!-- Security Section -->
+        <div class="profile-section" id="securitySection">
+            <h2>Security Settings</h2>
+            
+            <form id="passwordForm">
+                <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" placeholder="Enter current password">
+                </div>
+                
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" placeholder="Enter new password">
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm new password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Change Password</button>
+            </form>
+            
+            <hr style="margin: 30px 0;">
+            
+                         <h3>Account Actions</h3>
+             <button onclick="logout()" class="btn btn-secondary" style="margin-right: 10px;">Logout</button>
+             
+             <h3>Danger Zone</h3>
+             <button onclick="deleteAccount()" class="btn btn-danger">Delete Account</button>
+        </div>
+        
+        <!-- Statistics Section -->
+        <div class="profile-section" id="statsSection">
+            <h2>Your Statistics</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Xats</h3>
+                    <div class="value" id="xatsValue">0</div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Days</h3>
+                    <div class="value" id="daysValue">0</div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Rank</h3>
+                    <div class="value" id="rankValue">Member</div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Join Date</h3>
+                    <div class="value" id="joinDateValue">-</div>
+                </div>
+            </div>
         </div>
     </div>
-
+    
     <script>
+        let currentTab = 'account';
         let currentUser = null;
-        let isPreviewMode = false;
-
-        // Check authentication status
+        
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            await checkAuth();
+            loadAvatars();
+            loadPawns();
+        });
+        
         async function checkAuth() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/auth.html';
+                return;
+            }
+            
             try {
-                const token = localStorage.getItem('authToken');
-                const response = await fetch('/api/auth/status' + (token ? `?token=${token}` : ''));
+                const response = await fetch('/api/auth/status?token=' + token);
                 const data = await response.json();
                 
-                if(data.authenticated) {
-                    currentUser = data.user;
-                    showProfile();
-                    loadUserProfile();
-                } else {
-                    showAuthForms();
+                if (!data.authenticated) {
+                    localStorage.removeItem('token');
+                    window.location.href = '/auth.html';
+                    return;
                 }
+                
+                currentUser = data.user;
+                populateUserData();
             } catch (error) {
                 console.error('Auth check failed:', error);
-                showAuthForms();
+                window.location.href = '/auth.html';
             }
-        }
-
-        function showAuthForms() {
-            document.getElementById('auth-forms').style.display = 'block';
-            document.getElementById('profile-info').style.display = 'none';
-        }
-
-        function showProfile() {
-            document.getElementById('auth-forms').style.display = 'none';
-            document.getElementById('profile-info').style.display = 'block';
         }
         
-        function logout() {
-            localStorage.removeItem('authToken');
-            localStorage.removeItem('userData');
-            showAuthForms();
+        function populateUserData() {
+            document.getElementById('username').value = currentUser.username;
+            document.getElementById('nickname').value = currentUser.nickname || '';
+            document.getElementById('email').value = currentUser.email || '';
+            document.getElementById('xatsValue').textContent = currentUser.xats || 0;
+            document.getElementById('daysValue').textContent = currentUser.days || 0;
+            document.getElementById('rankValue').textContent = getRankName(currentUser.rank);
+            document.getElementById('joinDateValue').textContent = 'Today'; // You can add join date to user model
         }
-
-        async function loadUserProfile() {
-            if(!currentUser) return;
-            
-            try {
-                const response = await fetch(`/api/user/${currentUser.id}`);
-                const data = await response.json();
-                
-                if(data.success) {
-                    const user = data.user;
-                    document.getElementById('profile-nickname').textContent = user.nickname || user.username;
-                    document.getElementById('profile-xats').textContent = user.xats;
-                    document.getElementById('profile-days').textContent = Math.floor(user.days / 86400);
-                    document.getElementById('profile-powers').textContent = data.powerCount || 0;
-                    document.getElementById('profile-credit').textContent = user.credit || 0;
-                    
-                    // Set custom pawn
-                    const pawnInput = document.getElementById('custom-pawn-input');
-                    const pawnPreview = document.getElementById('pawn-preview');
-                    if(user.custpawn && user.custpawn !== 'off') {
-                        pawnInput.value = '#' + user.custpawn;
-                        pawnPreview.style.backgroundColor = '#' + user.custpawn;
-                        pawnPreview.textContent = '😎';
-                    } else {
-                        pawnInput.value = 'off';
-                        pawnPreview.style.backgroundColor = 'transparent';
-                        pawnPreview.textContent = '😎';
-                    }
-                    
-                    // Set bio
-                    document.getElementById('bio-textarea').value = user.desc || '';
-                    
-                    // Set referral link
-                    document.getElementById('referral-link').value = `${window.location.origin}/?ref=${user.id}`;
-                }
-            } catch (error) {
-                console.error('Failed to load profile:', error);
-            }
-        }
-
-        // Form handlers
-        document.getElementById('login-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            
-            try {
-                const response = await fetch('/api/auth/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: formData.get('user'),
-                        password: formData.get('pass')
-                    })
-                });
-
-                const result = await response.json();
-                
-                if(result.success) {
-                    // Store token in localStorage
-                    localStorage.setItem('authToken', result.token);
-                    localStorage.setItem('userData', JSON.stringify(result.user));
-                    showMessage('Login successful!');
-                    checkAuth();
-                } else {
-                    showMessage(result.message || 'Login failed');
-                }
-            } catch (error) {
-                console.error('Login failed:', error);
-                showMessage('Login failed');
-            }
-        });
-
-        document.getElementById('register-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            
-            try {
-                const response = await fetch('/api/auth/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: formData.get('user'),
-                        nickname: formData.get('nickname'),
-                        password: formData.get('pass'),
-                        email: formData.get('mail')
-                    })
-                });
-
-                const result = await response.json();
-                
-                if(result.success) {
-                    // Store token in localStorage
-                    localStorage.setItem('authToken', result.token);
-                    localStorage.setItem('userData', JSON.stringify(result.user));
-                    showMessage('Registration successful, you may now login');
-                    this.reset();
-                    checkAuth(); // Auto-login after registration
-                } else {
-                    showMessage(result.message || 'Registration failed');
-                }
-            } catch (error) {
-                console.error('Registration failed:', error);
-                showMessage('Registration failed');
-            }
-        });
-
-        document.getElementById('pawn-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const pawn = formData.get('update_pawn');
-            
-            try {
-                const response = await fetch('/api/user/pawn', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ pawn: pawn })
-                });
-
-                const result = await response.json();
-                
-                if(result.success) {
-                    showMessage('Custom pawn updated!');
-                    loadUserProfile();
-                } else {
-                    showMessage(result.message || 'Failed to update pawn');
-                }
-            } catch (error) {
-                console.error('Pawn update failed:', error);
-                showMessage('Failed to update pawn');
-            }
-        });
-
-        document.getElementById('bio-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const bio = formData.get('bio');
-            
-            try {
-                const response = await fetch('/api/user/bio', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ bio: bio })
-                });
-
-                const result = await response.json();
-                
-                if(result.success) {
-                    showMessage('Bio updated!');
-                } else {
-                    showMessage(result.message || 'Failed to update bio');
-                }
-            } catch (error) {
-                console.error('Bio update failed:', error);
-                showMessage('Failed to update bio');
-            }
-        });
-
-        // Custom pawn preview
-        document.getElementById('custom-pawn-input').addEventListener('input', function(e) {
-            const value = e.target.value;
-            const preview = document.getElementById('pawn-preview');
-            
-            if(value && value !== 'off' && value.match(/^#[0-9A-Fa-f]{6}$/)) {
-                preview.style.backgroundColor = value;
-            } else {
-                preview.style.backgroundColor = 'transparent';
-            }
-        });
-
-        // Bio preview toggle
-        document.getElementById('bio-preview-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            isPreviewMode = !isPreviewMode;
-            
-            if(isPreviewMode) {
-                const bio = document.getElementById('bio-textarea').value;
-                const display = document.getElementById('bio-display');
-                display.innerHTML = formatBio(bio);
-                document.getElementById('bio-edit').style.display = 'none';
-                document.getElementById('bio-display').style.display = 'block';
-                this.textContent = 'Edit';
-            } else {
-                document.getElementById('bio-edit').style.display = 'block';
-                document.getElementById('bio-display').style.display = 'none';
-                this.textContent = 'Preview';
-            }
-        });
-
-        function formatBio(bio) {
-            const bb = {
-                '[br]': '<br />',
-                '\n': '<br />',
-                '[center]': '<span class="tc" style="width: 100%;display: inline-block;">',
-                '[/center]': '</span>',
-                '[b]': '<b>',
-                '[/b]': '</b>',
-                '[h1]': '<h1>',
-                '[/h1]': '</h1>',
-                '[h2]': '<h2>',
-                '[/h2]': '</h2>',
-                '[h3]': '<h3>',
-                '[/h3]': '</h3>'
+        
+        function getRankName(rank) {
+            const ranks = {
+                0: 'Guest',
+                1: 'Member',
+                2: 'Moderator',
+                3: 'Owner',
+                4: 'Main Owner'
             };
+            return ranks[rank] || 'Member';
+        }
+        
+        function switchTab(tab) {
+            currentTab = tab;
             
-            return bio.replace(/\[br\]|\n|\[center\]|\[\/center\]|\[b\]|\[\/b\]|\[h1\]|\[\/h1\]|\[h2\]|\[\/h2\]|\[h3\]|\[\/h3\]/g, function(match) {
-                return bb[match] || match;
+            // Update tab styling
+            document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.profile-section').forEach(s => s.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tab + 'Section').classList.add('active');
+        }
+        
+        function loadAvatars() {
+            const avatarGrid = document.getElementById('avatarGrid');
+            avatarGrid.innerHTML = '';
+            
+            // Generate avatar options (you can customize this)
+            for (let i = 1; i <= 20; i++) {
+                const avatarDiv = document.createElement('div');
+                avatarDiv.className = 'avatar-option';
+                avatarDiv.style.backgroundImage = `url(https://xat.com/web_gear/chat/av/${i}.gif)`;
+                avatarDiv.onclick = () => selectAvatar(i);
+                
+                if (currentUser && currentUser.avatar == i) {
+                    avatarDiv.classList.add('selected');
+                }
+                
+                avatarGrid.appendChild(avatarDiv);
+            }
+        }
+        
+        function loadPawns() {
+            const pawnGrid = document.getElementById('pawnGrid');
+            pawnGrid.innerHTML = '';
+            
+            // Common hex colors for pawns
+            const colors = [
+                '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF',
+                '#FFA500', '#800080', '#008000', '#FFC0CB', '#A52A2A', '#808080',
+                '#000000', '#FFFFFF', '#FFD700', '#32CD32', '#FF1493', '#00CED1'
+            ];
+            
+            colors.forEach(color => {
+                const pawnDiv = document.createElement('div');
+                pawnDiv.className = 'pawn-option';
+                pawnDiv.style.backgroundColor = color;
+                pawnDiv.onclick = () => selectPawn(color);
+                pawnGrid.appendChild(pawnDiv);
             });
         }
-
-        async function claimCredit() {
-            try {
-                const response = await fetch('/api/user/claim-credit', { method: 'POST' });
-                const result = await response.json();
-                
-                if(result.success) {
-                    showMessage('Credit claimed successfully!');
-                    loadUserProfile();
-                } else {
-                    showMessage(result.message || 'Failed to claim credit');
-                }
-            } catch (error) {
-                console.error('Claim credit failed:', error);
-                showMessage('Failed to claim credit');
-            }
+        
+        function selectAvatar(avatarId) {
+            document.querySelectorAll('.avatar-option').forEach(a => a.classList.remove('selected'));
+            event.target.classList.add('selected');
+            currentUser.avatar = avatarId;
         }
-
-        async function relogin() {
-            try {
-                const response = await fetch('/api/auth/relogin', { method: 'POST' });
-                const result = await response.json();
-                
-                if(result.success) {
-                    showMessage('Relogin successful!');
-                    checkAuth();
-                } else {
-                    showMessage(result.message || 'Relogin failed');
-                }
-            } catch (error) {
-                console.error('Relogin failed:', error);
-                showMessage('Relogin failed');
-            }
+        
+        function selectPawn(color) {
+            document.querySelectorAll('.pawn-option').forEach(p => p.classList.remove('selected'));
+            event.target.classList.add('selected');
+            document.getElementById('customPawn').value = color;
         }
-
-        function showMessage(message) {
-            const messagesDiv = document.getElementById('messages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message';
-            messageDiv.textContent = message;
-            messagesDiv.appendChild(messageDiv);
-            
-            setTimeout(() => {
-                messageDiv.remove();
-            }, 5000);
-        }
-
-        // Forgot Password Functions
-        function showForgotPassword() {
-            document.getElementById('auth-forms').style.display = 'none';
-            document.getElementById('forgot-password-form').style.display = 'inline-block';
-        }
-
-        function hideForgotPassword() {
-            document.getElementById('forgot-password-form').style.display = 'none';
-            document.getElementById('auth-forms').style.display = 'block';
-        }
-
-        // Handle forgot password form submission
-        document.getElementById('forgot-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const email = formData.get('email');
+        
+        async function saveAppearance() {
+            showLoading();
             
             try {
-                const response = await fetch('/api/auth/forgot-password', {
+                const token = localStorage.getItem('token');
+                const response = await fetch('/api/user/update', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email })
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({
+                        avatar: currentUser.avatar,
+                        pawn: document.getElementById('customPawn').value
+                    })
                 });
                 
-                const result = await response.json();
+                const data = await response.json();
                 
-                if(result.success) {
-                    showMessage('Password reset email sent! Check your inbox.');
-                    hideForgotPassword();
+                if (response.ok) {
+                    showMessage('success', 'Appearance updated successfully!');
                 } else {
-                    showMessage(result.message || 'Failed to send reset email');
+                    showMessage('error', data.message || 'Failed to update appearance');
                 }
             } catch (error) {
-                console.error('Forgot password failed:', error);
-                showMessage('Failed to send reset email');
+                showMessage('error', 'Network error. Please try again.');
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        // Account form handler
+        document.getElementById('accountForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            showLoading();
+            
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch('/api/user/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({
+                        nickname: document.getElementById('nickname').value,
+                        email: document.getElementById('email').value,
+                        bio: document.getElementById('bio').value
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showMessage('success', 'Account updated successfully!');
+                    currentUser = { ...currentUser, ...data.user };
+                } else {
+                    showMessage('error', data.message || 'Failed to update account');
+                }
+            } catch (error) {
+                showMessage('error', 'Network error. Please try again.');
+            } finally {
+                hideLoading();
             }
         });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            checkAuth();
+        
+        // Password form handler
+        document.getElementById('passwordForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (newPassword !== confirmPassword) {
+                showMessage('error', 'New passwords do not match');
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                showMessage('error', 'Password must be at least 6 characters');
+                return;
+            }
+            
+            showLoading();
+            
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch('/api/user/change-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({
+                        currentPassword: document.getElementById('currentPassword').value,
+                        newPassword: newPassword
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showMessage('success', 'Password changed successfully!');
+                    document.getElementById('passwordForm').reset();
+                } else {
+                    showMessage('error', data.message || 'Failed to change password');
+                }
+            } catch (error) {
+                showMessage('error', 'Network error. Please try again.');
+            } finally {
+                hideLoading();
+            }
         });
+        
+        async function deleteAccount() {
+            if (!confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                return;
+            }
+            
+            showLoading();
+            
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch('/api/user/delete', {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showMessage('success', 'Account deleted successfully');
+                    localStorage.removeItem('token');
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 2000);
+                } else {
+                    showMessage('error', data.message || 'Failed to delete account');
+                }
+            } catch (error) {
+                showMessage('error', 'Network error. Please try again.');
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        function showMessage(type, message) {
+            const successMsg = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('errorMessage');
+            
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+            
+            if (type === 'success') {
+                successMsg.textContent = message;
+                successMsg.style.display = 'block';
+            } else {
+                errorMsg.textContent = message;
+                errorMsg.style.display = 'block';
+            }
+            
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+                errorMsg.style.display = 'none';
+            }, 5000);
+        }
+        
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+        }
+        
+                 function hideLoading() {
+             document.getElementById('loading').style.display = 'none';
+         }
+
+         function logout() {
+             localStorage.removeItem('token');
+             localStorage.removeItem('user');
+             window.location.href = '/';
+         }
     </script>
 </body>
 </html>

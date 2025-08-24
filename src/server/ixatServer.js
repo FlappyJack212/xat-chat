@@ -251,6 +251,12 @@ class IxatServer {
         
         // Power Purchase API
         this.app.post('/api/powers/buy', this.handleBuyPower.bind(this));
+        // User management routes
+        this.app.post('/api/user/update', this.handleUserUpdate.bind(this));
+        this.app.post('/api/user/change-password', this.handleChangePassword.bind(this));
+        this.app.delete('/api/user/delete', this.handleDeleteAccount.bind(this));
+        this.app.post('/api/user/pawn', this.handleUpdatePawn.bind(this));
+        this.app.post('/api/user/bio', this.handleUpdateBio.bind(this));
   }
   
   setupSocketHandlers() {
@@ -1785,16 +1791,123 @@ class IxatServer {
             const { bio } = req.body;
             
             const user = await User.findById(decoded.userId);
-      if (!user) {
+            if (!user) {
                 return res.status(404).json({ success: false, message: 'User not found' });
-      }
+            }
 
-            user.desc = bio || '';
-      await user.save();
+            user.desc = bio;
+            await user.save();
 
             res.json({ success: true, message: 'Bio updated successfully' });
-    } catch (error) {
+        } catch (error) {
             console.error('🎭 [SERVER] Update bio error:', error);
+            res.status(500).json({ success: false, message: 'Server error' });
+        }
+    }
+
+    async handleUserUpdate(req, res) {
+        try {
+            const token = req.headers.authorization?.replace('Bearer ', '');
+            if (!token) {
+                return res.status(401).json({ success: false, message: 'Authentication required' });
+            }
+            
+            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+            const { nickname, email, bio, avatar, pawn } = req.body;
+            
+            const user = await User.findById(decoded.userId);
+            if (!user) {
+                return res.status(404).json({ success: false, message: 'User not found' });
+            }
+
+            // Update fields if provided
+            if (nickname) user.nickname = nickname;
+            if (email) user.email = email;
+            if (bio) user.desc = bio;
+            if (avatar) user.avatar = avatar;
+            if (pawn) {
+                if (pawn === 'off') {
+                    user.custpawn = '';
+                } else if (/^#[0-9A-Fa-f]{6}$/.test(pawn)) {
+                    user.custpawn = pawn.substring(1); // Remove # for storage
+                }
+            }
+
+            await user.save();
+
+            res.json({ 
+                success: true, 
+                message: 'Profile updated successfully',
+                user: {
+                    id: user._id,
+                    username: user.username,
+                    nickname: user.nickname,
+                    email: user.email,
+                    avatar: user.avatar,
+                    rank: user.rank,
+                    xats: user.xats,
+                    days: user.days
+                }
+            });
+        } catch (error) {
+            console.error('🎭 [SERVER] User update error:', error);
+            res.status(500).json({ success: false, message: 'Server error' });
+        }
+    }
+
+    async handleChangePassword(req, res) {
+        try {
+            const token = req.headers.authorization?.replace('Bearer ', '');
+            if (!token) {
+                return res.status(401).json({ success: false, message: 'Authentication required' });
+            }
+            
+            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+            const { currentPassword, newPassword } = req.body;
+            
+            const user = await User.findById(decoded.userId);
+            if (!user) {
+                return res.status(404).json({ success: false, message: 'User not found' });
+            }
+
+            // Verify current password
+            const isValid = await bcrypt.compare(currentPassword, user.password);
+            if (!isValid) {
+                return res.status(400).json({ success: false, message: 'Current password is incorrect' });
+            }
+
+            // Hash new password
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+            user.password = hashedPassword;
+            await user.save();
+
+            res.json({ success: true, message: 'Password changed successfully' });
+        } catch (error) {
+            console.error('🎭 [SERVER] Change password error:', error);
+            res.status(500).json({ success: false, message: 'Server error' });
+        }
+    }
+
+    async handleDeleteAccount(req, res) {
+        try {
+            const token = req.headers.authorization?.replace('Bearer ', '');
+            if (!token) {
+                return res.status(401).json({ success: false, message: 'Authentication required' });
+            }
+            
+            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+            
+            const user = await User.findById(decoded.userId);
+            if (!user) {
+                return res.status(404).json({ success: false, message: 'User not found' });
+            }
+
+            // Delete user
+            await User.findByIdAndDelete(decoded.userId);
+
+            res.json({ success: true, message: 'Account deleted successfully' });
+        } catch (error) {
+            console.error('🎭 [SERVER] Delete account error:', error);
             res.status(500).json({ success: false, message: 'Server error' });
         }
     }

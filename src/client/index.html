@@ -353,7 +353,8 @@
                 <a class="nav-link" href="/">Home</a>
                 <a class="nav-link" href="/chat.html">Main Chat</a>
                 <a class="nav-link" href="/powers.html">Powers</a>
-                <a class="nav-link" href="/auth.html">Register/Login</a>
+                <a class="nav-link" href="/auth.html" id="authLink">Register/Login</a>
+                <a class="nav-link" href="/profile.html" id="profileLink" style="display: none;">Profile</a>
                 <a class="nav-link" href="/lobby.html">Lobby</a>
                 <a class="nav-link" href="/help.html">Help</a>
                 <a class="nav-link" href="/test.html">Test</a>
@@ -721,7 +722,7 @@
             document.getElementById(activeId).classList.add('active');
         }
 
-        // Search functionality
+                // Search functionality
         document.getElementById('searchBox').addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase();
             const allGroups = groupsData.filter(group => 
@@ -733,28 +734,60 @@
             thumbsContainer.innerHTML = '';
             
                          allGroups.forEach(group => {
-                 const groupCard = document.createElement('div');
-                 groupCard.className = 'col-lg-4 col-md-6';
-                 
-                 // All our groups have dedicated pages now
-                 let groupLink = '/' + group.name.toLowerCase() + '.html';
-                 
-                 groupCard.innerHTML = `
-                     <div class="group-card" onclick="window.location.href='${groupLink}'">
-                         <div class="group-thumbnail">
-                             <img src="${group.image}" alt="${group.name}" onerror="this.src='https://xat.com/content/web/R00221/img/xatplanet.svg'">
-                         </div>
-                         <div class="group-name">${group.name}</div>
-                         <div class="group-description">${group.description}</div>
-                         <div class="group-stats">
-                             <span>Active now</span>
-                             <span class="group-users">${group.users}</span>
-                         </div>
-                     </div>
-                 `;
-                 thumbsContainer.appendChild(groupCard);
-             });
+                const groupCard = document.createElement('div');
+                groupCard.className = 'col-lg-4 col-md-6';
+                
+                // All our groups have dedicated pages now
+                let groupLink = '/' + group.name.toLowerCase() + '.html';
+                
+                groupCard.innerHTML = `
+                    <div class="group-card" onclick="window.location.href='${groupLink}'">
+                        <div class="group-thumbnail">
+                            <img src="${group.image}" alt="${group.name}" onerror="this.src='https://xat.com/content/web/R00221/img/xatplanet.svg'">
+                        </div>
+                        <div class="group-name">${group.name}</div>
+                        <div class="group-description">${group.description}</div>
+                        <div class="group-stats">
+                            <span>Active now</span>
+                            <span class="group-users">${group.users}</span>
+                        </div>
+                    </div>
+                `;
+                thumbsContainer.appendChild(groupCard);
+            });
         });
+
+        // Check authentication status and update navbar
+        async function checkAuthStatus() {
+            const token = localStorage.getItem('token');
+            const authLink = document.getElementById('authLink');
+            const profileLink = document.getElementById('profileLink');
+            
+            if (token) {
+                try {
+                    const response = await fetch('/api/auth/status?token=' + token);
+                    const data = await response.json();
+                    
+                    if (data.authenticated) {
+                        authLink.style.display = 'none';
+                        profileLink.style.display = 'inline-block';
+                    } else {
+                        authLink.style.display = 'inline-block';
+                        profileLink.style.display = 'none';
+                        localStorage.removeItem('token');
+                    }
+                } catch (error) {
+                    authLink.style.display = 'inline-block';
+                    profileLink.style.display = 'none';
+                }
+            } else {
+                authLink.style.display = 'inline-block';
+                profileLink.style.display = 'none';
+            }
+        }
+
+        // Check auth status on page load
+        checkAuthStatus();
     </script>
 </body>
 </html>
