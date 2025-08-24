@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Powers Store - Xat Recreation</title>
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            background-color: #000000;
+            font-family: Arial, sans-serif;
+        }
+
+        .siteWrapper {
+            min-height: 100vh;
+        }
+
+        .siteHeader {
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(to bottom, #333333, #222222);
+            border-bottom: 2px solid #0066ff;
+        }
+
+        .center {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            float: left;
+            display: block;
+            width: 120px;
+            height: 40px;
+            margin: 10px 0;
+            background: linear-gradient(45deg, #0066ff, #00ccff);
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .navigation {
+            float: right;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navigation li {
+            display: inline-block;
+            position: relative;
+        }
+
+        .navigation a {
+            display: block;
+            padding: 15px 20px;
+            color: #cccccc;
+            text-decoration: none;
+            font-size: 13px;
+            text-align: center;
+            transition: color 0.3s;
+        }
+
+        .navigation a:hover {
+            color: #ffffff;
+        }
+
+        .navigation a strong {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .navigation a span {
+            display: block;
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        .block {
+            display: inline-block;
+            vertical-align: top;
+            margin: 0.5%;
+            padding: 0.5%;
+            border: 3px solid #0066ff;
+            font-size: 13px;
+            word-wrap: break-word;
+            font-family: Arial;
+            background: #111111;
+        }
+
+        .block.c1 { width: 98%; }
+        .block.c3 { width: 31.3%; }
+        .block.c5 { width: 18%; }
+        .block.fr { float: right; }
+
+        .heading {
+            display: inline-block;
+            font-size: 16px;
+            width: 100%;
+            border-bottom: 2px solid #ffffff;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .tc { text-align: center; }
+        .tr { text-align: right; }
+        .tl { text-align: left; }
+        .pnt { cursor: pointer; }
+        .hus:hover { text-decoration: underline; }
+
+        input[type="text"], input[type="password"], select {
+            border: 1px solid #adaba3;
+            padding: 2px 2px;
+            text-align: center;
+            background: #222222;
+            color: #ffffff;
+        }
+
+        input[type="submit"] {
+            border: 1px solid #adaba3;
+            padding: 1px 6px;
+            text-align: center;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            margin-left: -6px;
+            margin-right: -6px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #e0e0e0;
+        }
+
+        table {
+            width: 100%;
+            color: #ffffff;
+        }
+
+        table td {
+            padding: 5px;
+        }
+
+        .power-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .power-item {
+            border: 2px solid #0066ff;
+            background: #111111;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .power-preview {
+            width: 100%;
+            height: 100px;
+            background: #000000;
+            border: 1px solid #333333;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+        }
+
+        .message {
+            width: 98%;
+            padding: 0.5% 1%;
+            background-color: #000000;
+            font-size: 13px;
+            color: #ffffff;
+            font-family: Arial;
+            text-align: center;
+            margin-bottom: 5px;
+            border: 1px solid #0066ff;
+        }
+
+        .siteFooterBar {
+            background: #222222;
+            border-top: 2px solid #0066ff;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .backToTop {
+            color: #0066ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Site Wrapper Start -->
+    <div class="siteWrapper">
+        <!-- Site Header -->
+        <div class="siteHeader">
+            <div class="center">
+                <a class="logo" href="/">XAT</a>
+                <ul class="navigation">
+                    <li><a href="/"><strong>Home</strong><br><span>Main-Chat</span></a></li>
+                    <li><a href="/powers.html" style="color: #ffffff;"><strong>Powers</strong><br><span>Buy Powers!</span></a></li>
+                    <li><a href="/trade.html"><strong>Trade</strong><br><span>Sell/List Powers</span></a></li>
+                    <li><a href="/groups.html"><strong>Groups</strong><br><span>Edit Group/Create</span></a></li>
+                    <li><a href="/profile.html"><strong>Profile</strong><br><span>Register/Login!</span></a></li>
+                    <li><a href="/donate.html"><strong>Donate</strong><br><span>Support us!</span></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <center>
+            <div id="main">
+                <div class="block c1">
+                    <div class="tc">
+                        <i>Hover over the power NAME for any smilies associated with the power (if there are any)</i>
+                    </div>
+                    
+                    <div class="block c3">
+                        <div class="heading">Search by name</div>
+                        <small>Powers will update as you type.</small>
+                        <input type="text" id="psearchname" style="width: 98%" placeholder="Search powers..." />
+                    </div>
+                    
+                    <div class="block c3 fr">
+                        <div class="heading">Search by price <i>NOT WORKING DUE TO UPDATE</i></div>
+                        <small>Powers will update as you type.</small>
+                        <table style="width: 99%">
+                            <tr>
+                                <td>
+                                    <select id="psearchprice0">
+                                        <option selected="selected">Below</option>
+                                        <option>Above</option>
+                                        <option>Exactly</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" id="psearchprice" style="width: 100%" placeholder="Price..." />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="block c1" id="pages"></div>
+                <div class="block c1" id="powerBlock"></div>
+            </div>
+        </center>
+    </div>
+
+    <!-- Site Footer -->
+    <div class="siteFooterBar">
+        <div class="center">
+            <center>
+                <a class="backToTop" href="#">xat-recreation.com</a>
+                <p style="color: #cccccc; margin-top: 10px;">Complete Xat recreation with all 325+ authentic powers</p>
+            </center>
+        </div>
+    </div>
+
+    <script>
+        let powers = [];
+        let usepowers = [];
+        let currentPage = 1;
+        const powersPerPage = 20;
+
+        // Load powers from API
+        async function loadPowers() {
+            try {
+                const response = await fetch('/api/powers');
+                const data = await response.json();
+                powers = data.powers.filter(power => 
+                    !power.name.includes('(Undefined)') && 
+                    !['allpowers', 'chrome', 'everypower'].includes(power.name) &&
+                    power.subid < 2147483647
+                );
+                usepowers = [...powers];
+                setPages();
+                loadPage(1);
+            } catch (error) {
+                console.error('Failed to load powers:', error);
+                document.getElementById('powerBlock').innerHTML = '<div class="block c1 tc">Failed to load powers</div>';
+            }
+        }
+
+        function setPages() {
+            const pwr_max = usepowers.length;
+            const pwr_pages = Math.ceil(pwr_max / powersPerPage);
+            const pages = document.getElementById('pages');
+            pages.innerHTML = 'Pages: ';
+            
+            for(let i = 1; i <= pwr_pages; i++) {
+                pages.innerHTML += '&nbsp;<span class="pnt hus" onclick="loadPage(' + i + ')">' + i.toString() + '</span>&nbsp;';
+            }
+        }
+
+        function loadPage(page) {
+            currentPage = page;
+            const index = (page - 1) * powersPerPage;
+            const on_page = usepowers.slice(index, index + powersPerPage);
+            const powerBlock = document.getElementById('powerBlock');
+            powerBlock.innerHTML = "";
+            
+            if(on_page.length > 0) {
+                on_page.forEach(power => {
+                    const html = `
+                        <div class="block c5">
+                            <div class="heading pnt" title="${power.topsh || ''}">${power.name}</div>
+                            <table style="width:99%">
+                                <input type="hidden" class="xats" value="${power.cost}" />
+                                <tr class="price">
+                                    <td>Price</td>
+                                    <td class="tr price">${power.cost} xats</td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td class="tr">${getPowerStatus(power)}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="tc preview pnt" onclick="togglePreview(this)">
+                                        Click for preview
+                                    </td>
+                                </tr>
+                                <tr class="pvbox" style="display: none;">
+                                    <td colspan="2" class="tc">
+                                        <div class="power-preview">
+                                            <span>${power.name} Preview</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="tc">
+                                        <input type="submit" onclick="storeBuy(this)" class="storebuy" value="Buy Power" style="width: 100%" name="p${power.name}" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    `;
+                    powerBlock.innerHTML += html;
+                });
+            } else {
+                powerBlock.innerHTML = '<div class="block c1 tc">No powers were found</div>';
+            }
+        }
+
+        function getPowerStatus(power) {
+            if(parseInt(power.limited) === 1) {
+                if(parseInt(power.amount) > 0) {
+                    return power.amount + " available";
+                } else {
+                    return "Limited";
+                }
+            }
+            return "unlimited";
+        }
+
+        function togglePreview(element) {
+            const pvbox = element.parentElement.nextElementSibling;
+            pvbox.style.display = pvbox.style.display === 'none' ? 'table-row' : 'none';
+        }
+
+        async function storeBuy(button) {
+            const powerName = button.name.substring(1); // Remove 'p' prefix
+            const power = powers.find(p => p.name === powerName);
+            
+            if(!power) {
+                alert('Power not found');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/powers/buy', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ powerName: powerName })
+                });
+
+                const result = await response.json();
+                
+                if(result.status === 'ok') {
+                    alert('Power purchased successfully!');
+                    // Refresh user data if needed
+                } else {
+                    alert(result.status || 'Failed to purchase power');
+                }
+            } catch (error) {
+                console.error('Purchase failed:', error);
+                alert('Failed to purchase power');
+            }
+        }
+
+        // Search functionality
+        document.getElementById('psearchname').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            usepowers = powers.filter(power => 
+                power.name.toLowerCase().includes(searchTerm)
+            );
+            setPages();
+            loadPage(1);
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPowers();
+        });
+    </script>
+</body>
+</html>

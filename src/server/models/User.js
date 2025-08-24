@@ -1,102 +1,80 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    minlength: 3,
-    maxlength: 20
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true
-  },
-  passwordHash: {
-    type: String,
-    required: true
-  },
-  displayName: {
-    type: String,
-    required: true,
-    trim: true,
-    maxlength: 30
-  },
-  avatarId: {
-    type: String,
-    default: 'default'
-  },
-  level: {
-    type: Number,
-    default: 1
-  },
-  credits: {
-    type: Number,
-    default: 1000
-  },
-  // iXat currency system
-  xats: {
-    type: Number,
-    default: 1000
-  },
-  days: {
-    type: Number,
-    default: 7
-  },
-  powers: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Power'
-  }],
-  // iXat specific power tracking
-  userPowers: [{
-    powerId: { type: Number },
-    count: { type: Number, default: 1 },
-    purchased: { type: Date, default: Date.now }
-  }],
-  friends: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
-  blocked: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
-  status: {
-    type: String,
-    enum: ['online', 'away', 'offline'],
-    default: 'offline'
-  },
-  lastSeen: {
-    type: Date,
-    default: Date.now
-  },
-  settings: {
-    sound: {
-      type: Boolean,
-      default: true
+const userSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        minlength: 3,
+        maxlength: 20
     },
-    notifications: {
-      type: Boolean,
-      default: true
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        lowercase: true
     },
-    privacy: {
-      showStatus: {
+    password: {
+        type: String,
+        required: true
+    },
+    nickname: {
+        type: String,
+        trim: true,
+        maxlength: 20
+    },
+    rank: {
+        type: Number,
+        default: 3, // Member
+        enum: [1, 2, 3, 4, 5] // Main Owner, Admin, Member, Owner, Guest
+    },
+    xats: {
+        type: Number,
+        default: 0
+    },
+    days: {
+        type: Number,
+        default: 0
+    },
+    avatar: {
+        type: Number,
+        default: 1
+    },
+    custspawn: {
+        type: String,
+        default: ''
+    },
+    bio: {
+        type: String,
+        default: '',
+        maxlength: 500
+    },
+    homepage: {
+        type: String,
+        default: ''
+    },
+    enabled: {
         type: Boolean,
         default: true
-      },
-      allowFriendRequests: {
+    },
+    emailVerified: {
         type: Boolean,
-        default: true
-      }
+        default: false
+    },
+    friends: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    lastSeen: {
+        type: Date,
+        default: Date.now
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', userSchema);

@@ -7,7 +7,7 @@ const Room = require('../src/server/models/Room');
 dotenv.config();
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect('mongodb://localhost:27017/ixat_chat', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -122,7 +122,17 @@ async function importIxatData() {
     console.log('👥 Importing sample users...');
     for (const userData of IXAT_SAMPLE_USERS) {
       try {
-        const user = new User(userData);
+        const user = new User({
+          username: userData.username,
+          email: userData.email,
+          password: 'password123', // Default password
+          nickname: userData.displayName,
+          avatar: userData.avatarId,
+          xats: userData.xats,
+          days: userData.days,
+          rank: 1,
+          enabled: true
+        });
         await user.save();
         console.log(`  ✅ Imported user: ${userData.username}`);
       } catch (error) {
@@ -139,21 +149,16 @@ async function importIxatData() {
     for (const powerData of IXAT_POWERS) {
       try {
         const power = new Power({
+          id: powerData.id,
           name: powerData.name,
           description: powerData.description,
-          category: powerData.section,
-          icon: powerData.icon,
-          effect: `${powerData.name}-effect`,
-          price: powerData.cost,
-          isActive: true,
-          // iXat specific fields
           cost: powerData.cost,
           subid: powerData.subid,
           section: powerData.section,
           amount: powerData.amount,
           topsh: powerData.topsh,
           group: powerData.group,
-          limited: powerData.limited
+          limited: powerData.limited === 1
         });
         
         await power.save();

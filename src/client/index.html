@@ -1,395 +1,760 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xat Recreation - Modern Chat Platform</title>
-  <meta name="description" content="Experience the nostalgia of xat.com with modern features - Real-time chat, avatars, powers, and more!">
-  
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ixchats</title>
+    <meta name="description" content="ixchats is a fun social networking site, join a group, make friends, create your own chat group">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        .navbar {
+            background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+            border-bottom: 3px solid #004080;
+            padding: 10px 0;
+        }
+
+        .navbar-brand img {
+            height: 50px;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logoname-flex {
+            text-align: center;
+            color: white;
+        }
+
+        #groupName {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        #groupDescription {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 10px;
+            padding: 8px 16px !important;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff !important;
+            transform: translateY(-1px);
+        }
+
+        .navbar-nav .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff !important;
+        }
+
+        /* Hero Section */
+        #hero {
+            padding-top: 80px;
+            padding-bottom: 40px;
+        }
+
+        .xatbox {
+            background: #ffffff;
+            border: 2px solid #0066cc;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.2);
+        }
+
+                 #embedframe {
+             width: 100%;
+             height: 600px;
+             border: none;
+         }
+
+        #newto {
+            padding: 20px;
+        }
+
+        #newtoxat {
+            color: #0066cc;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #newtodesc {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0066cc, #0052a3);
+            border: none;
+            padding: 12px 24px;
+            font-weight: bold;
+            border-radius: 6px;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0052a3, #004080);
+            transform: translateY(-2px);
+        }
+
+        /* Carousel */
+        .carousel-item {
+            padding: 40px 0;
+        }
+
+        .carousel-item h1 {
+            color: #0066cc;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .carousel-item p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .carousel-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .xcarousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 102, 204, 0.8);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            z-index: 10;
+        }
+
+        .xcarousel-control.xleft {
+            left: 20px;
+        }
+
+        .xcarousel-control.xright {
+            right: 20px;
+        }
+
+        .ximg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Groups Section */
+        .groups_page {
+            background: #ffffff;
+            padding: 40px 0;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .section_header {
+            color: #0066cc;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .form-search {
+            max-width: 400px;
+        }
+
+        .homenav {
+            border-bottom: 2px solid #e9ecef;
+            margin-bottom: 30px;
+        }
+
+        .homenav .nav-link {
+            color: #666;
+            border: none;
+            padding: 12px 20px;
+            margin-right: 10px;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .homenav .nav-link.active {
+            background: #0066cc;
+            color: white;
+        }
+
+        .homenav .nav-link:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .homenav .nav-link.active:hover {
+            background: #0052a3;
+            color: white;
+        }
+
+                 /* Group Cards */
+         .group-card {
+             background: #ffffff;
+             border: 1px solid #e9ecef;
+             border-radius: 8px;
+             padding: 15px;
+             margin-bottom: 20px;
+             transition: all 0.3s ease;
+             cursor: pointer;
+             text-align: center;
+         }
+
+         .group-thumbnail {
+             margin-bottom: 10px;
+         }
+
+         .group-thumbnail img {
+             width: 80px;
+             height: 80px;
+             border-radius: 8px;
+             object-fit: cover;
+             border: 2px solid #e9ecef;
+         }
+
+        .group-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-color: #0066cc;
+        }
+
+        .group-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 10px;
+        }
+
+        .group-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .group-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .group-users {
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        #footer {
+            background: #333;
+            color: white;
+            padding: 20px 0;
+        }
+
+        .footer-icons {
+            margin: 0 10px;
+        }
+
+        .footer-icons img {
+            width: 18px;
+            height: 18px;
+        }
+
+        #footer a {
+            color: #ccc;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        #footer a:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-flex {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+                         #embedframe {
+                 height: 400px;
+             }
+
+            .carousel-item {
+                padding: 20px 0;
+            }
+
+            .carousel-item h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="nav-header">
-        <a href="/" class="nav-brand">
-          <i class="fas fa-comments"></i>
-          <span>Xat Recreation</span>
-        </a>
-        <div class="nav-welcome">
-          <div class="welcome-title">Welcome to Xat Recreation</div>
-          <div class="welcome-subtitle">Connect with people around the world</div>
-        </div>
-      </div>
-      <div class="nav-menu">
-        <a href="/chat.html" class="nav-link"><i class="fas fa-comments"></i> Chat</a>
-        <a href="/classic.html" class="nav-link"><i class="fas fa-star"></i> Classic</a>
-                 <a href="#" class="nav-link" id="powers-link"><i class="fas fa-magic"></i> Powers</a>
-         <a href="#" class="nav-link d-none" id="create-room-button"><i class="fas fa-plus"></i> Create Room</a>
-         <a href="#" class="nav-link" id="register-button"><i class="fas fa-user-plus"></i> Register</a>
-         <a href="#" class="nav-link" id="login-button"><i class="fas fa-sign-in-alt"></i> Login</a>
-         <a href="#" class="nav-link d-none" id="profile-link"><i class="fas fa-user"></i> Profile</a>
-         <a href="#" class="nav-link d-none" id="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-container">
-      <div class="hero-content">
-        <div class="hero-left">
-          <div class="chat-preview">
-            <div class="chat-header">
-              <div class="chat-title">
-                <i class="fas fa-comments"></i>
-                <span>Live Chat Preview</span>
-              </div>
-              <div class="chat-status">
-                <span class="status-dot"></span>
-                <span>Online</span>
-              </div>
-            </div>
-            <div class="chat-messages">
-              <div class="message">
-                <div class="message-avatar">😎</div>
-                <div class="message-content">
-                  <div class="message-user">CoolUser</div>
-                  <div class="message-text">Welcome to Xat Recreation! 🌟</div>
+    <!-- Header -->
+    <nav id="navTop" class="navbar navbar-expand-md navbar-dark fixed-top">
+        <div class="container">
+            <div class="header-flex">
+                <div>
+                    <a class="navbar-brand" href="/">
+                        <img id="navLogo" src="https://xat.com/content/web/R00221/img/xatplanet.svg" height="50" alt="logo">
+                    </a>
                 </div>
-              </div>
-              <div class="message">
-                <div class="message-avatar">🎮</div>
-                <div class="message-content">
-                  <div class="message-user">Gamer123</div>
-                  <div class="message-text">Anyone up for some retro gaming? 🎮</div>
+                <div class="logoname-flex">
+                    <div id="groupName">ixchats</div>
+                    <div id="groupDescription">Complete iXat recreation with all 325+ authentic powers</div>
                 </div>
-              </div>
-              <div class="message">
-                <div class="message-avatar">🎵</div>
-                <div class="message-content">
-                  <div class="message-user">MusicLover</div>
-                  <div class="message-text">The music player is working great! 🎵</div>
+            </div>
+            
+            <!-- Navigation Menu -->
+            <div class="navbar-nav ml-auto">
+                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/chat.html">Main Chat</a>
+                <a class="nav-link" href="/powers.html">Powers</a>
+                <a class="nav-link" href="/auth.html">Register/Login</a>
+                <a class="nav-link" href="/lobby.html">Lobby</a>
+                <a class="nav-link" href="/help.html">Help</a>
+                <a class="nav-link" href="/test.html">Test</a>
+            </div>
+        </div>
+        <span id="statnav"></span>
+    </nav>
+
+    <!-- Hero Section with Carousel -->
+    <div id="hero">
+        <div class="container">
+            <div class="row">
+                <div>
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                        <div class="carousel-inner">
+                            <!-- Main Chat Slide -->
+                            <div class="carousel-item active">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <div id="xatbox">
+                                                <div class="xatbox">
+                                                                                                         <iframe name="box" title="chat" width="728" height="600" id="embedframe" src="/chat.html"></iframe>
+                                                </div>
+                                                <div id="promo"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm">
+                                            <div id="newto">
+                                                <h1 id="newtoxat">new to ixchats?</h1>
+                                                <p id="newtodesc">Register an account. Find a chat group that shares your interests. Make your own chat group. Get and trade Powers. Play a multiplayer game. Design your own animated avatar character. Send stickers with custom text.</p>
+                                                <a href="#myCarousel" data-slide="next" class="btn btn-primary btn-large">
+                                                    <img class="mr-2 pb-1" src="https://xat.com/content/web/R00221/img/navbar/help.svg" alt="help" width="19">
+                                                    <span>learn more</span>
+                                                </a>
+                                                <p class="pt-4">
+                                                    <span>Follow ixchats on</span>: 
+                                                    <a href="https://twitter.com/ixchats" rel="noopener" target="_blank">
+                                                        <img class="ml-2 mr-2 mb-1" src="https://xat.com/content/web/R00221/img/navbar/x_b.svg" alt="ixchats x" width="18">
+                                                    </a>
+                                                    <a href="https://facebook.com/ixchats" rel="noopener" target="_blank">
+                                                        <img class="mr-2 mb-1" src="https://xat.com/content/web/R00221/img/navbar/facebook.svg" alt="ixchats facebook" width="22">
+                                                    </a>
+                                                    <a href="https://instagram.com/ixchats" rel="noopener" target="_blank">
+                                                        <img class="mr-2 insta" src="https://xat.com/content/web/R00221/img/navbar/instagram.svg" alt="ixchats instagram" width="22">
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Create Group Slide -->
+                            <div class="carousel-item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <img src="https://xat.com/content/web/R00221/img/home/tourgroup.png" alt="group" loading="lazy" class="img-fluid">
+                                        </div>
+                                        <div class="col-sm">
+                                                                                         <h1>create a chat group</h1>
+                                             <p>Your own chat group could be for particular subject (e.g. music, anime, video games), for the visitors to your site or just for you and your friends. You can use it on ixchats or embed it on your site. Groups are fully customizable and can be members only if you want to restrict it to your friends.</p>
+                                             <a href="/groups.html" class="btn btn-primary btn-large">
+                                                 <img class="mr-2 pb-1" src="https://xat.com/content/web/R00221/img/navbar/community.svg" alt="community">
+                                                 <span>create chat group</span>
+                                             </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Powers Slide -->
+                            <div class="carousel-item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                                                                         <h1>powers</h1>
+                                             <p>You can use your xats and days to buy special powers for the chat box. These include sets of custom smilies, special effects and abilities and group powers which add extra features to your chat group. Learn more about all the available powers on the <a href="https://xat.wiki/Powers">iXat wiki</a>.</p>
+                                            <a href="/powers.html" class="btn btn-primary btn-large">
+                                                <img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/powers.svg" alt="powers">
+                                                <span>get powers</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm">
+                                            <img src="https://xat.com/content/web/R00221/img/home/tourpowers.png" loading="lazy" alt="powers" class="img-fluid pt-1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Trade Slide -->
+                            <div class="carousel-item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                                                                         <h1>trade powers</h1>
+                                             <p>You can trade powers with other ixchats users. If you are skillful you can earn a profit, buy low and sell high. <a href="/trade.html">ixchats trade</a> is a stock exchange where traders meet.</p>
+                                            <a href="/trade.html" class="btn btn-primary btn-large">
+                                                <img class="mr-2 pb-1" src="https://xat.com/content/web/R00221/img/navbar/trade.svg" alt="trade">
+                                                <span>start trading</span>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm">
+                                            <img src="https://xat.com/content/web/R00221/img/home/tourtrade.png" loading="lazy" alt="trade" class="img-fluid">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Games Slide -->
+                            <div class="carousel-item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <img src="https://xat.com/content/web/R00221/img/home/tourgames.png" loading="lazy" alt="games" class="img-fluid">
+                                        </div>
+                                        <div class="col-sm">
+                                            <h1>games</h1>
+                                            <p>Play games against your friends or randoms.<br>Compete to be the fastest in the race games or evade bans with the ban games. <a href="/chat.html?game=doodle">Doodle</a> is a freeform co-operative drawing app. <a href="/chat.html?game=doodlerace">DoodleRace</a> gives you something to draw and then you vote on whose drawing was the best. Also try the new <a href="/chat.html?game=hearts">Hearts</a> card game.</p>
+                                            <a href="/chat.html" class="btn btn-primary btn-large">
+                                                <img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/games.svg" alt="games">
+                                                <span>play now</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Carousel Controls -->
+                        <a class="xcarousel-control xleft" href="#myCarousel" data-slide="prev">
+                            <img class="ximg p-2" src="https://xat.com/content/web/R00221/img/leftarrow.svg" alt="prev">
+                        </a>
+                        <a class="xcarousel-control xright" href="#myCarousel" data-slide="next">
+                            <img class="ximg p-2" src="https://xat.com/content/web/R00221/img/rightarrow.svg" alt="next">
+                        </a>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="chat-input">
-              <input type="text" placeholder="Type your message..." disabled>
-              <button class="chat-send" disabled><i class="fas fa-paper-plane"></i></button>
-            </div>
-          </div>
         </div>
-        <div class="hero-right">
-          <div class="hero-text">
-            <h1 class="hero-title">New to Xat Recreation?</h1>
-            <p class="hero-description">
-              Experience the nostalgia of the classic xat.com chat platform with modern features. 
-              Register an account, join chat rooms, customize your avatar, collect powers, and make new friends!
-            </p>
-            <div class="hero-features">
-              <div class="feature-item">
-                <i class="fas fa-users"></i>
-                <span>Join Communities</span>
-              </div>
-              <div class="feature-item">
-                <i class="fas fa-magic"></i>
-                <span>Collect Powers</span>
-              </div>
-              <div class="feature-item">
-                <i class="fas fa-palette"></i>
-                <span>Customize Avatars</span>
-              </div>
-              <div class="feature-item">
-                <i class="fas fa-gamepad"></i>
-                <span>Play Games</span>
-              </div>
-            </div>
-            <div class="hero-buttons">
-              <a href="/classic.html" class="btn btn-primary">
-                <i class="fas fa-star"></i>
-                <span>Try Classic Mode</span>
-              </a>
-              <a href="/chat.html" class="btn btn-secondary">
-                <i class="fas fa-comments"></i>
-                <span>Modern Chat</span>
-              </a>
-            </div>
-            <div class="hero-social">
-              <span>Follow us on:</span>
-              <div class="social-icons">
-                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
 
-  <!-- Features Carousel -->
-  <section class="features-carousel">
-    <div class="carousel-container">
-      <div class="carousel-track">
-        <!-- Slide 1: Powers -->
-        <div class="carousel-slide active">
-          <div class="slide-content">
-            <div class="slide-left">
-              <h2>Powers & Effects</h2>
-              <p>Collect and use special powers to enhance your chat experience. From rainbow text effects to sparkle animations, make your messages stand out!</p>
-              <a href="/classic.html" class="btn btn-primary">
-                <i class="fas fa-magic"></i>
-                <span>Explore Powers</span>
-              </a>
-            </div>
-            <div class="slide-right">
-              <div class="power-showcase">
-                <div class="power-item rainbow">🌈 Rainbow Text</div>
-                <div class="power-item sparkle">⭐ Sparkle Effect</div>
-                <div class="power-item fire">🔥 Fire Effect</div>
-                <div class="power-item ice">❄️ Ice Effect</div>
-                <div class="power-item lightning">⚡ Lightning Effect</div>
-                <div class="power-item diamond">💎 Diamond Effect</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Slide 2: Avatars -->
-        <div class="carousel-slide">
-          <div class="slide-content">
-            <div class="slide-left">
-              <h2>Custom Avatars</h2>
-              <p>Design your own animated character! Choose from hundreds of avatars, customize colors, add accessories, and watch your character respond to chat.</p>
-              <a href="/classic.html" class="btn btn-primary">
-                <i class="fas fa-palette"></i>
-                <span>Create Avatar</span>
-              </a>
-            </div>
-            <div class="slide-right">
-              <div class="avatar-showcase">
-                <div class="avatar-grid">
-                  <div class="avatar-item">😎</div>
-                  <div class="avatar-item">🎮</div>
-                  <div class="avatar-item">🎵</div>
-                  <div class="avatar-item">🌸</div>
-                  <div class="avatar-item">🦄</div>
-                  <div class="avatar-item">👻</div>
-                  <div class="avatar-item">🐱</div>
-                  <div class="avatar-item">🐶</div>
+    <!-- Groups Section -->
+    <div id="groups" class="groups_page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                                         <h2 class="section_header left">
+                         <span>chat groups</span>
+                     </h2>
                 </div>
-              </div>
+                <div class="col-lg-8">
+                    <div class="float-right">
+                        <form action="/search" class="form-search form-span inline-center">
+                            <div id="searchdiv" class="input-group mb-3">
+                                <input id="searchBox" name="search" class="form-control" placeholder="find out what people are talking about" aria-label="search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit">
+                                        <img class="mr-2 search" src="https://xat.com/content/web/R00221/img/navbar/search.svg" alt="search">
+                                        <span>search</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Slide 3: Commands -->
-        <div class="carousel-slide">
-          <div class="slide-content">
-            <div class="slide-left">
-              <h2>Powerful Commands</h2>
-              <p>Use slash commands to enhance your chat experience. From moderation tools to fun effects, there's a command for everything!</p>
-              <a href="/classic.html" class="btn btn-primary">
-                <i class="fas fa-terminal"></i>
-                <span>Learn Commands</span>
-              </a>
+            <div class="row mt-4 mb-2">
+                <div class="col-lg-8">
+                    <ul class="nav nav-pills homenav">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="xfeatured" href="#">
+                                <img class="mr-2 pb-1" src="https://xat.com/content/web/R00221/img/navbar/featured.svg" alt="featured">
+                                <span>featured</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="xpopular" href="#">
+                                <img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/popular.svg" alt="popular">
+                                <span>popular</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="xsupported" href="#">
+                                <img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/supported.svg" alt="supported">
+                                <span>supported</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="xgames" href="#">
+                                <img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/games.svg" alt="games">
+                                <span>games</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <nav aria-label="" class="float-right">
+                        <ul class="pagination pagination-right">
+                            <li class="page-item">
+                                <a class="page-link" id="prev" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">«</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" id="p1" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" id="p2" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" id="p3" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" id="p4" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" id="p5" href="#">5</a></li>
+                            <li class="page-item">
+                                <a class="page-link" id="next" href="#" aria-label="Next">
+                                    <span aria-hidden="true">»</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-            <div class="slide-right">
-              <div class="command-showcase">
-                <div class="command-item">
-                  <code>/me</code>
-                  <span>Perform actions</span>
+
+            <div class="row">
+                <div id="thumbs" class="span12 w-100">
+                    <!-- Groups will be loaded here dynamically -->
                 </div>
-                <div class="command-item">
-                  <code>/rainbow</code>
-                  <span>Rainbow text effect</span>
-                </div>
-                <div class="command-item">
-                  <code>/bg space</code>
-                  <span>Change background</span>
-                </div>
-                <div class="command-item">
-                  <code>/music</code>
-                  <span>Play background music</span>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="carousel-controls">
-        <button class="carousel-btn prev" id="carousel-prev">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <div class="carousel-dots">
-          <span class="dot active" data-slide="0"></span>
-          <span class="dot" data-slide="1"></span>
-          <span class="dot" data-slide="2"></span>
-        </div>
-        <button class="carousel-btn next" id="carousel-next">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-    </div>
-  </section>
 
-  <!-- Popular Rooms -->
-  <section class="popular-rooms">
-    <div class="rooms-container">
-      <div class="rooms-header">
-        <h2>Popular Chat Rooms</h2>
-        <p>Join the most active communities and start chatting!</p>
-      </div>
-      
-      <div class="rooms-grid" id="popular-rooms-list">
-        <!-- Rooms will be loaded dynamically -->
-        <div class="loading-rooms">
-          <div class="loading-spinner"></div>
-          <p>Loading popular rooms...</p>
+            <div class="row">
+                <div class="col-lg">
+                    <nav aria-label="" class="float-right">
+                        <ul class="pagination pagination-right">
+                            <li class="page-item">
+                                <a class="page-link" id="xprev" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">«</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" id="pp1" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" id="pp2" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" id="pp3" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" id="pp4" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" id="pp5" href="#">5</a></li>
+                            <li class="page-item">
+                                <a class="page-link" id="xnext" href="#" aria-label="Next">
+                                    <span aria-hidden="true">»</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Xat Recreation</h3>
-          <p>Experience the nostalgia of xat.com with modern features and enhanced functionality.</p>
-          <div class="footer-social">
-            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
-          </div>
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container text-center">
+            <span class="d-flex justify-content-center">
+                                 <a class="nav-link ftright footer-icons footLang" href="https://twitter.com/ixchats" rel="noopener" target="_blank">
+                     <img src="https://xat.com/content/web/R00221/img/navbar/x.svg" width="15" alt="x">
+                 </a>
+                 <a class="nav-link ftright footer-icons footLang" href="https://facebook.com/ixchats" rel="noopener" target="_blank">
+                     <img src="https://xat.com/content/web/R00221/img/navbar/facebook_white.svg" width="18" alt="facebook">
+                 </a>
+                 <a class="nav-link ftlast footer-icons footLang fInsta" href="https://instagram.com/ixchats" rel="noopener" target="_blank">
+                     <img src="https://xat.com/content/web/R00221/img/navbar/instagram_white.svg" width="18" alt="instagram">
+                 </a>
+            </span>
+            <span>
+                <a href="/privacy.html"><span>privacy/cookies</span></a>
+                <span>•</span>
+                <a href="/terms.html" rel="noopener" target="_blank"><span>terms of service</span></a>
+                <span>•</span>
+                <a href="/safety.html" rel="noopener" target="_blank"><span>safety</span></a>
+                <span>•</span>
+                                 <span>© <span id="copyrightyear">2024</span> ixchats</span>
+            </span>
         </div>
-        <div class="footer-section">
-          <h4>Features</h4>
-          <ul>
-            <li><a href="/chat.html">Modern Chat</a></li>
-            <li><a href="/classic.html">Classic Mode</a></li>
-            <li><a href="#">Powers & Effects</a></li>
-            <li><a href="#">Avatar Customization</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4>Support</h4>
-          <ul>
-            <li><a href="#">Help Center</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Contact Us</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2024 Xat Recreation. This is a fan recreation and is not affiliated with xat.com.</p>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
-  <!-- Login Modal -->
-  <div class="modal" id="login-modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Welcome Back</h2>
-        <span class="close">&times;</span>
-      </div>
-      <form id="login-form">
-        <div class="form-group">
-          <label for="login-username">Username</label>
-          <input type="text" id="login-username" name="username" required>
-        </div>
-        <div class="form-group">
-          <label for="login-password">Password</label>
-          <input type="password" id="login-password" name="password" required>
-        </div>
-        <button type="submit" class="btn btn-primary btn-full">Login</button>
-      </form>
-      <div class="modal-footer">
-        <p>Don't have an account? <a href="#" id="switch-to-register">Register here</a></p>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Register Modal -->
-  <div class="modal" id="register-modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Join Xat Recreation</h2>
-        <span class="close">&times;</span>
-      </div>
-      <form id="register-form">
-        <div class="form-group">
-          <label for="register-username">Username</label>
-          <input type="text" id="register-username" name="username" required>
-        </div>
-        <div class="form-group">
-          <label for="register-email">Email</label>
-          <input type="email" id="register-email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label for="register-password">Password</label>
-          <input type="password" id="register-password" name="password" required>
-        </div>
-        <div class="form-group">
-          <label for="register-confirm-password">Confirm Password</label>
-          <input type="password" id="register-confirm-password" name="confirmPassword" required>
-        </div>
-        <button type="submit" class="btn btn-primary btn-full">Create Account</button>
-      </form>
-      <div class="modal-footer">
-        <p>Already have an account? <a href="#" id="switch-to-login">Login here</a></p>
-      </div>
-    </div>
-  </div>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Set copyright year
+        document.getElementById('copyrightyear').textContent = new Date().getFullYear();
 
-  <!-- Create Room Modal -->
-  <div class="modal" id="create-room-modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Create New Room</h2>
-        <span class="close">&times;</span>
-      </div>
-      <form id="create-room-form">
-        <div class="form-group">
-          <label for="room-name">Room Name</label>
-          <input type="text" id="room-name" name="name" required minlength="3" maxlength="30">
-        </div>
-        <div class="form-group">
-          <label for="room-description">Description (Optional)</label>
-          <textarea id="room-description" name="description" maxlength="200" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="max-users">Max Users</label>
-          <select id="max-users" name="maxUsers">
-            <option value="10">10 users</option>
-            <option value="25">25 users</option>
-            <option value="50" selected>50 users</option>
-            <option value="100">100 users</option>
-            <option value="200">200 users</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>
-            <input type="checkbox" id="is-private" name="isPrivate">
-            Private Room (invite only)
-          </label>
-        </div>
-        <button type="submit" class="btn btn-primary btn-full">Create Room</button>
-      </form>
-      <div class="modal-footer">
-        <p>Room will be created and you'll be redirected to it automatically.</p>
-      </div>
-    </div>
-  </div>
+        // Real chat groups - only the ones we've actually created
+        const groupsData = [
+            { name: 'Lobby', description: 'Main lobby and welcome room - Join the ixchats community', users: 8, category: 'featured', image: 'https://xat.com/content/web/R00221/img/xatplanet.svg' },
+            { name: 'Help', description: 'Help and support center - Get assistance with ixchats', users: 4, category: 'supported', image: 'https://xat.com/content/web/R00221/img/xatplanet.svg' },
+            { name: 'Test', description: 'Testing and development room - Try out new features', users: 2, category: 'featured', image: 'https://xat.com/content/web/R00221/img/xatplanet.svg' },
+            { name: 'Chat', description: 'General chat and discussion - Join the conversation', users: 5, category: 'popular', image: 'https://xat.com/content/web/R00221/img/xatplanet.svg' }
+        ];
+
+        // Function to render groups
+        function renderGroups(category = 'featured') {
+            const thumbsContainer = document.getElementById('thumbs');
+            const filteredGroups = groupsData.filter(group => group.category === category);
+            
+            thumbsContainer.innerHTML = '';
+            
+                         filteredGroups.forEach(group => {
+                 const groupCard = document.createElement('div');
+                 groupCard.className = 'col-lg-4 col-md-6';
+                 
+                 // All our groups have dedicated pages now
+                 let groupLink = '/' + group.name.toLowerCase() + '.html';
+                 
+                 groupCard.innerHTML = `
+                     <div class="group-card" onclick="window.location.href='${groupLink}'">
+                         <div class="group-thumbnail">
+                             <img src="${group.image}" alt="${group.name}" onerror="this.src='https://xat.com/content/web/R00221/img/xatplanet.svg'">
+                         </div>
+                         <div class="group-name">${group.name}</div>
+                         <div class="group-description">${group.description}</div>
+                         <div class="group-stats">
+                             <span>Active now</span>
+                             <span class="group-users">${group.users}</span>
+                         </div>
+                     </div>
+                 `;
+                 thumbsContainer.appendChild(groupCard);
+             });
+        }
+
+        // Initialize groups
+        renderGroups();
+
+        // Tab switching
+        document.getElementById('xfeatured').addEventListener('click', function(e) {
+            e.preventDefault();
+            setActiveTab('xfeatured');
+            renderGroups('featured');
+        });
+
+        document.getElementById('xpopular').addEventListener('click', function(e) {
+            e.preventDefault();
+            setActiveTab('xpopular');
+            renderGroups('popular');
+        });
+
+        document.getElementById('xsupported').addEventListener('click', function(e) {
+            e.preventDefault();
+            setActiveTab('xsupported');
+            renderGroups('supported');
+        });
+
+        document.getElementById('xgames').addEventListener('click', function(e) {
+            e.preventDefault();
+            setActiveTab('xgames');
+            renderGroups('games');
+        });
+
+        function setActiveTab(activeId) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.homenav .nav-link').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Add active class to clicked tab
+            document.getElementById(activeId).classList.add('active');
+        }
+
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const allGroups = groupsData.filter(group => 
+                group.name.toLowerCase().includes(searchTerm) || 
+                group.description.toLowerCase().includes(searchTerm)
+            );
+            
+            const thumbsContainer = document.getElementById('thumbs');
+            thumbsContainer.innerHTML = '';
+            
+                         allGroups.forEach(group => {
+                 const groupCard = document.createElement('div');
+                 groupCard.className = 'col-lg-4 col-md-6';
+                 
+                 // All our groups have dedicated pages now
+                 let groupLink = '/' + group.name.toLowerCase() + '.html';
+                 
+                 groupCard.innerHTML = `
+                     <div class="group-card" onclick="window.location.href='${groupLink}'">
+                         <div class="group-thumbnail">
+                             <img src="${group.image}" alt="${group.name}" onerror="this.src='https://xat.com/content/web/R00221/img/xatplanet.svg'">
+                         </div>
+                         <div class="group-name">${group.name}</div>
+                         <div class="group-description">${group.description}</div>
+                         <div class="group-stats">
+                             <span>Active now</span>
+                             <span class="group-users">${group.users}</span>
+                         </div>
+                     </div>
+                 `;
+                 thumbsContainer.appendChild(groupCard);
+             });
+        });
+    </script>
 </body>
 </html>

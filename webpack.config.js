@@ -8,9 +8,9 @@ module.exports = (env, argv) => {
   
   return {
     entry: {
-      main: './src/client/index.js',
-      chat: './src/client/chat.js',
-      classic: './src/client/classic.js'
+      main: './src/client/index.js'
+      // Removed old chat.js and AuthenticFlashChat entries
+      // We're now using IxatClient.js directly
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
@@ -51,22 +51,7 @@ module.exports = (env, argv) => {
         filename: 'index.html',
         chunks: ['main']
       }),
-      new HtmlWebpackPlugin({
-        template: './src/client/chat.html',
-        filename: 'chat.html',
-        chunks: ['chat']
-      }),
-      new HtmlWebpackPlugin({
-        template: './src/client/classic.html',
-        filename: 'classic.html',
-        chunks: []  // Disable JS for now since it's broken
-      }),
-
-      new HtmlWebpackPlugin({
-        template: './src/client/simple-xat.html',
-        filename: 'simple-xat.html',
-        chunks: []  // Self-contained
-      }),
+      // Removed chat.html plugin since we're serving it directly
       new MiniCssExtractPlugin({
         filename: 'css/[name].[contenthash].css'
       }),

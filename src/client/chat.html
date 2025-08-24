@@ -1,151 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xat Chat</title>
-  <meta name="description" content="Real-time chat platform">
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/chat.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎭 Xat Recreation Chat</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #ffcc00;
+            margin: 0;
+        }
+        
+        .header p {
+            color: #888;
+            margin: 5px 0;
+        }
+        
+        #userStatus {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        #userInfo {
+            margin-right: 10px;
+        }
+        
+        #logoutBtn {
+            padding: 5px 10px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            display: none;
+        }
+        
+        #logoutBtn:hover {
+            background: #c82333;
+        }
+        
+        .chat-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #ffcc00;
+            font-size: 18px;
+        }
+        
+        .error {
+            text-align: center;
+            color: #ff6666;
+            font-size: 16px;
+            padding: 20px;
+            background: #2a2a2a;
+            border-radius: 5px;
+            margin: 20px;
+        }
+    </style>
 </head>
 <body>
-  <div class="chat-layout">
-    <!-- Header -->
-    <header class="chat-header">
-      <div class="header-left">
-        <h1>Xat Chat</h1>
-        <div id="connection-status" class="status connected">Connected</div>
-      </div>
-      <div class="header-right">
-        <div id="user-info" class="user-info">
-          <span class="username">Loading...</span>
+    <div class="header">
+        <h1>🎭 Xat Recreation Chat</h1>
+        <p>Authentic chat recreation with JavaScript (728x486) - No Flash Required</p>
+        <div id="userStatus">
+            <span id="userInfo">Loading...</span>
+            <button id="logoutBtn" onclick="logout()">Logout</button>
+            <button id="testProfileBtn" onclick="testUserProfile()" style="margin-left: 10px; background: #28a745; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Test Profile</button>
+            <button id="debugBtn" onclick="debugUserList()" style="margin-left: 10px; background: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Debug Users</button>
+            <button id="addTestUserBtn" onclick="addTestUser()" style="margin-left: 10px; background: #ffc107; color: black; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Add Test User</button>
+            <button id="testProfileDisplayBtn" onclick="testProfileDisplay()" style="margin-left: 10px; background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Test Profile Display</button>
         </div>
-        <a href="/" class="btn-home">Home</a>
-        <a href="/classic.html" class="btn-classic">Classic</a>
-      </div>
-    </header>
-
-    <!-- Main Chat Area -->
-    <main class="chat-main">
-      <!-- Sidebar -->
-      <aside class="chat-sidebar">
-        <div class="sidebar-section">
-          <h3>Room Selection</h3>
-          <select id="room-select" class="room-select">
-            <option value="">Select a room...</option>
-            <option value="general">General</option>
-            <option value="gaming">Gaming</option>
-            <option value="music">Music</option>
-            <option value="random">Random</option>
-          </select>
-        </div>
-
-        <div class="sidebar-section">
-          <h3>Room Info</h3>
-          <div id="room-info" class="room-info">
-            <h4>Select a room</h4>
-            <span class="user-count">0 users</span>
-          </div>
-        </div>
-
-        <div class="sidebar-section">
-          <h3>Users Online</h3>
-          <div id="user-list" class="user-list">
-            <div class="user-item">No users online</div>
-          </div>
-        </div>
-
-        <div class="sidebar-section">
-          <h3>Avatar</h3>
-          <select id="avatar-select" class="avatar-select">
-            <option value="">Default</option>
-            <option value="cat">Cat</option>
-            <option value="dog">Dog</option>
-            <option value="robot">Robot</option>
-          </select>
-        </div>
-
-        <div class="sidebar-section">
-          <h3>Powers</h3>
-          <select id="power-select" class="power-select">
-            <option value="">No power</option>
-            <option value="rainbow">Rainbow Text</option>
-            <option value="sparkle">Sparkle Effect</option>
-            <option value="sound">Sound Effect</option>
-          </select>
-        </div>
-      </aside>
-
-      <!-- Chat Container -->
-      <div class="chat-container" id="chat-container">
-        <!-- Messages Area -->
-        <div class="messages-area">
-          <div id="message-list" class="message-list">
-            <div class="welcome-message">
-              <h2>Welcome to Xat Chat!</h2>
-              <p>Select a room to start chatting.</p>
-            </div>
-          </div>
-          
-          <!-- Typing Indicator -->
-          <div id="typing-indicator" class="typing-indicator" style="display: none;">
-            Someone is typing...
-          </div>
-        </div>
-
-        <!-- Input Area -->
-        <div class="input-area">
-          <div class="input-container">
-            <textarea 
-              id="message-input" 
-              class="message-input" 
-              placeholder="Type your message here..."
-              rows="3"
-            ></textarea>
-            <button id="send-button" class="send-button">Send</button>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <!-- Power Animation Container -->
-  <div id="power-animations" class="power-animations"></div>
-
-  <!-- Settings Modal -->
-  <div id="settings-modal" class="modal" style="display: none;">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Settings</h2>
-      <div class="settings-section">
-        <h3>Sound</h3>
-        <label>
-          <input type="checkbox" id="sound-enabled" checked>
-          Enable sounds
-        </label>
-        <label>
-          Volume: <input type="range" id="sound-volume" min="0" max="100" value="50">
-        </label>
-      </div>
-      <div class="settings-section">
-        <h3>Notifications</h3>
-        <label>
-          <input type="checkbox" id="notifications-enabled" checked>
-          Enable notifications
-        </label>
-      </div>
-      <div class="settings-section">
-        <h3>Theme</h3>
-        <select id="theme-select">
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-          <option value="classic">Classic</option>
-        </select>
-      </div>
     </div>
-  </div>
 
-  <script src="/socket.io/socket.io.js"></script>
+    <div class="chat-wrapper">
+        <div id="loading" class="loading">
+            Connecting to chat server...
+        </div>
+        <div id="error" class="error" style="display: none;"></div>
+        <div id="chatContainer"></div>
+    </div>
+
+    <!-- Socket.IO client -->
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <!-- Ixat Client -->
+    <script src="/js/IxatClient.js?v=FORCE_NEW_VERSION_3"></script>
+    
+    <script>
+        let chatClient = null;
+        
+        function updateUserStatus() {
+            const token = localStorage.getItem('authToken');
+            const userData = localStorage.getItem('userData');
+            const userInfo = document.getElementById('userInfo');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            console.log('🎭 [CHAT] updateUserStatus - Token:', token);
+            console.log('🎭 [CHAT] updateUserStatus - UserData:', userData);
+            
+            if (token && userData) {
+                try {
+                    const user = JSON.parse(userData);
+                    console.log('🎭 [CHAT] Parsed user data:', user);
+                    userInfo.textContent = `Logged in as: ${user.nickname} (${user.username}) - Rank: ${user.rank}`;
+                    logoutBtn.style.display = 'inline-block';
+                } catch (e) {
+                    console.error('🎭 [CHAT] Error parsing user data:', e);
+                    userInfo.textContent = 'Guest user (parse error)';
+                    logoutBtn.style.display = 'none';
+                }
+            } else {
+                console.log('🎭 [CHAT] No token or user data found');
+                userInfo.textContent = 'Guest user';
+                logoutBtn.style.display = 'none';
+            }
+        }
+        
+        function logout() {
+            // Clear authentication data
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userData');
+            
+            // Update status
+            updateUserStatus();
+            
+            // Redirect to auth page
+            window.location.href = '/auth.html';
+        }
+        
+        function testUserProfile() {
+            if (chatClient && chatClient.user) {
+                console.log('🎭 [CHAT] Testing user profile for current user:', chatClient.user.id);
+                chatClient.showUserProfile(chatClient.user.id);
+            } else {
+                console.log('🎭 [CHAT] No chat client or user available');
+            }
+        }
+        
+        function testProfileDisplay() {
+            console.log('🎭 [CHAT] Testing profile display with mock data');
+            if (window.chatClient && window.chatClient.showUserProfileFromData) {
+                const mockData = {
+                    b: 1,
+                    d: '123',
+                    u: '456',
+                    t: '/l',
+                    po: '1=1|2=1|',
+                    x: 1000,
+                    y: 7,
+                    q: 3,
+                    N: 'TestUser',
+                    n: 'TestUser',
+                    a: '1',
+                    h: 'http://example.com',
+                    v: 2,
+                    rank: 1,
+                    guest: false,
+                    bride: ''
+                };
+                window.chatClient.showUserProfileFromData(mockData);
+            } else {
+                console.error('🎭 [CHAT] chatClient or showUserProfileFromData not available');
+            }
+        }
+        
+        function debugUserList() {
+            if (chatClient) {
+                console.log('🎭 [CHAT] Debug user list:');
+                console.log('🎭 [CHAT] Users map size:', chatClient.users.size);
+                console.log('🎭 [CHAT] Users:', Array.from(chatClient.users.entries()));
+                console.log('🎭 [CHAT] User list element:', chatClient.elements.userList);
+                console.log('🎭 [CHAT] User list children:', chatClient.elements.userList ? chatClient.elements.userList.children.length : 'No element');
+            } else {
+                console.log('🎭 [CHAT] No chat client available');
+            }
+        }
+
+        function addTestUser() {
+            if (chatClient) {
+                const testUser = {
+                    id: 'testUser_' + Date.now(),
+                    nickname: 'Test User ' + Date.now(),
+                    username: 'testuser' + Date.now(),
+                    rank: 4,
+                    avatar: '1',
+                    guest: false,
+                    xats: 1000,
+                    days: 0
+                };
+                
+                console.log('🎭 [CHAT] Adding test user:', testUser);
+                chatClient.addUser(testUser);
+            } else {
+                console.log('🎭 [CHAT] No chat client available to add test user.');
+            }
+        }
+        
+        function showError(message) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+            document.getElementById('error').textContent = message;
+        }
+        
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+        
+        // Initialize chat client
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUserStatus();
+            
+            // Get room parameter from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const roomParam = urlParams.get('room');
+            
+            // Set room name based on parameter
+            let roomName = 'Main Chat';
+            if (roomParam) {
+                switch(roomParam.toLowerCase()) {
+                    case 'lobby':
+                        roomName = 'Lobby';
+                        break;
+                    case 'help':
+                        roomName = 'Help';
+                        break;
+                    case 'test':
+                        roomName = 'Test';
+                        break;
+                    case 'chat':
+                        roomName = 'Chat';
+                        break;
+                    case 'flirt':
+                        roomName = 'Flirt';
+                        break;
+                    case 'gaming':
+                        roomName = 'Gaming';
+                        break;
+                    case 'music':
+                        roomName = 'Music';
+                        break;
+                    case 'anime':
+                        roomName = 'Anime';
+                        break;
+                    case 'random':
+                        roomName = 'Random';
+                        break;
+                    default:
+                        roomName = roomParam.charAt(0).toUpperCase() + roomParam.slice(1);
+                }
+            }
+            
+            try {
+                // Create the Ixat client with correct parameters
+                chatClient = createIxatChat('chatContainer', {
+                    width: 728,
+                    height: 486,
+                    roomName: roomName,
+                    background: 'http://oi60.tinypic.com/1r6io9.jpg',
+                    buttonColor: '#ffcc00'
+                });
+                
+                console.log('🎭 [CHAT] Chat client created successfully for room:', roomName);
+                hideLoading();
+                
+            } catch (error) {
+                console.error('🎭 [CHAT] Failed to initialize chat client:', error);
+                showError('Failed to initialize chat client');
+            }
+        });
+        
+        // Handle page unload
+        window.addEventListener('beforeunload', () => {
+            if (chatClient) {
+                chatClient.disconnect();
+            }
+        });
+    </script>
 </body>
 </html>

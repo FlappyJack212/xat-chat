@@ -1,82 +1,23 @@
 const mongoose = require('mongoose');
 
 const PowerSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  description: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  category: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  icon: {
-    type: String,
-    default: ''
-  },
-  effect: {
-    type: String,
-    default: ''
-  },
-  sound: {
-    type: String,
-    default: ''
-  },
-  animation: {
-    type: String,
-    default: ''
-  },
-  price: {
-    type: Number,
-    default: 0
-  },
-  usageCount: {
-    type: Number,
-    default: 0
-  },
-  isActive: {
-    type: Boolean,
-    default: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  // iXat specific fields for compatibility
-  cost: {
-    type: Number,
-    default: 0
-  },
-  subid: {
-    type: Number,
-    required: false
-  },
-  section: {
-    type: String,
-    default: 'p0'
-  },
-  amount: {
-    type: Number,
-    default: 0
-  },
-  topsh: {
-    type: String,
-    default: ''
-  },
-  group: {
-    type: String,
-    default: ''
-  },
-  limited: {
-    type: Number,
-    default: 0
-  }
+    id: { type: Number, required: true, unique: true },
+    section: { type: String, required: true, default: 'p0' }, // P string index
+    name: { type: String, required: true }, // Power name
+    subid: { type: Number, required: true }, // ID in the p string
+    cost: { type: Number, default: 0 },
+    limited: { type: Boolean, default: false },
+    description: { type: String, default: '' },
+    amount: { type: Number, default: 0 }, // Amount to sell
+    topsh: { type: String, default: '' },
+    group: { type: String, default: '' }
+}, {
+    timestamps: true
 });
+
+// Index for efficient querying
+PowerSchema.index({ id: 1 });
+PowerSchema.index({ section: 1, subid: 1 });
+PowerSchema.index({ name: 1 });
 
 module.exports = mongoose.model('Power', PowerSchema);

@@ -1,54 +1,19 @@
 const mongoose = require('mongoose');
 
 const MessageSchema = new mongoose.Schema({
-  room: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Room',
-    required: true
-  },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  content: {
-    type: String,
-    required: true,
-    trim: true,
-    maxlength: 1000
-  },
-  type: {
-    type: String,
-    enum: ['text', 'system', 'power', 'image'],
-    default: 'text'
-  },
-  timestamp: {
-    type: Date,
-    default: Date.now
-  },
-  mentions: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
-  powerEffect: {
-    powerId: {
-      type: String
-    },
-    effect: {
-      type: String
-    }
-  },
-  isEdited: {
-    type: Boolean,
-    default: false
-  },
-  isDeleted: {
-    type: Boolean,
-    default: false
-  }
+    roomId: { type: mongoose.Schema.Types.ObjectId, ref: 'Room', required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    text: { type: String, required: true, maxlength: 255 },
+    timestamp: { type: Date, default: Date.now },
+    visible: { type: Boolean, default: true },
+    pool: { type: Number, default: 0 },
+    mid: { type: Number, auto: true } // Message ID like Ixat Files
+}, {
+    timestamps: true
 });
 
 // Index for efficient querying
 MessageSchema.index({ roomId: 1, timestamp: -1 });
+MessageSchema.index({ userId: 1, timestamp: -1 });
 
 module.exports = mongoose.model('Message', MessageSchema);

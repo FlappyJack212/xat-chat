@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "test": "jest",
     "init-db": "node scripts/init-db.js",
-    "import-ixat": "node scripts/import-ixat-data.js"
+    "import-ixat": "node scripts/import-ixat-data.js",
+    "migrate-mysql": "node scripts/migrate-mysql-to-mongodb.js"
   },
   "repository": {
     "type": "git",
@@ -27,12 +28,14 @@
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "howler": "^2.2.4",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.6.3",
+    "nodemailer": "^7.0.5",
     "redis": "^4.6.10",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.8.1"

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create/Edit Groups - Ixat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #007bff;
+            margin: 0;
+        }
+        .content {
+            display: flex;
+            gap: 20px;
+        }
+        .block {
+            background: #2a2a2a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .c1 { flex: 1; }
+        .c2-3 { flex: 2; }
+        .c4 { flex: 1; }
+        .c4-5 { flex: 4; }
+        .heading {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #007bff;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        .nb { border-bottom: none; padding-bottom: 0; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table td {
+            padding: 8px;
+            vertical-align: top;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        input[type="submit"] {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        input[type="submit"]:hover {
+            background: #0056b3;
+        }
+        .fr { text-align: right; }
+        .message {
+            background: #333;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            color: #fff;
+        }
+        .message.success {
+            background: #28a745;
+            border-color: #1e7e34;
+        }
+        .message.error {
+            background: #dc3545;
+            border-color: #c82333;
+        }
+        .edit_group_login, .edit_group_conf {
+            display: block;
+        }
+        .edit_group_conf {
+            display: none;
+        }
+        .edit_group_box {
+            min-height: 400px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 10px;
+        }
+        .recent-chat {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .recent-chat img {
+            width: 158px;
+            height: 107px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+        .recent-chat a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .recent-chat a:hover {
+            text-decoration: underline;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #888;
+        }
+        .loading.show {
+            display: block;
+        }
+        .navigation {
+            background: #2a2a2a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .navigation a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        .navigation a.active {
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎭 Ixat Groups</h1>
+            <p>Create and manage your chat groups</p>
+        </div>
+
+        <div class="navigation">
+            <a href="/">Home</a>
+            <a href="/profile.html">Profile</a>
+            <a href="/powers.html">Powers</a>
+            <a href="/trade.html">Trade</a>
+            <a href="/groups.html" class="active">Groups</a>
+        </div>
+
+        <div class="content">
+            <!-- Create Group Section -->
+            <div class="block c1">
+                <div class="heading">Create a Group</div>
+                <small>Fields marked with an (*) are required.</small>
+                
+                <div id="create-messages"></div>
+                
+                <form id="create-form">
+                    <table>
+                        <tr>
+                            <td>*Name</td>
+                            <td><input type="text" name="name" required></td>
+                        </tr>
+                        <tr>
+                            <td>*Password</td>
+                            <td><input type="password" name="pass" required></td>
+                        </tr>
+                        <tr>
+                            <td>Radio</td>
+                            <td><input type="text" name="radio" value="http://relay.181.fm:8128"></td>
+                        </tr>
+                        <tr>
+                            <td>Inner BG</td>
+                            <td><input type="text" name="inner" id="inner-bg"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="fr">
+                                <input type="submit" value="Create Group">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+            <!-- Edit Group Section -->
+            <div class="block c1">
+                <div class="heading">Edit Group</div>
+                
+                <div class="edit_group_login">
+                    <div class="heading">Edit Group</div>
+                    <table>
+                        <tr>
+                            <td><input type="text" class="egroupname" placeholder="Group Name" style="width: 100%"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="password" class="egrouppass" placeholder="Password" style="width: 100%"></td>
+                        </tr>
+                        <tr>
+                            <td class="fr"><input type="submit" class="egroupsub" value="Load Group"></td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="edit_group_conf" style="display: none">
+                    <div class="heading">Configuration</div>
+                    <table>
+                        <tr>
+                            <td><input type="text" class="eg_innr" placeholder="Inner BG" style="width: 100%"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" class="eg_scrl" placeholder="Scroller" style="width: 100%"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" class="eg_rdio" placeholder="Radio" style="width: 100%"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" class="eg_bttn" placeholder="Button Color" style="width: 100%"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" class="eg_atch" placeholder="Attached Chat" style="width: 100%"></td>
+                        </tr>
+                        <tr>
+                            <td class="fr"><input type="submit" class="eg_submit" value="Update Chat"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Preview Section -->
+        <div class="block c4-5">
+            <div class="heading">Your group will show up here.</div>
+            <div class="edit_group_box" id="edit-group-box">
+                <div style="text-align: center; padding: 50px; color: #888;">
+                    Enter group name and password to load chat preview
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Chats Section -->
+        <div class="block c2-3">
+            <div class="heading">Recent Chats</div>
+            <div id="recent-chats">
+                <div style="text-align: center; color: #888; padding: 20px;">
+                    Loading recent chats...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading" class="loading">
+        <div>Loading...</div>
+    </div>
+
+    <!-- Socket.IO -->
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <!-- Ixat Chat System -->
+            <script src="/js/IxatClient.js"></script>
+
+    <script>
+        // Global chat instances
+        window.ixatChats = {};
+
+        // Initialize random background
+        document.getElementById('inner-bg').value = `http://localhost:8000/web_gear/chat_bgs/${Math.floor(Math.random() * 7) + 1}.jpg`;
+
+        // Create Group Form
+        document.getElementById('create-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                pass: formData.get('pass'),
+                radio: formData.get('radio'),
+                inner: formData.get('inner')
+            };
+
+            try {
+                const response = await fetch('/api/rooms', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                
+                const messagesDiv = document.getElementById('create-messages');
+                if (result.success) {
+                    messagesDiv.innerHTML = `<div class="message success">${result.message}</div>`;
+                    this.reset();
+                    loadRecentChats();
+                } else {
+                    messagesDiv.innerHTML = `<div class="message error">${result.error}</div>`;
+                }
+            } catch (error) {
+                console.error('Error creating group:', error);
+                document.getElementById('create-messages').innerHTML = 
+                    '<div class="message error">Error creating group. Please try again.</div>';
+            }
+        });
+
+        // Edit Group Login
+        document.querySelector('.egroupsub').addEventListener('click', async function() {
+            const groupName = document.querySelector('.egroupname').value;
+            const groupPass = document.querySelector('.egrouppass').value;
+            
+            if (!groupName || !groupPass) {
+                alert('Please enter both group name and password');
+                return;
+            }
+
+            document.getElementById('loading').classList.add('show');
+
+            try {
+                const response = await fetch('/api/rooms/edit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        gn: groupName,
+                        gp: groupPass
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Load chat embed
+                    const editGroupBox = document.getElementById('edit-group-box');
+                    editGroupBox.innerHTML = '<div id="edit-chat-embed"></div>';
+                    
+                    // Create chat instance
+                    window.ixatChats['edit-chat-embed'] = createIxatChat('edit-chat-embed', {
+                        width: 700,
+                        height: 450,
+                        roomId: groupName,
+                        roomName: groupName,
+                        background: result.background,
+                        radio: result.radio,
+                        buttonColor: result.buttonColor,
+                        attached: result.attached,
+                        scroller: result.scroller
+                    });
+
+                    // Populate settings form
+                    document.querySelector('.eg_innr').value = result.background || '';
+                    document.querySelector('.eg_scrl').value = result.scroller || '';
+                    document.querySelector('.eg_rdio').value = result.radio || '';
+                    document.querySelector('.eg_bttn').value = result.buttonColor || '';
+                    document.querySelector('.eg_atch').value = result.attached || '';
+
+                    // Show settings form
+                    document.querySelector('.edit_group_login').style.display = 'none';
+                    document.querySelector('.edit_group_conf').style.display = 'block';
+                } else {
+                    alert(result.error || 'Failed to load group');
+                }
+            } catch (error) {
+                console.error('Error loading group:', error);
+                alert('Error loading group. Please try again.');
+            } finally {
+                document.getElementById('loading').classList.remove('show');
+            }
+        });
+
+        // Update Group Settings
+        document.querySelector('.eg_submit').addEventListener('click', async function() {
+            const groupName = document.querySelector('.egroupname').value;
+            const groupPass = document.querySelector('.egrouppass').value;
+            
+            const settings = {
+                gn: groupName,
+                gp: groupPass,
+                innr: document.querySelector('.eg_innr').value,
+                scrl: document.querySelector('.eg_scrl').value,
+                rdio: document.querySelector('.eg_rdio').value,
+                bttn: document.querySelector('.eg_bttn').value,
+                atch: document.querySelector('.eg_atch').value
+            };
+
+            try {
+                const response = await fetch('/api/rooms/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(settings)
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Update chat settings
+                    const chat = window.ixatChats['edit-chat-embed'];
+                    if (chat) {
+                        chat.updateSettings({
+                            background: settings.innr,
+                            scroller: settings.scrl,
+                            radio: settings.rdio,
+                            buttonColor: settings.bttn,
+                            attached: settings.atch
+                        });
+                    }
+                    
+                    alert(result.message || 'Settings updated successfully');
+                } else {
+                    alert(result.error || 'Failed to update settings');
+                }
+            } catch (error) {
+                console.error('Error updating settings:', error);
+                alert('Error updating settings. Please try again.');
+            }
+        });
+
+        // Load recent chats
+        async function loadRecentChats() {
+            try {
+                const response = await fetch('/api/rooms?limit=4');
+                const result = await response.json();
+                
+                const recentChatsDiv = document.getElementById('recent-chats');
+                if (result.rooms && result.rooms.length > 0) {
+                    recentChatsDiv.innerHTML = result.rooms.map(room => `
+                        <div class="recent-chat">
+                            <a href="/chat.html?room=${room.name}" target="_blank">
+                                <img src="${room.background || '/web_gear/chat_bgs/1.jpg'}" alt="${room.name}">
+                                <div class="heading nb">${room.name}</div>
+                            </a>
+                        </div>
+                    `).join('');
+                } else {
+                    recentChatsDiv.innerHTML = '<div style="text-align: center; color: #888; padding: 20px;">No recent chats found</div>';
+                }
+            } catch (error) {
+                console.error('Error loading recent chats:', error);
+                document.getElementById('recent-chats').innerHTML = 
+                    '<div style="text-align: center; color: #888; padding: 20px;">Error loading recent chats</div>';
+            }
+        }
+
+        // Enter key handlers
+        document.querySelector('.egrouppass').addEventListener('keypress', function(e) {
+            if (e.which === 13) {
+                document.querySelector('.egroupsub').click();
+            }
+        });
+
+        document.querySelector('.egroupname').addEventListener('keypress', function(e) {
+            if (e.which === 13) {
+                document.querySelector('.egroupsub').click();
+            }
+        });
+
+        document.querySelector('.eg_innr').addEventListener('keypress', function(e) {
+            if (e.which === 13) {
+                document.querySelector('.eg_submit').click();
+            }
+        });
+
+        document.querySelector('.eg_scrl').addEventListener('keypress', function(e) {
+            if (e.which === 13) {
+                document.querySelector('.eg_submit').click();
+            }
+        });
+
+        document.querySelector('.eg_rdio').addEventListener('keypress', function(e) {
+            if (e.which === 13) {
+                document.querySelector('.eg_submit').click();
+            }
+        });
+
+        document.querySelector('.eg_bttn').addEventListener('keypress', function(e) {
+            if (e.which === 13) {
+                document.querySelector('.eg_submit').click();
+            }
+        });
+
+        document.querySelector('.eg_atch').addEventListener('keypress', function(e) {
+            if (e.which === 13) {
+                document.querySelector('.eg_submit').click();
+            }
+        });
+
+        // Load recent chats on page load
+        loadRecentChats();
+    </script>
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Trading - Xat Recreation</title>
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            background-color: #000000;
+            font-family: Arial, sans-serif;
+        }
+
+        .siteWrapper {
+            min-height: 100vh;
+        }
+
+        .siteHeader {
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(to bottom, #333333, #222222);
+            border-bottom: 2px solid #0066ff;
+        }
+
+        .center {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            float: left;
+            display: block;
+            width: 120px;
+            height: 40px;
+            margin: 10px 0;
+            background: linear-gradient(45deg, #0066ff, #00ccff);
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .navigation {
+            float: right;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navigation li {
+            display: inline-block;
+            position: relative;
+        }
+
+        .navigation a {
+            display: block;
+            padding: 15px 20px;
+            color: #cccccc;
+            text-decoration: none;
+            font-size: 13px;
+            text-align: center;
+            transition: color 0.3s;
+        }
+
+        .navigation a:hover {
+            color: #ffffff;
+        }
+
+        .navigation a strong {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .navigation a span {
+            display: block;
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        .block {
+            display: inline-block;
+            vertical-align: top;
+            margin: 0.5%;
+            padding: 0.5%;
+            border: 3px solid #0066ff;
+            font-size: 13px;
+            word-wrap: break-word;
+            font-family: Arial;
+            background: #111111;
+        }
+
+        .block.c1 { width: 98%; }
+        .block.c3 { width: 31.3%; }
+        .block.c5 { width: 18%; }
+        .block.fr { float: right; }
+
+        .heading {
+            display: inline-block;
+            font-size: 16px;
+            width: 100%;
+            border-bottom: 2px solid #ffffff;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .tc { text-align: center; }
+        .tr { text-align: right; }
+        .tl { text-align: left; }
+        .pnt { cursor: pointer; }
+        .hus:hover { text-decoration: underline; }
+
+        input[type="text"], input[type="password"], select {
+            border: 1px solid #adaba3;
+            padding: 2px 2px;
+            text-align: center;
+            background: #222222;
+            color: #ffffff;
+        }
+
+        input[type="submit"] {
+            border: 1px solid #adaba3;
+            padding: 1px 6px;
+            text-align: center;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            margin-left: -6px;
+            margin-right: -6px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #e0e0e0;
+        }
+
+        table {
+            width: 100%;
+            color: #ffffff;
+        }
+
+        table td {
+            padding: 5px;
+        }
+
+        .message {
+            width: 98%;
+            padding: 0.5% 1%;
+            background-color: #000000;
+            font-size: 13px;
+            color: #ffffff;
+            font-family: Arial;
+            text-align: center;
+            margin-bottom: 5px;
+            border: 1px solid #0066ff;
+        }
+
+        .siteFooterBar {
+            background: #222222;
+            border-top: 2px solid #0066ff;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .backToTop {
+            color: #0066ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .trade-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .trade-tab {
+            padding: 10px 20px;
+            background: #333333;
+            color: #cccccc;
+            cursor: pointer;
+            border: 1px solid #0066ff;
+            margin-right: 5px;
+        }
+
+        .trade-tab.active {
+            background: #0066ff;
+            color: #ffffff;
+        }
+
+        .trade-content {
+            display: none;
+        }
+
+        .trade-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Site Wrapper Start -->
+    <div class="siteWrapper">
+        <!-- Site Header -->
+        <div class="siteHeader">
+            <div class="center">
+                <a class="logo" href="/">XAT</a>
+                <ul class="navigation">
+                    <li><a href="/"><strong>Home</strong><br><span>Main-Chat</span></a></li>
+                    <li><a href="/powers.html"><strong>Powers</strong><br><span>Buy Powers!</span></a></li>
+                    <li><a href="/trade.html" style="color: #ffffff;"><strong>Trade</strong><br><span>Sell/List Powers</span></a></li>
+                    <li><a href="/groups.html"><strong>Groups</strong><br><span>Edit Group/Create</span></a></li>
+                    <li><a href="/profile.html"><strong>Profile</strong><br><span>Register/Login!</span></a></li>
+                    <li><a href="/donate.html"><strong>Donate</strong><br><span>Support us!</span></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <center>
+            <div id="main">
+                <div class="message">
+                    <i>Only other people can see the powers that you have listed.</i>
+                </div>
+
+                <div class="trade-tabs">
+                    <div class="trade-tab active" onclick="switchTab('buy')">Buy Powers</div>
+                    <div class="trade-tab" onclick="switchTab('sell')">Sell Powers</div>
+                    <div class="trade-tab" onclick="switchTab('list')">My Listings</div>
+                </div>
+
+                <!-- Buy Powers Tab -->
+                <div id="buy-tab" class="trade-content active">
+                    <div class="block c1" id="search">
+                        <div class="block c3">
+                            <div class="heading">Search by name</div>
+                            <small>Powers will update as you type.</small>
+                            <input type="text" id="buy-search" onkeyup="doTradeSearch()" style="width: 98%" placeholder="Search powers..." />
+                        </div>
+                    </div>
+                    <div class="block c1" id="buy-pages"></div>
+                    <div class="block c1" id="buy-powers"></div>
+                </div>
+
+                <!-- Sell Powers Tab -->
+                <div id="sell-tab" class="trade-content">
+                    <div class="block c1">
+                        <div class="heading">List Your Powers for Sale</div>
+                        <div class="block c3">
+                            <div class="heading">Select Power</div>
+                            <select id="sell-power-select" style="width: 100%">
+                                <option value="">Choose a power...</option>
+                            </select>
+                        </div>
+                        <div class="block c3">
+                            <div class="heading">Price (xats)</div>
+                            <input type="number" id="sell-price" style="width: 100%" placeholder="Enter price..." />
+                        </div>
+                        <div class="block c3">
+                            <div class="heading">Action</div>
+                            <input type="submit" value="List Power" onclick="listPower()" style="width: 100%" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Listings Tab -->
+                <div id="list-tab" class="trade-content">
+                    <div class="block c1" id="list-search">
+                        <div class="block c3">
+                            <div class="heading">Search by name</div>
+                            <small>Powers will update as you type.</small>
+                            <input type="text" id="list-search" onkeyup="doTradeSearch()" style="width: 98%" placeholder="Search powers..." />
+                        </div>
+                    </div>
+                    <div class="block c1" id="list-pages"></div>
+                    <div class="block c1" id="list-powers"></div>
+                </div>
+            </div>
+        </center>
+    </div>
+
+    <!-- Site Footer -->
+    <div class="siteFooterBar">
+        <div class="center">
+            <center>
+                <a class="backToTop" href="#">xat-recreation.com</a>
+                <p style="color: #cccccc; margin-top: 10px;">Complete Xat recreation with all 325+ authentic powers</p>
+            </center>
+        </div>
+    </div>
+
+    <script>
+        let currentTab = 'buy';
+        let userPowers = [];
+        let tradePowers = [];
+        let currentPage = 1;
+        const powersPerPage = 20;
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update tab styling
+            document.querySelectorAll('.trade-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.trade-content').forEach(c => c.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tab + '-tab').classList.add('active');
+            
+            // Load appropriate data
+            if(tab === 'buy') {
+                loadTradePowers();
+            } else if(tab === 'sell') {
+                loadUserPowers();
+            } else if(tab === 'list') {
+                loadUserListings();
+            }
+        }
+
+        async function loadTradePowers() {
+            try {
+                const response = await fetch('/api/trade');
+                const data = await response.json();
+                tradePowers = data.trades || [];
+                writeTrade(tradePowers, 'trades');
+            } catch (error) {
+                console.error('Failed to load trade powers:', error);
+                document.getElementById('buy-powers').innerHTML = '<div class="block c1 tc">Failed to load trade powers</div>';
+            }
+        }
+
+        async function loadUserPowers() {
+            try {
+                const response = await fetch('/api/user/powers');
+                const data = await response.json();
+                userPowers = data.powers || [];
+                
+                const select = document.getElementById('sell-power-select');
+                select.innerHTML = '<option value="">Choose a power...</option>';
+                
+                userPowers.forEach(power => {
+                    if(!['allpowers', 'everypower'].includes(power.name)) {
+                        const option = document.createElement('option');
+                        option.value = power.id;
+                        option.textContent = `${power.name} (${power.count})`;
+                        select.appendChild(option);
+                    }
+                });
+            } catch (error) {
+                console.error('Failed to load user powers:', error);
+            }
+        }
+
+        async function loadUserListings() {
+            try {
+                const response = await fetch('/api/trade/list');
+                const data = await response.json();
+                const listings = data.listings || [];
+                writeTrade(listings, 'list');
+            } catch (error) {
+                console.error('Failed to load user listings:', error);
+                document.getElementById('list-powers').innerHTML = '<div class="block c1 tc">Failed to load listings</div>';
+            }
+        }
+
+        function writeTrade(powers, type) {
+            const pagesId = type === 'trades' ? 'buy-pages' : 'list-pages';
+            const powersId = type === 'trades' ? 'buy-powers' : 'list-powers';
+            
+            const pwr_max = powers.length;
+            const pwr_pages = Math.ceil(pwr_max / powersPerPage);
+            const pages = document.getElementById(pagesId);
+            pages.innerHTML = 'Pages: ';
+            
+            for(let i = 1; i <= pwr_pages; i++) {
+                pages.innerHTML += '&nbsp;<span class="pnt hus" onclick="loadTradePage(' + i + ', \'' + type + '\')">' + i.toString() + '</span>&nbsp;';
+            }
+            
+            loadTradePage(1, type);
+        }
+
+        function loadTradePage(page, type) {
+            const powersId = type === 'trades' ? 'buy-powers' : 'list-powers';
+            const powers = type === 'trades' ? tradePowers : userPowers;
+            
+            const index = (page - 1) * powersPerPage;
+            const on_page = powers.slice(index, index + powersPerPage);
+            const powerBlock = document.getElementById(powersId);
+            powerBlock.innerHTML = "";
+            
+            if(on_page.length > 0) {
+                on_page.forEach(power => {
+                    const html = `
+                        <div class="block c5">
+                            <div class="heading">${power.name}</div>
+                            <table style="width:99%">
+                                <tr>
+                                    <td>Price</td>
+                                    <td class="tr">${power.price} xats</td>
+                                </tr>
+                                <tr>
+                                    <td>Seller</td>
+                                    <td class="tr">${power.seller || 'Unknown'}</td>
+                                </tr>
+                                <tr>
+                                    <td>Available</td>
+                                    <td class="tr">${power.count}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="tc">
+                                        ${type === 'trades' ? 
+                                            `<input type="submit" onclick="buyPower(${power.id})" value="Buy Power" style="width: 100%" />` :
+                                            `<input type="submit" onclick="removeListing(${power.id})" value="Remove" style="width: 100%" />`
+                                        }
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    `;
+                    powerBlock.innerHTML += html;
+                });
+            } else {
+                powerBlock.innerHTML = '<div class="block c1 tc">No powers found</div>';
+            }
+        }
+
+        function doTradeSearch() {
+            const searchTerm = document.getElementById(currentTab + '-search').value.toLowerCase();
+            const powers = currentTab === 'buy' ? tradePowers : userPowers;
+            const filtered = powers.filter(power => 
+                power.name.toLowerCase().includes(searchTerm)
+            );
+            writeTrade(filtered, currentTab === 'buy' ? 'trades' : 'list');
+        }
+
+        async function buyPower(tradeId) {
+            try {
+                const response = await fetch('/api/trade/buy', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ tradeId: tradeId })
+                });
+
+                const result = await response.json();
+                
+                if(result.status === 'ok') {
+                    alert('Power purchased successfully!');
+                    loadTradePowers();
+                } else {
+                    alert(result.status || 'Failed to purchase power');
+                }
+            } catch (error) {
+                console.error('Purchase failed:', error);
+                alert('Failed to purchase power');
+            }
+        }
+
+        async function listPower() {
+            const powerId = document.getElementById('sell-power-select').value;
+            const price = document.getElementById('sell-price').value;
+            
+            if(!powerId || !price) {
+                alert('Please select a power and enter a price');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/trade/list', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        powerId: parseInt(powerId), 
+                        price: parseInt(price) 
+                    })
+                });
+
+                const result = await response.json();
+                
+                if(result.status === 'ok') {
+                    alert('Power listed successfully!');
+                    document.getElementById('sell-power-select').value = '';
+                    document.getElementById('sell-price').value = '';
+                    loadUserPowers();
+                } else {
+                    alert(result.status || 'Failed to list power');
+                }
+            } catch (error) {
+                console.error('Listing failed:', error);
+                alert('Failed to list power');
+            }
+        }
+
+        async function removeListing(tradeId) {
+            try {
+                const response = await fetch('/api/trade/remove', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ tradeId: tradeId })
+                });
+
+                const result = await response.json();
+                
+                if(result.status === 'ok') {
+                    alert('Listing removed successfully!');
+                    loadUserListings();
+                } else {
+                    alert(result.status || 'Failed to remove listing');
+                }
+            } catch (error) {
+                console.error('Remove failed:', error);
+                alert('Failed to remove listing');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTradePowers();
+        });
+    </script>
+</body>
+</html>
