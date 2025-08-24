@@ -38,779 +38,981 @@
         }
 
         /* Main Chat Area (74%) */
-        .main-chat-area {
+        .main-chat {
             width: 74%;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.4);
+            border-right: 1px solid rgba(192, 192, 192, 0.8);
         }
 
-        .chat-container {
-            width: 100%;
-            height: 100%;
-            display: table;
-        }
-
-        .chat-messages-area {
-            width: 100%;
+        /* Messages Area (75% of main chat) */
+        .messages-area {
             height: 75%;
-        }
-
-        .chat-messages-container {
-            padding: 0.6rem 0.26667rem 0.13333rem 0.73333rem;
-        }
-
-        .tabcontent {
-            position: relative;
-            z-index: 2;
-            height: 92%;
-            border: 1px solid rgba(192, 192, 192, 0.8);
-            border-bottom: none;
-            border-radius: 4px 4px 0 0;
-            background-color: rgba(255, 255, 255, 0.4);
-        }
-
-        .tab {
-            overflow-y: hidden;
-            height: 8%;
-            position: relative;
-            z-index: 1;
-        }
-
-        .tab button {
-            background-color: rgba(255, 255, 255, 0.4);
-            border: none;
-            outline: 0;
-            cursor: pointer;
-            padding-left: 0.2rem;
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(192, 192, 192, 0.8);
-            border-radius: 0 0 4px 4px;
-            height: 88%;
-            line-height: 88%;
-            font-weight: 700;
-            color: #000;
-        }
-
-        .tab button.active {
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-top: 2px solid rgba(255, 255, 255, 0);
-        }
-
-        .tab button:active {
-            color: inherit;
-        }
-
-        /* Messages Container */
-        #messagesContainer {
-            height: 100%;
-            width: 100%;
-            padding-top: 12px;
-            position: relative;
-            overflow-x: hidden;
+            background: rgba(255, 255, 255, 0.1);
             overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            top: 0 !important;
-            transform: translateZ(0);
-        }
-
-        #messages {
-            margin-bottom: 0.25rem;
-            display: flex;
-            flex-wrap: nowrap;
-            flex-direction: column;
+            padding: 10px;
+            border-bottom: 1px solid rgba(192, 192, 192, 0.5);
         }
 
         .message {
-            background-color: transparent;
-            margin-top: 0;
-            margin-bottom: 0;
-            padding: 0.1888rem;
-            padding-left: 0.13333rem;
-            user-select: text;
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
-        }
-
-        .message.system {
-            color: #f39c12;
-            font-style: italic;
-        }
-
-        .message.user {
-            color: #ecf0f1;
-        }
-
-        .message .username {
-            font-weight: bold;
-            color: #3498db;
-        }
-
-        .message .content {
-            margin-left: 5px;
-        }
-
-        /* Smiley Bar */
-        .smiley-bar {
-            width: 100%;
-            height: 7%;
-        }
-
-        .smiley-bar-container {
-            padding: 0.3rem 0 0.1rem 0.5rem;
-        }
-
-        .smileyBar {
-            width: 100%;
-            height: 100%;
-            margin-top: 4px;
-            position: relative;
-            display: table;
-        }
-
-        #smileyBar {
+            margin-bottom: 8px;
             display: flex;
-            gap: 5px;
-            align-items: center;
-            flex-wrap: wrap;
+            align-items: flex-start;
         }
 
-        .smiley {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            border-radius: 2px;
-            transition: transform 0.2s;
-            font-size: 16px;
-        }
-
-        .smiley:hover {
-            transform: scale(1.2);
-        }
-
-        /* Input Area */
-        .input-area {
-            width: 100%;
-            height: 18%;
-        }
-
-        .input-container {
-            padding: 0.4rem 0.3rem 0.7rem 0.7rem;
-        }
-
-        .input-wrapper {
-            width: 100%;
-            height: 100%;
-            display: table;
-        }
-
-        .text-entry-row {
-            display: table-row;
-        }
-
-        .text-entry-cell {
-            display: table-cell;
-            width: 92.6%;
-            height: 100%;
-            position: inherit;
-        }
-
-        .textentry {
-            width: 100%;
-            height: 100%;
-            text-align: left;
-            overflow-y: auto;
-            font-weight: 700;
-            position: relative;
-            overflow-x: hidden;
-            word-break: break-word;
-            -webkit-user-select: text;
-            transition: 0.25s ease-out all;
-            outline: 0 solid transparent;
-            display: block;
-            border: 1px solid rgba(192, 192, 192, 0.8);
-            border-radius: 4px;
-            background-color: rgba(255, 255, 255, 0.4);
-            padding: 0 0 0 0.3rem;
-        }
-
-        .send-button-cell {
-            display: table-cell;
-            position: relative;
-            z-index: 1;
-            width: 8%;
-            height: 100%;
-            padding-left: 0.73rem;
-        }
-
-        .butcontainer {
-            width: 100%;
-            height: 100%;
-        }
-
-        .butlayout {
-            width: 100%;
-            height: 100%;
-        }
-
-        .butcontent {
-            width: 100%;
-            height: 100%;
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            margin-right: 8px;
+            border-radius: 50%;
             background: #3498db;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
         }
 
-        .butcontent:hover {
+        .message-content {
+            flex: 1;
+        }
+
+        .username {
+            font-weight: bold;
+            color: #f39c12;
+            margin-right: 8px;
+        }
+
+        .message-text {
+            color: white;
+        }
+
+        /* Smiley Bar (7% of main chat) */
+        .smiley-bar {
+            height: 7%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            border-bottom: 1px solid rgba(192, 192, 192, 0.5);
+        }
+
+        .smiley-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            padding: 2px;
+        }
+
+        .smiley-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        /* Input Area (18% of main chat) */
+        .input-area {
+            height: 18%;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-controls {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .format-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(192, 192, 192, 0.5);
+            color: white;
+            padding: 2px 6px;
+            margin-right: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .format-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .message-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(192, 192, 192, 0.8);
+            padding: 8px;
+            color: #333;
+            font-size: 14px;
+            resize: none;
+        }
+
+        .send-btn {
+            background: #3498db;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .send-btn:hover {
             background: #2980b9;
         }
 
         /* Right Sidebar (26%) */
         .right-sidebar {
-            position: relative;
-            z-index: 2;
             width: 26%;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.4);
         }
 
-        .sidebar-container {
-            width: 100%;
-            height: 100%;
-            display: table;
-        }
-
-        .sidebar-main {
-            width: 73%;
-            height: 100%;
-        }
-
-        .sidebar-main-container {
-            width: 100%;
-            height: 100%;
-            display: table;
-        }
-
-        .visitors-area {
-            width: 100%;
+        /* Visitors List (75% of sidebar) */
+        .visitors-list {
             height: 75%;
-        }
-
-        .visitors-container {
-            padding: 0.6rem 0.76667rem 0 0.46667rem;
-        }
-
-        #visitorsContainer {
-            height: 100%;
-            width: 100%;
-            position: relative;
-            overflow-x: hidden;
+            background: rgba(255, 255, 255, 0.1);
             overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            transform: translateZ(0);
+            padding: 10px;
+            border-bottom: 1px solid rgba(192, 192, 192, 0.5);
         }
 
-        #idvisitors {
-            list-style: none;
+        .pool-section {
+            margin-bottom: 15px;
         }
 
-        .friend {
-            background-color: transparent;
-            overflow: visible;
-            position: relative;
-            padding: 0;
-            margin-top: 0;
-            margin-bottom: 0;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            cursor: pointer;
+        .pool-header {
+            background: rgba(255, 255, 255, 0.2);
             padding: 5px 8px;
-            margin: 2px 0;
-            border-radius: 4px;
-            transition: background 0.3s;
+            font-weight: bold;
+            font-size: 12px;
+            border-bottom: 1px solid rgba(192, 192, 192, 0.5);
+        }
+
+        .user-item {
+            display: flex;
+            align-items: center;
+            padding: 3px 8px;
+            cursor: pointer;
             font-size: 12px;
         }
 
-        .friend:hover {
-            background: rgba(52, 152, 219, 0.3);
+        .user-item:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        .friend::before {
-            content: "●";
-            color: #27ae60;
-            margin-right: 5px;
+        .user-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 6px;
         }
 
-        .section {
-            background-image: linear-gradient(hsla(0, 0%, 100%, 0.1), rgba(0, 0, 0, 0.05));
-            border-radius: 4px;
-            margin: 0.26667rem 0.23333rem;
-            cursor: pointer;
-            padding: 8px;
-            font-weight: bold;
-            color: #bdc3c7;
+        .status-online { background: #27ae60; }
+        .status-away { background: #f39c12; }
+        .status-busy { background: #e74c3c; }
+
+        .user-rank {
+            font-size: 10px;
+            margin-left: 5px;
+            padding: 1px 3px;
+            border-radius: 2px;
         }
 
-        .section:hover {
-            background: linear-gradient(rgb(255 255 255 / 12%), rgb(255 255 255 / 12%));
-        }
+        .rank-owner { background: #e74c3c; }
+        .rank-mod { background: #f39c12; }
+        .rank-member { background: #3498db; }
+        .rank-guest { background: #95a5a6; }
 
-        /* List Tabs */
+        /* List Tabs (7% of sidebar) */
         .list-tabs {
-            width: 100%;
             height: 7%;
-            overflow-y: hidden;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            border-bottom: 1px solid rgba(192, 192, 192, 0.5);
         }
 
-        .list-tabs-container {
-            padding: 0 0.8rem 0 0.1rem;
-        }
-
-        .list-tabs-wrapper {
-            width: 100%;
-            height: 100%;
-            display: table;
-        }
-
-        .listlinks {
-            width: 50%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.4);
+        .tab-btn {
+            background: none;
             border: none;
-            outline: 0;
+            color: white;
+            padding: 5px 10px;
+            margin-right: 5px;
             cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #000;
-            border-top: 1px solid rgba(192, 192, 192, 0.8);
-            border-radius: 0 0 4px 4px;
+            font-size: 12px;
         }
 
-        .listlinks.active {
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-top: 2px solid rgba(255, 255, 255, 0);
+        .tab-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
         }
 
-        /* Right Bar Icons */
+        /* Right Bar Icons (7% of sidebar) */
         .right-bar-icons {
-            width: 100%;
             height: 7%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 10px;
+            border-bottom: 1px solid rgba(192, 192, 192, 0.5);
         }
 
-        .right-bar-container {
-            padding: 0 0.8rem 0 0.1rem;
-        }
-
-        .right-bar-wrapper {
-            width: 100%;
-            height: 100%;
-            display: table;
-        }
-
-        .svgBack {
-            background-size: 20px;
-            background-repeat: no-repeat;
-            background-position: center;
+        .icon-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
             cursor: pointer;
-            transition: opacity 0.3s;
+            padding: 2px;
         }
 
-        .svgBack:hover {
-            opacity: 0.7;
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
         }
 
-        #groupBut {
-            width: 23%;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H17c-.8 0-1.54.37-2.01 1l-1.99 2.5V18h-2v-8.5l-1.99-2.5A2.5 2.5 0 0 0 7 8H5.46c-.8 0-1.54.37-2.01 1L.96 16.63A1.5 1.5 0 0 0 2.5 18H5v6h2v-6h7v6h2z"/></svg>');
-        }
-
-        #helpBut {
-            width: 27%;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>');
-        }
-
-        #xatBut {
-            width: 49%;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>');
-        }
-
-        /* Action Buttons */
+        /* Action Buttons (18% of sidebar) */
         .action-buttons {
-            width: 100%;
             height: 18%;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .action-buttons-container {
-            width: 100%;
-            height: 100%;
-            display: table;
-        }
-
-        .action-button-row {
-            width: 100%;
-            height: 50%;
-        }
-
-        .action-button-cell {
-            padding: 0.4rem 0.8rem 0.5rem 0.45rem;
-        }
-
-        .action-button-cell.bottom {
-            padding: 0.15rem 0.8rem 0.7rem 0.45rem;
-        }
-
-        .mainButtons {
-            width: 100%;
-            height: 100%;
+        .action-btn {
             background: #3498db;
             border: none;
-            border-radius: 4px;
             color: white;
+            padding: 8px;
+            margin-bottom: 5px;
             cursor: pointer;
+            font-size: 12px;
             font-weight: bold;
-            transition: background 0.3s;
         }
 
-        .mainButtons:hover {
+        .action-btn:hover {
             background: #2980b9;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main-chat-area {
-                width: 70%;
-            }
-            
-            .right-sidebar {
-                width: 30%;
-            }
+        /* User Profile Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #34495e;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 400px;
+            border-radius: 5px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: white;
+        }
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .profile-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 15px;
+        }
+
+        .profile-btn {
+            background: #3498db;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 11px;
+            border-radius: 3px;
+        }
+
+        .profile-btn:hover {
+            background: #2980b9;
+        }
+
+        .profile-btn.danger {
+            background: #e74c3c;
+        }
+
+        .profile-btn.danger:hover {
+            background: #c0392b;
+        }
+
+        /* Power Bar */
+        .power-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            border-top: 1px solid rgba(192, 192, 192, 0.8);
+        }
+
+        .power-icon {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(192, 192, 192, 0.5);
+            margin-right: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .power-icon:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .power-icon.cooldown {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Games Bar */
+        .games-bar {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(192, 192, 192, 0.5);
+            border-radius: 0 5px 5px 0;
+            padding: 10px 5px;
+        }
+
+        .game-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(192, 192, 192, 0.5);
+            margin-bottom: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            border-radius: 3px;
+        }
+
+        .game-icon:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(192, 192, 192, 0.5);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(192, 192, 192, 0.7);
         }
     </style>
 </head>
 <body>
     <div class="background">
         <div class="row">
-            <!-- Main Chat Area (74%) -->
-            <div class="cell main-chat-area">
-                <div class="chat-container">
-                    <div class="row chat-messages-area">
-                        <div class="cell chat-messages-container">
-                            <div id="messagesTabContainer" class="tabcontent">
-                                <div id="messagesContainer">
-                                    <ul id="messages">
-                                        <li class="message system">
-                                            🎭 Welcome to ixchats! Type your message below to start chatting.
-                                        </li>
-                                        <li class="message system">
-                                            💡 Use the tabs below to switch between different views.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div id="alltabs" class="tab">
-                                <div class="chat-container">
-                                    <div id="chattabs" class="row">
-                                        <button class="active" onclick="switchTab('chat')">Chat</button>
-                                        <button onclick="switchTab('powers')">Powers</button>
-                                        <button onclick="switchTab('smilies')">Smilies</button>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- Main Chat Area -->
+            <div class="cell main-chat">
+                <div class="messages-area" id="messagesArea">
+                    <div class="message">
+                        <div class="user-avatar">S</div>
+                        <div class="message-content">
+                            <span class="username">System</span>
+                            <span class="message-text">Welcome to ixchats! Type your message below to start chatting.</span>
                         </div>
                     </div>
-                    
-                    <!-- Smiley Bar -->
-                    <div class="row smiley-bar">
-                        <div class="cell smiley-bar-container">
-                            <div class="smileyBar">
-                                <div id="smileyBar">
-                                    <span class="smiley" onclick="addSmiley('😊')">😊</span>
-                                    <span class="smiley" onclick="addSmiley('😂')">😂</span>
-                                    <span class="smiley" onclick="addSmiley('❤️')">❤️</span>
-                                    <span class="smiley" onclick="addSmiley('👍')">👍</span>
-                                    <span class="smiley" onclick="addSmiley('🎉')">🎉</span>
-                                    <span class="smiley" onclick="addSmiley('🔥')">🔥</span>
-                                    <span class="smiley" onclick="addSmiley('😎')">😎</span>
-                                    <span class="smiley" onclick="addSmiley('🤔')">🤔</span>
-                                    <span class="smiley" onclick="addSmiley('😭')">😭</span>
-                                    <span class="smiley" onclick="addSmiley('💯')">💯</span>
-                                </div>
-                            </div>
+                    <div class="message">
+                        <div class="user-avatar">💡</div>
+                        <div class="message-content">
+                            <span class="username">System</span>
+                            <span class="message-text">Use the tabs below to switch between different views.</span>
                         </div>
                     </div>
-                    
-                    <!-- Input Area -->
-                    <div class="row input-area">
-                        <div class="cell input-container">
-                            <div class="input-wrapper">
-                                <div class="text-entry-row">
-                                    <div class="cell text-entry-cell">
-                                        <div id="textEntryEditable" class="textentry" contenteditable="true" onkeypress="handleKeyPress(event)"></div>
-                                    </div>
-                                    <div class="cell send-button-cell">
-                                        <div class="butcontainer">
-                                            <div class="butlayout">
-                                                <div id="returnBut" class="butcontent mainButtons" onclick="sendMessage()">
-                                                    ➤
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                
+                <div class="smiley-bar">
+                    <button class="smiley-btn">😊</button>
+                    <button class="smiley-btn">🥰</button>
+                    <button class="smiley-btn">❤️</button>
+                    <button class="smiley-btn">👍</button>
+                    <button class="smiley-btn">🔥</button>
+                    <button class="smiley-btn">😎</button>
+                    <button class="smiley-btn">🥳</button>
+                    <button class="smiley-btn">🤯</button>
+                    <button class="smiley-btn">💯</button>
+                </div>
+                
+                <div class="input-area">
+                    <div class="input-controls">
+                        <button class="format-btn">B</button>
+                        <button class="format-btn">I</button>
+                        <button class="format-btn">U</button>
+                        <button class="format-btn">🎨</button>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <textarea class="message-input" id="messageInput" placeholder="Type your message..." rows="2"></textarea>
+                        <button class="send-btn" id="sendBtn">➤</button>
                     </div>
                 </div>
             </div>
             
-            <!-- Right Sidebar (26%) -->
+            <!-- Right Sidebar -->
             <div class="cell right-sidebar">
-                <div class="sidebar-container">
-                    <div class="row">
-                        <div class="cell sidebar-main">
-                            <div class="sidebar-main-container">
-                                <div class="row visitors-area">
-                                    <div class="cell visitors-container">
-                                        <div id="visitorsTabContainer" class="tabcontent">
-                                            <div id="visitorsContainer">
-                                                <ul id="idvisitors">
-                                                    <li class="section">Club</li>
-                                                    <li class="friend">You (Guest)</li>
-                                                    <li class="friend">User123</li>
-                                                    <li class="friend">Chatter456</li>
-                                                    <li class="section">VIP</li>
-                                                    <li class="friend">VIP_User1</li>
-                                                    <li class="friend">VIP_User2</li>
-                                                    <li class="section">Chum</li>
-                                                    <li class="friend">Chum_User1</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div id="listtabs" class="tab">
-                                            <button id="defaultList" class="listlinks active" onclick="switchList('visitors')">Visitors</button>
-                                            <button id="friendsList" class="listlinks" onclick="switchList('friends')">Friends</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Right Bar Icons -->
-                                <div class="row right-bar-icons">
-                                    <div class="cell right-bar-container">
-                                        <div class="right-bar-wrapper">
-                                            <div id="rightBarIcons" class="row">
-                                                <div id="groupBut" class="cell svgBack smline"></div>
-                                                <div id="helpBut" class="cell svgBack smline"></div>
-                                                <div id="xatBut" class="cell svgBack smline"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Action Buttons -->
-                                <div class="row action-buttons">
-                                    <div class="cell">
-                                        <div class="action-buttons-container">
-                                            <div class="row action-button-row">
-                                                <div class="cell action-button-cell">
-                                                    <div class="butcontainer">
-                                                        <div class="butlayout">
-                                                            <div id="GetaChat" class="butcontent mainButtons" onclick="getChat()">Get a Chat Box</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row action-button-row">
-                                                <div class="cell action-button-cell bottom">
-                                                    <div class="butcontainer">
-                                                        <div class="butlayout">
-                                                            <div id="signIn" class="butcontent mainButtons" onclick="signIn()">Sign In</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="visitors-list" id="visitorsList">
+                    <div class="pool-section">
+                        <div class="pool-header">Club</div>
+                        <div class="user-item" data-user="You (Guest)">
+                            <div class="user-status status-online"></div>
+                            <span>You (Guest)</span>
+                        </div>
+                        <div class="user-item" data-user="User123">
+                            <div class="user-status status-online"></div>
+                            <span>User123</span>
+                        </div>
+                        <div class="user-item" data-user="Chatter456">
+                            <div class="user-status status-online"></div>
+                            <span>Chatter456</span>
                         </div>
                     </div>
+                    
+                    <div class="pool-section">
+                        <div class="pool-header">VIP</div>
+                        <div class="user-item" data-user="VIP_User1">
+                            <div class="user-status status-online"></div>
+                            <span>VIP_User1</span>
+                            <span class="user-rank rank-member">VIP</span>
+                        </div>
+                        <div class="user-item" data-user="VIP_User2">
+                            <div class="user-status status-online"></div>
+                            <span>VIP_User2</span>
+                            <span class="user-rank rank-member">VIP</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pool-section">
+                        <div class="pool-header">Chum</div>
+                        <div class="user-item" data-user="Chum_User1">
+                            <div class="user-status status-online"></div>
+                            <span>Chum_User1</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pool-section">
+                        <div class="pool-header">Visitors</div>
+                        <!-- Visitors will be populated dynamically -->
+                    </div>
+                </div>
+                
+                <div class="list-tabs">
+                    <button class="tab-btn active">All</button>
+                    <button class="tab-btn">Friends</button>
+                    <button class="tab-btn">Ignored</button>
+                </div>
+                
+                <div class="right-bar-icons">
+                    <button class="icon-btn" title="User Count">👥</button>
+                    <button class="icon-btn" title="Help">❓</button>
+                    <button class="icon-btn" title="Settings">⚙️</button>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn">Get a Chat Box</button>
+                    <button class="action-btn">Sign In</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Games Bar -->
+    <div class="games-bar">
+        <div class="game-icon" title="Doodle" data-game="doodle">🎨</div>
+        <div class="game-icon" title="Hangman" data-game="hangman">🎯</div>
+        <div class="game-icon" title="Tic Tac Toe" data-game="tictactoe">⭕</div>
+        <div class="game-icon" title="Quiz" data-game="quiz">❓</div>
+        <div class="game-icon" title="Rock Paper Scissors" data-game="rps">✂️</div>
+        <div class="game-icon" title="Dice" data-game="dice">🎲</div>
+    </div>
+
+    <!-- Power Bar -->
+    <div class="power-bar">
+        <div class="power-icon" title="Blast" data-power="blast">💥</div>
+        <div class="power-icon" title="Fade" data-power="fade">🌫️</div>
+        <div class="power-icon" title="Glitter" data-power="glitter">✨</div>
+        <div class="power-icon" title="Rainbow" data-power="rainbow">🌈</div>
+        <div class="power-icon" title="Reverse" data-power="reverse">↩️</div>
+        <div class="power-icon" title="Bot" data-power="bot">🤖</div>
+    </div>
+
+    <!-- User Profile Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalUsername">User Profile</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="profile-avatar" id="modalAvatar">U</div>
+            <div id="modalInfo">
+                <p><strong>Rank:</strong> <span id="modalRank">Guest</span></p>
+                <p><strong>Status:</strong> <span id="modalStatus">Online</span></p>
+                <p><strong>Avatar:</strong> <span id="modalAvatarType">Default</span></p>
+            </div>
+            <div class="profile-actions" id="modalActions">
+                <!-- Actions will be populated based on user rank -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
     <script>
-        let currentTab = 'chat';
-        let currentList = 'visitors';
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set room name from URL parameter
-            const urlParams = new URLSearchParams(window.location.search);
-            const room = urlParams.get('room');
-            if (room) {
-                updateRoomName(room);
-            }
-            
-            // Focus on input
-            document.getElementById('textEntryEditable').focus();
-        });
-
-        function handleKeyPress(event) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
-                sendMessage();
-            }
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('textEntryEditable');
-            const message = input.textContent.trim();
-            
-            if (message) {
-                addMessage('You', message);
-                input.textContent = '';
+        class IxatChatInterface {
+            constructor() {
+                this.socket = io();
+                this.currentUser = null;
+                this.users = new Map();
+                this.currentPool = 0;
+                this.pools = {
+                    0: { name: 'Main', users: [] },
+                    1: { name: 'VIP', users: [], requiresRank: 'vip' },
+                    2: { name: 'Club', users: [], requiresRank: 'club' },
+                    3: { name: 'Banned', users: [], requiresRank: 'banned' }
+                };
+                this.powers = new Map();
+                this.games = new Map();
                 
-                // Simulate other users responding
-                setTimeout(() => {
-                    const responses = [
-                        'Hello there!',
-                        'Nice to meet you!',
-                        'How are you doing?',
-                        'Welcome to the chat!',
-                        'Great to see you here!'
-                    ];
-                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                    addMessage('Guest' + Math.floor(Math.random() * 1000), randomResponse);
-                }, 1000 + Math.random() * 2000);
+                this.init();
             }
-        }
 
-        function addMessage(username, content) {
-            const messagesList = document.getElementById('messages');
-            const messageLi = document.createElement('li');
-            messageLi.className = 'message user';
-            messageLi.innerHTML = `<span class="username">${username}:</span><span class="content">${content}</span>`;
-            messagesList.appendChild(messageLi);
-            
-            // Scroll to bottom
-            const messagesContainer = document.getElementById('messagesContainer');
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function addSmiley(smiley) {
-            const input = document.getElementById('textEntryEditable');
-            input.textContent += smiley;
-            input.focus();
-        }
-
-        function switchTab(tab) {
-            currentTab = tab;
-            
-            // Update active tab buttons
-            document.querySelectorAll('#chattabs button').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Handle tab switching
-            switch(tab) {
-                case 'chat':
-                    // Show chat interface
-                    break;
-                case 'powers':
-                    addMessage('System', 'Powers tab clicked - powers interface would appear here');
-                    break;
-                case 'smilies':
-                    addMessage('System', 'Smilies tab clicked - smilies interface would appear here');
-                    break;
+            init() {
+                this.setupEventListeners();
+                this.setupSocketEvents();
+                this.loadPowers();
+                this.loadGames();
+                this.updateUserList();
             }
-        }
 
-        function switchList(list) {
-            currentList = list;
-            
-            // Update active list buttons
-            document.querySelectorAll('.listlinks').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Update user list based on selection
-            const visitorsList = document.getElementById('idvisitors');
-            const users = {
-                'visitors': [
-                    { type: 'section', name: 'Club' },
-                    { type: 'friend', name: 'You (Guest)' },
-                    { type: 'friend', name: 'User123' },
-                    { type: 'friend', name: 'Chatter456' },
-                    { type: 'section', name: 'VIP' },
-                    { type: 'friend', name: 'VIP_User1' },
-                    { type: 'friend', name: 'VIP_User2' },
-                    { type: 'section', name: 'Chum' },
-                    { type: 'friend', name: 'Chum_User1' }
-                ],
-                'friends': [
-                    { type: 'section', name: 'Friends' },
-                    { type: 'friend', name: 'Friend1' },
-                    { type: 'friend', name: 'Friend2' },
-                    { type: 'friend', name: 'Friend3' }
-                ]
-            };
-            
-            visitorsList.innerHTML = '';
-            users[list].forEach(user => {
-                const li = document.createElement('li');
-                li.className = user.type;
-                li.textContent = user.name;
-                if (user.type === 'friend') {
-                    li.onclick = () => showUserProfile(user.name);
+            setupEventListeners() {
+                // Message input
+                const messageInput = document.getElementById('messageInput');
+                const sendBtn = document.getElementById('sendBtn');
+
+                sendBtn.addEventListener('click', () => this.sendMessage());
+                messageInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.sendMessage();
+                    }
+                });
+
+                // User clicks
+                document.addEventListener('click', (e) => {
+                    if (e.target.closest('.user-item')) {
+                        const userItem = e.target.closest('.user-item');
+                        const username = userItem.dataset.user;
+                        this.showUserProfile(username);
+                    }
+                });
+
+                // Tab switching
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.addEventListener('click', () => this.switchTab(btn));
+                });
+
+                // Power activation
+                document.querySelectorAll('.power-icon').forEach(icon => {
+                    icon.addEventListener('click', () => this.activatePower(icon.dataset.power));
+                });
+
+                // Game activation
+                document.querySelectorAll('.game-icon').forEach(icon => {
+                    icon.addEventListener('click', () => this.startGame(icon.dataset.game));
+                });
+
+                // Modal close
+                document.querySelector('.close').addEventListener('click', () => {
+                    document.getElementById('userModal').style.display = 'none';
+                });
+
+                // Smiley buttons
+                document.querySelectorAll('.smiley-btn').forEach(btn => {
+                    btn.addEventListener('click', () => this.insertSmiley(btn.textContent));
+                });
+            }
+
+            setupSocketEvents() {
+                this.socket.on('connect', () => {
+                    console.log('🎭 [CHAT] Connected to server');
+                    this.authenticate();
+                });
+
+                this.socket.on('user_list', (data) => {
+                    this.updateUserList(data.users);
+                });
+
+                this.socket.on('message', (data) => {
+                    this.addMessage(data);
+                });
+
+                this.socket.on('user_joined', (data) => {
+                    this.addSystemMessage(`${data.username} joined the chat`);
+                });
+
+                this.socket.on('user_left', (data) => {
+                    this.addSystemMessage(`${data.username} left the chat`);
+                });
+
+                this.socket.on('power_activated', (data) => {
+                    this.showPowerEffect(data);
+                });
+            }
+
+            authenticate() {
+                // Get room from URL params
+                const urlParams = new URLSearchParams(window.location.search);
+                const room = urlParams.get('room') || 'lobby';
+                
+                this.socket.emit('authenticate', {
+                    guest: true,
+                    nickname: `Guest${Math.floor(Math.random() * 1000)}`,
+                    room: room
+                });
+            }
+
+            sendMessage() {
+                const input = document.getElementById('messageInput');
+                const message = input.value.trim();
+                
+                if (message) {
+                    this.socket.emit('message', {
+                        content: message,
+                        room: this.currentRoom
+                    });
+                    input.value = '';
                 }
-                visitorsList.appendChild(li);
-            });
-        }
+            }
 
-        function showUserProfile(username) {
-            addMessage('System', `Clicked on user: ${username} - user profile would appear here`);
-        }
+            addMessage(data) {
+                const messagesArea = document.getElementById('messagesArea');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message';
+                
+                messageDiv.innerHTML = `
+                    <div class="user-avatar">${data.avatar || 'U'}</div>
+                    <div class="message-content">
+                        <span class="username">${data.username}</span>
+                        <span class="message-text">${data.content}</span>
+                    </div>
+                `;
+                
+                messagesArea.appendChild(messageDiv);
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+            }
 
-        function updateRoomName(room) {
-            // Update page title or add room indicator
-            document.title = `${room.charAt(0).toUpperCase() + room.slice(1)} - ixchats`;
-        }
+            addSystemMessage(text) {
+                const messagesArea = document.getElementById('messagesArea');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message';
+                
+                messageDiv.innerHTML = `
+                    <div class="user-avatar">💬</div>
+                    <div class="message-content">
+                        <span class="username">System</span>
+                        <span class="message-text">${text}</span>
+                    </div>
+                `;
+                
+                messagesArea.appendChild(messageDiv);
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+            }
 
-        function getChat() {
-            if (window.parent && window.parent !== window) {
-                window.parent.location.href = '/chat-edit.html';
-            } else {
-                window.location.href = '/chat-edit.html';
+            updateUserList(users = []) {
+                const visitorsList = document.getElementById('visitorsList');
+                
+                // Clear existing users
+                document.querySelectorAll('.pool-section').forEach(section => {
+                    const header = section.querySelector('.pool-header');
+                    if (header.textContent !== 'Visitors') {
+                        section.innerHTML = '';
+                        section.appendChild(header);
+                    }
+                });
+
+                // Group users by pool
+                users.forEach(user => {
+                    const pool = user.pool || 0;
+                    const poolName = this.pools[pool]?.name || 'Main';
+                    
+                    let poolSection = document.querySelector(`.pool-section .pool-header:contains('${poolName}')`).parentElement;
+                    if (!poolSection) {
+                        poolSection = this.createPoolSection(poolName);
+                        visitorsList.appendChild(poolSection);
+                    }
+
+                    const userItem = this.createUserItem(user);
+                    poolSection.appendChild(userItem);
+                });
+            }
+
+            createPoolSection(name) {
+                const section = document.createElement('div');
+                section.className = 'pool-section';
+                section.innerHTML = `
+                    <div class="pool-header">${name}</div>
+                `;
+                return section;
+            }
+
+            createUserItem(user) {
+                const item = document.createElement('div');
+                item.className = 'user-item';
+                item.dataset.user = user.username;
+                
+                const statusClass = this.getStatusClass(user.status);
+                const rankClass = this.getRankClass(user.rank);
+                
+                item.innerHTML = `
+                    <div class="user-status ${statusClass}"></div>
+                    <span>${user.username}</span>
+                    ${user.rank ? `<span class="user-rank ${rankClass}">${user.rank}</span>` : ''}
+                `;
+                
+                return item;
+            }
+
+            getStatusClass(status) {
+                switch (status) {
+                    case 'online': return 'status-online';
+                    case 'away': return 'status-away';
+                    case 'busy': return 'status-busy';
+                    default: return 'status-online';
+                }
+            }
+
+            getRankClass(rank) {
+                switch (rank) {
+                    case 'owner': return 'rank-owner';
+                    case 'mod': return 'rank-mod';
+                    case 'member': return 'rank-member';
+                    case 'guest': return 'rank-guest';
+                    default: return 'rank-guest';
+                }
+            }
+
+            showUserProfile(username) {
+                const user = this.users.get(username) || {
+                    username: username,
+                    rank: 'guest',
+                    status: 'online',
+                    avatar: 'U'
+                };
+
+                document.getElementById('modalUsername').textContent = user.username;
+                document.getElementById('modalAvatar').textContent = user.avatar;
+                document.getElementById('modalRank').textContent = user.rank;
+                document.getElementById('modalStatus').textContent = user.status;
+                document.getElementById('modalAvatarType').textContent = user.avatarType || 'Default';
+
+                this.populateProfileActions(user);
+                document.getElementById('userModal').style.display = 'block';
+            }
+
+            populateProfileActions(user) {
+                const actionsContainer = document.getElementById('modalActions');
+                actionsContainer.innerHTML = '';
+
+                const actions = this.getUserActions(user);
+                actions.forEach(action => {
+                    const btn = document.createElement('button');
+                    btn.className = `profile-btn ${action.danger ? 'danger' : ''}`;
+                    btn.textContent = action.text;
+                    btn.onclick = () => action.handler(user);
+                    actionsContainer.appendChild(btn);
+                });
+            }
+
+            getUserActions(user) {
+                const actions = [
+                    { text: 'Add Friend', handler: (u) => this.addFriend(u) },
+                    { text: 'Private Message', handler: (u) => this.privateMessage(u) }
+                ];
+
+                // Add rank-specific actions
+                if (this.currentUser?.rank === 'owner' || this.currentUser?.rank === 'mod') {
+                    actions.push(
+                        { text: 'Kick', handler: (u) => this.kickUser(u) },
+                        { text: 'Ban', handler: (u) => this.banUser(u), danger: true }
+                    );
+                }
+
+                if (this.currentUser?.rank === 'owner') {
+                    actions.push(
+                        { text: 'Make Mod', handler: (u) => this.makeMod(u) },
+                        { text: 'Transfer Ownership', handler: (u) => this.transferOwnership(u) }
+                    );
+                }
+
+                return actions;
+            }
+
+            switchTab(btn) {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const tab = btn.textContent.toLowerCase();
+                this.filterUserList(tab);
+            }
+
+            filterUserList(filter) {
+                // Implement user list filtering based on tab
+                console.log('🎭 [CHAT] Filtering users by:', filter);
+            }
+
+            activatePower(powerName) {
+                const icon = document.querySelector(`[data-power="${powerName}"]`);
+                if (icon.classList.contains('cooldown')) return;
+
+                this.socket.emit('activate_power', {
+                    power: powerName,
+                    room: this.currentRoom
+                });
+
+                // Add cooldown
+                icon.classList.add('cooldown');
+                setTimeout(() => {
+                    icon.classList.remove('cooldown');
+                }, 5000);
+            }
+
+            startGame(gameName) {
+                this.socket.emit('start_game', {
+                    game: gameName,
+                    room: this.currentRoom
+                });
+            }
+
+            insertSmiley(smiley) {
+                const input = document.getElementById('messageInput');
+                input.value += smiley;
+                input.focus();
+            }
+
+            showPowerEffect(data) {
+                // Implement power effect display
+                console.log('🎭 [CHAT] Power effect:', data);
+            }
+
+            // User action handlers
+            addFriend(user) {
+                console.log('🎭 [CHAT] Adding friend:', user.username);
+            }
+
+            privateMessage(user) {
+                console.log('🎭 [CHAT] Private message to:', user.username);
+            }
+
+            kickUser(user) {
+                this.socket.emit('kick_user', { username: user.username });
+            }
+
+            banUser(user) {
+                this.socket.emit('ban_user', { username: user.username });
+            }
+
+            makeMod(user) {
+                this.socket.emit('make_mod', { username: user.username });
+            }
+
+            transferOwnership(user) {
+                this.socket.emit('transfer_ownership', { username: user.username });
+            }
+
+            loadPowers() {
+                // Load available powers
+                this.powers.set('blast', { name: 'Blast', cooldown: 5000 });
+                this.powers.set('fade', { name: 'Fade', cooldown: 3000 });
+                this.powers.set('glitter', { name: 'Glitter', cooldown: 2000 });
+                this.powers.set('rainbow', { name: 'Rainbow', cooldown: 4000 });
+                this.powers.set('reverse', { name: 'Reverse', cooldown: 6000 });
+                this.powers.set('bot', { name: 'Bot', cooldown: 10000 });
+            }
+
+            loadGames() {
+                // Load available games
+                this.games.set('doodle', { name: 'Doodle', maxPlayers: 10 });
+                this.games.set('hangman', { name: 'Hangman', maxPlayers: 2 });
+                this.games.set('tictactoe', { name: 'Tic Tac Toe', maxPlayers: 2 });
+                this.games.set('quiz', { name: 'Quiz', maxPlayers: 10 });
+                this.games.set('rps', { name: 'Rock Paper Scissors', maxPlayers: 2 });
+                this.games.set('dice', { name: 'Dice', maxPlayers: 10 });
             }
         }
 
-        function signIn() {
-            if (window.parent && window.parent !== window) {
-                window.parent.location.href = '/auth.html';
-            } else {
-                window.location.href = '/auth.html';
-            }
-        }
-
-        // Simulate some activity
-        setInterval(() => {
-            const messages = [
-                'Hello everyone!',
-                'How is everyone doing?',
-                'This chat is awesome!',
-                'Anyone want to play games?',
-                'Great to be here!'
-            ];
-            
-            if (Math.random() < 0.1) { // 10% chance every 5 seconds
-                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-                const randomUser = 'Guest' + Math.floor(Math.random() * 1000);
-                addMessage(randomUser, randomMessage);
-            }
-        }, 5000);
+        // Initialize chat interface when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new IxatChatInterface();
+        });
     </script>
 </body>
 </html>
