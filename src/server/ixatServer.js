@@ -237,6 +237,11 @@ class IxatServer {
         this.app.get('/chat-edit.html', (req, res) => {
             res.sendFile(path.join(__dirname, '../client/chat-edit.html'));
         });
+        
+        // Serve chat interface (for iframe embedding)
+        this.app.get('/chat-interface.html', (req, res) => {
+            res.sendFile(path.join(__dirname, '../client/chat-interface.html'));
+        });
 
         // Friends API
         this.app.get('/api/friends', this.handleGetFriends.bind(this));

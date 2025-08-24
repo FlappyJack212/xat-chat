@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ixchats - Chat Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #2c3e50;
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Top Header - Dark Blue */
+        .chat-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            border-bottom: 2px solid #34495e;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .header-nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Main Chat Container */
+        .chat-container {
+            display: flex;
+            height: calc(100vh - 50px);
+        }
+
+        /* Left Sidebar - Games & Chat Groups */
+        .left-sidebar {
+            width: 120px;
+            background: #34495e;
+            border-right: 2px solid #2c3e50;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-section {
+            padding: 10px;
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #bdc3c7;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .game-button, .chat-group-button {
+            width: 100%;
+            padding: 8px 5px;
+            margin: 2px 0;
+            background: #2c3e50;
+            border: 1px solid #34495e;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 11px;
+            transition: all 0.3s;
+        }
+
+        .game-button:hover, .chat-group-button:hover {
+            background: #3498db;
+            border-color: #2980b9;
+        }
+
+        .game-button.active, .chat-group-button.active {
+            background: #3498db;
+            border-color: #2980b9;
+        }
+
+        /* Main Chat Area */
+        .main-chat {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #34495e;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #2c3e50;
+        }
+
+        .message {
+            margin-bottom: 8px;
+            padding: 5px 0;
+        }
+
+        .message.system {
+            color: #f39c12;
+            font-style: italic;
+        }
+
+        .message.user {
+            color: #ecf0f1;
+        }
+
+        .message .username {
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .message .content {
+            margin-left: 5px;
+        }
+
+        .chat-input-area {
+            background: #34495e;
+            padding: 10px;
+            border-top: 2px solid #2c3e50;
+        }
+
+        .chat-input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #2c3e50;
+            border-radius: 4px;
+            background: #2c3e50;
+            color: white;
+            font-size: 14px;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .send-button {
+            padding: 8px 15px;
+            background: #3498db;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .send-button:hover {
+            background: #2980b9;
+        }
+
+        .emoticon-bar {
+            display: flex;
+            gap: 5px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .emoticon {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: transform 0.2s;
+        }
+
+        .emoticon:hover {
+            transform: scale(1.2);
+        }
+
+        /* Right Sidebar - User List */
+        .right-sidebar {
+            width: 200px;
+            background: #34495e;
+            border-left: 2px solid #2c3e50;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-section {
+            padding: 10px;
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .user-section-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #bdc3c7;
+            margin-bottom: 8px;
+        }
+
+        .user-list {
+            list-style: none;
+        }
+
+        .user-item {
+            padding: 5px 8px;
+            margin: 2px 0;
+            background: #2c3e50;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 12px;
+        }
+
+        .user-item:hover {
+            background: #3498db;
+        }
+
+        .user-item::before {
+            content: "●";
+            color: #27ae60;
+            margin-right: 5px;
+        }
+
+        .rank-pools {
+            padding: 10px;
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .rank-pool-button {
+            width: 100%;
+            padding: 6px 8px;
+            margin: 2px 0;
+            background: #2c3e50;
+            border: 1px solid #34495e;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 11px;
+            transition: all 0.3s;
+        }
+
+        .rank-pool-button:hover {
+            background: #3498db;
+        }
+
+        .rank-pool-button.active {
+            background: #3498db;
+        }
+
+        .chat-tabs {
+            padding: 10px;
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .tab-button {
+            width: 100%;
+            padding: 6px 8px;
+            margin: 2px 0;
+            background: #2c3e50;
+            border: 1px solid #34495e;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 11px;
+            transition: all 0.3s;
+        }
+
+        .tab-button:hover {
+            background: #3498db;
+        }
+
+        .tab-button.active {
+            background: #3498db;
+        }
+
+        .chat-actions {
+            padding: 10px;
+            margin-top: auto;
+        }
+
+        .action-button {
+            width: 100%;
+            padding: 8px 10px;
+            margin: 2px 0;
+            background: #2c3e50;
+            border: 1px solid #34495e;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .action-button:hover {
+            background: #3498db;
+        }
+
+        /* Bottom Bar - Powers */
+        .bottom-bar {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            border-top: 2px solid #34495e;
+        }
+
+        .power-info {
+            font-size: 12px;
+            color: #f39c12;
+            margin-right: 15px;
+        }
+
+        .power-icons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .power-icon {
+            width: 24px;
+            height: 24px;
+            background: #34495e;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .power-icon:hover {
+            background: #3498db;
+        }
+
+        /* Game Area */
+        .game-area {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #2c3e50;
+            border: 2px solid #34495e;
+            border-radius: 8px;
+            padding: 20px;
+            z-index: 1000;
+            display: none;
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .game-close-btn {
+            background: #e74c3c;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .game-content {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .left-sidebar {
+                width: 80px;
+            }
+            
+            .right-sidebar {
+                width: 150px;
+            }
+            
+            .game-button, .chat-group-button {
+                font-size: 10px;
+                padding: 6px 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="chat-header">
+        <div class="header-left">
+            <div class="header-logo">🎭 ixchats</div>
+            <div class="header-nav">
+                <a href="#" onclick="switchTab('chat')">Chat</a>
+                <a href="#" onclick="switchTab('powers')">Powers</a>
+                <a href="#" onclick="switchTab('smilies')">Smilies</a>
+            </div>
+        </div>
+        <div class="header-right">
+            <span id="userCount">0 users</span>
+            <span id="roomName">Main Chat</span>
+        </div>
+    </div>
+
+    <!-- Main Chat Container -->
+    <div class="chat-container">
+        <!-- Left Sidebar -->
+        <div class="left-sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">🎮 GAMES</div>
+                <button class="game-button" onclick="startGame('doodle')">🎨 Doodle</button>
+                <button class="game-button" onclick="startGame('hangman')">🎯 Hangman</button>
+                <button class="game-button" onclick="startGame('tictactoe')">⭕ Tic Tac Toe</button>
+                <button class="game-button" onclick="startGame('quiz')">❓ Quiz</button>
+                <button class="game-button" onclick="startGame('rps')">✂️ RPS</button>
+                <button class="game-button" onclick="startGame('dice')">🎲 Dice</button>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">💬 CHATS</div>
+                <button class="chat-group-button active" onclick="switchChatGroup('main')">Main Chat</button>
+                <button class="chat-group-button" onclick="switchChatGroup('lobby')">Lobby</button>
+                <button class="chat-group-button" onclick="switchChatGroup('help')">Help</button>
+                <button class="chat-group-button" onclick="switchChatGroup('test')">Test</button>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="main-chat">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message system">
+                    🎭 Welcome to ixchats! Type your message below to start chatting.
+                </div>
+                <div class="message system">
+                    💡 Use the left sidebar to play games or switch chat groups.
+                </div>
+            </div>
+            
+            <div class="chat-input-area">
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="messageInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+                    <button class="send-button" onclick="sendMessage()">Send</button>
+                </div>
+                
+                <div class="emoticon-bar">
+                    <span class="emoticon" onclick="addEmoticon('😊')">😊</span>
+                    <span class="emoticon" onclick="addEmoticon('😂')">😂</span>
+                    <span class="emoticon" onclick="addEmoticon('❤️')">❤️</span>
+                    <span class="emoticon" onclick="addEmoticon('👍')">👍</span>
+                    <span class="emoticon" onclick="addEmoticon('🎉')">🎉</span>
+                    <span class="emoticon" onclick="addEmoticon('🔥')">🔥</span>
+                    <span class="emoticon" onclick="addEmoticon('😎')">😎</span>
+                    <span class="emoticon" onclick="addEmoticon('🤔')">🤔</span>
+                    <span class="emoticon" onclick="addEmoticon('😭')">😭</span>
+                    <span class="emoticon" onclick="addEmoticon('💯')">💯</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="right-sidebar">
+            <div class="user-section">
+                <div class="user-section-title">Club</div>
+                <ul class="user-list" id="userList">
+                    <li class="user-item">You (Guest)</li>
+                </ul>
+            </div>
+            
+            <div class="rank-pools">
+                <div class="user-section-title">Rank Pools</div>
+                <button class="rank-pool-button active" onclick="switchRankPool('club')">Club</button>
+                <button class="rank-pool-button" onclick="switchRankPool('vip')">VIP</button>
+                <button class="rank-pool-button" onclick="switchRankPool('chum')">Chum</button>
+            </div>
+            
+            <div class="chat-tabs">
+                <button class="tab-button active" onclick="switchTab('visitors')">Visitors</button>
+                <button class="tab-button" onclick="switchTab('friends')">Friends</button>
+            </div>
+            
+            <div class="chat-actions">
+                <button class="action-button" onclick="editChat()">Edit Your Chat</button>
+                <button class="action-button" onclick="signOut()">Sign Out</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="bottom-bar">
+        <div class="power-info">New RIDER power [LIMITED]</div>
+        <div class="power-icons">
+            <div class="power-icon" title="Rider">🏍️</div>
+            <div class="power-icon" title="Smile">😊</div>
+            <div class="power-icon" title="Diamond">💎</div>
+            <div class="power-icon" title="Notification">🔔</div>
+            <div class="power-icon" title="X">❌</div>
+            <div class="power-icon" title="Yield">⚠️</div>
+            <div class="power-icon" title="Traffic Light">🚦</div>
+        </div>
+    </div>
+
+    <!-- Game Area -->
+    <div class="game-area" id="gameArea">
+        <div class="game-header">
+            <h3 id="gameTitle">Game</h3>
+            <button class="game-close-btn" onclick="endGame()">✕</button>
+        </div>
+        <div class="game-content" id="gameContent">
+            Game content will appear here...
+        </div>
+    </div>
+
+    <script>
+        let currentTab = 'chat';
+        let currentChatGroup = 'main';
+        let currentRankPool = 'club';
+        let activeGame = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set room name from URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const room = urlParams.get('room');
+            if (room) {
+                switchChatGroup(room);
+            }
+            
+            // Focus on input
+            document.getElementById('messageInput').focus();
+        });
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage('You', message);
+                input.value = '';
+                
+                // Simulate other users responding
+                setTimeout(() => {
+                    const responses = [
+                        'Hello there!',
+                        'Nice to meet you!',
+                        'How are you doing?',
+                        'Welcome to the chat!',
+                        'Great to see you here!'
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessage('Guest' + Math.floor(Math.random() * 1000), randomResponse);
+                }, 1000 + Math.random() * 2000);
+            }
+        }
+
+        function addMessage(username, content) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user';
+            messageDiv.innerHTML = `<span class="username">${username}:</span><span class="content">${content}</span>`;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function addEmoticon(emoticon) {
+            const input = document.getElementById('messageInput');
+            input.value += emoticon;
+            input.focus();
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update active tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Handle tab switching
+            switch(tab) {
+                case 'chat':
+                    // Show chat interface
+                    break;
+                case 'powers':
+                    // Show powers interface
+                    addMessage('System', 'Powers tab clicked - powers interface would appear here');
+                    break;
+                case 'smilies':
+                    // Show smilies interface
+                    addMessage('System', 'Smilies tab clicked - smilies interface would appear here');
+                    break;
+                case 'visitors':
+                    // Show visitors list
+                    break;
+                case 'friends':
+                    // Show friends list
+                    break;
+            }
+        }
+
+        function switchChatGroup(group) {
+            currentChatGroup = group;
+            
+            // Update active chat group buttons
+            document.querySelectorAll('.chat-group-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update room name
+            document.getElementById('roomName').textContent = group.charAt(0).toUpperCase() + group.slice(1) + ' Chat';
+            
+            // Clear messages and add welcome
+            const messagesDiv = document.getElementById('chatMessages');
+            messagesDiv.innerHTML = `
+                <div class="message system">
+                    🎭 Welcome to ${group.charAt(0).toUpperCase() + group.slice(1)} Chat!
+                </div>
+                <div class="message system">
+                    💡 You can chat with other users here.
+                </div>
+            `;
+            
+            // Update user count
+            const userCount = Math.floor(Math.random() * 50) + 1;
+            document.getElementById('userCount').textContent = userCount + ' users';
+        }
+
+        function switchRankPool(pool) {
+            currentRankPool = pool;
+            
+            // Update active rank pool buttons
+            document.querySelectorAll('.rank-pool-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update user list based on rank pool
+            const userList = document.getElementById('userList');
+            const users = {
+                'club': ['You (Guest)', 'User123', 'Chatter456', 'Friend789'],
+                'vip': ['VIP_User1', 'VIP_User2', 'VIP_User3'],
+                'chum': ['Chum_User1', 'Chum_User2']
+            };
+            
+            userList.innerHTML = '';
+            users[pool].forEach(user => {
+                const li = document.createElement('li');
+                li.className = 'user-item';
+                li.textContent = user;
+                li.onclick = () => showUserProfile(user);
+                userList.appendChild(li);
+            });
+        }
+
+        function showUserProfile(username) {
+            addMessage('System', `Clicked on user: ${username} - user profile would appear here`);
+        }
+
+        function startGame(game) {
+            activeGame = game;
+            const gameArea = document.getElementById('gameArea');
+            const gameTitle = document.getElementById('gameTitle');
+            const gameContent = document.getElementById('gameContent');
+            
+            const games = {
+                'doodle': { title: '🎨 Doodle Game', content: 'Draw and collaborate with other users!' },
+                'hangman': { title: '🎯 Hangman', content: 'Guess the word before the hangman is complete!' },
+                'tictactoe': { title: '⭕ Tic Tac Toe', content: 'Play the classic X and O game!' },
+                'quiz': { title: '❓ Quiz', content: 'Test your knowledge with trivia questions!' },
+                'rps': { title: '✂️ Rock Paper Scissors', content: 'Rock beats scissors, scissors beat paper, paper beats rock!' },
+                'dice': { title: '🎲 Dice', content: 'Roll virtual dice and see what happens!' }
+            };
+            
+            gameTitle.textContent = games[game].title;
+            gameContent.innerHTML = `
+                <p>${games[game].content}</p>
+                <p>Game would start here with interactive elements.</p>
+                <button onclick="endGame()" style="background: #e74c3c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">End Game</button>
+            `;
+            
+            gameArea.style.display = 'block';
+        }
+
+        function endGame() {
+            activeGame = null;
+            document.getElementById('gameArea').style.display = 'none';
+        }
+
+        function editChat() {
+            // Open chat edit in parent window
+            if (window.parent && window.parent !== window) {
+                window.parent.location.href = '/chat-edit.html';
+            } else {
+                window.location.href = '/chat-edit.html';
+            }
+        }
+
+        function signOut() {
+            if (confirm('Are you sure you want to sign out?')) {
+                if (window.parent && window.parent !== window) {
+                    window.parent.location.href = '/';
+                } else {
+                    window.location.href = '/';
+                }
+            }
+        }
+
+        // Simulate some activity
+        setInterval(() => {
+            const messages = [
+                'Hello everyone!',
+                'How is everyone doing?',
+                'This chat is awesome!',
+                'Anyone want to play games?',
+                'Great to be here!'
+            ];
+            
+            if (Math.random() < 0.1) { // 10% chance every 5 seconds
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                const randomUser = 'Guest' + Math.floor(Math.random() * 1000);
+                addMessage(randomUser, randomMessage);
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
