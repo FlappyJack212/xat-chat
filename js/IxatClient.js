@@ -45,8 +45,17 @@ class IxatClient {
         this.currentTab = 'chat';
         this.pawns = []; // Available pawns/avatars
         this.selectedPawn = null; // Currently selected pawn
-        this.games = []; // Available games
-        this.activeGame = null; // Currently active game
+        this.games = [
+            { id: 'doodle', name: 'Doodle', icon: '🎨', description: 'Draw and collaborate' },
+            { id: 'hangman', name: 'Hangman', icon: '🎯', description: 'Guess the word' },
+            { id: 'tictactoe', name: 'Tic Tac Toe', icon: '⭕', description: 'Classic X and O' },
+            { id: 'quiz', name: 'Quiz', icon: '❓', description: 'Test your knowledge' },
+            { id: 'rps', name: 'Rock Paper Scissors', icon: '✂️', description: 'Rock beats scissors' },
+            { id: 'dice', name: 'Dice', icon: '🎲', description: 'Roll the dice' }
+        ];
+        this.activeGame = null;
+        this.gamePlayers = new Map(); // Track players in each game
+        this.gameStates = new Map(); // Store game state
         
         // Initialize
         this.init();
@@ -230,7 +239,7 @@ class IxatClient {
             const gameBtn = document.createElement('div');
             gameBtn.style.cssText = `
                 background: #333333;
-                border: 1px solid #444444;
+            border: 1px solid #444444;
                 color: #ffffff;
                 padding: 8px;
                 margin-bottom: 5px;
@@ -280,7 +289,7 @@ class IxatClient {
             groupBtn.style.cssText = `
                 background: ${group.id === this.currentChatGroup ? '#28a745' : '#333333'};
                 border: 1px solid #444444;
-                color: #ffffff;
+            color: #ffffff;
                 padding: 6px 8px;
                 margin-bottom: 3px;
                 font-size: 10px;
@@ -605,8 +614,8 @@ class IxatClient {
                 cursor: pointer;
                 padding: 2px;
                 border-radius: 2px;
-                transition: all 0.2s ease;
-            `;
+            transition: all 0.2s ease;
+        `;
             emojiElement.textContent = emoji;
             
             emojiElement.onmouseover = () => {
@@ -1619,7 +1628,7 @@ class IxatClient {
             { id: 'tictactoe', name: 'Tic Tac Toe', description: 'Classic X and O game', icon: '⭕' },
             { id: 'quiz', name: 'Quiz', description: 'Trivia questions', icon: '❓' },
             { id: 'rps', name: 'Rock Paper Scissors', description: 'Rock, Paper, Scissors', icon: '✂️' },
-            { id: 'dice', name: 'Dice Roll', description: 'Roll virtual dice', icon: '🎲' }
+            { id: 'dice', name: 'Dice', description: 'Roll virtual dice', icon: '🎲' }
         ];
         
         console.log('🎭 [CLIENT] Loaded games:', this.games.length);
@@ -1746,6 +1755,14 @@ class IxatClient {
         // Show active game area
         activeGameArea.style.display = 'block';
         
+        // Initialize game state
+        this.gameStates.set(game.id, {
+            players: [],
+            status: 'waiting',
+            startTime: Date.now(),
+            data: {}
+        });
+        
         // Load game-specific content
         switch (game.id) {
             case 'doodle':
@@ -1772,7 +1789,11 @@ class IxatClient {
         
         // Emit game start to server
         if (this.socket) {
-            this.socket.emit('start_game', { gameId: game.id });
+            this.socket.emit('start_game', { 
+                gameId: game.id,
+                room: this.config.roomName,
+                player: this.currentUser ? this.currentUser.nickname : 'Guest'
+            });
         }
     }
     
@@ -2110,7 +2131,7 @@ class IxatClient {
         
         // Fix: Check if userCount element exists
         if (this.elements.userCount) {
-            this.elements.userCount.textContent = `Users: ${users.length}`;
+        this.elements.userCount.textContent = `Users: ${users.length}`;
         }
     }
     

@@ -16,7 +16,7 @@
             padding: 20px;
             min-height: 100vh;
         }
-        
+
         .profile-container {
             max-width: 800px;
             margin: 0 auto;
@@ -237,7 +237,7 @@
             font-weight: bold;
             color: #333;
         }
-        
+
         .message {
             padding: 12px;
             border-radius: 8px;
@@ -299,7 +299,7 @@
         <div class="profile-header">
             <h1>Profile Settings</h1>
             <p>Manage your ixchats account and preferences</p>
-        </div>
+            </div>
         
         <div class="message" id="successMessage"></div>
         <div class="message" id="errorMessage"></div>
@@ -311,7 +311,7 @@
             <div class="profile-tab" onclick="switchTab('security')">Security</div>
             <div class="profile-tab" onclick="switchTab('stats')">Statistics</div>
         </div>
-        
+
         <!-- Account Section -->
         <div class="profile-section active" id="accountSection">
             <h2>Account Information</h2>
@@ -329,15 +329,15 @@
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" placeholder="Enter your email">
-                </div>
+                            </div>
                 
                 <div class="form-group">
                     <label for="bio">Bio</label>
                     <textarea id="bio" rows="4" placeholder="Tell us about yourself..."></textarea>
-                </div>
-                
+                        </div>
+                        
                 <button type="submit" class="btn btn-primary">Update Account</button>
-            </form>
+                                </form>
         </div>
         
         <!-- Appearance Section -->
@@ -348,19 +348,19 @@
                 <label>Avatar</label>
                 <div class="avatar-grid" id="avatarGrid">
                     <!-- Avatars will be loaded here -->
-                </div>
-            </div>
-            
+                            </div>
+                        </div>
+                        
             <div class="form-group">
                 <label>Custom Pawn (Hex Color)</label>
                 <input type="text" id="customPawn" placeholder="#000000 or 'off' to disable">
                 <div class="pawn-grid" id="pawnGrid">
                     <!-- Pawn colors will be loaded here -->
-                </div>
-            </div>
-            
+                        </div>
+                    </div>
+
             <button onclick="saveAppearance()" class="btn btn-primary">Save Appearance</button>
-        </div>
+                                    </div>
         
         <!-- Security Section -->
         <div class="profile-section" id="securitySection">
@@ -370,20 +370,20 @@
                 <div class="form-group">
                     <label for="currentPassword">Current Password</label>
                     <input type="password" id="currentPassword" placeholder="Enter current password">
-                </div>
+                                </div>
                 
                 <div class="form-group">
                     <label for="newPassword">New Password</label>
                     <input type="password" id="newPassword" placeholder="Enter new password">
-                </div>
-                
+                            </div>
+                            
                 <div class="form-group">
                     <label for="confirmPassword">Confirm New Password</label>
                     <input type="password" id="confirmPassword" placeholder="Confirm new password">
-                </div>
+                                        </div>
                 
                 <button type="submit" class="btn btn-primary">Change Password</button>
-            </form>
+                                    </form>
             
             <hr style="margin: 30px 0;">
             
@@ -392,7 +392,7 @@
              
              <h3>Danger Zone</h3>
              <button onclick="deleteAccount()" class="btn btn-danger">Delete Account</button>
-        </div>
+                                            </div>
         
         <!-- Statistics Section -->
         <div class="profile-section" id="statsSection">
@@ -402,26 +402,26 @@
                 <div class="stat-card">
                     <h3>Xats</h3>
                     <div class="value" id="xatsValue">0</div>
-                </div>
+                                    </div>
                 
                 <div class="stat-card">
                     <h3>Days</h3>
                     <div class="value" id="daysValue">0</div>
-                </div>
+                                </div>
                 
                 <div class="stat-card">
                     <h3>Rank</h3>
                     <div class="value" id="rankValue">Member</div>
-                </div>
+                            </div>
                 
                 <div class="stat-card">
                     <h3>Join Date</h3>
                     <div class="value" id="joinDateValue">-</div>
-                </div>
-            </div>
+                        </div>
+                    </div>
         </div>
     </div>
-    
+
     <script>
         let currentTab = 'account';
         let currentUser = null;
@@ -450,7 +450,7 @@
                     return;
                 }
                 
-                currentUser = data.user;
+                    currentUser = data.user;
                 populateUserData();
             } catch (error) {
                 console.error('Auth check failed:', error);
@@ -557,7 +557,7 @@
                         pawn: document.getElementById('customPawn').value
                     })
                 });
-                
+
                 const data = await response.json();
                 
                 if (response.ok) {
@@ -591,7 +591,7 @@
                         bio: document.getElementById('bio').value
                     })
                 });
-                
+
                 const data = await response.json();
                 
                 if (response.ok) {
@@ -606,7 +606,7 @@
                 hideLoading();
             }
         });
-        
+
         // Password form handler
         document.getElementById('passwordForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -639,7 +639,7 @@
                         newPassword: newPassword
                     })
                 });
-                
+
                 const data = await response.json();
                 
                 if (response.ok) {
@@ -699,7 +699,7 @@
             if (type === 'success') {
                 successMsg.textContent = message;
                 successMsg.style.display = 'block';
-            } else {
+                } else {
                 errorMsg.textContent = message;
                 errorMsg.style.display = 'block';
             }
@@ -709,7 +709,7 @@
                 errorMsg.style.display = 'none';
             }, 5000);
         }
-        
+
         function showLoading() {
             document.getElementById('loading').style.display = 'block';
         }
