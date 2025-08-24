@@ -17,122 +17,117 @@
             color: white;
             overflow: hidden;
             height: 100vh;
+            font-size: 0.93333rem;
         }
 
-        /* Top Header - Dark Blue */
-        .chat-header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 15px;
-            border-bottom: 2px solid #34495e;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .header-logo {
-            font-size: 18px;
-            font-weight: bold;
-            margin-right: 20px;
-        }
-
-        .header-nav {
-            display: flex;
-            gap: 15px;
-        }
-
-        .header-nav a {
-            color: white;
-            text-decoration: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background 0.3s;
-        }
-
-        .header-nav a:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Main Chat Container */
-        .chat-container {
-            display: flex;
-            height: calc(100vh - 50px);
-        }
-
-        /* Left Sidebar - Games & Chat Groups */
-        .left-sidebar {
-            width: 120px;
-            background: #34495e;
-            border-right: 2px solid #2c3e50;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar-section {
-            padding: 10px;
-            border-bottom: 1px solid #2c3e50;
-        }
-
-        .sidebar-title {
-            font-size: 12px;
-            font-weight: bold;
-            color: #bdc3c7;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-
-        .game-button, .chat-group-button {
+        /* Main Container */
+        .background {
             width: 100%;
-            padding: 8px 5px;
-            margin: 2px 0;
-            background: #2c3e50;
-            border: 1px solid #34495e;
-            color: white;
+            height: 100%;
+            background-size: 100% 100%;
+            display: table;
+        }
+
+        .row {
+            display: table-row;
+        }
+
+        .cell {
+            display: table-cell;
+            vertical-align: top;
+        }
+
+        /* Main Chat Area (74%) */
+        .main-chat-area {
+            width: 74%;
+        }
+
+        .chat-container {
+            width: 100%;
+            height: 100%;
+            display: table;
+        }
+
+        .chat-messages-area {
+            width: 100%;
+            height: 75%;
+        }
+
+        .chat-messages-container {
+            padding: 0.6rem 0.26667rem 0.13333rem 0.73333rem;
+        }
+
+        .tabcontent {
+            position: relative;
+            z-index: 2;
+            height: 92%;
+            border: 1px solid rgba(192, 192, 192, 0.8);
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .tab {
+            overflow-y: hidden;
+            height: 8%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tab button {
+            background-color: rgba(255, 255, 255, 0.4);
+            border: none;
+            outline: 0;
             cursor: pointer;
-            border-radius: 4px;
-            font-size: 11px;
-            transition: all 0.3s;
+            padding-left: 0.2rem;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(192, 192, 192, 0.8);
+            border-radius: 0 0 4px 4px;
+            height: 88%;
+            line-height: 88%;
+            font-weight: 700;
+            color: #000;
         }
 
-        .game-button:hover, .chat-group-button:hover {
-            background: #3498db;
-            border-color: #2980b9;
+        .tab button.active {
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-top: 2px solid rgba(255, 255, 255, 0);
         }
 
-        .game-button.active, .chat-group-button.active {
-            background: #3498db;
-            border-color: #2980b9;
+        .tab button:active {
+            color: inherit;
         }
 
-        /* Main Chat Area */
-        .main-chat {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background: #34495e;
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 15px;
+        /* Messages Container */
+        #messagesContainer {
+            height: 100%;
+            width: 100%;
+            padding-top: 12px;
+            position: relative;
+            overflow-x: hidden;
             overflow-y: auto;
-            background: #2c3e50;
+            -webkit-overflow-scrolling: touch;
+            top: 0 !important;
+            transform: translateZ(0);
+        }
+
+        #messages {
+            margin-bottom: 0.25rem;
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: column;
         }
 
         .message {
-            margin-bottom: 8px;
-            padding: 5px 0;
+            background-color: transparent;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding: 0.1888rem;
+            padding-left: 0.13333rem;
+            user-select: text;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
         }
 
         .message.system {
@@ -153,410 +148,504 @@
             margin-left: 5px;
         }
 
-        .chat-input-area {
-            background: #34495e;
-            padding: 10px;
-            border-top: 2px solid #2c3e50;
+        /* Smiley Bar */
+        .smiley-bar {
+            width: 100%;
+            height: 7%;
         }
 
-        .chat-input-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .smiley-bar-container {
+            padding: 0.3rem 0 0.1rem 0.5rem;
         }
 
-        .chat-input {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid #2c3e50;
-            border-radius: 4px;
-            background: #2c3e50;
-            color: white;
-            font-size: 14px;
+        .smileyBar {
+            width: 100%;
+            height: 100%;
+            margin-top: 4px;
+            position: relative;
+            display: table;
         }
 
-        .chat-input:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-
-        .send-button {
-            padding: 8px 15px;
-            background: #3498db;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .send-button:hover {
-            background: #2980b9;
-        }
-
-        .emoticon-bar {
+        #smileyBar {
             display: flex;
             gap: 5px;
-            margin-top: 8px;
+            align-items: center;
             flex-wrap: wrap;
         }
 
-        .emoticon {
+        .smiley {
             width: 20px;
             height: 20px;
             cursor: pointer;
             border-radius: 2px;
             transition: transform 0.2s;
+            font-size: 16px;
         }
 
-        .emoticon:hover {
+        .smiley:hover {
             transform: scale(1.2);
         }
 
-        /* Right Sidebar - User List */
-        .right-sidebar {
-            width: 200px;
-            background: #34495e;
-            border-left: 2px solid #2c3e50;
-            display: flex;
-            flex-direction: column;
+        /* Input Area */
+        .input-area {
+            width: 100%;
+            height: 18%;
         }
 
-        .user-section {
-            padding: 10px;
-            border-bottom: 1px solid #2c3e50;
+        .input-container {
+            padding: 0.4rem 0.3rem 0.7rem 0.7rem;
         }
 
-        .user-section-title {
-            font-size: 14px;
+        .input-wrapper {
+            width: 100%;
+            height: 100%;
+            display: table;
+        }
+
+        .text-entry-row {
+            display: table-row;
+        }
+
+        .text-entry-cell {
+            display: table-cell;
+            width: 92.6%;
+            height: 100%;
+            position: inherit;
+        }
+
+        .textentry {
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            overflow-y: auto;
+            font-weight: 700;
+            position: relative;
+            overflow-x: hidden;
+            word-break: break-word;
+            -webkit-user-select: text;
+            transition: 0.25s ease-out all;
+            outline: 0 solid transparent;
+            display: block;
+            border: 1px solid rgba(192, 192, 192, 0.8);
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.4);
+            padding: 0 0 0 0.3rem;
+        }
+
+        .send-button-cell {
+            display: table-cell;
+            position: relative;
+            z-index: 1;
+            width: 8%;
+            height: 100%;
+            padding-left: 0.73rem;
+        }
+
+        .butcontainer {
+            width: 100%;
+            height: 100%;
+        }
+
+        .butlayout {
+            width: 100%;
+            height: 100%;
+        }
+
+        .butcontent {
+            width: 100%;
+            height: 100%;
+            background: #3498db;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
             font-weight: bold;
-            color: #bdc3c7;
-            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .user-list {
+        .butcontent:hover {
+            background: #2980b9;
+        }
+
+        /* Right Sidebar (26%) */
+        .right-sidebar {
+            position: relative;
+            z-index: 2;
+            width: 26%;
+        }
+
+        .sidebar-container {
+            width: 100%;
+            height: 100%;
+            display: table;
+        }
+
+        .sidebar-main {
+            width: 73%;
+            height: 100%;
+        }
+
+        .sidebar-main-container {
+            width: 100%;
+            height: 100%;
+            display: table;
+        }
+
+        .visitors-area {
+            width: 100%;
+            height: 75%;
+        }
+
+        .visitors-container {
+            padding: 0.6rem 0.76667rem 0 0.46667rem;
+        }
+
+        #visitorsContainer {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            transform: translateZ(0);
+        }
+
+        #idvisitors {
             list-style: none;
         }
 
-        .user-item {
+        .friend {
+            background-color: transparent;
+            overflow: visible;
+            position: relative;
+            padding: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: pointer;
             padding: 5px 8px;
             margin: 2px 0;
-            background: #2c3e50;
             border-radius: 4px;
-            cursor: pointer;
             transition: background 0.3s;
             font-size: 12px;
         }
 
-        .user-item:hover {
-            background: #3498db;
+        .friend:hover {
+            background: rgba(52, 152, 219, 0.3);
         }
 
-        .user-item::before {
+        .friend::before {
             content: "●";
             color: #27ae60;
             margin-right: 5px;
         }
 
-        .rank-pools {
-            padding: 10px;
-            border-bottom: 1px solid #2c3e50;
+        .section {
+            background-image: linear-gradient(hsla(0, 0%, 100%, 0.1), rgba(0, 0, 0, 0.05));
+            border-radius: 4px;
+            margin: 0.26667rem 0.23333rem;
+            cursor: pointer;
+            padding: 8px;
+            font-weight: bold;
+            color: #bdc3c7;
         }
 
-        .rank-pool-button {
+        .section:hover {
+            background: linear-gradient(rgb(255 255 255 / 12%), rgb(255 255 255 / 12%));
+        }
+
+        /* List Tabs */
+        .list-tabs {
             width: 100%;
-            padding: 6px 8px;
-            margin: 2px 0;
-            background: #2c3e50;
-            border: 1px solid #34495e;
+            height: 7%;
+            overflow-y: hidden;
+        }
+
+        .list-tabs-container {
+            padding: 0 0.8rem 0 0.1rem;
+        }
+
+        .list-tabs-wrapper {
+            width: 100%;
+            height: 100%;
+            display: table;
+        }
+
+        .listlinks {
+            width: 50%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.4);
+            border: none;
+            outline: 0;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #000;
+            border-top: 1px solid rgba(192, 192, 192, 0.8);
+            border-radius: 0 0 4px 4px;
+        }
+
+        .listlinks.active {
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-top: 2px solid rgba(255, 255, 255, 0);
+        }
+
+        /* Right Bar Icons */
+        .right-bar-icons {
+            width: 100%;
+            height: 7%;
+        }
+
+        .right-bar-container {
+            padding: 0 0.8rem 0 0.1rem;
+        }
+
+        .right-bar-wrapper {
+            width: 100%;
+            height: 100%;
+            display: table;
+        }
+
+        .svgBack {
+            background-size: 20px;
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .svgBack:hover {
+            opacity: 0.7;
+        }
+
+        #groupBut {
+            width: 23%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H17c-.8 0-1.54.37-2.01 1l-1.99 2.5V18h-2v-8.5l-1.99-2.5A2.5 2.5 0 0 0 7 8H5.46c-.8 0-1.54.37-2.01 1L.96 16.63A1.5 1.5 0 0 0 2.5 18H5v6h2v-6h7v6h2z"/></svg>');
+        }
+
+        #helpBut {
+            width: 27%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>');
+        }
+
+        #xatBut {
+            width: 49%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>');
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            width: 100%;
+            height: 18%;
+        }
+
+        .action-buttons-container {
+            width: 100%;
+            height: 100%;
+            display: table;
+        }
+
+        .action-button-row {
+            width: 100%;
+            height: 50%;
+        }
+
+        .action-button-cell {
+            padding: 0.4rem 0.8rem 0.5rem 0.45rem;
+        }
+
+        .action-button-cell.bottom {
+            padding: 0.15rem 0.8rem 0.7rem 0.45rem;
+        }
+
+        .mainButtons {
+            width: 100%;
+            height: 100%;
+            background: #3498db;
+            border: none;
+            border-radius: 4px;
             color: white;
             cursor: pointer;
-            border-radius: 4px;
-            font-size: 11px;
-            transition: all 0.3s;
-        }
-
-        .rank-pool-button:hover {
-            background: #3498db;
-        }
-
-        .rank-pool-button.active {
-            background: #3498db;
-        }
-
-        .chat-tabs {
-            padding: 10px;
-            border-bottom: 1px solid #2c3e50;
-        }
-
-        .tab-button {
-            width: 100%;
-            padding: 6px 8px;
-            margin: 2px 0;
-            background: #2c3e50;
-            border: 1px solid #34495e;
-            color: white;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 11px;
-            transition: all 0.3s;
-        }
-
-        .tab-button:hover {
-            background: #3498db;
-        }
-
-        .tab-button.active {
-            background: #3498db;
-        }
-
-        .chat-actions {
-            padding: 10px;
-            margin-top: auto;
-        }
-
-        .action-button {
-            width: 100%;
-            padding: 8px 10px;
-            margin: 2px 0;
-            background: #2c3e50;
-            border: 1px solid #34495e;
-            color: white;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 12px;
-            transition: all 0.3s;
-        }
-
-        .action-button:hover {
-            background: #3498db;
-        }
-
-        /* Bottom Bar - Powers */
-        .bottom-bar {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            height: 40px;
-            display: flex;
-            align-items: center;
-            padding: 0 15px;
-            border-top: 2px solid #34495e;
-        }
-
-        .power-info {
-            font-size: 12px;
-            color: #f39c12;
-            margin-right: 15px;
-        }
-
-        .power-icons {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .power-icon {
-            width: 24px;
-            height: 24px;
-            background: #34495e;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            cursor: pointer;
+            font-weight: bold;
             transition: background 0.3s;
         }
 
-        .power-icon:hover {
-            background: #3498db;
-        }
-
-        /* Game Area */
-        .game-area {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #2c3e50;
-            border: 2px solid #34495e;
-            border-radius: 8px;
-            padding: 20px;
-            z-index: 1000;
-            display: none;
-            max-width: 80%;
-            max-height: 80%;
-            overflow: auto;
-        }
-
-        .game-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #34495e;
-        }
-
-        .game-close-btn {
-            background: #e74c3c;
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .game-content {
-            color: white;
+        .mainButtons:hover {
+            background: #2980b9;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .left-sidebar {
-                width: 80px;
+            .main-chat-area {
+                width: 70%;
             }
             
             .right-sidebar {
-                width: 150px;
-            }
-            
-            .game-button, .chat-group-button {
-                font-size: 10px;
-                padding: 6px 3px;
+                width: 30%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Top Header -->
-    <div class="chat-header">
-        <div class="header-left">
-            <div class="header-logo">🎭 ixchats</div>
-            <div class="header-nav">
-                <a href="#" onclick="switchTab('chat')">Chat</a>
-                <a href="#" onclick="switchTab('powers')">Powers</a>
-                <a href="#" onclick="switchTab('smilies')">Smilies</a>
-            </div>
-        </div>
-        <div class="header-right">
-            <span id="userCount">0 users</span>
-            <span id="roomName">Main Chat</span>
-        </div>
-    </div>
-
-    <!-- Main Chat Container -->
-    <div class="chat-container">
-        <!-- Left Sidebar -->
-        <div class="left-sidebar">
-            <div class="sidebar-section">
-                <div class="sidebar-title">🎮 GAMES</div>
-                <button class="game-button" onclick="startGame('doodle')">🎨 Doodle</button>
-                <button class="game-button" onclick="startGame('hangman')">🎯 Hangman</button>
-                <button class="game-button" onclick="startGame('tictactoe')">⭕ Tic Tac Toe</button>
-                <button class="game-button" onclick="startGame('quiz')">❓ Quiz</button>
-                <button class="game-button" onclick="startGame('rps')">✂️ RPS</button>
-                <button class="game-button" onclick="startGame('dice')">🎲 Dice</button>
-            </div>
-            
-            <div class="sidebar-section">
-                <div class="sidebar-title">💬 CHATS</div>
-                <button class="chat-group-button active" onclick="switchChatGroup('main')">Main Chat</button>
-                <button class="chat-group-button" onclick="switchChatGroup('lobby')">Lobby</button>
-                <button class="chat-group-button" onclick="switchChatGroup('help')">Help</button>
-                <button class="chat-group-button" onclick="switchChatGroup('test')">Test</button>
-            </div>
-        </div>
-
-        <!-- Main Chat Area -->
-        <div class="main-chat">
-            <div class="chat-messages" id="chatMessages">
-                <div class="message system">
-                    🎭 Welcome to ixchats! Type your message below to start chatting.
+    <div class="background">
+        <div class="row">
+            <!-- Main Chat Area (74%) -->
+            <div class="cell main-chat-area">
+                <div class="chat-container">
+                    <div class="row chat-messages-area">
+                        <div class="cell chat-messages-container">
+                            <div id="messagesTabContainer" class="tabcontent">
+                                <div id="messagesContainer">
+                                    <ul id="messages">
+                                        <li class="message system">
+                                            🎭 Welcome to ixchats! Type your message below to start chatting.
+                                        </li>
+                                        <li class="message system">
+                                            💡 Use the tabs below to switch between different views.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="alltabs" class="tab">
+                                <div class="chat-container">
+                                    <div id="chattabs" class="row">
+                                        <button class="active" onclick="switchTab('chat')">Chat</button>
+                                        <button onclick="switchTab('powers')">Powers</button>
+                                        <button onclick="switchTab('smilies')">Smilies</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Smiley Bar -->
+                    <div class="row smiley-bar">
+                        <div class="cell smiley-bar-container">
+                            <div class="smileyBar">
+                                <div id="smileyBar">
+                                    <span class="smiley" onclick="addSmiley('😊')">😊</span>
+                                    <span class="smiley" onclick="addSmiley('😂')">😂</span>
+                                    <span class="smiley" onclick="addSmiley('❤️')">❤️</span>
+                                    <span class="smiley" onclick="addSmiley('👍')">👍</span>
+                                    <span class="smiley" onclick="addSmiley('🎉')">🎉</span>
+                                    <span class="smiley" onclick="addSmiley('🔥')">🔥</span>
+                                    <span class="smiley" onclick="addSmiley('😎')">😎</span>
+                                    <span class="smiley" onclick="addSmiley('🤔')">🤔</span>
+                                    <span class="smiley" onclick="addSmiley('😭')">😭</span>
+                                    <span class="smiley" onclick="addSmiley('💯')">💯</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Input Area -->
+                    <div class="row input-area">
+                        <div class="cell input-container">
+                            <div class="input-wrapper">
+                                <div class="text-entry-row">
+                                    <div class="cell text-entry-cell">
+                                        <div id="textEntryEditable" class="textentry" contenteditable="true" onkeypress="handleKeyPress(event)"></div>
+                                    </div>
+                                    <div class="cell send-button-cell">
+                                        <div class="butcontainer">
+                                            <div class="butlayout">
+                                                <div id="returnBut" class="butcontent mainButtons" onclick="sendMessage()">
+                                                    ➤
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="message system">
-                    💡 Use the left sidebar to play games or switch chat groups.
+            </div>
+            
+            <!-- Right Sidebar (26%) -->
+            <div class="cell right-sidebar">
+                <div class="sidebar-container">
+                    <div class="row">
+                        <div class="cell sidebar-main">
+                            <div class="sidebar-main-container">
+                                <div class="row visitors-area">
+                                    <div class="cell visitors-container">
+                                        <div id="visitorsTabContainer" class="tabcontent">
+                                            <div id="visitorsContainer">
+                                                <ul id="idvisitors">
+                                                    <li class="section">Club</li>
+                                                    <li class="friend">You (Guest)</li>
+                                                    <li class="friend">User123</li>
+                                                    <li class="friend">Chatter456</li>
+                                                    <li class="section">VIP</li>
+                                                    <li class="friend">VIP_User1</li>
+                                                    <li class="friend">VIP_User2</li>
+                                                    <li class="section">Chum</li>
+                                                    <li class="friend">Chum_User1</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div id="listtabs" class="tab">
+                                            <button id="defaultList" class="listlinks active" onclick="switchList('visitors')">Visitors</button>
+                                            <button id="friendsList" class="listlinks" onclick="switchList('friends')">Friends</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Right Bar Icons -->
+                                <div class="row right-bar-icons">
+                                    <div class="cell right-bar-container">
+                                        <div class="right-bar-wrapper">
+                                            <div id="rightBarIcons" class="row">
+                                                <div id="groupBut" class="cell svgBack smline"></div>
+                                                <div id="helpBut" class="cell svgBack smline"></div>
+                                                <div id="xatBut" class="cell svgBack smline"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Action Buttons -->
+                                <div class="row action-buttons">
+                                    <div class="cell">
+                                        <div class="action-buttons-container">
+                                            <div class="row action-button-row">
+                                                <div class="cell action-button-cell">
+                                                    <div class="butcontainer">
+                                                        <div class="butlayout">
+                                                            <div id="GetaChat" class="butcontent mainButtons" onclick="getChat()">Get a Chat Box</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row action-button-row">
+                                                <div class="cell action-button-cell bottom">
+                                                    <div class="butcontainer">
+                                                        <div class="butlayout">
+                                                            <div id="signIn" class="butcontent mainButtons" onclick="signIn()">Sign In</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="chat-input-area">
-                <div class="chat-input-container">
-                    <input type="text" class="chat-input" id="messageInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
-                    <button class="send-button" onclick="sendMessage()">Send</button>
-                </div>
-                
-                <div class="emoticon-bar">
-                    <span class="emoticon" onclick="addEmoticon('😊')">😊</span>
-                    <span class="emoticon" onclick="addEmoticon('😂')">😂</span>
-                    <span class="emoticon" onclick="addEmoticon('❤️')">❤️</span>
-                    <span class="emoticon" onclick="addEmoticon('👍')">👍</span>
-                    <span class="emoticon" onclick="addEmoticon('🎉')">🎉</span>
-                    <span class="emoticon" onclick="addEmoticon('🔥')">🔥</span>
-                    <span class="emoticon" onclick="addEmoticon('😎')">😎</span>
-                    <span class="emoticon" onclick="addEmoticon('🤔')">🤔</span>
-                    <span class="emoticon" onclick="addEmoticon('😭')">😭</span>
-                    <span class="emoticon" onclick="addEmoticon('💯')">💯</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Sidebar -->
-        <div class="right-sidebar">
-            <div class="user-section">
-                <div class="user-section-title">Club</div>
-                <ul class="user-list" id="userList">
-                    <li class="user-item">You (Guest)</li>
-                </ul>
-            </div>
-            
-            <div class="rank-pools">
-                <div class="user-section-title">Rank Pools</div>
-                <button class="rank-pool-button active" onclick="switchRankPool('club')">Club</button>
-                <button class="rank-pool-button" onclick="switchRankPool('vip')">VIP</button>
-                <button class="rank-pool-button" onclick="switchRankPool('chum')">Chum</button>
-            </div>
-            
-            <div class="chat-tabs">
-                <button class="tab-button active" onclick="switchTab('visitors')">Visitors</button>
-                <button class="tab-button" onclick="switchTab('friends')">Friends</button>
-            </div>
-            
-            <div class="chat-actions">
-                <button class="action-button" onclick="editChat()">Edit Your Chat</button>
-                <button class="action-button" onclick="signOut()">Sign Out</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bottom Bar -->
-    <div class="bottom-bar">
-        <div class="power-info">New RIDER power [LIMITED]</div>
-        <div class="power-icons">
-            <div class="power-icon" title="Rider">🏍️</div>
-            <div class="power-icon" title="Smile">😊</div>
-            <div class="power-icon" title="Diamond">💎</div>
-            <div class="power-icon" title="Notification">🔔</div>
-            <div class="power-icon" title="X">❌</div>
-            <div class="power-icon" title="Yield">⚠️</div>
-            <div class="power-icon" title="Traffic Light">🚦</div>
-        </div>
-    </div>
-
-    <!-- Game Area -->
-    <div class="game-area" id="gameArea">
-        <div class="game-header">
-            <h3 id="gameTitle">Game</h3>
-            <button class="game-close-btn" onclick="endGame()">✕</button>
-        </div>
-        <div class="game-content" id="gameContent">
-            Game content will appear here...
         </div>
     </div>
 
     <script>
         let currentTab = 'chat';
-        let currentChatGroup = 'main';
-        let currentRankPool = 'club';
-        let activeGame = null;
+        let currentList = 'visitors';
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
@@ -564,26 +653,27 @@
             const urlParams = new URLSearchParams(window.location.search);
             const room = urlParams.get('room');
             if (room) {
-                switchChatGroup(room);
+                updateRoomName(room);
             }
             
             // Focus on input
-            document.getElementById('messageInput').focus();
+            document.getElementById('textEntryEditable').focus();
         });
 
         function handleKeyPress(event) {
-            if (event.key === 'Enter') {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
                 sendMessage();
             }
         }
 
         function sendMessage() {
-            const input = document.getElementById('messageInput');
-            const message = input.value.trim();
+            const input = document.getElementById('textEntryEditable');
+            const message = input.textContent.trim();
             
             if (message) {
                 addMessage('You', message);
-                input.value = '';
+                input.textContent = '';
                 
                 // Simulate other users responding
                 setTimeout(() => {
@@ -601,17 +691,20 @@
         }
 
         function addMessage(username, content) {
-            const messagesDiv = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message user';
-            messageDiv.innerHTML = `<span class="username">${username}:</span><span class="content">${content}</span>`;
-            messagesDiv.appendChild(messageDiv);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            const messagesList = document.getElementById('messages');
+            const messageLi = document.createElement('li');
+            messageLi.className = 'message user';
+            messageLi.innerHTML = `<span class="username">${username}:</span><span class="content">${content}</span>`;
+            messagesList.appendChild(messageLi);
+            
+            // Scroll to bottom
+            const messagesContainer = document.getElementById('messagesContainer');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
 
-        function addEmoticon(emoticon) {
-            const input = document.getElementById('messageInput');
-            input.value += emoticon;
+        function addSmiley(smiley) {
+            const input = document.getElementById('textEntryEditable');
+            input.textContent += smiley;
             input.focus();
         }
 
@@ -619,7 +712,7 @@
             currentTab = tab;
             
             // Update active tab buttons
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('#chattabs button').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             
             // Handle tab switching
@@ -628,70 +721,52 @@
                     // Show chat interface
                     break;
                 case 'powers':
-                    // Show powers interface
                     addMessage('System', 'Powers tab clicked - powers interface would appear here');
                     break;
                 case 'smilies':
-                    // Show smilies interface
                     addMessage('System', 'Smilies tab clicked - smilies interface would appear here');
-                    break;
-                case 'visitors':
-                    // Show visitors list
-                    break;
-                case 'friends':
-                    // Show friends list
                     break;
             }
         }
 
-        function switchChatGroup(group) {
-            currentChatGroup = group;
+        function switchList(list) {
+            currentList = list;
             
-            // Update active chat group buttons
-            document.querySelectorAll('.chat-group-button').forEach(btn => btn.classList.remove('active'));
+            // Update active list buttons
+            document.querySelectorAll('.listlinks').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             
-            // Update room name
-            document.getElementById('roomName').textContent = group.charAt(0).toUpperCase() + group.slice(1) + ' Chat';
-            
-            // Clear messages and add welcome
-            const messagesDiv = document.getElementById('chatMessages');
-            messagesDiv.innerHTML = `
-                <div class="message system">
-                    🎭 Welcome to ${group.charAt(0).toUpperCase() + group.slice(1)} Chat!
-                </div>
-                <div class="message system">
-                    💡 You can chat with other users here.
-                </div>
-            `;
-            
-            // Update user count
-            const userCount = Math.floor(Math.random() * 50) + 1;
-            document.getElementById('userCount').textContent = userCount + ' users';
-        }
-
-        function switchRankPool(pool) {
-            currentRankPool = pool;
-            
-            // Update active rank pool buttons
-            document.querySelectorAll('.rank-pool-button').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Update user list based on rank pool
-            const userList = document.getElementById('userList');
+            // Update user list based on selection
+            const visitorsList = document.getElementById('idvisitors');
             const users = {
-                'club': ['You (Guest)', 'User123', 'Chatter456', 'Friend789'],
-                'vip': ['VIP_User1', 'VIP_User2', 'VIP_User3'],
-                'chum': ['Chum_User1', 'Chum_User2']
+                'visitors': [
+                    { type: 'section', name: 'Club' },
+                    { type: 'friend', name: 'You (Guest)' },
+                    { type: 'friend', name: 'User123' },
+                    { type: 'friend', name: 'Chatter456' },
+                    { type: 'section', name: 'VIP' },
+                    { type: 'friend', name: 'VIP_User1' },
+                    { type: 'friend', name: 'VIP_User2' },
+                    { type: 'section', name: 'Chum' },
+                    { type: 'friend', name: 'Chum_User1' }
+                ],
+                'friends': [
+                    { type: 'section', name: 'Friends' },
+                    { type: 'friend', name: 'Friend1' },
+                    { type: 'friend', name: 'Friend2' },
+                    { type: 'friend', name: 'Friend3' }
+                ]
             };
             
-            userList.innerHTML = '';
-            users[pool].forEach(user => {
+            visitorsList.innerHTML = '';
+            users[list].forEach(user => {
                 const li = document.createElement('li');
-                li.className = 'user-item';
-                li.textContent = user;
-                li.onclick = () => showUserProfile(user);
-                userList.appendChild(li);
+                li.className = user.type;
+                li.textContent = user.name;
+                if (user.type === 'friend') {
+                    li.onclick = () => showUserProfile(user.name);
+                }
+                visitorsList.appendChild(li);
             });
         }
 
@@ -699,38 +774,12 @@
             addMessage('System', `Clicked on user: ${username} - user profile would appear here`);
         }
 
-        function startGame(game) {
-            activeGame = game;
-            const gameArea = document.getElementById('gameArea');
-            const gameTitle = document.getElementById('gameTitle');
-            const gameContent = document.getElementById('gameContent');
-            
-            const games = {
-                'doodle': { title: '🎨 Doodle Game', content: 'Draw and collaborate with other users!' },
-                'hangman': { title: '🎯 Hangman', content: 'Guess the word before the hangman is complete!' },
-                'tictactoe': { title: '⭕ Tic Tac Toe', content: 'Play the classic X and O game!' },
-                'quiz': { title: '❓ Quiz', content: 'Test your knowledge with trivia questions!' },
-                'rps': { title: '✂️ Rock Paper Scissors', content: 'Rock beats scissors, scissors beat paper, paper beats rock!' },
-                'dice': { title: '🎲 Dice', content: 'Roll virtual dice and see what happens!' }
-            };
-            
-            gameTitle.textContent = games[game].title;
-            gameContent.innerHTML = `
-                <p>${games[game].content}</p>
-                <p>Game would start here with interactive elements.</p>
-                <button onclick="endGame()" style="background: #e74c3c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">End Game</button>
-            `;
-            
-            gameArea.style.display = 'block';
+        function updateRoomName(room) {
+            // Update page title or add room indicator
+            document.title = `${room.charAt(0).toUpperCase() + room.slice(1)} - ixchats`;
         }
 
-        function endGame() {
-            activeGame = null;
-            document.getElementById('gameArea').style.display = 'none';
-        }
-
-        function editChat() {
-            // Open chat edit in parent window
+        function getChat() {
             if (window.parent && window.parent !== window) {
                 window.parent.location.href = '/chat-edit.html';
             } else {
@@ -738,13 +787,11 @@
             }
         }
 
-        function signOut() {
-            if (confirm('Are you sure you want to sign out?')) {
-                if (window.parent && window.parent !== window) {
-                    window.parent.location.href = '/';
-                } else {
-                    window.location.href = '/';
-                }
+        function signIn() {
+            if (window.parent && window.parent !== window) {
+                window.parent.location.href = '/auth.html';
+            } else {
+                window.location.href = '/auth.html';
             }
         }
 
