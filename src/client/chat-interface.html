@@ -20,38 +20,112 @@
             font-size: 0.93333rem;
         }
 
+        /* Top Navigation Bar */
+        .top-nav {
+            height: 30px;
+            background: #1e3c72;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            border-bottom: 1px solid #4a5f7a;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+        .nav-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-icon {
+            width: 16px;
+            height: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
         /* Main Container */
-        .background {
-            width: 100%;
-            height: 100%;
-            background-size: 100% 100%;
-            display: table;
+        .main-container {
+            display: flex;
+            height: calc(100vh - 30px);
         }
 
-        .row {
-            display: table-row;
+        /* Left Sidebar */
+        .left-sidebar {
+            width: 50px;
+            background: #34495e;
+            border-right: 1px solid #4a5f7a;
+            padding: 10px 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
 
-        .cell {
-            display: table-cell;
-            vertical-align: top;
-        }
-
-        /* Main Chat Area (74%) */
-        .main-chat {
-            width: 74%;
-            height: 100vh;
-            background: rgba(255, 255, 255, 0.4);
-            border-right: 1px solid rgba(192, 192, 192, 0.8);
-        }
-
-        /* Messages Area (75% of main chat) */
-        .messages-area {
-            height: 75%;
+        .tool-icon {
+            width: 40px;
+            height: 40px;
             background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #4a5f7a;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            color: #ecf0f1;
+        }
+
+        .tool-icon:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Chat Area */
+        .main-chat {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+
+        /* Messages Area */
+        .messages-area {
+            flex: 1;
+            background: #ecf0f1;
             overflow-y: auto;
             padding: 10px;
-            border-bottom: 1px solid rgba(192, 192, 192, 0.5);
+            border-bottom: 1px solid #bdc3c7;
         }
 
         .message {
@@ -71,6 +145,7 @@
             justify-content: center;
             font-size: 12px;
             font-weight: bold;
+            color: white;
         }
 
         .message-content {
@@ -79,76 +154,42 @@
 
         .username {
             font-weight: bold;
-            color: #f39c12;
+            color: #e74c3c;
             margin-right: 8px;
         }
 
         .message-text {
-            color: white;
+            color: #2c3e50;
         }
 
-        /* Smiley Bar (7% of main chat) */
-        .smiley-bar {
-            height: 7%;
-            background: rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            padding: 0 10px;
-            border-bottom: 1px solid rgba(192, 192, 192, 0.5);
+        .system-message {
+            color: #f39c12;
+            font-style: italic;
         }
 
-        .smiley-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 16px;
-            margin-right: 10px;
-            cursor: pointer;
-            padding: 2px;
-        }
-
-        .smiley-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 3px;
-        }
-
-        /* Input Area (18% of main chat) */
+        /* Input Area */
         .input-area {
-            height: 18%;
-            background: rgba(255, 255, 255, 0.3);
+            height: 80px;
+            background: #ecf0f1;
+            border-top: 1px solid #bdc3c7;
             padding: 10px;
-            display: flex;
-            flex-direction: column;
         }
 
-        .input-controls {
+        .input-row {
             display: flex;
             align-items: center;
             margin-bottom: 5px;
         }
 
-        .format-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(192, 192, 192, 0.5);
-            color: white;
-            padding: 2px 6px;
-            margin-right: 5px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .format-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
         .message-input {
             flex: 1;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(192, 192, 192, 0.8);
+            background: white;
+            border: 1px solid #bdc3c7;
             padding: 8px;
-            color: #333;
+            color: #2c3e50;
             font-size: 14px;
             resize: none;
+            height: 30px;
         }
 
         .send-btn {
@@ -165,32 +206,61 @@
             background: #2980b9;
         }
 
-        /* Right Sidebar (26%) */
+        /* Emoticon Bar */
+        .emoticon-bar {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 0;
+        }
+
+        .emoticon {
+            width: 20px;
+            height: 20px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .emoticon:hover {
+            background: rgba(52, 152, 219, 0.2);
+            border-radius: 2px;
+        }
+
+        .get-xats-btn {
+            background: #f39c12;
+            border: none;
+            color: white;
+            padding: 2px 6px;
+            font-size: 10px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        /* Right Sidebar */
         .right-sidebar {
-            width: 26%;
-            height: 100vh;
-            background: rgba(255, 255, 255, 0.4);
+            width: 200px;
+            background: #ecf0f1;
+            border-left: 1px solid #bdc3c7;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Visitors List (75% of sidebar) */
-        .visitors-list {
-            height: 75%;
-            background: rgba(255, 255, 255, 0.1);
-            overflow-y: auto;
-            padding: 10px;
-            border-bottom: 1px solid rgba(192, 192, 192, 0.5);
-        }
-
+        /* Pool Sections */
         .pool-section {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .pool-header {
-            background: rgba(255, 255, 255, 0.2);
+            background: #34495e;
+            color: white;
             padding: 5px 8px;
             font-weight: bold;
             font-size: 12px;
-            border-bottom: 1px solid rgba(192, 192, 192, 0.5);
         }
 
         .user-item {
@@ -199,10 +269,11 @@
             padding: 3px 8px;
             cursor: pointer;
             font-size: 12px;
+            color: #2c3e50;
         }
 
         .user-item:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(52, 152, 219, 0.1);
         }
 
         .user-status {
@@ -221,6 +292,7 @@
             margin-left: 5px;
             padding: 1px 3px;
             border-radius: 2px;
+            color: white;
         }
 
         .rank-owner { background: #e74c3c; }
@@ -228,183 +300,75 @@
         .rank-member { background: #3498db; }
         .rank-guest { background: #95a5a6; }
 
-        /* List Tabs (7% of sidebar) */
-        .list-tabs {
-            height: 7%;
-            background: rgba(255, 255, 255, 0.2);
+        /* Tabs */
+        .tabs {
             display: flex;
-            align-items: center;
-            padding: 0 10px;
-            border-bottom: 1px solid rgba(192, 192, 192, 0.5);
+            background: #bdc3c7;
         }
 
-        .tab-btn {
-            background: none;
+        .tab {
+            flex: 1;
+            background: #ecf0f1;
             border: none;
-            color: white;
-            padding: 5px 10px;
-            margin-right: 5px;
+            padding: 5px;
+            font-size: 11px;
             cursor: pointer;
-            font-size: 12px;
+            color: #2c3e50;
         }
 
-        .tab-btn.active {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 3px;
-        }
-
-        /* Right Bar Icons (7% of sidebar) */
-        .right-bar-icons {
-            height: 7%;
-            background: rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            padding: 0 10px;
-            border-bottom: 1px solid rgba(192, 192, 192, 0.5);
-        }
-
-        .icon-btn {
-            background: none;
-            border: none;
+        .tab.active {
+            background: #34495e;
             color: white;
-            font-size: 16px;
-            cursor: pointer;
-            padding: 2px;
         }
 
-        .icon-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 3px;
-        }
-
-        /* Action Buttons (18% of sidebar) */
+        /* Action Buttons */
         .action-buttons {
-            height: 18%;
-            background: rgba(255, 255, 255, 0.3);
             padding: 10px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            gap: 5px;
         }
 
         .action-btn {
-            background: #3498db;
+            background: #95a5a6;
             border: none;
             color: white;
             padding: 8px;
-            margin-bottom: 5px;
             cursor: pointer;
             font-size: 12px;
-            font-weight: bold;
-        }
-
-        .action-btn:hover {
-            background: #2980b9;
-        }
-
-        /* User Profile Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content {
-            background-color: #34495e;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 400px;
-            border-radius: 5px;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover {
-            color: white;
-        }
-
-        .profile-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #3498db;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .profile-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-top: 15px;
-        }
-
-        .profile-btn {
-            background: #3498db;
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 11px;
             border-radius: 3px;
         }
 
-        .profile-btn:hover {
-            background: #2980b9;
+        .action-btn:hover {
+            background: #7f8c8d;
         }
 
-        .profile-btn.danger {
-            background: #e74c3c;
-        }
-
-        .profile-btn.danger:hover {
-            background: #c0392b;
-        }
-
-        /* Power Bar */
+        /* Bottom Power Bar */
         .power-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
             height: 40px;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: #1e3c72;
             display: flex;
             align-items: center;
             padding: 0 10px;
-            border-top: 1px solid rgba(192, 192, 192, 0.8);
+            border-top: 1px solid #4a5f7a;
+        }
+
+        .power-text {
+            color: white;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+
+        .power-icons {
+            display: flex;
+            gap: 5px;
         }
 
         .power-icon {
             width: 30px;
             height: 30px;
             background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(192, 192, 192, 0.5);
-            margin-right: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -416,212 +380,186 @@
             background: rgba(255, 255, 255, 0.3);
         }
 
-        .power-icon.cooldown {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Games Bar */
-        .games-bar {
-            position: fixed;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 50px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(192, 192, 192, 0.5);
-            border-radius: 0 5px 5px 0;
-            padding: 10px 5px;
-        }
-
-        .game-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(192, 192, 192, 0.5);
-            margin-bottom: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            border-radius: 3px;
-        }
-
-        .game-icon:hover {
-            background: rgba(255, 255, 255, 0.4);
-        }
-
         /* Scrollbars */
         ::-webkit-scrollbar {
             width: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
+            background: #ecf0f1;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: rgba(192, 192, 192, 0.5);
+            background: #bdc3c7;
             border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(192, 192, 192, 0.7);
+            background: #95a5a6;
         }
     </style>
 </head>
 <body>
-    <div class="background">
-        <div class="row">
-            <!-- Main Chat Area -->
-            <div class="cell main-chat">
-                <div class="messages-area" id="messagesArea">
-                    <div class="message">
-                        <div class="user-avatar">S</div>
-                        <div class="message-content">
-                            <span class="username">System</span>
-                            <span class="message-text">Welcome to ixchats! Type your message below to start chatting.</span>
-                        </div>
-                    </div>
-                    <div class="message">
-                        <div class="user-avatar">💡</div>
-                        <div class="message-content">
-                            <span class="username">System</span>
-                            <span class="message-text">Use the tabs below to switch between different views.</span>
-                        </div>
+    <!-- Top Navigation Bar -->
+    <div class="top-nav">
+        <div class="nav-left">
+            <div class="nav-logo">🌍 hopper</div>
+            <div class="nav-links">
+                <a class="nav-link">groups</a>
+                <a class="nav-link">store</a>
+                <a class="nav-link">🌍 xat</a>
+                <a class="nav-link">group</a>
+                <a class="nav-link">account</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="nav-icon">📱</div>
+            <div class="nav-icon">🌍</div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <div class="left-sidebar">
+            <div class="tool-icon" title="Theme">🌙</div>
+            <div class="tool-icon" title="Music">▶️</div>
+            <div class="tool-icon" title="Friends">👥</div>
+            <div class="tool-icon" title="Avatar">👤</div>
+            <div class="tool-icon" title="Colors">🎨</div>
+            <div class="tool-icon" title="Grid">▦</div>
+            <div class="tool-icon" title="Settings">⚙️</div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="main-chat">
+            <div class="messages-area" id="messagesArea">
+                <div class="message">
+                    <div class="user-avatar">💬</div>
+                    <div class="message-content">
+                        <span class="username">1554317677</span>
+                        <span class="message-text system-message">ACE ## has joined the trivia game!</span>
                     </div>
                 </div>
-                
-                <div class="smiley-bar">
-                    <button class="smiley-btn">😊</button>
-                    <button class="smiley-btn">🥰</button>
-                    <button class="smiley-btn">❤️</button>
-                    <button class="smiley-btn">👍</button>
-                    <button class="smiley-btn">🔥</button>
-                    <button class="smiley-btn">😎</button>
-                    <button class="smiley-btn">🥳</button>
-                    <button class="smiley-btn">🤯</button>
-                    <button class="smiley-btn">💯</button>
-                </div>
-                
-                <div class="input-area">
-                    <div class="input-controls">
-                        <button class="format-btn">B</button>
-                        <button class="format-btn">I</button>
-                        <button class="format-btn">U</button>
-                        <button class="format-btn">🎨</button>
+                <div class="message">
+                    <div class="user-avatar">💬</div>
+                    <div class="message-content">
+                        <span class="username">1554317677</span>
+                        <span class="message-text system-message">Trivia game started by ACE ##! Type !join to participate.</span>
                     </div>
-                    <div style="display: flex; align-items: center;">
-                        <textarea class="message-input" id="messageInput" placeholder="Type your message..." rows="2"></textarea>
-                        <button class="send-btn" id="sendBtn">➤</button>
+                </div>
+                <div class="message">
+                    <div class="user-avatar">💬</div>
+                    <div class="message-content">
+                        <span class="username">1554317677</span>
+                        <span class="message-text system-message">The game will have 10 rounds with 30 seconds per question.</span>
+                    </div>
+                </div>
+                <div class="message">
+                    <div class="user-avatar">💬</div>
+                    <div class="message-content">
+                        <span class="username">1554317677</span>
+                        <span class="message-text system-message">Type !trivia start when you're ready to begin the first round.</span>
+                    </div>
+                </div>
+                <div class="message">
+                    <div class="user-avatar">💬</div>
+                    <div class="message-content">
+                        <span class="username">1554317677</span>
+                        <span class="message-text system-message">Remember to follow our chat rules! Be kind to each other.</span>
+                    </div>
+                </div>
+                <div class="message">
+                    <div class="user-avatar">👾</div>
+                    <div class="message-content">
+                        <span class="username">ACE</span>
+                        <span class="message-text">!trivia start</span>
+                    </div>
+                </div>
+                <div class="message">
+                    <div class="user-avatar">👾</div>
+                    <div class="message-content">
+                        <span class="username">ACE</span>
+                        <span class="message-text">hmm</span>
+                    </div>
+                </div>
+                <div class="message">
+                    <div class="user-avatar">🐱</div>
+                    <div class="message-content">
+                        <span class="username">SnoogleCute</span>
+                        <span class="message-text">hi</span>
                     </div>
                 </div>
             </div>
             
-            <!-- Right Sidebar -->
-            <div class="cell right-sidebar">
-                <div class="visitors-list" id="visitorsList">
-                    <div class="pool-section">
-                        <div class="pool-header">Club</div>
-                        <div class="user-item" data-user="You (Guest)">
-                            <div class="user-status status-online"></div>
-                            <span>You (Guest)</span>
-                        </div>
-                        <div class="user-item" data-user="User123">
-                            <div class="user-status status-online"></div>
-                            <span>User123</span>
-                        </div>
-                        <div class="user-item" data-user="Chatter456">
-                            <div class="user-status status-online"></div>
-                            <span>Chatter456</span>
-                        </div>
-                    </div>
-                    
-                    <div class="pool-section">
-                        <div class="pool-header">VIP</div>
-                        <div class="user-item" data-user="VIP_User1">
-                            <div class="user-status status-online"></div>
-                            <span>VIP_User1</span>
-                            <span class="user-rank rank-member">VIP</span>
-                        </div>
-                        <div class="user-item" data-user="VIP_User2">
-                            <div class="user-status status-online"></div>
-                            <span>VIP_User2</span>
-                            <span class="user-rank rank-member">VIP</span>
-                        </div>
-                    </div>
-                    
-                    <div class="pool-section">
-                        <div class="pool-header">Chum</div>
-                        <div class="user-item" data-user="Chum_User1">
-                            <div class="user-status status-online"></div>
-                            <span>Chum_User1</span>
-                        </div>
-                    </div>
-                    
-                    <div class="pool-section">
-                        <div class="pool-header">Visitors</div>
-                        <!-- Visitors will be populated dynamically -->
-                    </div>
+            <div class="input-area">
+                <div class="input-row">
+                    <textarea class="message-input" id="messageInput" placeholder="hopper" rows="1"></textarea>
+                    <button class="send-btn" id="sendBtn">Send</button>
                 </div>
-                
-                <div class="list-tabs">
-                    <button class="tab-btn active">All</button>
-                    <button class="tab-btn">Friends</button>
-                    <button class="tab-btn">Ignored</button>
+                <div class="emoticon-bar">
+                    <button class="emoticon">😊</button>
+                    <button class="emoticon">😢</button>
+                    <button class="emoticon">😠</button>
+                    <button class="emoticon">😎</button>
+                    <button class="emoticon">😴</button>
+                    <button class="emoticon">😍</button>
+                    <button class="emoticon">🤔</button>
+                    <button class="emoticon">😂</button>
+                    <button class="emoticon">🎱</button>
+                    <button class="get-xats-btn">get xats</button>
+                    <button class="emoticon">🎵</button>
+                    <button class="emoticon">❓</button>
+                    <button class="emoticon">🌍 xat</button>
                 </div>
-                
-                <div class="right-bar-icons">
-                    <button class="icon-btn" title="User Count">👥</button>
-                    <button class="icon-btn" title="Help">❓</button>
-                    <button class="icon-btn" title="Settings">⚙️</button>
+            </div>
+        </div>
+        
+        <!-- Right Sidebar -->
+        <div class="right-sidebar">
+            <div class="pool-section">
+                <div class="pool-header">Club</div>
+                <div class="user-item" data-user="ACE">
+                    <div class="user-status status-online"></div>
+                    <span>ACE</span>
                 </div>
-                
-                <div class="action-buttons">
-                    <button class="action-btn">Get a Chat Box</button>
-                    <button class="action-btn">Sign In</button>
+                <div class="user-item" data-user="SnoogleCute">
+                    <div class="user-status status-online"></div>
+                    <span>SnoogleCute</span>
                 </div>
+            </div>
+            
+            <div class="pool-section">
+                <div class="pool-header">VIP</div>
+                <!-- VIP users will be populated dynamically -->
+            </div>
+            
+            <div class="pool-section">
+                <div class="pool-header">Chum</div>
+                <!-- Chum users will be populated dynamically -->
+            </div>
+            
+            <div class="tabs">
+                <button class="tab active">Visitors</button>
+                <button class="tab">Friends</button>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="action-btn">Edit Your Chat</button>
+                <button class="action-btn">Sign Out</button>
             </div>
         </div>
     </div>
 
-    <!-- Games Bar -->
-    <div class="games-bar">
-        <div class="game-icon" title="Doodle" data-game="doodle">🎨</div>
-        <div class="game-icon" title="Hangman" data-game="hangman">🎯</div>
-        <div class="game-icon" title="Tic Tac Toe" data-game="tictactoe">⭕</div>
-        <div class="game-icon" title="Quiz" data-game="quiz">❓</div>
-        <div class="game-icon" title="Rock Paper Scissors" data-game="rps">✂️</div>
-        <div class="game-icon" title="Dice" data-game="dice">🎲</div>
-    </div>
-
-    <!-- Power Bar -->
+    <!-- Bottom Power Bar -->
     <div class="power-bar">
-        <div class="power-icon" title="Blast" data-power="blast">💥</div>
-        <div class="power-icon" title="Fade" data-power="fade">🌫️</div>
-        <div class="power-icon" title="Glitter" data-power="glitter">✨</div>
-        <div class="power-icon" title="Rainbow" data-power="rainbow">🌈</div>
-        <div class="power-icon" title="Reverse" data-power="reverse">↩️</div>
-        <div class="power-icon" title="Bot" data-power="bot">🤖</div>
-    </div>
-
-    <!-- User Profile Modal -->
-    <div id="userModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalUsername">User Profile</h3>
-                <span class="close">&times;</span>
-            </div>
-            <div class="profile-avatar" id="modalAvatar">U</div>
-            <div id="modalInfo">
-                <p><strong>Rank:</strong> <span id="modalRank">Guest</span></p>
-                <p><strong>Status:</strong> <span id="modalStatus">Online</span></p>
-                <p><strong>Avatar:</strong> <span id="modalAvatarType">Default</span></p>
-            </div>
-            <div class="profile-actions" id="modalActions">
-                <!-- Actions will be populated based on user rank -->
-            </div>
+        <div class="power-text">New RIDER power [LIMITED]</div>
+        <div class="power-icons">
+            <div class="power-icon" title="Rider">🏍️</div>
+            <div class="power-icon" title="Diamond">💎</div>
+            <div class="power-icon" title="Notification">🔔</div>
+            <div class="power-icon" title="X">❌</div>
+            <div class="power-icon" title="Yield">⚠️</div>
+            <div class="power-icon" title="Traffic Light">🚦</div>
         </div>
     </div>
 
@@ -634,13 +572,11 @@
                 this.users = new Map();
                 this.currentPool = 0;
                 this.pools = {
-                    0: { name: 'Main', users: [] },
+                    0: { name: 'Club', users: [] },
                     1: { name: 'VIP', users: [], requiresRank: 'vip' },
-                    2: { name: 'Club', users: [], requiresRank: 'club' },
+                    2: { name: 'Chum', users: [], requiresRank: 'chum' },
                     3: { name: 'Banned', users: [], requiresRank: 'banned' }
                 };
-                this.powers = new Map();
-                this.games = new Map();
                 
                 this.init();
             }
@@ -648,9 +584,7 @@
             init() {
                 this.setupEventListeners();
                 this.setupSocketEvents();
-                this.loadPowers();
-                this.loadGames();
-                this.updateUserList();
+                this.authenticate();
             }
 
             setupEventListeners() {
@@ -676,35 +610,29 @@
                 });
 
                 // Tab switching
-                document.querySelectorAll('.tab-btn').forEach(btn => {
+                document.querySelectorAll('.tab').forEach(btn => {
                     btn.addEventListener('click', () => this.switchTab(btn));
                 });
 
-                // Power activation
+                // Tool icons
+                document.querySelectorAll('.tool-icon').forEach(icon => {
+                    icon.addEventListener('click', () => this.activateTool(icon.title));
+                });
+
+                // Power icons
                 document.querySelectorAll('.power-icon').forEach(icon => {
-                    icon.addEventListener('click', () => this.activatePower(icon.dataset.power));
+                    icon.addEventListener('click', () => this.activatePower(icon.title));
                 });
 
-                // Game activation
-                document.querySelectorAll('.game-icon').forEach(icon => {
-                    icon.addEventListener('click', () => this.startGame(icon.dataset.game));
-                });
-
-                // Modal close
-                document.querySelector('.close').addEventListener('click', () => {
-                    document.getElementById('userModal').style.display = 'none';
-                });
-
-                // Smiley buttons
-                document.querySelectorAll('.smiley-btn').forEach(btn => {
-                    btn.addEventListener('click', () => this.insertSmiley(btn.textContent));
+                // Emoticons
+                document.querySelectorAll('.emoticon').forEach(emoticon => {
+                    emoticon.addEventListener('click', () => this.insertEmoticon(emoticon.textContent));
                 });
             }
 
             setupSocketEvents() {
                 this.socket.on('connect', () => {
                     console.log('🎭 [CHAT] Connected to server');
-                    this.authenticate();
                 });
 
                 this.socket.on('user_list', (data) => {
@@ -722,14 +650,9 @@
                 this.socket.on('user_left', (data) => {
                     this.addSystemMessage(`${data.username} left the chat`);
                 });
-
-                this.socket.on('power_activated', (data) => {
-                    this.showPowerEffect(data);
-                });
             }
 
             authenticate() {
-                // Get room from URL params
                 const urlParams = new URLSearchParams(window.location.search);
                 const room = urlParams.get('room') || 'lobby';
                 
@@ -759,7 +682,7 @@
                 messageDiv.className = 'message';
                 
                 messageDiv.innerHTML = `
-                    <div class="user-avatar">${data.avatar || 'U'}</div>
+                    <div class="user-avatar">${data.avatar || '👤'}</div>
                     <div class="message-content">
                         <span class="username">${data.username}</span>
                         <span class="message-text">${data.content}</span>
@@ -779,7 +702,7 @@
                     <div class="user-avatar">💬</div>
                     <div class="message-content">
                         <span class="username">System</span>
-                        <span class="message-text">${text}</span>
+                        <span class="message-text system-message">${text}</span>
                     </div>
                 `;
                 
@@ -788,40 +711,30 @@
             }
 
             updateUserList(users = []) {
-                const visitorsList = document.getElementById('visitorsList');
+                const clubSection = document.querySelector('.pool-section:first-child');
+                const vipSection = document.querySelector('.pool-section:nth-child(2)');
+                const chumSection = document.querySelector('.pool-section:nth-child(3)');
                 
                 // Clear existing users
-                document.querySelectorAll('.pool-section').forEach(section => {
-                    const header = section.querySelector('.pool-header');
-                    if (header.textContent !== 'Visitors') {
-                        section.innerHTML = '';
-                        section.appendChild(header);
-                    }
-                });
+                clubSection.innerHTML = '<div class="pool-header">Club</div>';
+                vipSection.innerHTML = '<div class="pool-header">VIP</div>';
+                chumSection.innerHTML = '<div class="pool-header">Chum</div>';
 
                 // Group users by pool
                 users.forEach(user => {
                     const pool = user.pool || 0;
-                    const poolName = this.pools[pool]?.name || 'Main';
+                    let targetSection;
                     
-                    let poolSection = document.querySelector(`.pool-section .pool-header:contains('${poolName}')`).parentElement;
-                    if (!poolSection) {
-                        poolSection = this.createPoolSection(poolName);
-                        visitorsList.appendChild(poolSection);
+                    switch(pool) {
+                        case 0: targetSection = clubSection; break;
+                        case 1: targetSection = vipSection; break;
+                        case 2: targetSection = chumSection; break;
+                        default: targetSection = clubSection;
                     }
 
                     const userItem = this.createUserItem(user);
-                    poolSection.appendChild(userItem);
+                    targetSection.appendChild(userItem);
                 });
-            }
-
-            createPoolSection(name) {
-                const section = document.createElement('div');
-                section.className = 'pool-section';
-                section.innerHTML = `
-                    <div class="pool-header">${name}</div>
-                `;
-                return section;
             }
 
             createUserItem(user) {
@@ -861,63 +774,12 @@
             }
 
             showUserProfile(username) {
-                const user = this.users.get(username) || {
-                    username: username,
-                    rank: 'guest',
-                    status: 'online',
-                    avatar: 'U'
-                };
-
-                document.getElementById('modalUsername').textContent = user.username;
-                document.getElementById('modalAvatar').textContent = user.avatar;
-                document.getElementById('modalRank').textContent = user.rank;
-                document.getElementById('modalStatus').textContent = user.status;
-                document.getElementById('modalAvatarType').textContent = user.avatarType || 'Default';
-
-                this.populateProfileActions(user);
-                document.getElementById('userModal').style.display = 'block';
-            }
-
-            populateProfileActions(user) {
-                const actionsContainer = document.getElementById('modalActions');
-                actionsContainer.innerHTML = '';
-
-                const actions = this.getUserActions(user);
-                actions.forEach(action => {
-                    const btn = document.createElement('button');
-                    btn.className = `profile-btn ${action.danger ? 'danger' : ''}`;
-                    btn.textContent = action.text;
-                    btn.onclick = () => action.handler(user);
-                    actionsContainer.appendChild(btn);
-                });
-            }
-
-            getUserActions(user) {
-                const actions = [
-                    { text: 'Add Friend', handler: (u) => this.addFriend(u) },
-                    { text: 'Private Message', handler: (u) => this.privateMessage(u) }
-                ];
-
-                // Add rank-specific actions
-                if (this.currentUser?.rank === 'owner' || this.currentUser?.rank === 'mod') {
-                    actions.push(
-                        { text: 'Kick', handler: (u) => this.kickUser(u) },
-                        { text: 'Ban', handler: (u) => this.banUser(u), danger: true }
-                    );
-                }
-
-                if (this.currentUser?.rank === 'owner') {
-                    actions.push(
-                        { text: 'Make Mod', handler: (u) => this.makeMod(u) },
-                        { text: 'Transfer Ownership', handler: (u) => this.transferOwnership(u) }
-                    );
-                }
-
-                return actions;
+                console.log('🎭 [CHAT] Show profile for:', username);
+                // Implement user profile modal
             }
 
             switchTab(btn) {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 
                 const tab = btn.textContent.toLowerCase();
@@ -925,87 +787,21 @@
             }
 
             filterUserList(filter) {
-                // Implement user list filtering based on tab
                 console.log('🎭 [CHAT] Filtering users by:', filter);
             }
 
+            activateTool(toolName) {
+                console.log('🎭 [CHAT] Activating tool:', toolName);
+            }
+
             activatePower(powerName) {
-                const icon = document.querySelector(`[data-power="${powerName}"]`);
-                if (icon.classList.contains('cooldown')) return;
-
-                this.socket.emit('activate_power', {
-                    power: powerName,
-                    room: this.currentRoom
-                });
-
-                // Add cooldown
-                icon.classList.add('cooldown');
-                setTimeout(() => {
-                    icon.classList.remove('cooldown');
-                }, 5000);
+                console.log('🎭 [CHAT] Activating power:', powerName);
             }
 
-            startGame(gameName) {
-                this.socket.emit('start_game', {
-                    game: gameName,
-                    room: this.currentRoom
-                });
-            }
-
-            insertSmiley(smiley) {
+            insertEmoticon(emoticon) {
                 const input = document.getElementById('messageInput');
-                input.value += smiley;
+                input.value += emoticon;
                 input.focus();
-            }
-
-            showPowerEffect(data) {
-                // Implement power effect display
-                console.log('🎭 [CHAT] Power effect:', data);
-            }
-
-            // User action handlers
-            addFriend(user) {
-                console.log('🎭 [CHAT] Adding friend:', user.username);
-            }
-
-            privateMessage(user) {
-                console.log('🎭 [CHAT] Private message to:', user.username);
-            }
-
-            kickUser(user) {
-                this.socket.emit('kick_user', { username: user.username });
-            }
-
-            banUser(user) {
-                this.socket.emit('ban_user', { username: user.username });
-            }
-
-            makeMod(user) {
-                this.socket.emit('make_mod', { username: user.username });
-            }
-
-            transferOwnership(user) {
-                this.socket.emit('transfer_ownership', { username: user.username });
-            }
-
-            loadPowers() {
-                // Load available powers
-                this.powers.set('blast', { name: 'Blast', cooldown: 5000 });
-                this.powers.set('fade', { name: 'Fade', cooldown: 3000 });
-                this.powers.set('glitter', { name: 'Glitter', cooldown: 2000 });
-                this.powers.set('rainbow', { name: 'Rainbow', cooldown: 4000 });
-                this.powers.set('reverse', { name: 'Reverse', cooldown: 6000 });
-                this.powers.set('bot', { name: 'Bot', cooldown: 10000 });
-            }
-
-            loadGames() {
-                // Load available games
-                this.games.set('doodle', { name: 'Doodle', maxPlayers: 10 });
-                this.games.set('hangman', { name: 'Hangman', maxPlayers: 2 });
-                this.games.set('tictactoe', { name: 'Tic Tac Toe', maxPlayers: 2 });
-                this.games.set('quiz', { name: 'Quiz', maxPlayers: 10 });
-                this.games.set('rps', { name: 'Rock Paper Scissors', maxPlayers: 2 });
-                this.games.set('dice', { name: 'Dice', maxPlayers: 10 });
             }
         }
 
