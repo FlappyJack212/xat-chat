@@ -13,7 +13,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #2c3e50;
+            background: #f5f5f5;
             color: #333;
             overflow: hidden;
             height: 100vh;
@@ -87,8 +87,8 @@
         /* Left Sidebar */
         .left-sidebar {
             width: 40px;
-            background: #34495e;
-            border-right: 1px solid #4a5f7a;
+            background: #e8e8e8;
+            border-right: 1px solid #ccc;
             padding: 8px 4px;
             display: flex;
             flex-direction: column;
@@ -98,19 +98,20 @@
         .tool-icon {
             width: 32px;
             height: 32px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid #4a5f7a;
+            background: #f8f8f8;
+            border: 1px solid #ddd;
             border-radius: 2px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 14px;
             cursor: pointer;
-            color: #ecf0f1;
+            color: #666;
         }
 
         .tool-icon:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: #e0e0e0;
+            border-color: #bbb;
         }
 
         /* Main Chat Area */
@@ -118,17 +119,17 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            background: #ecf0f1;
-            color: #2c3e50;
+            background: white;
+            color: #333;
         }
 
         /* Messages Area */
         .messages-area {
             flex: 1;
-            background: #ecf0f1;
+            background: white;
             overflow-y: auto;
             padding: 8px;
-            border-bottom: 1px solid #bdc3c7;
+            border-bottom: 1px solid #ddd;
         }
 
         .message {
@@ -165,7 +166,7 @@
         }
 
         .message-text {
-            color: #2c3e50;
+            color: #333;
             font-size: 11px;
         }
 
@@ -177,8 +178,8 @@
         /* Input Area */
         .input-area {
             height: 60px;
-            background: #ecf0f1;
-            border-top: 1px solid #bdc3c7;
+            background: #f9f9f9;
+            border-top: 1px solid #ddd;
             padding: 8px;
         }
 
@@ -191,13 +192,18 @@
         .message-input {
             flex: 1;
             background: white;
-            border: 1px solid #bdc3c7;
+            border: 1px solid #ccc;
             padding: 6px;
-            color: #2c3e50;
+            color: #333;
             font-size: 12px;
             resize: none;
             height: 24px;
             font-family: Arial, sans-serif;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: #3498db;
         }
 
         .send-btn {
@@ -209,6 +215,7 @@
             cursor: pointer;
             font-weight: bold;
             font-size: 11px;
+            border-radius: 3px;
         }
 
         .send-btn:hover {
@@ -234,11 +241,11 @@
             align-items: center;
             justify-content: center;
             padding: 1px;
+            border-radius: 2px;
         }
 
         .emoticon:hover {
-            background: rgba(52, 152, 219, 0.2);
-            border-radius: 2px;
+            background: #e8f4fd;
         }
 
         .get-xats-btn {
@@ -252,11 +259,15 @@
             margin-left: 4px;
         }
 
+        .get-xats-btn:hover {
+            background: #e67e22;
+        }
+
         /* Right Sidebar */
         .right-sidebar {
             width: 180px;
-            background: #ecf0f1;
-            border-left: 1px solid #bdc3c7;
+            background: #f5f5f5;
+            border-left: 1px solid #ddd;
             display: flex;
             flex-direction: column;
         }
@@ -280,11 +291,11 @@
             padding: 2px 6px;
             cursor: pointer;
             font-size: 10px;
-            color: #2c3e50;
+            color: #333;
         }
 
         .user-item:hover {
-            background: rgba(52, 152, 219, 0.1);
+            background: #e8f4fd;
         }
 
         .user-status {
@@ -315,23 +326,27 @@
         /* Tabs */
         .tabs {
             display: flex;
-            background: #bdc3c7;
+            background: #e0e0e0;
             margin-top: auto;
         }
 
         .tab {
             flex: 1;
-            background: #ecf0f1;
+            background: #f5f5f5;
             border: none;
             padding: 4px;
             font-size: 10px;
             cursor: pointer;
-            color: #2c3e50;
+            color: #333;
         }
 
         .tab.active {
             background: #34495e;
             color: white;
+        }
+
+        .tab:hover:not(.active) {
+            background: #e8e8e8;
         }
 
         /* Action Buttons */
@@ -387,6 +402,7 @@
             align-items: center;
             justify-content: center;
             font-size: 10px;
+            border-radius: 2px;
         }
 
         .power-icon:hover {
@@ -399,16 +415,16 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: #ecf0f1;
+            background: #f5f5f5;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #bdc3c7;
+            background: #ccc;
             border-radius: 3px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #95a5a6;
+            background: #bbb;
         }
     </style>
 </head>
@@ -578,6 +594,138 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
+        // Power system based on original iXat API
+        class PowerSystem {
+            constructor() {
+                this.powers = new Map();
+                this.smileys = new Map();
+                this.loadPowers();
+            }
+
+            // Sample power data based on original iXat structure
+            loadPowers() {
+                const powerData = [
+                    {
+                        id: 1,
+                        name: 'purple',
+                        subdesc: 'Purple text effect',
+                        desc: 'Make your text purple colored',
+                        price: 50,
+                        pStatus: 'Available',
+                        allpowers: false,
+                        epic: false,
+                        game: false,
+                        group: false,
+                        newpower: false,
+                        section: 'p0',
+                        subid: 1,
+                        smileys: ['purple']
+                    },
+                    {
+                        id: 2,
+                        name: 'gold',
+                        subdesc: 'Gold pawn and smilies',
+                        desc: 'Gold pawn and smilies. $WIKI',
+                        price: 50000,
+                        pStatus: 'Available',
+                        allpowers: false,
+                        epic: true,
+                        game: false,
+                        group: false,
+                        newpower: false,
+                        section: 'p4',
+                        subid: 153,
+                        smileys: ['goldb', 'bars', 'bar', 'goldstar']
+                    },
+                    {
+                        id: 3,
+                        name: 'blast',
+                        subdesc: 'Blast effect',
+                        desc: 'Create visual explosion effects',
+                        price: 100,
+                        pStatus: 'Available',
+                        allpowers: false,
+                        epic: false,
+                        game: false,
+                        group: false,
+                        newpower: false,
+                        section: 'p1',
+                        subid: 10,
+                        smileys: ['blast']
+                    },
+                    {
+                        id: 4,
+                        name: 'rainbow',
+                        subdesc: 'Rainbow text effect',
+                        desc: 'Create rainbow text effects',
+                        price: 200,
+                        pStatus: 'Available',
+                        allpowers: false,
+                        epic: false,
+                        game: false,
+                        group: false,
+                        newpower: false,
+                        section: 'p1',
+                        subid: 15,
+                        smileys: ['rainbow']
+                    },
+                    {
+                        id: 5,
+                        name: 'reverse',
+                        subdesc: 'Reverse text effect',
+                        desc: 'Cause a users words to be reversed',
+                        price: 180,
+                        pStatus: 'Available',
+                        allpowers: false,
+                        epic: false,
+                        game: false,
+                        group: false,
+                        newpower: false,
+                        section: 'p5',
+                        subid: 176,
+                        smileys: ['reverse']
+                    }
+                ];
+
+                powerData.forEach(power => {
+                    this.powers.set(power.name.toLowerCase(), power);
+                    this.powers.set(power.id.toString(), power);
+                    
+                    // Map smileys to powers
+                    if (power.smileys) {
+                        power.smileys.forEach(smiley => {
+                            this.smileys.set(smiley.toLowerCase(), power);
+                        });
+                    }
+                });
+            }
+
+            getPowerInfo(powerName) {
+                return this.powers.get(powerName.toLowerCase());
+            }
+
+            getPowerBySmiley(smiley) {
+                return this.smileys.get(smiley.toLowerCase());
+            }
+
+            getAllPowers() {
+                return Array.from(this.powers.values()).filter(p => typeof p === 'object' && p.id);
+            }
+
+            getPowerPrice(powerName) {
+                const power = this.getPowerInfo(powerName);
+                return power ? power.price : 0;
+            }
+
+            convertXatsToDays(xats) {
+                return Math.floor(xats / 13.5);
+            }
+
+            convertDaysToXats(days) {
+                return Math.floor(days * 13.5);
+            }
+        }
+
         class IxatChatInterface {
             constructor() {
                 this.socket = io();
@@ -590,6 +738,9 @@
                     2: { name: 'Chum', users: [], requiresRank: 'chum' },
                     3: { name: 'Banned', users: [], requiresRank: 'banned' }
                 };
+                this.powerSystem = new PowerSystem();
+                this.userXats = 1000; // Starting xats
+                this.userDays = 0;
                 
                 this.init();
             }
@@ -598,6 +749,7 @@
                 this.setupEventListeners();
                 this.setupSocketEvents();
                 this.authenticate();
+                this.updatePowerBar();
             }
 
             setupEventListeners() {
@@ -641,6 +793,13 @@
                 document.querySelectorAll('.emoticon').forEach(emoticon => {
                     emoticon.addEventListener('click', () => this.insertEmoticon(emoticon.textContent));
                 });
+
+                // Power lookup
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('power-lookup')) {
+                        this.showPowerInfo(e.target.textContent);
+                    }
+                });
             }
 
             setupSocketEvents() {
@@ -663,6 +822,10 @@
                 this.socket.on('user_left', (data) => {
                     this.addSystemMessage(`${data.username} left the chat`);
                 });
+
+                this.socket.on('power_activated', (data) => {
+                    this.showPowerEffect(data);
+                });
             }
 
             authenticate() {
@@ -681,12 +844,32 @@
                 const message = input.value.trim();
                 
                 if (message) {
+                    // Check for power usage in message
+                    const processedMessage = this.processMessageForPowers(message);
+                    
                     this.socket.emit('message', {
-                        content: message,
+                        content: processedMessage,
                         room: this.currentRoom
                     });
                     input.value = '';
                 }
+            }
+
+            processMessageForPowers(message) {
+                // Check for smiley codes and convert them
+                let processedMessage = message;
+                
+                // Look for smiley codes like (purple), (gold), etc.
+                const smileyRegex = /\(([^)]+)\)/g;
+                processedMessage = processedMessage.replace(smileyRegex, (match, smiley) => {
+                    const power = this.powerSystem.getPowerBySmiley(smiley);
+                    if (power) {
+                        return `<span class="power-effect" data-power="${power.name}">${match}</span>`;
+                    }
+                    return match;
+                });
+
+                return processedMessage;
             }
 
             addMessage(data) {
@@ -694,16 +877,58 @@
                 const messageDiv = document.createElement('div');
                 messageDiv.className = 'message';
                 
+                // Process message for power effects
+                const processedContent = this.processMessageForPowers(data.content);
+                
                 messageDiv.innerHTML = `
                     <div class="user-avatar">${data.avatar || '👤'}</div>
                     <div class="message-content">
                         <span class="username">${data.username}</span>
-                        <span class="message-text">${data.content}</span>
+                        <span class="message-text">${processedContent}</span>
                     </div>
                 `;
                 
                 messagesArea.appendChild(messageDiv);
                 messagesArea.scrollTop = messagesArea.scrollHeight;
+                
+                // Apply power effects
+                this.applyPowerEffects(messageDiv);
+            }
+
+            applyPowerEffects(messageDiv) {
+                const powerEffects = messageDiv.querySelectorAll('.power-effect');
+                powerEffects.forEach(effect => {
+                    const powerName = effect.dataset.power;
+                    const power = this.powerSystem.getPowerInfo(powerName);
+                    if (power) {
+                        this.applyPowerStyle(effect, power);
+                    }
+                });
+            }
+
+            applyPowerStyle(element, power) {
+                switch (power.name) {
+                    case 'purple':
+                        element.style.color = '#800080';
+                        element.style.fontWeight = 'bold';
+                        break;
+                    case 'gold':
+                        element.style.color = '#FFD700';
+                        element.style.fontWeight = 'bold';
+                        element.style.textShadow = '0 0 5px #FFD700';
+                        break;
+                    case 'rainbow':
+                        element.style.background = 'linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3)';
+                        element.style.backgroundClip = 'text';
+                        element.style.webkitBackgroundClip = 'text';
+                        element.style.webkitTextFillColor = 'transparent';
+                        element.style.fontWeight = 'bold';
+                        break;
+                    case 'reverse':
+                        const text = element.textContent;
+                        element.textContent = text.split('').reverse().join('');
+                        break;
+                }
             }
 
             addSystemMessage(text) {
@@ -788,7 +1013,7 @@
 
             showUserProfile(username) {
                 console.log('🎭 [CHAT] Show profile for:', username);
-                // Implement user profile modal
+                // Implement user profile modal with power info
             }
 
             switchTab(btn) {
@@ -805,16 +1030,100 @@
 
             activateTool(toolName) {
                 console.log('🎭 [CHAT] Activating tool:', toolName);
+                switch (toolName) {
+                    case 'Theme':
+                        this.showThemeSelector();
+                        break;
+                    case 'Music':
+                        this.showMusicPlayer();
+                        break;
+                    case 'Friends':
+                        this.showFriendsList();
+                        break;
+                    case 'Avatar':
+                        this.showAvatarSelector();
+                        break;
+                    case 'Colors':
+                        this.showColorPicker();
+                        break;
+                    case 'Grid':
+                        this.toggleGrid();
+                        break;
+                    case 'Settings':
+                        this.showSettings();
+                        break;
+                }
             }
 
             activatePower(powerName) {
                 console.log('🎭 [CHAT] Activating power:', powerName);
+                const power = this.powerSystem.getPowerInfo(powerName);
+                if (power) {
+                    this.showPowerInfo(power.name);
+                }
+            }
+
+            showPowerInfo(powerName) {
+                const power = this.powerSystem.getPowerInfo(powerName);
+                if (power) {
+                    const info = `
+Power: ${power.name}
+Price: ${power.price} xats (${this.powerSystem.convertXatsToDays(power.price)} days)
+Description: ${power.desc}
+Status: ${power.pStatus}
+Epic: ${power.epic ? 'Yes' : 'No'}
+Game: ${power.game ? 'Yes' : 'No'}
+Group: ${power.group ? 'Yes' : 'No'}
+                    `;
+                    alert(info);
+                }
             }
 
             insertEmoticon(emoticon) {
                 const input = document.getElementById('messageInput');
                 input.value += emoticon;
                 input.focus();
+            }
+
+            updatePowerBar() {
+                const powerText = document.querySelector('.power-text');
+                if (powerText) {
+                    powerText.textContent = `You have ${this.userXats} xats (${this.powerSystem.convertXatsToDays(this.userXats)} days)`;
+                }
+            }
+
+            showPowerEffect(data) {
+                console.log('🎭 [CHAT] Power effect:', data);
+                // Implement power effect display
+            }
+
+            // Tool functions
+            showThemeSelector() {
+                console.log('🎭 [CHAT] Show theme selector');
+            }
+
+            showMusicPlayer() {
+                console.log('🎭 [CHAT] Show music player');
+            }
+
+            showFriendsList() {
+                console.log('🎭 [CHAT] Show friends list');
+            }
+
+            showAvatarSelector() {
+                console.log('🎭 [CHAT] Show avatar selector');
+            }
+
+            showColorPicker() {
+                console.log('🎭 [CHAT] Show color picker');
+            }
+
+            toggleGrid() {
+                console.log('🎭 [CHAT] Toggle grid');
+            }
+
+            showSettings() {
+                console.log('🎭 [CHAT] Show settings');
             }
         }
 
