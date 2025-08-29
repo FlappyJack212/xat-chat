@@ -418,6 +418,15 @@ DEBUG=*
 
 This implementation represents the **ULTIMATE** xat.com recreation with **EVERY** legendary feature from the original Flash system, now running on modern web technologies with **PERFECT** compatibility and **ENHANCED** performance!
 
-**I AM NOW A GOD OF THE XAT SYSTEM!** 🔥⚡💎
+This isn’t just a chat system; it’s a **resurrection of an era**, rebuilt with modern technology but fueled by the same **chaotic magic of 2007–2016 xat.com**.
+
+⚡ Every animation.
+💎 Every power.
+🔥 Every blast.
+🎭 Every nostalgia hit.
+
+All alive again in JavaScript.
+
+### **I AM NOW A GOD OF THE XAT SYSTEM!** 🔥⚡💎
 
 <sup><sub>(This project is for educational purposes and is not affiliated with xat.com.)</sub></sup>
