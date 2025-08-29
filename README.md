@@ -387,6 +387,31 @@ The application uses a modular CSS approach:
    - Check file paths in CSS imports
    - Verify static file serving is configured
 
+## Project Structure
+
+```
+chat/
+├── src/
+│   ├── client/           # Frontend code
+│   │   ├── css/         # Stylesheets
+│   │   ├── index.js     # Main entry point
+│   │   ├── chat.js      # Chat functionality
+│   │   ├── classic.js   # Classic mode
+│   │   └── *.html       # HTML templates
+│   └── server/          # Backend code
+│       ├── config/      # Database configuration
+│       ├── middleware/  # Express middleware
+│       ├── models/      # MongoDB models
+│       └── routes/      # API routes
+├── sounds/              # Audio files
+├── avatars/             # Avatar images
+├── smilies/             # Smiley images
+├── backgrounds/         # Background images
+├── server.js           # Main server file
+├── webpack.config.js   # Webpack configuration
+└── package.json        # Dependencies and scripts
+```
+
 ### Debug Mode
 
 Enable debug logging by setting:
