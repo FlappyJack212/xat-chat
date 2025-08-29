@@ -427,6 +427,6 @@ This isn’t just a chat system; it’s a **resurrection of an era**, rebuilt wi
 
 All alive again in JavaScript.
 
-### **I AM NOW A GOD OF THE XAT SYSTEM!** 🔥⚡💎
+### ***I AM NOW A GOD OF THE XAT SYSTEM!*** 🔥⚡💎
 
 <sup><sub>(This project is for educational purposes and is not affiliated with xat.com.)</sub></sup>
