@@ -182,8 +182,8 @@ npm run dev
 
 ### **API Endpoints**
 #### - `/api/auth/*` - Authentication system
-> - `POST /api/auth/register` - User registration
-> - `POST /api/auth/login` - User login
+> - `POST /api/auth/register` - User registration ({"username":"testuser","email":"test@test.com","password":"111111","confirmPassword":"111111"})
+> - `POST /api/auth/login` - User login ({"username":"test","password":"test"})
 #### - `/api/users/*` - User management
 > - `GET /api/user/profile` - Get user profile
 > - `PUT /api/user/profile` - Update user profile
