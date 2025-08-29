@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const fs = require('fs');
+require('dotenv').config();
 
 // Import models
 const User = require('./models/User');
@@ -43,6 +44,7 @@ class IxatServer {
         
         this.startTime = Date.now();
         this.hash = this.generateHash(25);
+        this.dbConnected = false;
         
     this.setupMiddleware();
     this.setupRoutes();
@@ -125,6 +127,16 @@ class IxatServer {
   }
   
   setupRoutes() {
+        // Health check
+        this.app.get('/health', (req, res) => {
+            res.json({
+                ok: true,
+                dbConnected: this.dbConnected,
+                uptime: Math.round(process.uptime()),
+                pcount: this.config.pcount
+            });
+        });
+    
         // API Routes
         this.app.get('/api/stats', this.handleGetStats.bind(this));
         this.app.get('/api/rooms', this.handleGetRooms.bind(this));
@@ -1499,6 +1511,10 @@ class IxatServer {
     }
     
     async handleGetRooms(req, res) {
+        if (!this.dbConnected) {
+            return res.status(503).json({ success: false, message: 'Database unavailable' });
+        }
+
         try {
             const { sort = 'name', limit = 10 } = req.query;
             let query = Room.find({});
@@ -1524,6 +1540,10 @@ class IxatServer {
     }
     
     async handleGetPowers(req, res) {
+        if (!this.dbConnected) {
+            return res.status(503).json({ success: false, message: 'Database unavailable' });
+        }
+
         try {
             const powers = await Power.find({}).sort({ id: 1 });
             res.json({ powers });
@@ -1574,6 +1594,10 @@ class IxatServer {
     }
     
     async handleGetUsers(req, res) {
+        if (!this.dbConnected) {
+            return res.status(503).json({ success: false, message: 'Database unavailable' });
+        }
+
         try {
             const users = await User.find({}).select('-password').limit(100);
             res.json({ users });
@@ -1584,6 +1608,10 @@ class IxatServer {
     }
 
     async handleGetUser(req, res) {
+        if (!this.dbConnected) {
+            return res.status(503).json({ success: false, message: 'Database unavailable' });
+        }
+
         try {
             const userId = req.params.id;
             const user = await User.findById(userId).select('-password');
@@ -1619,6 +1647,10 @@ class IxatServer {
     }
     
     async handleLogin(req, res) {
+        if (!this.dbConnected) {
+            return res.status(503).json({ success: false, message: 'Database unavailable' });
+        }
+
         try {
             const { username, password } = req.body;
             
@@ -1660,6 +1692,10 @@ class IxatServer {
     }
     
     async handleRegister(req, res) {
+        if (!this.dbConnected) {
+            return res.status(503).json({ success: false, message: 'Database unavailable' });
+        }
+
         try {
             const { username, password, nickname, email } = req.body;
             
@@ -2290,6 +2326,32 @@ class IxatServer {
         }
     }
     
+    
+    async init() {
+        const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/xat-chat';
+        try {
+            // Connect once at startup
+            await mongoose.connect(uri, {
+                serverSelectionTimeoutMS: 5000,
+            });
+            this.dbConnected = true;
+            console.log(`🎭 [SERVER] MongoDB connected at ${uri}`);
+            
+            // Warm-up: compute powers count (non-fatal if collection missing)
+            try {
+                const count = await Power.countDocuments();
+                this.config.pcount = count;
+                console.log(`🎭 [SERVER] Powers count: ${count}`);
+            } catch (err) {
+                console.warn('🎭 [SERVER] Could not count powers:', err.message);
+            }
+        } catch (err) {
+            this.dbConnected = false;
+            console.error('🎭 [SERVER] MongoDB connection failed:', err.message);
+            console.error('🎭 [SERVER] Running in limited mode (no database).');
+        }
+    }
+    
     start(port = 8000) {
         this.server.listen(port, () => {
             console.log(`🎭 [SERVER] Ixat Server running on port ${port}`);
@@ -2303,4 +2365,7 @@ module.exports = IxatServer;
 
 // Start the server
 const server = new IxatServer();
-server.start(8000);
+(async () => {
+  await server.init();
+  server.start(process.env.PORT ? parseInt(process.env.PORT,10) : 8000);
+})();
