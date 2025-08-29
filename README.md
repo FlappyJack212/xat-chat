@@ -1,6 +1,6 @@
 # 🎭 XAT.COM - Complete Flash to JavaScript Migration
 
-**The ULTIMATE xat.com recreation with ALL legendary features!**
+**The ULTIMATE xat.com recreation with ALL legendary features!**<br>
 This is a recreation of the classic xat.com chat platform from 2007-2016, built with modern web technologies while maintaining the nostalgic feel and features.
 
 ## 🔥 LEGENDARY FEATURES IMPLEMENTED
