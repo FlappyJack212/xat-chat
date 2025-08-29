@@ -1,32 +1,29 @@
-import DOMPurify from 'dompurify';
-import bus from '../eventBus.js';
+export default class FriendList {
+  static container = null;
 
-export default function createChatBox() {
-  const wrap = document.createElement('div');
-  wrap.className = 'chatbox flex gap-2 items-center p-2 border-t';
+  static init(parent) {
+    this.container = document.createElement("div");
+    this.container.className = "friend-list p-2 rounded-xl shadow bg-gray-100";
+    parent.appendChild(this.container);
+  }
 
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.placeholder = 'Type a message…';
-  input.className = 'flex-1 px-3 py-2 rounded-lg border outline-none';
+  static render(friends = []) {
+    if (!this.container) return;
+    this.container.innerHTML = "";
 
-  const send = document.createElement('button');
-  send.textContent = 'Send';
-  send.className = 'px-4 py-2 rounded-xl shadow';
-  send.addEventListener('click', () => {
-    const text = input.value.trim();
-    if (!text) return;
-    bus.emit('chat:send', { text });
-    input.value = '';
-  });
+    const title = document.createElement("h2");
+    title.className = "font-bold text-lg mb-2";
+    title.innerText = "Friends";
+    this.container.appendChild(title);
 
-  wrap.append(input, send);
-  return wrap;
-}
-
-export function renderMessage({ user = 'You', text }) {
-  const row = document.createElement('div');
-  row.className = 'message px-2 py-1';
-  row.innerHTML = DOMPurify.sanitize(`<b>${user}</b>: ${text}`);
-  return row;
+    friends.forEach(friend => {
+      const item = document.createElement("div");
+      item.className = "flex items-center gap-2 p-1 hover:bg-gray-200 rounded";
+      item.innerHTML = `
+        <span class="w-2 h-2 rounded-full ${friend.online ? "bg-green-500" : "bg-gray-400"}"></span>
+        <span>${friend.username}</span>
+      `;
+      this.container.appendChild(item);
+    });
+  }
 }
