@@ -143,8 +143,8 @@ npm run dev
 
 **Access your chat at:**
 - **Homepage**: http://localhost:8000/
-<!--- **Main Chat**: http://localhost:8000/chat-interface.html
-- **Authentication**: http://localhost:8000/auth.html-->
+- **Main Chat**: http://localhost:8000/chat-interface.html
+- **Authentication**: http://localhost:8000/auth.html
 
 ### **Current Working Features**
 ✅ **Guest User Support** - Shows guest users when not logged in<br>
@@ -292,11 +292,6 @@ npm run init-db
 # Start the server
 npm start
 ```
-
-### **Access Points**
-- **Full Engine**: http://localhost:8000/xat-authentic.html
-- **Classic Chat**: http://localhost:8000/classic.html
-- **Homepage**: http://localhost:8000/
 
 ## 🎭 **LEGENDARY CAPABILITIES**
 
