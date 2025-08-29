@@ -5,6 +5,22 @@ import bus from './eventBus.js';
 import createChatBox, { renderMessage } from './components/ChatBox.js';
 import createFriendList from './components/FriendList.js';
 import createTradePanel from './components/TradePanel.js';
+import FriendList from "./components/FriendList.js";
+import TradePanel from "./components/TradePanel.js";
+import XaviPanel from "./components/XaviPanel.js";
+import BlastSystem from "./components/BlastSystem.js";
+import RoomPanel from "./components/RoomPanel.js";
+
+// Bootstrapping
+document.addEventListener("DOMContentLoaded", () => {
+  const app = document.getElementById("app");
+
+  FriendList.init(app);
+  TradePanel.init(app);
+  XaviPanel.init(app);
+  BlastSystem.init(app);
+  RoomPanel.init(app);
+});
 
 // Notification system
 const showNotification = (message, type = 'info') => {
