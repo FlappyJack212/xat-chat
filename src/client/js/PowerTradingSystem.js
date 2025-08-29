@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 /**
  * 💎 POWER TRADING SYSTEM - Flash to JavaScript Migration
  * Replaces Flash trading interface with pure JavaScript
@@ -62,7 +63,7 @@ class PowerTradingSystem {
       align-items: center;
     `;
     
-    header.innerHTML = `
+    header.innerHTML = DOMPurify.sanitize `
       <h2 style="margin: 0; font-size: 18px;">💎 Power Trading Market</h2>
       <button id="close-trading" style="background: #FF4444; border: none; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer;">✕</button>
     `;
@@ -83,7 +84,7 @@ class PowerTradingSystem {
       border-bottom: 2px solid #533483;
     `;
     
-    tabs.innerHTML = `
+    tabs.innerHTML = DOMPurify.sanitize `
       <button class="tab-btn active" data-tab="market" style="flex: 1; background: #533483; border: none; color: white; padding: 10px; cursor: pointer;">Market</button>
       <button class="tab-btn" data-tab="my-trades" style="flex: 1; background: #2a2a2a; border: none; color: white; padding: 10px; cursor: pointer;">My Trades</button>
       <button class="tab-btn" data-tab="create" style="flex: 1; background: #2a2a2a; border: none; color: white; padding: 10px; cursor: pointer;">Create Trade</button>
@@ -121,7 +122,7 @@ class PowerTradingSystem {
   }
   
   showTab(tabName) {
-    this.tabContent.innerHTML = '';
+    this.tabContent.innerHTML = DOMPurify.sanitize '';
     
     switch(tabName) {
       case 'market':
@@ -138,7 +139,7 @@ class PowerTradingSystem {
   
   showMarketTab() {
     const marketContent = document.createElement('div');
-    marketContent.innerHTML = `
+    marketContent.innerHTML = DOMPurify.sanitize `
       <div style="margin-bottom: 20px;">
         <input type="text" id="search-trades" placeholder="Search trades..." style="width: 100%; padding: 10px; border: 1px solid #533483; border-radius: 5px; background: #2a2a2a; color: white;">
       </div>
@@ -153,7 +154,7 @@ class PowerTradingSystem {
   
   showMyTradesTab() {
     const myTradesContent = document.createElement('div');
-    myTradesContent.innerHTML = `
+    myTradesContent.innerHTML = DOMPurify.sanitize `
       <div id="my-trades-list" style="max-height: 400px; overflow-y: auto;">
         <div style="text-align: center; padding: 20px; color: #888;">Loading your trades...</div>
       </div>
@@ -165,7 +166,7 @@ class PowerTradingSystem {
   
   showCreateTab() {
     const createContent = document.createElement('div');
-    createContent.innerHTML = `
+    createContent.innerHTML = DOMPurify.sanitize `
       <div style="margin-bottom: 20px;">
         <h3 style="margin-bottom: 10px;">Create New Trade</h3>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -206,7 +207,7 @@ class PowerTradingSystem {
       { id: 3, seller: 'XatMaster', power: 'wink', price: 75, status: 'PENDING' }
     ];
     
-    tradesList.innerHTML = '';
+    tradesList.innerHTML = DOMPurify.sanitize '';
     
     mockTrades.forEach(trade => {
       const tradeElement = this.createTradeElement(trade);
@@ -223,7 +224,7 @@ class PowerTradingSystem {
       { id: 5, seller: 'Me', power: 'laugh', price: 150, status: 'ACCEPTED' }
     ];
     
-    myTradesList.innerHTML = '';
+    myTradesList.innerHTML = DOMPurify.sanitize '';
     
     mockMyTrades.forEach(trade => {
       const tradeElement = this.createTradeElement(trade, true);
@@ -252,7 +253,7 @@ class PowerTradingSystem {
       'COMPLETED': '#00AA00'
     };
     
-    tradeDiv.innerHTML = `
+    tradeDiv.innerHTML = DOMPurify.sanitize `
       <div>
         <div style="font-weight: bold; margin-bottom: 5px;">${trade.power.toUpperCase()}</div>
         <div style="font-size: 12px; color: #888;">Seller: ${trade.seller}</div>
@@ -294,7 +295,7 @@ class PowerTradingSystem {
       { id: 5, name: 'laugh', cost: 150 }
     ];
     
-    powerSelect.innerHTML = '<option value="">Select a power...</option>';
+    powerSelect.innerHTML = DOMPurify.sanitize '<option value="">Select a power...</option>';
     
     mockPowers.forEach(power => {
       const option = document.createElement('option');
