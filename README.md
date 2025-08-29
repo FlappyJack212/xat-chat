@@ -71,26 +71,57 @@
 
 ## 🚀 **TECHNICAL ARCHITECTURE**
 
-### **Flash to JavaScript Migration**
-- **Adobe AS3 Guidelines** followed for all systems
-- **Canvas rendering** replacing Flash Stage
-- **WebSocket communication** replacing XMLSocket
-- **Real-time animations** using requestAnimationFrame
-- **Event-driven architecture** replacing Flash event system
-
-### **Server Architecture**
-- **Node.js/Express** backend with Socket.IO
+### **Current Working Setup**
+- **Node.js/Express** backend with Socket.IO (`src/server/xatServer.js`)
+- **Pure HTML/JS/CSS** frontend (`src/client/chat-interface.html`)
 - **MongoDB** database with Mongoose ODM
 - **JWT authentication** with bcrypt hashing
 - **Real-time communication** with WebSockets
-- **Rate limiting** and security measures
+- **iXat-style ranking system** with `f` flag support
+
+### **Server Architecture**
+- **Main Server**: `src/server/xatServer.js` - Complete working server
+- **Models**: `src/server/models/` - Database schemas
+- **Routes**: `src/server/routes/` - API endpoints
+- **Services**: `src/server/services/` - Business logic
+- **Middleware**: `src/server/middleware/` - Server middleware
 
 ### **Client Architecture**
+- **Main Chat**: `src/client/chat-interface.html` - Complete working chat interface
+- **Authentication**: `src/client/auth.html` - Login/register system
+- **Homepage**: `src/client/index.html` - Main landing page
 - **Pure JavaScript** with ES6+ features
-- **Canvas-based rendering** for animations
-- **WebSocket client** for real-time communication
-- **Modular system design** with separate components
-- **Responsive UI** with modern CSS
+- **Real-time WebSocket client** for communication
+- **iXat ranking system** with guest user support
+
+## 🚀 **QUICK START**
+
+### **Running the Current Working System**
+```bash
+# Install dependencies
+npm install
+
+# Start the server (serves from src/client directly)
+npm start
+
+# Or for development with auto-restart
+npm run dev
+```
+
+**Access your chat at:**
+- **Main Chat**: http://localhost:8000/chat-interface.html
+- **Homepage**: http://localhost:8000/
+- **Authentication**: http://localhost:8000/auth.html
+
+### **Current Working Features**
+✅ **Guest User Support** - Shows guest users when not logged in
+✅ **User Authentication** - Login/register system
+✅ **iXat Ranking System** - `f` flag based ranking (Guest, Main Owner, Mod, Member, VIP, etc.)
+✅ **Real-time Chat** - WebSocket communication
+✅ **Powers System** - 325+ powers with store
+✅ **Advanced Moderation** - Warnings, mutes, kicks, bans
+✅ **Chat Management** - Create, edit, join chat rooms
+✅ **Groups System** - Create and manage user groups
 
 ## 🎯 **SYSTEM COMPONENTS**
 

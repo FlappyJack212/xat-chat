@@ -104,5 +104,87 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Listen for authentication messages from iframes
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'AUTH_SUCCESS') {
+                console.log('🎭 [TEST] Received auth success from iframe:', event.data);
+                
+                // Store the auth token
+                localStorage.setItem('authToken', event.data.token);
+                
+                // Send auth update to iframe
+                const chatFrame = document.getElementById('chatFrame');
+                if (chatFrame && chatFrame.contentWindow) {
+                    try {
+                        chatFrame.contentWindow.postMessage({
+                            type: 'AUTH_UPDATE',
+                            token: event.data.token,
+                            user: event.data.user
+                        }, '*');
+                        console.log('🎭 [TEST] Sent auth update to iframe');
+                    } catch (e) {
+                        console.log('🎭 [TEST] Could not send message to iframe');
+                    }
+                }
+                
+                // Refresh the iframe to show authenticated state
+                if (chatFrame) {
+                    chatFrame.src = chatFrame.src;
+                }
+                
+                console.log('🎭 [TEST] Authentication state updated, iframe refreshed');
+            } else if (event.data && event.data.type === 'AUTH_LOGOUT') {
+                console.log('🎭 [TEST] Received logout message from iframe');
+                
+                // Remove the auth token
+                localStorage.removeItem('authToken');
+                
+                // Refresh the iframe to show unauthenticated state
+                const chatFrame = document.getElementById('chatFrame');
+                if (chatFrame) {
+                    chatFrame.src = chatFrame.src;
+                }
+                
+                console.log('🎭 [TEST] Logout processed, iframe refreshed');
+            }
+        });
+        
+        // Check authentication status on page load and send to iframe
+        async function checkAndSendAuth() {
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                try {
+                    const response = await fetch('/api/auth/status?token=' + token);
+                    const data = await response.json();
+                    
+                    if (response.ok && data.user) {
+                        // Send auth update to iframe
+                        const chatFrame = document.getElementById('chatFrame');
+                        if (chatFrame && chatFrame.contentWindow) {
+                            try {
+                                chatFrame.contentWindow.postMessage({
+                                    type: 'AUTH_UPDATE',
+                                    token: token,
+                                    user: data.user
+                                }, '*');
+                                console.log('🎭 [TEST] Sent auth update to iframe on page load');
+                            } catch (e) {
+                                console.log('🎭 [TEST] Could not send message to iframe');
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error('🎭 [TEST] Auth check error:', error);
+                }
+            }
+        }
+        
+        // Check auth status when iframe loads
+        window.addEventListener('load', function() {
+            setTimeout(checkAndSendAuth, 1000); // Wait for iframe to load
+        });
+    </script>
 </body>
 </html>

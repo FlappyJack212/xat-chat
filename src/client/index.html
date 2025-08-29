@@ -760,7 +760,7 @@
 
         // Check authentication status and update navbar
         async function checkAuthStatus() {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem('authToken');
             const authLink = document.getElementById('authLink');
             const profileLink = document.getElementById('profileLink');
             
@@ -769,26 +769,106 @@
                     const response = await fetch('/api/auth/status?token=' + token);
                     const data = await response.json();
                     
-                    if (data.authenticated) {
-                        authLink.style.display = 'none';
-                        profileLink.style.display = 'inline-block';
+                    if (response.ok && data.user) {
+                        // User is authenticated
+                        if (authLink) authLink.style.display = 'none';
+                        if (profileLink) profileLink.style.display = 'inline-block';
+                        console.log('🎭 [HOME] User authenticated:', data.user.username);
+                        
+                        // Send auth update to iframe
+                        const embedframe = document.getElementById('embedframe');
+                        if (embedframe && embedframe.contentWindow) {
+                            try {
+                                embedframe.contentWindow.postMessage({
+                                    type: 'AUTH_UPDATE',
+                                    token: token,
+                                    user: data.user
+                                }, '*');
+                                console.log('🎭 [HOME] Sent auth update to iframe on page load');
+                            } catch (e) {
+                                console.log('🎭 [HOME] Could not send message to iframe');
+                            }
+                        }
                     } else {
-                        authLink.style.display = 'inline-block';
-                        profileLink.style.display = 'none';
-                        localStorage.removeItem('token');
+                        // Token invalid, remove it
+                        if (authLink) authLink.style.display = 'inline-block';
+                        if (profileLink) profileLink.style.display = 'none';
+                        localStorage.removeItem('authToken');
+                        console.log('🎭 [HOME] Token invalid, removed');
                     }
                 } catch (error) {
-                    authLink.style.display = 'inline-block';
-                    profileLink.style.display = 'none';
+                    console.error('🎭 [HOME] Auth check error:', error);
+                    if (authLink) authLink.style.display = 'inline-block';
+                    if (profileLink) profileLink.style.display = 'none';
+                    localStorage.removeItem('authToken');
                 }
             } else {
-                authLink.style.display = 'inline-block';
-                profileLink.style.display = 'none';
+                if (authLink) authLink.style.display = 'inline-block';
+                if (profileLink) profileLink.style.display = 'none';
             }
         }
 
         // Check auth status on page load
         checkAuthStatus();
+        
+        // Listen for authentication messages from iframes
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'AUTH_SUCCESS') {
+                console.log('🎭 [HOME] Received auth success from iframe:', event.data);
+                
+                // Store the auth token
+                localStorage.setItem('authToken', event.data.token);
+                
+                // Update the navbar to show user is logged in
+                const authLink = document.getElementById('authLink');
+                const profileLink = document.getElementById('profileLink');
+                
+                if (authLink) authLink.style.display = 'none';
+                if (profileLink) profileLink.style.display = 'inline-block';
+                
+                // Send auth update to all iframes
+                const embedframe = document.getElementById('embedframe');
+                if (embedframe && embedframe.contentWindow) {
+                    try {
+                        embedframe.contentWindow.postMessage({
+                            type: 'AUTH_UPDATE',
+                            token: event.data.token,
+                            user: event.data.user
+                        }, '*');
+                        console.log('🎭 [HOME] Sent auth update to iframe');
+                    } catch (e) {
+                        console.log('🎭 [HOME] Could not send message to iframe');
+                    }
+                }
+                
+                // Refresh the iframe to show authenticated state
+                if (embedframe) {
+                    embedframe.src = embedframe.src;
+                }
+                
+                console.log('🎭 [HOME] Authentication state updated, iframe refreshed');
+            } else if (event.data && event.data.type === 'AUTH_LOGOUT') {
+                console.log('🎭 [HOME] Received logout message from iframe');
+                
+                // Remove the auth token
+                localStorage.removeItem('authToken');
+                
+                // Update the navbar to show user is logged out
+                const authLink = document.getElementById('authLink');
+                const profileLink = document.getElementById('profileLink');
+                
+                if (authLink) authLink.style.display = 'inline-block';
+                if (profileLink) profileLink.style.display = 'none';
+                
+                // Refresh the iframe to show unauthenticated state
+                const embedframe = document.getElementById('embedframe');
+                if (embedframe) {
+                    embedframe.src = embedframe.src;
+                }
+                
+                console.log('🎭 [HOME] Logout processed, iframe refreshed');
+            }
+        });
     </script>
 </body>
 </html>

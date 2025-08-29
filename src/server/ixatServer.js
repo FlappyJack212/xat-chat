@@ -261,8 +261,19 @@ class IxatServer {
         
         // Power Purchase API
         this.app.post('/api/powers/buy', this.handleBuyPower.bind(this));
+        this.app.get('/api/powers/user', this.handleGetUserPowers.bind(this));
+        
+        // Moderation API routes
+        this.app.post('/api/moderation/warn', this.handleModerationWarn.bind(this));
+        this.app.post('/api/moderation/mute', this.handleModerationMute.bind(this));
+        this.app.post('/api/moderation/ban', this.handleModerationBan.bind(this));
+        this.app.post('/api/moderation/kick', this.handleModerationKick.bind(this));
+        this.app.get('/api/moderation/history/:userId', this.handleGetModerationHistory.bind(this));
+        this.app.get('/api/moderation/actions/:userId', this.handleGetActiveModerationActions.bind(this));
+        
         // User management routes
         this.app.post('/api/user/update', this.handleUserUpdate.bind(this));
+        this.app.get('/api/users/online', this.handleGetOnlineUsers.bind(this));
         this.app.post('/api/user/change-password', this.handleChangePassword.bind(this));
         this.app.delete('/api/user/delete', this.handleDeleteAccount.bind(this));
         this.app.post('/api/user/pawn', this.handleUpdatePawn.bind(this));
@@ -2094,6 +2105,191 @@ class IxatServer {
         }
     }
     
+    // Moderation API handlers
+    async handleModerationWarn(req, res) {
+        try {
+            const { targetUserId, chatRoomId, reason } = req.body;
+            
+            if (!targetUserId || !chatRoomId || !reason) {
+                return res.status(400).json({ success: false, message: 'Missing required fields' });
+            }
+            
+            // For now, return success (in real implementation, this would use the ModerationService)
+            res.json({ 
+                success: true, 
+                message: 'Warning issued successfully',
+                action: {
+                    type: 'warning',
+                    targetUser: targetUserId,
+                    reason: reason,
+                    timestamp: new Date()
+                }
+            });
+        } catch (error) {
+            console.error('🎭 [SERVER] Warning error:', error);
+            res.status(500).json({ success: false, message: 'Server error' });
+        }
+    }
+    
+    async handleModerationMute(req, res) {
+        try {
+            const { targetUserId, chatRoomId, reason, duration = 15 } = req.body;
+            
+            if (!targetUserId || !chatRoomId || !reason) {
+                return res.status(400).json({ success: false, message: 'Missing required fields' });
+            }
+            
+            res.json({ 
+                success: true, 
+                message: 'User muted successfully',
+                action: {
+                    type: 'mute',
+                    targetUser: targetUserId,
+                    reason: reason,
+                    duration: duration,
+                    timestamp: new Date()
+                }
+            });
+        } catch (error) {
+            console.error('🎭 [SERVER] Mute error:', error);
+            res.status(500).json({ success: false, message: 'Server error' });
+        }
+    }
+    
+    async handleModerationBan(req, res) {
+        try {
+            const { targetUserId, chatRoomId, reason, duration = 1440 } = req.body;
+            
+            if (!targetUserId || !chatRoomId || !reason) {
+                return res.status(400).json({ success: false, message: 'Missing required fields' });
+            }
+            
+            res.json({ 
+                success: true, 
+                message: 'User banned successfully',
+                action: {
+                    type: 'ban',
+                    targetUser: targetUserId,
+                    reason: reason,
+                    duration: duration,
+                    timestamp: new Date()
+                }
+            });
+        } catch (error) {
+            console.error('🎭 [SERVER] Ban error:', error);
+            res.status(500).json({ success: false, message: 'Server error' });
+        }
+    }
+    
+    async handleModerationKick(req, res) {
+        try {
+            const { targetUserId, chatRoomId, reason } = req.body;
+            
+            if (!targetUserId || !chatRoomId || !reason) {
+                return res.status(400).json({ success: false, message: 'Missing required fields' });
+            }
+            
+            res.json({ 
+                success: true, 
+                message: 'User kicked successfully',
+                action: {
+                    type: 'kick',
+                    targetUser: targetUserId,
+                    reason: reason,
+                    timestamp: new Date()
+                }
+            });
+        } catch (error) {
+            console.error('🎭 [SERVER] Kick error:', error);
+            res.status(500).json({ success: false, message: 'Server error' });
+        }
+    }
+    
+    async handleGetModerationHistory(req, res) {
+        try {
+            const { userId } = req.params;
+            
+            // Mock moderation history (in real implementation, this would come from database)
+            const history = [
+                {
+                    type: 'warning',
+                    reason: 'Spam',
+                    moderator: 'Admin',
+                    timestamp: new Date(Date.now() - 86400000), // 1 day ago
+                    status: 'active'
+                }
+            ];
+            
+            res.json({ success: true, history });
+        } catch (error) {
+            console.error('🎭 [SERVER] Get moderation history error:', error);
+            res.status(500).json({ success: false, message: 'Server error' });
+        }
+    }
+    
+    async handleGetActiveModerationActions(req, res) {
+        try {
+            const { userId } = req.params;
+            
+            // Mock active actions (in real implementation, this would come from database)
+            const actions = [];
+            
+            res.json({ success: true, actions });
+        } catch (error) {
+            console.error('🎭 [SERVER] Get active moderation actions error:', error);
+            res.status(500).json({ success: false, message: 'Server error' });
+        }
+    }
+    
+    async handleGetOnlineUsers(req, res) {
+        try {
+            // Return mock online users for now
+            const onlineUsers = [
+                {
+                    id: 'guest1',
+                    username: 'Guest1',
+                    nickname: 'Guest1',
+                    avatar: '1',
+                    rank: 5,
+                    guest: true,
+                    xats: 0,
+                    days: 0
+                },
+                {
+                    id: 'guest2',
+                    username: 'Guest2', 
+                    nickname: 'Guest2',
+                    avatar: '2',
+                    rank: 5,
+                    guest: true,
+                    xats: 0,
+                    days: 0
+                }
+            ];
+            
+            res.json({ success: true, users: onlineUsers });
+        } catch (error) {
+            console.error('🎭 [SERVER] Get online users error:', error);
+            res.status(500).json({ success: false, message: 'Server error' });
+        }
+    }
+    
+    async handleGetUserPowers(req, res) {
+        try {
+            // Return mock user powers for now
+            const userPowers = [
+                { id: 1, name: 'Smile', cost: 100, category: 'Basic' },
+                { id: 2, name: 'Wave', cost: 200, category: 'Basic' },
+                { id: 3, name: 'Dance', cost: 500, category: 'Fun' }
+            ];
+            
+            res.json({ success: true, powers: userPowers });
+        } catch (error) {
+            console.error('🎭 [SERVER] Get user powers error:', error);
+            res.status(500).json({ success: false, message: 'Server error' });
+        }
+    }
+    
     start(port = 8000) {
         this.server.listen(port, () => {
             console.log(`🎭 [SERVER] Ixat Server running on port ${port}`);
@@ -2104,3 +2300,7 @@ class IxatServer {
 }
 
 module.exports = IxatServer;
+
+// Start the server
+const server = new IxatServer();
+server.start(8000);

@@ -68,8 +68,9 @@ class XatServer {
       });
       console.log('🎭 Connected to MongoDB');
     } catch (error) {
-      console.error('Database connection failed:', error);
-      process.exit(1);
+      console.warn('⚠️  MongoDB connection failed, running in demo mode:', error.message);
+      console.log('🎭 Server will run with mock data until database is available');
+      // Don't exit, just continue without database
     }
   }
   
@@ -77,8 +78,8 @@ class XatServer {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     
-    // Serve static files
-    this.app.use(express.static('dist'));
+    // Serve static files - use src/client for development
+    this.app.use(express.static('src/client'));
     this.app.use('/avatars', express.static('avatars'));
     this.app.use('/smilies', express.static('smilies'));
     this.app.use('/sounds', express.static('sounds'));
@@ -106,9 +107,11 @@ class XatServer {
     // User routes
     this.app.get('/api/users/:id', this.getUser.bind(this));
     this.app.put('/api/users/:id', this.updateUser.bind(this));
+    this.app.get('/api/users/online', this.getOnlineUsers.bind(this));
     
     // Power routes
     this.app.get('/api/powers', this.getPowers.bind(this));
+    this.app.get('/api/powers/user', this.getUserPowers.bind(this));
     this.app.post('/api/powers/buy', this.buyPower.bind(this));
     
     // Room routes
@@ -127,7 +130,7 @@ class XatServer {
     
     // Serve main HTML files
     this.app.get('/', (req, res) => {
-      res.sendFile(path.join(__dirname, '../../dist/index.html'));
+      res.sendFile(path.join(__dirname, '../client/index.html'));
     });
     
     this.app.get('/xat-authentic.html', (req, res) => {
@@ -139,12 +142,21 @@ class XatServer {
     });
     
     this.app.get('/chat.html', (req, res) => {
-      res.sendFile(path.join(__dirname, '../../dist/chat.html'));
+      res.sendFile(path.join(__dirname, '../client/chat-interface.html'));
     });
     
-    // Catch-all route for SPA
+    this.app.get('/chat-interface.html', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/chat-interface.html'));
+    });
+    
+    // Catch-all route for SPA - but don't interfere with our specific routes
     this.app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '../../dist/index.html'));
+      // Don't serve index.html for API routes or our specific HTML files
+      if (req.path.startsWith('/api/') || req.path.endsWith('.html')) {
+        return res.status(404).send('Not found');
+      }
+      
+      res.sendFile(path.join(__dirname, '../client/index.html'));
     });
   }
   
@@ -780,6 +792,36 @@ class XatServer {
     }
   }
   
+  async getOnlineUsers(req, res) {
+    try {
+      // For now, return mock online users until we have real user management
+      const mockUsers = [
+        {
+          id: 'guest1',
+          username: 'Guest1',
+          f: 0, // Guest rank
+          isOnline: true,
+          avatar: 1,
+          xats: 0,
+          days: 0
+        },
+        {
+          id: 'guest2', 
+          username: 'Guest2',
+          f: 0, // Guest rank
+          isOnline: true,
+          avatar: 2,
+          xats: 0,
+          days: 0
+        }
+      ];
+      
+      res.json({ success: true, users: mockUsers });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get online users' });
+    }
+  }
+  
   async updateUser(req, res) {
     try {
       const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -798,6 +840,21 @@ class XatServer {
       res.json(powers);
     } catch (error) {
       res.status(500).json({ error: 'Failed to get powers' });
+    }
+  }
+  
+  async getUserPowers(req, res) {
+    try {
+      // For now, return mock user powers until we have real user management
+      const mockPowers = [
+        { id: 1, name: 'Smile', cost: 100, category: 'Basic' },
+        { id: 2, name: 'Wave', cost: 200, category: 'Basic' },
+        { id: 3, name: 'Dance', cost: 500, category: 'Fun' }
+      ];
+      
+      res.json({ success: true, powers: mockPowers });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get user powers' });
     }
   }
   

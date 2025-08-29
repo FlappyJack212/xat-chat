@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
@@ -58,6 +59,14 @@ module.exports = (env, argv) => {
       new webpack.ProvidePlugin({
         Buffer: ['buffer', 'Buffer'],
         process: 'process/browser'
+      }),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: 'js/*.js',
+            to: 'js/[name][ext]'
+          }
+        ]
       })
     ],
     devtool: isProduction ? 'source-map' : 'eval-source-map',

@@ -1,421 +1,544 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>xat.com - Chat Rooms, Avatars, Powers</title><meta name="description" content="xat.com - Free chat rooms with avatars, powers, and more!"><style>body, html {
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ixchats</title><meta name="description" content="ixchats is a fun social networking site, join a group, make friends, create your own chat group"><link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet"><style>* {
+            box-sizing: border-box;
+        }
+
+        body, html {
             margin: 0;
             padding: 0;
-            background: #000000;
-            font-family: Arial, sans-serif;
-            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
         }
 
         /* Header */
-        .header {
-            background: #1a1a1a;
-            border-bottom: 2px solid #0066cc;
+        .navbar {
+            background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+            border-bottom: 3px solid #004080;
             padding: 10px 0;
         }
 
-        .header-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
+        .navbar-brand img {
+            height: 50px;
         }
 
-        .logo {
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logoname-flex {
+            text-align: center;
+            color: white;
+        }
+
+        #groupName {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        #groupDescription {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 10px;
+            padding: 8px 16px !important;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff !important;
+            transform: translateY(-1px);
+        }
+
+        .navbar-nav .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff !important;
+        }
+
+        /* Hero Section */
+        #hero {
+            padding-top: 80px;
+            padding-bottom: 40px;
+        }
+
+        .xatbox {
+            background: #ffffff;
+            border: 2px solid #0066cc;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.2);
+        }
+
+                 #embedframe {
+             width: 100%;
+             height: 600px;
+             border: none;
+         }
+
+        #newto {
+            padding: 20px;
+        }
+
+        #newtoxat {
+            color: #0066cc;
             font-size: 32px;
             font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #newtodesc {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0066cc, #0052a3);
+            border: none;
+            padding: 12px 24px;
+            font-weight: bold;
+            border-radius: 6px;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0052a3, #004080);
+            transform: translateY(-2px);
+        }
+
+        /* Carousel */
+        .carousel-item {
+            padding: 40px 0;
+        }
+
+        .carousel-item h1 {
             color: #0066cc;
-            text-decoration: none;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
-        .nav {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
+        .carousel-item p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
         }
 
-        .nav li {
-            margin-left: 20px;
-            position: relative;
+        .carousel-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
         }
 
-        .nav a {
-            color: #cccccc;
-            text-decoration: none;
-            font-size: 14px;
-            padding: 8px 12px;
-            border-radius: 3px;
-            transition: background 0.3s;
-            display: block;
-        }
-
-        .nav a strong {
-            display: block;
-            font-size: 12px;
-        }
-
-        .nav a span {
-            display: block;
-            font-size: 10px;
-            color: #999999;
-        }
-
-        .nav a:hover {
-            background: #333333;
-            color: #ffffff;
-        }
-
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown ul {
-            display: none;
+        .xcarousel-control {
             position: absolute;
-            top: 100%;
-            left: 0;
-            background: #1a1a1a;
-            border: 1px solid #333333;
-            min-width: 150px;
-            z-index: 1000;
-        }
-
-        .dropdown:hover ul {
-            display: block;
-        }
-
-        .dropdown ul li {
-            margin: 0;
-        }
-
-        .dropdown ul a {
-            padding: 8px 12px;
-            border-radius: 0;
-        }
-
-
-
-        /* Main Content */
-        .main-content {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        /* News Notice */
-        .news-notice {
-            background: #1a1a1a;
-            border: 1px solid #0066cc;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            text-align: center;
-        }
-
-        .news-notice h3 {
-            margin: 0 0 10px 0;
-            color: #0066cc;
-            font-size: 16px;
-        }
-
-        .news-notice p {
-            margin: 5px 0;
-            font-size: 13px;
-            line-height: 1.4;
-        }
-
-        /* Layout */
-        .layout {
-            display: flex;
-            gap: 20px;
-        }
-
-        .main-area {
-            flex: 1;
-        }
-
-        .chat-embed {
-            background: #000000;
-            border: 2px solid #333333;
-            border-radius: 0;
-            overflow: hidden;
-        }
-
-        .chat-header {
-            background: linear-gradient(to bottom, #333333, #222222);
-            border-bottom: 1px solid #666666;
-            padding: 8px 15px;
-            font-size: 14px;
-            color: #ffffff;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chat-container {
-            width: 728px;
-            height: 486px;
-            margin: 0 auto;
-            background: #000000;
-            position: relative;
-        }
-
-        .sidebar {
-            width: 250px;
-        }
-
-        /* Sidebar Blocks */
-        .sidebar-block {
-            background: #1a1a1a;
-            border: 1px solid #333333;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-
-        .sidebar-header {
-            background: #333333;
-            padding: 10px 15px;
-            border-bottom: 1px solid #444444;
-        }
-
-        .sidebar-header h4 {
-            margin: 0;
-            font-size: 14px;
-            color: #ffffff;
-        }
-
-        .sidebar-content {
-            padding: 15px;
-        }
-
-        .sidebar-content p {
-            margin: 5px 0;
-            font-size: 12px;
-            line-height: 1.3;
-        }
-
-        .sidebar-content a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-
-        .sidebar-content a:hover {
-            text-decoration: underline;
-        }
-
-        /* Stats */
-        .stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            font-size: 12px;
-        }
-
-        .stat-item {
-            background: #222222;
-            padding: 8px;
-            border-radius: 3px;
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 16px;
-            font-weight: bold;
-            color: #0066cc;
-        }
-
-        .stat-label {
-            font-size: 10px;
-            color: #888888;
-        }
-
-        /* Recent Chats */
-        .recent-chats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .chat-preview {
-            background: #222222;
-            border: 1px solid #333333;
-            border-radius: 3px;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .chat-preview:hover {
-            background: #333333;
-        }
-
-        .chat-preview img {
-            width: 100%;
-            height: 80px;
-            object-fit: cover;
-        }
-
-        .chat-preview .name {
-            padding: 5px;
-            font-size: 11px;
-            text-align: center;
-            color: #ffffff;
-        }
-
-        /* Popular Rooms */
-        .room-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .room-list li {
-            padding: 5px 0;
-            border-bottom: 1px solid #333333;
-        }
-
-        .room-list li:last-child {
-            border-bottom: none;
-        }
-
-        .room-list a {
-            color: #cccccc;
-            text-decoration: none;
-            font-size: 12px;
-        }
-
-        .room-list a:hover {
-            color: #0066cc;
-        }
-
-        /* Footer */
-        .footer {
-            background: #1a1a1a;
-            border-top: 1px solid #333333;
-            padding: 20px 0;
-            margin-top: 40px;
-            text-align: center;
-            font-size: 12px;
-            color: #888888;
-        }
-
-        /* Loading */
-        .loading {
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 102, 204, 0.8);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100%;
-            color: #888888;
-            font-size: 14px;
+            color: white;
+            text-decoration: none;
+            z-index: 10;
         }
 
-        .loading::after {
-            content: '';
+        .xcarousel-control.xleft {
+            left: 20px;
+        }
+
+        .xcarousel-control.xright {
+            right: 20px;
+        }
+
+        .ximg {
             width: 20px;
             height: 20px;
-            border: 2px solid #333333;
-            border-top: 2px solid #0066cc;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-left: 10px;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        /* Groups Section */
+        .groups_page {
+            background: #ffffff;
+            padding: 40px 0;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .section_header {
+            color: #0066cc;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .form-search {
+            max-width: 400px;
+        }
+
+        .homenav {
+            border-bottom: 2px solid #e9ecef;
+            margin-bottom: 30px;
+        }
+
+        .homenav .nav-link {
+            color: #666;
+            border: none;
+            padding: 12px 20px;
+            margin-right: 10px;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .homenav .nav-link.active {
+            background: #0066cc;
+            color: white;
+        }
+
+        .homenav .nav-link:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .homenav .nav-link.active:hover {
+            background: #0052a3;
+            color: white;
+        }
+
+                 /* Group Cards */
+         .group-card {
+             background: #ffffff;
+             border: 1px solid #e9ecef;
+             border-radius: 8px;
+             padding: 15px;
+             margin-bottom: 20px;
+             transition: all 0.3s ease;
+            cursor: pointer;
+             text-align: center;
+        }
+
+         .group-thumbnail {
+             margin-bottom: 10px;
+        }
+
+         .group-thumbnail img {
+             width: 80px;
+            height: 80px;
+             border-radius: 8px;
+            object-fit: cover;
+             border: 2px solid #e9ecef;
+         }
+
+        .group-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-color: #0066cc;
+        }
+
+        .group-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 10px;
+        }
+
+        .group-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .group-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .group-users {
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        #footer {
+            background: #333;
+            color: white;
+            padding: 20px 0;
+        }
+
+        .footer-icons {
+            margin: 0 10px;
+        }
+
+        .footer-icons img {
+            width: 18px;
+            height: 18px;
+        }
+
+        #footer a {
+            color: #ccc;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        #footer a:hover {
+            color: white;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .layout {
+            .header-flex {
                 flex-direction: column;
+                gap: 15px;
             }
+
+                         #embedframe {
+                 height: 400px;
+             }
+
+            .carousel-item {
+                padding: 20px 0;
+            }
+
+            .carousel-item h1 {
+                font-size: 24px;
+            }
+        }</style><script defer="defer" src="js/main.42423fc1b6699882a08f.js"></script><link href="css/main.32f887c795133fc8ab30.css" rel="stylesheet"></head><body><nav id="navTop" class="navbar navbar-expand-md navbar-dark fixed-top"><div class="container"><div class="header-flex"><div><a class="navbar-brand" href="/"><img id="navLogo" src="https://xat.com/content/web/R00221/img/xatplanet.svg" height="50" alt="logo"></a></div><div class="logoname-flex"><div id="groupName">ixchats</div><div id="groupDescription">Complete iXat recreation with all 325+ authentic powers</div></div></div><div class="navbar-nav ml-auto"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/chat.html">Main Chat</a> <a class="nav-link" href="/powers.html">Powers</a> <a class="nav-link" href="/auth.html" id="authLink">Register/Login</a> <a class="nav-link" href="/profile.html" id="profileLink" style="display: none;">Profile</a> <a class="nav-link" href="/lobby.html">Lobby</a> <a class="nav-link" href="/help.html">Help</a> <a class="nav-link" href="/test.html">Test</a> <a class="nav-link" href="/chat-edit.html">Edit Chat</a></div></div><span id="statnav"></span></nav><div id="hero"><div class="container"><div class="row"><div><div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false"><div class="carousel-inner"><div class="carousel-item active"><div class="container"><div class="row"><div class="col-sm"><div id="xatbox"><div class="xatbox"><iframe name="box" title="chat" width="728" height="600" id="embedframe" src="/chat-interface.html"></iframe></div><div id="promo"></div></div></div><div class="col-sm"><div id="newto"><h1 id="newtoxat">new to ixchats?</h1><p id="newtodesc">Register an account. Find a chat group that shares your interests. Make your own chat group. Get and trade Powers. Play a multiplayer game. Design your own animated avatar character. Send stickers with custom text.</p><a href="#myCarousel" data-slide="next" class="btn btn-primary btn-large"><img class="mr-2 pb-1" src="https://xat.com/content/web/R00221/img/navbar/help.svg" alt="help" width="19"> <span>learn more</span></a><p class="pt-4"><span>Follow ixchats on</span>: <a href="https://twitter.com/ixchats" rel="noopener" target="_blank"><img class="ml-2 mr-2 mb-1" src="https://xat.com/content/web/R00221/img/navbar/x_b.svg" alt="ixchats x" width="18"> </a><a href="https://facebook.com/ixchats" rel="noopener" target="_blank"><img class="mr-2 mb-1" src="https://xat.com/content/web/R00221/img/navbar/facebook.svg" alt="ixchats facebook" width="22"> </a><a href="https://instagram.com/ixchats" rel="noopener" target="_blank"><img class="mr-2 insta" src="https://xat.com/content/web/R00221/img/navbar/instagram.svg" alt="ixchats instagram" width="22"></a></p></div></div></div></div></div><div class="carousel-item"><div class="container"><div class="row"><div class="col-sm"><img src="https://xat.com/content/web/R00221/img/home/tourgroup.png" alt="group" loading="lazy" class="img-fluid"></div><div class="col-sm"><h1>create a chat group</h1><p>Your own chat group could be for particular subject (e.g. music, anime, video games), for the visitors to your site or just for you and your friends. You can use it on ixchats or embed it on your site. Groups are fully customizable and can be members only if you want to restrict it to your friends.</p><a href="/groups.html" class="btn btn-primary btn-large"><img class="mr-2 pb-1" src="https://xat.com/content/web/R00221/img/navbar/community.svg" alt="community"> <span>create chat group</span></a></div></div></div></div><div class="carousel-item"><div class="container"><div class="row"><div class="col-sm"><h1>powers</h1><p>You can use your xats and days to buy special powers for the chat box. These include sets of custom smilies, special effects and abilities and group powers which add extra features to your chat group. Learn more about all the available powers on the <a href="https://xat.wiki/Powers">iXat wiki</a>.</p><a href="/powers.html" class="btn btn-primary btn-large"><img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/powers.svg" alt="powers"> <span>get powers</span></a></div><div class="col-sm"><img src="https://xat.com/content/web/R00221/img/home/tourpowers.png" loading="lazy" alt="powers" class="img-fluid pt-1"></div></div></div></div><div class="carousel-item"><div class="container"><div class="row"><div class="col-sm"><h1>trade powers</h1><p>You can trade powers with other ixchats users. If you are skillful you can earn a profit, buy low and sell high. <a href="/trade.html">ixchats trade</a> is a stock exchange where traders meet.</p><a href="/trade.html" class="btn btn-primary btn-large"><img class="mr-2 pb-1" src="https://xat.com/content/web/R00221/img/navbar/trade.svg" alt="trade"> <span>start trading</span></a></div><div class="col-sm"><img src="https://xat.com/content/web/R00221/img/home/tourtrade.png" loading="lazy" alt="trade" class="img-fluid"></div></div></div></div><div class="carousel-item"><div class="container"><div class="row"><div class="col-sm"><img src="https://xat.com/content/web/R00221/img/home/tourgames.png" loading="lazy" alt="games" class="img-fluid"></div><div class="col-sm"><h1>games</h1><p>Play games against your friends or randoms.<br>Compete to be the fastest in the race games or evade bans with the ban games. <a href="/chat.html?game=doodle">Doodle</a> is a freeform co-operative drawing app. <a href="/chat.html?game=doodlerace">DoodleRace</a> gives you something to draw and then you vote on whose drawing was the best. Also try the new <a href="/chat.html?game=hearts">Hearts</a> card game.</p><a href="/chat.html" class="btn btn-primary btn-large"><img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/games.svg" alt="games"> <span>play now</span></a></div></div></div></div></div><a class="xcarousel-control xleft" href="#myCarousel" data-slide="prev"><img class="ximg p-2" src="https://xat.com/content/web/R00221/img/leftarrow.svg" alt="prev"> </a><a class="xcarousel-control xright" href="#myCarousel" data-slide="next"><img class="ximg p-2" src="https://xat.com/content/web/R00221/img/rightarrow.svg" alt="next"></a></div></div></div></div></div><div id="groups" class="groups_page"><div class="container"><div class="row"><div class="col-lg-4"><h2 class="section_header left"><span>chat groups</span></h2></div><div class="col-lg-8"><div class="float-right"><form action="/search" class="form-search form-span inline-center"><div id="searchdiv" class="input-group mb-3"><input id="searchBox" name="search" class="form-control" placeholder="find out what people are talking about" aria-label="search"><div class="input-group-append"><button class="btn btn-outline-secondary" type="submit"><img class="mr-2 search" src="https://xat.com/content/web/R00221/img/navbar/search.svg" alt="search"> <span>search</span></button></div></div></form></div></div></div><div class="row mt-4 mb-2"><div class="col-lg-8"><ul class="nav nav-pills homenav"><li class="nav-item"><a class="nav-link active" id="xfeatured" href="#"><img class="mr-2 pb-1" src="https://xat.com/content/web/R00221/img/navbar/featured.svg" alt="featured"> <span>featured</span></a></li><li class="nav-item"><a class="nav-link" id="xpopular" href="#"><img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/popular.svg" alt="popular"> <span>popular</span></a></li><li class="nav-item"><a class="nav-link" id="xsupported" href="#"><img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/supported.svg" alt="supported"> <span>supported</span></a></li><li class="nav-item"><a class="nav-link" id="xgames" href="#"><img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/games.svg" alt="games"> <span>games</span></a></li></ul></div><div class="col-lg-4"><nav aria-label="" class="float-right"><ul class="pagination pagination-right"><li class="page-item"><a class="page-link" id="prev" href="#" aria-label="Previous"><span aria-hidden="true">«</span> <span class="sr-only">Previous</span></a></li><li class="page-item active"><a class="page-link" id="p1" href="#">1</a></li><li class="page-item"><a class="page-link" id="p2" href="#">2</a></li><li class="page-item"><a class="page-link" id="p3" href="#">3</a></li><li class="page-item"><a class="page-link" id="p4" href="#">4</a></li><li class="page-item"><a class="page-link" id="p5" href="#">5</a></li><li class="page-item"><a class="page-link" id="next" href="#" aria-label="Next"><span aria-hidden="true">»</span> <span class="sr-only">Next</span></a></li></ul></nav></div></div><div class="row"><div id="thumbs" class="span12 w-100"></div></div><div class="row"><div class="col-lg"><nav aria-label="" class="float-right"><ul class="pagination pagination-right"><li class="page-item"><a class="page-link" id="xprev" href="#" aria-label="Previous"><span aria-hidden="true">«</span> <span class="sr-only">Previous</span></a></li><li class="page-item active"><a class="page-link" id="pp1" href="#">1</a></li><li class="page-item"><a class="page-link" id="pp2" href="#">2</a></li><li class="page-item"><a class="page-link" id="pp3" href="#">3</a></li><li class="page-item"><a class="page-link" id="pp4" href="#">4</a></li><li class="page-item"><a class="page-link" id="pp5" href="#">5</a></li><li class="page-item"><a class="page-link" id="xnext" href="#" aria-label="Next"><span aria-hidden="true">»</span> <span class="sr-only">Next</span></a></li></ul></nav></div></div></div></div><footer id="footer"><div class="container text-center"><span class="d-flex justify-content-center"><a class="nav-link ftright footer-icons footLang" href="https://twitter.com/ixchats" rel="noopener" target="_blank"><img src="https://xat.com/content/web/R00221/img/navbar/x.svg" width="15" alt="x"> </a><a class="nav-link ftright footer-icons footLang" href="https://facebook.com/ixchats" rel="noopener" target="_blank"><img src="https://xat.com/content/web/R00221/img/navbar/facebook_white.svg" width="18" alt="facebook"> </a><a class="nav-link ftlast footer-icons footLang fInsta" href="https://instagram.com/ixchats" rel="noopener" target="_blank"><img src="https://xat.com/content/web/R00221/img/navbar/instagram_white.svg" width="18" alt="instagram"> </a></span><span><a href="/privacy.html"><span>privacy/cookies</span></a> <span>•</span> <a href="/terms.html" rel="noopener" target="_blank"><span>terms of service</span></a> <span>•</span> <a href="/safety.html" rel="noopener" target="_blank"><span>safety</span></a> <span>•</span> <span>© <span id="copyrightyear">2024</span> ixchats</span></span></div></footer><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script><script>// Set copyright year
+        document.getElementById('copyrightyear').textContent = new Date().getFullYear();
+
+        // Real chat groups - only the ones we've actually created
+        const groupsData = [
+            { name: 'Lobby', description: 'Main lobby and welcome room - Join the ixchats community', users: 8, category: 'featured', image: 'https://xat.com/content/web/R00221/img/xatplanet.svg' },
+            { name: 'Help', description: 'Help and support center - Get assistance with ixchats', users: 4, category: 'supported', image: 'https://xat.com/content/web/R00221/img/xatplanet.svg' },
+            { name: 'Test', description: 'Testing and development room - Try out new features', users: 2, category: 'featured', image: 'https://xat.com/content/web/R00221/img/xatplanet.svg' },
+            { name: 'Chat', description: 'General chat and discussion - Join the conversation', users: 5, category: 'popular', image: 'https://xat.com/content/web/R00221/img/xatplanet.svg' }
+        ];
+
+        // Function to render groups
+        function renderGroups(category = 'featured') {
+            const thumbsContainer = document.getElementById('thumbs');
+            const filteredGroups = groupsData.filter(group => group.category === category);
             
-            .nav {
-                display: none;
-            }
-        }</style><script defer="defer" src="js/vendors.a5214367fc20e0483d1f.js"></script><script defer="defer" src="js/main.b2c4202b1fc75ec05266.js"></script><script defer="defer" src="js/AuthenticFlashChat.31d6cfe0d16ae931b73c.js"></script><link href="css/vendors.8eda02661e116c35eb02.css" rel="stylesheet"></head><body><div class="header"><div class="header-content"><a href="/" class="logo">xat</a><ul class="nav"><li class="dropdown"><a href="/"><strong>Home</strong> <span>Main-Chat</span></a><ul><li><a href="/doodle.html"><strong>Doodle</strong> Game</a></li><li><a href="/trade.html"><strong>Flash</strong> Trade</a></li><li><a href="/mobile.html"><strong>Mobile</strong> Chat</a></li></ul></li><li><a href="/powers.html"><strong>Powers</strong><span>Buy Powers!</span></a></li><li class="dropdown"><a href="/trade.html"><strong>Trade</strong> <span>Sell/List Powers</span></a><ul><li><a href="/trade.html"><strong>Buy</strong> Powers</a></li><li><a href="/trade.html?action=list"><strong>Sell</strong> Powers</a></li><li><a href="/trade.html"><strong>Flash</strong> Trade</a></li></ul></li><li class="dropdown"><a href="/groups.html"><strong>Groups</strong> <span>Edit Group/Create</span></a><ul><li><a href="/create.html"><strong>Create</strong> Group</a></li><li><a href="/edit.html"><strong>Edit</strong> Group</a></li></ul></li><li><a href="/auth.html"><strong>Login</strong><span>Register/Login!</span></a></li><li><a href="/profile.html"><strong>Profile</strong><span>My Account</span></a></li><li><a href="/donate.html"><strong>Donate</strong><span>Support us!</span></a></li></ul></div></div><div class="main-content"><div class="news-notice"><h3>🎭 Welcome to xat.com Recreation!</h3><p><strong>Latest Update:</strong> All 325+ authentic powers from the original Ixat Files are now fully functional!</p><p><strong>Featured Powers:</strong> Purple Pawn (22,500 xats), Gold (50,000 xats), Everypower (2.1B xats)</p><p><strong>New Features:</strong> Real-time chat, Xavi avatars, power effects, trading system, and more!</p></div><div class="layout"><div class="main-area"><div class="chat-embed"><div class="chat-header"><span style="color: #0066cc;">Main Chat</span> <span style="color: #999999;">Users: <span id="user-count">0</span></span></div><div class="chat-container" id="mainChatEmbed"><div class="loading">Loading chat...</div></div></div></div><div class="sidebar"><div class="sidebar-block"><div class="sidebar-header"><h4>📊 Server Stats</h4></div><div class="sidebar-content"><div class="stats"><div class="stat-item"><div class="stat-value" id="online-users">-</div><div class="stat-label">Online</div></div><div class="stat-item"><div class="stat-value" id="total-rooms">-</div><div class="stat-label">Rooms</div></div><div class="stat-item"><div class="stat-value">325+</div><div class="stat-label">Powers</div></div><div class="stat-item"><div class="stat-value" id="active-rooms">-</div><div class="stat-label">Active</div></div></div></div></div><div class="sidebar-block"><div class="sidebar-header"><h4>🏠 Get a Chat</h4></div><div class="sidebar-content"><p><a href="/create.html">⚡ Create Your Own Chat</a></p><p><a href="/groups.html">👥 Join Groups</a></p><p><a href="/popular.html">🔥 Popular Chats</a></p></div></div><div class="sidebar-block"><div class="sidebar-header"><h4>🕒 Recent Chats</h4></div><div class="sidebar-content"><div class="recent-chats" id="recent-chats"><div class="chat-preview"><img src="https://via.placeholder.com/158x107/333333/666666?text=Chat" alt="Chat"><div class="name">Main Chat</div></div><div class="chat-preview"><img src="https://via.placeholder.com/158x107/333333/666666?text=Chat" alt="Chat"><div class="name">Lobby</div></div></div></div></div><div class="sidebar-block"><div class="sidebar-header"><h4>🏠 Popular Rooms</h4></div><div class="sidebar-content"><ul class="room-list" id="popular-rooms"><li><a href="/chat.html">🎭 Main Chat</a></li><li><a href="/chat.html?room=lobby">🏛️ Lobby</a></li><li><a href="/chat.html?room=chillzone">😌 ChillZone</a></li><li><a href="/chat.html?room=trading">💎 Trading</a></li><li><a href="/chat.html?room=music">🎵 Music</a></li></ul></div></div><div class="sidebar-block"><div class="sidebar-header"><h4>🔗 Quick Links</h4></div><div class="sidebar-content"><p><a href="/powers.html">⚡ Buy Powers</a></p><p><a href="/trade.html">💎 Trade Powers</a></p><p><a href="/groups.html">🏠 Create Group</a></p><p><a href="/profile.html">👤 My Profile</a></p><p><a href="/help.html">❓ Help & Rules</a></p></div></div><div class="sidebar-block"><div class="sidebar-header"><h4>⭐ Featured Powers</h4></div><div class="sidebar-content"><p>💜 Purple Pawn<br><small>22,500 xats</small></p><p>🥇 Gold<br><small>50,000 xats</small></p><p>💎 Diamond<br><small>738 xats</small></p><p>❤️ Heart<br><small>597 xats</small></p><p>👼 Angel<br><small>10,000 xats</small></p><p>🌟 Everypower<br><small>2.1B xats</small></p></div></div></div></div></div><div class="footer"><p>&copy; 2024 xat.com Recreation - Authentic 2014 Experience</p><p>All powers, avatars, and features from the original Ixat Files</p></div><script src="/socket.io/socket.io.js"></script><script src="/js/IxatChatSystem.js"></script><script>document.addEventListener('DOMContentLoaded', function() {
+            thumbsContainer.innerHTML = '';
+            
+                         filteredGroups.forEach(group => {
+                 const groupCard = document.createElement('div');
+                 groupCard.className = 'col-lg-4 col-md-6';
+                 
+                 // All our groups have dedicated pages now
+                 let groupLink = '/' + group.name.toLowerCase() + '.html';
+                 
+                 groupCard.innerHTML = `
+                     <div class="group-card" onclick="window.location.href='${groupLink}'">
+                         <div class="group-thumbnail">
+                             <img src="${group.image}" alt="${group.name}" onerror="this.src='https://xat.com/content/web/R00221/img/xatplanet.svg'">
+                         </div>
+                         <div class="group-name">${group.name}</div>
+                         <div class="group-description">${group.description}</div>
+                         <div class="group-stats">
+                             <span>Active now</span>
+                             <span class="group-users">${group.users}</span>
+                         </div>
+                     </div>
+                 `;
+                 thumbsContainer.appendChild(groupCard);
+             });
+        }
 
-            // Initialize the authentic chat system
-            window.mainChat = createIxatChat('mainChatEmbed', {
-                width: 728,
-                height: 486,
-                roomId: 'main',
-                roomName: 'Main Chat',
-                background: '',
-                radio: '',
-                buttonColor: '#0066cc',
-                attached: '',
-                scroller: ''
+        // Initialize groups
+        renderGroups();
+
+        // Tab switching
+        document.getElementById('xfeatured').addEventListener('click', function(e) {
+            e.preventDefault();
+            setActiveTab('xfeatured');
+            renderGroups('featured');
+        });
+
+        document.getElementById('xpopular').addEventListener('click', function(e) {
+            e.preventDefault();
+            setActiveTab('xpopular');
+            renderGroups('popular');
+        });
+
+        document.getElementById('xsupported').addEventListener('click', function(e) {
+            e.preventDefault();
+            setActiveTab('xsupported');
+            renderGroups('supported');
+        });
+
+        document.getElementById('xgames').addEventListener('click', function(e) {
+            e.preventDefault();
+            setActiveTab('xgames');
+            renderGroups('games');
+        });
+
+        function setActiveTab(activeId) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.homenav .nav-link').forEach(tab => {
+                tab.classList.remove('active');
             });
+            // Add active class to clicked tab
+            document.getElementById(activeId).classList.add('active');
+        }
 
-            // Load server stats
-            function loadStats() {
-                fetch('/api/stats')
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('online-users').textContent = data.onlineUsers || '0';
-                        document.getElementById('total-rooms').textContent = data.totalRooms || '0';
-                        document.getElementById('active-rooms').textContent = data.activeRooms || '0';
-                    })
-                    .catch(error => {
-                        console.log('Stats loading failed:', error);
-                    });
-            }
+                // Search functionality
+        document.getElementById('searchBox').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const allGroups = groupsData.filter(group => 
+                group.name.toLowerCase().includes(searchTerm) || 
+                group.description.toLowerCase().includes(searchTerm)
+            );
+            
+            const thumbsContainer = document.getElementById('thumbs');
+            thumbsContainer.innerHTML = '';
+            
+                         allGroups.forEach(group => {
+                const groupCard = document.createElement('div');
+                groupCard.className = 'col-lg-4 col-md-6';
+                
+                // All our groups have dedicated pages now
+                let groupLink = '/' + group.name.toLowerCase() + '.html';
+                
+                groupCard.innerHTML = `
+                    <div class="group-card" onclick="window.location.href='${groupLink}'">
+                        <div class="group-thumbnail">
+                            <img src="${group.image}" alt="${group.name}" onerror="this.src='https://xat.com/content/web/R00221/img/xatplanet.svg'">
+                        </div>
+                        <div class="group-name">${group.name}</div>
+                        <div class="group-description">${group.description}</div>
+                        <div class="group-stats">
+                            <span>Active now</span>
+                            <span class="group-users">${group.users}</span>
+                        </div>
+                    </div>
+                `;
+                thumbsContainer.appendChild(groupCard);
+            });
+        });
 
-            // Load popular rooms
-            function loadPopularRooms() {
-                fetch('/api/rooms?sort=popular&limit=5')
-                    .then(response => response.json())
-                    .then(data => {
-                        const roomList = document.getElementById('popular-rooms');
-                        if (data.rooms && data.rooms.length > 0) {
-                            roomList.innerHTML = '';
-                            data.rooms.forEach(room => {
-                                const li = document.createElement('li');
-                                li.innerHTML = `<a href="/chat.html?room=${room.id}">🏠 ${room.name}</a>`;
-                                roomList.appendChild(li);
-                            });
+        // Check authentication status and update navbar
+        async function checkAuthStatus() {
+            const token = localStorage.getItem('authToken');
+            const authLink = document.getElementById('authLink');
+            const profileLink = document.getElementById('profileLink');
+            
+            if (token) {
+                try {
+                    const response = await fetch('/api/auth/status?token=' + token);
+                    const data = await response.json();
+                    
+                    if (response.ok && data.user) {
+                        // User is authenticated
+                        if (authLink) authLink.style.display = 'none';
+                        if (profileLink) profileLink.style.display = 'inline-block';
+                        console.log('🎭 [HOME] User authenticated:', data.user.username);
+                        
+                        // Send auth update to iframe
+                        const embedframe = document.getElementById('embedframe');
+                        if (embedframe && embedframe.contentWindow) {
+                            try {
+                                embedframe.contentWindow.postMessage({
+                                    type: 'AUTH_UPDATE',
+                                    token: token,
+                                    user: data.user
+                                }, '*');
+                                console.log('🎭 [HOME] Sent auth update to iframe on page load');
+                            } catch (e) {
+                                console.log('🎭 [HOME] Could not send message to iframe');
+                            }
                         }
-                    })
-                    .catch(error => {
-                        console.log('Rooms loading failed:', error);
-                    });
+                    } else {
+                        // Token invalid, remove it
+                        if (authLink) authLink.style.display = 'inline-block';
+                        if (profileLink) profileLink.style.display = 'none';
+                        localStorage.removeItem('authToken');
+                        console.log('🎭 [HOME] Token invalid, removed');
+                    }
+                } catch (error) {
+                    console.error('🎭 [HOME] Auth check error:', error);
+                    if (authLink) authLink.style.display = 'inline-block';
+                    if (profileLink) profileLink.style.display = 'none';
+                    localStorage.removeItem('authToken');
+                }
+            } else {
+                if (authLink) authLink.style.display = 'inline-block';
+                if (profileLink) profileLink.style.display = 'none';
             }
+        }
 
-            // Load recent chats
-            function loadRecentChats() {
-                fetch('/api/rooms?sort=recent&limit=4')
-                    .then(response => response.json())
-                    .then(data => {
-                        const recentContainer = document.getElementById('recent-chats');
-                        if (data.rooms && data.rooms.length > 0) {
-                            recentContainer.innerHTML = '';
-                            data.rooms.forEach(room => {
-                                const div = document.createElement('div');
-                                div.className = 'chat-preview';
-                                div.innerHTML = `
-                                    <img src="${room.background || 'https://via.placeholder.com/158x107/333333/666666?text=Chat'}" alt="${room.name}">
-                                    <div class="name">${room.name}</div>
-                                `;
-                                div.onclick = () => window.open(`/chat.html?room=${room.id}`, '_blank');
-                                recentContainer.appendChild(div);
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.log('Recent chats loading failed:', error);
-                    });
+        // Check auth status on page load
+        checkAuthStatus();
+        
+        // Listen for authentication messages from iframes
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'AUTH_SUCCESS') {
+                console.log('🎭 [HOME] Received auth success from iframe:', event.data);
+                
+                // Store the auth token
+                localStorage.setItem('authToken', event.data.token);
+                
+                // Update the navbar to show user is logged in
+                const authLink = document.getElementById('authLink');
+                const profileLink = document.getElementById('profileLink');
+                
+                if (authLink) authLink.style.display = 'none';
+                if (profileLink) profileLink.style.display = 'inline-block';
+                
+                // Send auth update to all iframes
+                const embedframe = document.getElementById('embedframe');
+                if (embedframe && embedframe.contentWindow) {
+                    try {
+                        embedframe.contentWindow.postMessage({
+                            type: 'AUTH_UPDATE',
+                            token: event.data.token,
+                            user: event.data.user
+                        }, '*');
+                        console.log('🎭 [HOME] Sent auth update to iframe');
+                    } catch (e) {
+                        console.log('🎭 [HOME] Could not send message to iframe');
+                    }
+                }
+                
+                // Refresh the iframe to show authenticated state
+                if (embedframe) {
+                    embedframe.src = embedframe.src;
+                }
+                
+                console.log('🎭 [HOME] Authentication state updated, iframe refreshed');
+            } else if (event.data && event.data.type === 'AUTH_LOGOUT') {
+                console.log('🎭 [HOME] Received logout message from iframe');
+                
+                // Remove the auth token
+                localStorage.removeItem('authToken');
+                
+                // Update the navbar to show user is logged out
+                const authLink = document.getElementById('authLink');
+                const profileLink = document.getElementById('profileLink');
+                
+                if (authLink) authLink.style.display = 'inline-block';
+                if (profileLink) profileLink.style.display = 'none';
+                
+                // Refresh the iframe to show unauthenticated state
+                const embedframe = document.getElementById('embedframe');
+                if (embedframe) {
+                    embedframe.src = embedframe.src;
+                }
+                
+                console.log('🎭 [HOME] Logout processed, iframe refreshed');
             }
-
-            // Initial load
-            loadStats();
-            loadPopularRooms();
-            loadRecentChats();
-
-            // Refresh stats every 30 seconds
-            setInterval(loadStats, 30000);
         });</script></body></html>
