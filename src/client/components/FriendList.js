@@ -1,34 +1,29 @@
 import DOMPurify from 'dompurify';
 import bus from '../eventBus.js';
 
-export default function createFriendList(initial = []) {
-  const wrap = document.createElement('div');
-  wrap.className = 'friendlist p-2 space-y-1';
+export default class TradePanel {
+  static container = null;
 
-  const title = document.createElement('div');
-  title.textContent = 'Friends';
-  title.className = 'font-semibold mb-1';
-
-  const list = document.createElement('ul');
-  list.className = 'space-y-1';
-
-  function render(friends) {
-    list.innerHTML = '';
-    friends.forEach(f => {
-      const li = document.createElement('li');
-      li.className = 'flex items-center justify-between gap-2';
-      const name = document.createElement('span');
-      name.textContent = f.name;
-      const msg = document.createElement('button');
-      msg.textContent = 'Message';
-      msg.className = 'px-2 py-1 rounded-lg border';
-      msg.addEventListener('click', () => bus.emit('friends:message', { id: f.id }));
-      li.append(name, msg);
-      list.appendChild(li);
-    });
+  static init(parent) {
+    this.container = document.createElement("div");
+    this.container.className = "trade-panel p-3 rounded-xl shadow bg-white";
+    parent.appendChild(this.container);
   }
 
-  render(initial);
-  wrap.append(title, list);
-  return { el: wrap, render };
+  static render(items = []) {
+    if (!this.container) return;
+    this.container.innerHTML = "<h2 class='font-bold text-lg mb-2'>Trade</h2>";
+
+    const list = document.createElement("div");
+    list.className = "grid grid-cols-2 gap-2";
+
+    items.forEach(item => {
+      const entry = document.createElement("div");
+      entry.className = "border rounded p-2 text-sm hover:bg-gray-50 cursor-pointer";
+      entry.innerText = `${item.name} (x${item.count})`;
+      list.appendChild(entry);
+    });
+
+    this.container.appendChild(list);
+  }
 }
