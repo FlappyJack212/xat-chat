@@ -114,14 +114,14 @@ npm run dev
 - **Authentication**: http://localhost:8000/auth.html
 
 ### **Current Working Features**
-✅ **Guest User Support** - Shows guest users when not logged in
-✅ **User Authentication** - Login/register system
-✅ **iXat Ranking System** - `f` flag based ranking (Guest, Main Owner, Mod, Member, VIP, etc.)
-✅ **Real-time Chat** - WebSocket communication
-✅ **Powers System** - 325+ powers with store
-✅ **Advanced Moderation** - Warnings, mutes, kicks, bans
-✅ **Chat Management** - Create, edit, join chat rooms
-✅ **Groups System** - Create and manage user groups
+✅ **Guest User Support** - Shows guest users when not logged in<br>
+✅ **User Authentication** - Login/register system<br>
+✅ **iXat Ranking System** - `f` flag based ranking (Guest, Main Owner, Mod, Member, VIP, etc.)<br>
+✅ **Real-time Chat** - WebSocket communication<br>
+✅ **Powers System** - 325+ powers with store<br>
+✅ **Advanced Moderation** - Warnings, mutes, kicks, bans<br>
+✅ **Chat Management** - Create, edit, join chat rooms<br>
+✅ **Groups System** - Create and manage user groups<br>
 
 ## 🎯 **SYSTEM COMPONENTS**
 
