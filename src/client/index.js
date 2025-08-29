@@ -1,11 +1,12 @@
 import './css/normalize.css';
 import './css/main.css';
+import DOMPurify from 'dompurify';
 
 // Notification system
 const showNotification = (message, type = 'info') => {
   const notification = document.createElement('div');
   notification.className = `notification ${type}`;
-  notification.innerHTML = `
+  notification.innerHTML = DOMPurify.sanitize(`
     <div class="notification-content">
       <span class="notification-message">${message}</span>
       <button class="notification-close">&times;</button>
