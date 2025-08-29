@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 import bus from '../eventBus.js';
 
 export default function createFriendList(initial = []) {
