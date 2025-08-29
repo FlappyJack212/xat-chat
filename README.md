@@ -121,7 +121,7 @@ npm install
 net start MongoDB
 
 # On macOS/Linux
-sudo systemctl start mongod
+sudo systemctl start mongodb
 ```
 
 3. For configuration, create a `.env` file in the root directory:
