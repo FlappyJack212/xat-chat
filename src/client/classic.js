@@ -2,6 +2,7 @@ import io from 'socket.io-client';
 import './css/normalize.css';
 import './css/main.css';
 import './css/chat.css';
+import bus from './eventBus.js';
 import DOMPurify from 'dompurify';
 
 class AuthenticXatClassic {
@@ -808,3 +809,5 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+// Hook: bridge classic send to new UI bus
+try { window.sendMessage && (window.__origSendMessage = window.sendMessage, window.sendMessage = function(){ bus.emit('chat:send', { text: arguments[0] }); return window.__origSendMessage.apply(this, arguments); }); } catch(e) {}
