@@ -1,11 +1,32 @@
 import './css/normalize.css';
 import './css/main.css';
+import DOMPurify from 'dompurify';
+import bus from './eventBus.js';
+import createChatBox, { renderMessage } from './components/ChatBox.js';
+import createFriendList from './components/FriendList.js';
+import createTradePanel from './components/TradePanel.js';
+import FriendList from "./components/FriendList.js";
+import TradePanel from "./components/TradePanel.js";
+import XaviPanel from "./components/XaviPanel.js";
+import BlastSystem from "./components/BlastSystem.js";
+import RoomPanel from "./components/RoomPanel.js";
+
+// Bootstrapping
+document.addEventListener("DOMContentLoaded", () => {
+  const app = document.getElementById("app");
+
+  FriendList.init(app);
+  TradePanel.init(app);
+  XaviPanel.init(app);
+  BlastSystem.init(app);
+  RoomPanel.init(app);
+});
 
 // Notification system
 const showNotification = (message, type = 'info') => {
   const notification = document.createElement('div');
   notification.className = `notification ${type}`;
-  notification.innerHTML = `
+  notification.innerHTML = DOMPurify.sanitize(`
     <div class="notification-content">
       <span class="notification-message">${message}</span>
       <button class="notification-close">&times;</button>
@@ -450,3 +471,63 @@ document.addEventListener('DOMContentLoaded', () => {
   loadPopularRooms();
   initCarousel();
 });
+
+// ---- App bootstrap (modular UI) ----
+function ensureAppRoot() {
+  let root = document.getElementById('app');
+  if (!root) {
+    root = document.createElement('div');
+    root.id = 'app';
+    document.body.appendChild(root);
+  }
+  return root;
+}
+
+function mountUI() {
+  const root = ensureAppRoot();
+
+  // Layout
+  const shell = document.createElement('div');
+  shell.className = 'grid grid-cols-4 gap-4 p-4';
+
+  const colChat = document.createElement('div');
+  colChat.className = 'col-span-3 rounded-2xl shadow p-2 flex flex-col gap-2';
+
+  const messages = document.createElement('div');
+  messages.id = 'messages';
+  messages.className = 'flex-1 overflow-auto space-y-1';
+
+  const chatBox = createChatBox();
+  colChat.append(messages, chatBox);
+
+  const colSide = document.createElement('div');
+  colSide.className = 'col-span-1 space-y-4';
+
+  const friendList = createFriendList([]);
+  const tradePanel = createTradePanel();
+  colSide.append(friendList.el, tradePanel.el);
+
+  shell.append(colChat, colSide);
+  root.appendChild(shell);
+
+  // Wire bus events (minimal demo)
+  bus.on('chat:send', (e) => {
+    const { text } = e.detail || {};
+    const row = renderMessage({ user: 'You', text });
+    messages.appendChild(row);
+    messages.scrollTop = messages.scrollHeight;
+  });
+
+  // Example friend event to open PM (placeholder)
+  bus.on('friends:message', (e) => {
+    console.log('Open PM with', e.detail);
+  });
+
+  return { messages, friendList, tradePanel };
+}
+
+// Ensure UI is mounted once
+if (!window.__XAT_UI_MOUNTED__) {
+  window.__XAT_UI_MOUNTED__ = true;
+  try { mountUI(); } catch (e) { console.error('UI mount failed', e); }
+}

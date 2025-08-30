@@ -2,6 +2,8 @@ import io from 'socket.io-client';
 import './css/normalize.css';
 import './css/main.css';
 import './css/chat.css';
+import bus from './eventBus.js';
+import DOMPurify from 'dompurify';
 
 class AuthenticXatClassic {
   constructor() {
@@ -268,12 +270,12 @@ class AuthenticXatClassic {
   loadSmilies() {
     if (!this.smileyBar) return;
     
-    this.smileyBar.innerHTML = '';
+    this.smileyBar.innerHTML = DOMPurify.sanitize '';
     Object.entries(this.SMILEYS).forEach(([code, emoji]) => {
       const smileyElement = document.createElement('div');
       smileyElement.className = 'xat-smiley-item';
       smileyElement.dataset.smiley = code;
-      smileyElement.innerHTML = emoji;
+      smileyElement.innerHTML = DOMPurify.sanitize emoji;
       smileyElement.title = code;
       this.smileyBar.appendChild(smileyElement);
     });
@@ -396,7 +398,7 @@ class AuthenticXatClassic {
     if (data.type === 'action') {
       // Action message (/me)
       messageElement.classList.add('xat-system-message');
-      messageElement.innerHTML = `
+      messageElement.innerHTML = DOMPurify.sanitize `
         <div class="xat-message-content">
           <em>${data.username || 'Anonymous'} ${this.formatMessage(data.content)}</em>
         </div>
@@ -404,7 +406,7 @@ class AuthenticXatClassic {
     } else if (data.type === 'system') {
       // System message
       messageElement.classList.add('xat-system-message');
-      messageElement.innerHTML = `
+      messageElement.innerHTML = DOMPurify.sanitize `
         <div class="xat-message-content">
           ${this.formatMessage(data.content)}
         </div>
@@ -419,7 +421,7 @@ class AuthenticXatClassic {
         formattedContent = `<span class="${this.POWER_EFFECTS[data.power]}">${messageContent}</span>`;
       }
     
-    messageElement.innerHTML = `
+    messageElement.innerHTML = DOMPurify.sanitize `
         <div class="xat-message-header">
           <span class="xat-username">${data.username || 'Anonymous'}</span>
           <span class="xat-timestamp">${timestamp}</span>
@@ -455,7 +457,7 @@ class AuthenticXatClassic {
   handleUserJoin(data) {
     const joinElement = document.createElement('div');
     joinElement.className = 'xat-message xat-join-message';
-    joinElement.innerHTML = `
+    joinElement.innerHTML = DOMPurify.sanitize `
       <div class="xat-message-content">
         <strong>${data.username || 'Anonymous'}</strong> joined the room
       </div>
@@ -469,7 +471,7 @@ class AuthenticXatClassic {
   handleUserLeave(data) {
     const leaveElement = document.createElement('div');
     leaveElement.className = 'xat-message xat-leave-message';
-    leaveElement.innerHTML = `
+    leaveElement.innerHTML = DOMPurify.sanitize `
       <div class="xat-message-content">
         <strong>${data.username || 'Anonymous'}</strong> left the room
       </div>
@@ -485,7 +487,7 @@ class AuthenticXatClassic {
     this.socket.emit('room:join', roomId);
     
     // Clear messages
-    this.messageList.innerHTML = '';
+    this.messageList.innerHTML = DOMPurify.sanitize '';
     
     // Add welcome message
     this.addWelcomeMessage();
@@ -499,7 +501,7 @@ class AuthenticXatClassic {
   addWelcomeMessage() {
     const welcomeElement = document.createElement('div');
     welcomeElement.className = 'xat-welcome';
-    welcomeElement.innerHTML = `
+    welcomeElement.innerHTML = DOMPurify.sanitize `
       <h2>🎭 Welcome to Xat Classic! 🎭</h2>
       <p>Experience the authentic xat.com chat from 2007-2016</p>
       <div class="xat-features">
@@ -517,7 +519,7 @@ class AuthenticXatClassic {
   addSystemMessage(message) {
     const systemElement = document.createElement('div');
     systemElement.className = 'xat-message xat-system-message';
-    systemElement.innerHTML = `
+    systemElement.innerHTML = DOMPurify.sanitize `
       <div class="xat-message-content">
         ${this.formatMessage(message)}
       </div>
@@ -573,7 +575,7 @@ class AuthenticXatClassic {
     // Add visual effect to the chat
     const effectElement = document.createElement('div');
     effectElement.className = `xat-power-effect ${data.power}`;
-    effectElement.innerHTML = `${data.icon || '✨'} ${data.username || 'Someone'} used ${data.power}!`;
+    effectElement.innerHTML = DOMPurify.sanitize `${data.icon || '✨'} ${data.username || 'Someone'} used ${data.power}!`;
     effectElement.style.cssText = `
       position: fixed;
       top: 50%;
@@ -655,7 +657,7 @@ class AuthenticXatClassic {
     this.profileFields.style.display = 'block';
     
     // Set up own profile actions
-    this.profileActions.innerHTML = `
+    this.profileActions.innerHTML = DOMPurify.sanitize `
       <button class="xat-profile-btn" onclick="this.settings()">⚙️ Settings</button>
       <button class="xat-profile-btn" onclick="this.divorce()">💔 Divorce</button>
       <button class="xat-profile-btn" onclick="this.xatStore()">🛍️ xat Store</button>
@@ -679,7 +681,7 @@ class AuthenticXatClassic {
     this.profileFields.style.display = 'none';
     
     // Set up other user actions
-    this.profileActions.innerHTML = `
+    this.profileActions.innerHTML = DOMPurify.sanitize `
       <button class="xat-profile-btn" onclick="this.privateChat()">💬 Private Chat</button>
       <button class="xat-profile-btn" onclick="this.privateMessage()">📨 Private Message</button>
       <button class="xat-profile-btn" onclick="this.addFriend()">➕ Add as Friend</button>
@@ -713,7 +715,7 @@ class AuthenticXatClassic {
   }
 
   clearChat() {
-    this.messageList.innerHTML = '';
+    this.messageList.innerHTML = DOMPurify.sanitize '';
     this.addWelcomeMessage();
   }
 
@@ -748,11 +750,11 @@ You can also use smilies like :D :) :P <3 in your messages!
       { username: 'MusicLover', avatar: '🎵', status: 'online' }
     ];
     
-    this.userList.innerHTML = '';
+    this.userList.innerHTML = DOMPurify.sanitize '';
     demoUsers.forEach(user => {
       const userElement = document.createElement('div');
       userElement.className = 'xat-user-item';
-      userElement.innerHTML = `
+      userElement.innerHTML = DOMPurify.sanitize `
         <div class="xat-user-avatar">${user.avatar}</div>
         <div class="xat-user-name">${user.username}</div>
         <div class="xat-user-status" style="background: ${user.status === 'online' ? 'var(--xat-green)' : 'var(--xat-yellow)'}"></div>
@@ -807,3 +809,5 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+// Hook: bridge classic send to new UI bus
+try { window.sendMessage && (window.__origSendMessage = window.sendMessage, window.sendMessage = function(){ bus.emit('chat:send', { text: arguments[0] }); return window.__origSendMessage.apply(this, arguments); }); } catch(e) {}
