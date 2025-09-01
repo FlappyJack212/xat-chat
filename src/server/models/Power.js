@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const powerSchema = new mongoose.Schema({
-    // Basic power information
     name: {
         type: String,
         required: true,
@@ -18,8 +17,6 @@ const powerSchema = new mongoose.Schema({
         default: '',
         maxlength: 200
     },
-    
-    // Power categorization
     section: {
         type: String,
         required: true,
@@ -31,8 +28,6 @@ const powerSchema = new mongoose.Schema({
         required: true,
         min: 1
     },
-    
-    // Power properties
     cost: {
         type: Number,
         required: true,
@@ -57,11 +52,9 @@ const powerSchema = new mongoose.Schema({
     },
     amount: {
         type: Number,
-        default: -1, // -1 means unlimited
+        default: -1,
         min: -1
     },
-    
-    // Power types
     allpowers: {
         type: Boolean,
         default: false
@@ -87,39 +80,20 @@ const powerSchema = new mongoose.Schema({
         enum: ['epic', 'game', 'group', 'moderation', 'chat', 'utility'],
         default: 'utility'
     },
-    
-    // Power status
     status: {
         type: String,
         enum: ['active', 'Available', 'Limited', 'Unavailable', 'Coming Soon'],
         default: 'Available'
     },
-    
-    // Power effects and features
     effects: [{
         type: String,
         enum: ['text', 'avatar', 'sound', 'visual', 'game', 'moderation', 'social', 'temporary_all_powers', 'modify_xats', 'grant_power', '8ball_response', 'play_music', 'create_group', 'manage_group', 'kick_user', 'ban_user', 'mute_user', 'extended_smilies', 'chat_colors', 'transfer_xats', 'trade_items']
     }],
-    
-    // Power cooldowns
     cooldowns: {
-        personal: {
-            type: Number,
-            default: 0
-        },
-        global: {
-            type: Number,
-            default: 0
-        }
+        personal: { type: Number, default: 0 },
+        global: { type: Number, default: 0 }
     },
-    
-    // Smileys and visual elements
-    smileys: [{
-        type: String,
-        trim: true
-    }],
-    
-    // Power requirements
+    smileys: [{ type: String, trim: true }],
     requirements: {
         rank: {
             type: String,
@@ -131,88 +105,31 @@ const powerSchema = new mongoose.Schema({
             enum: ['guest', 'member', 'moderator', 'owner', 'mainowner'],
             default: 'guest'
         },
-        minXats: {
-            type: Number,
-            default: 0
-        },
-        minDays: {
-            type: Number,
-            default: 0
-        }
+        minXats: { type: Number, default: 0 },
+        minDays: { type: Number, default: 0 }
     },
-    
-    // Power cooldowns and limitations
-    cooldown: {
-        type: Number,
-        default: 0, // in seconds
-        min: 0
-    },
-    maxUses: {
-        type: Number,
-        default: -1, // -1 means unlimited
-        min: -1
-    },
-    
-    // Power metadata
+    cooldown: { type: Number, default: 0, min: 0 },
+    maxUses: { type: Number, default: -1, min: -1 },
     category: {
         type: String,
         enum: ['basic', 'premium', 'epic', 'legendary', 'special'],
         default: 'basic'
     },
-    tags: [{
-        type: String,
-        trim: true
-    }],
-    
-    // Power availability
-    releaseDate: {
-        type: Date,
-        default: Date.now
-    },
-    endDate: {
-        type: Date,
-        default: null
-    },
-    
-    // Power statistics
-    totalSold: {
-        type: Number,
-        default: 0,
-        min: 0
-    },
-    totalUsed: {
-        type: Number,
-        default: 0,
-        min: 0
-    },
-    
-    // Power configuration
-    config: {
-        type: mongoose.Schema.Types.Mixed,
-        default: {}
-    },
-    
-    // Power images and assets
+    tags: [{ type: String, trim: true }],
+    releaseDate: { type: Date, default: Date.now },
+    endDate: { type: Date, default: null },
+    totalSold: { type: Number, default: 0, min: 0 },
+    totalUsed: { type: Number, default: 0, min: 0 },
+    config: { type: mongoose.Schema.Types.Mixed, default: {} },
     images: {
         icon: String,
         preview: String,
         banner: String
     },
-    
-    // Power documentation
-    wiki: {
-        type: String,
-        default: ''
-    },
-    help: {
-        type: String,
-        default: ''
-    }
-}, {
-    timestamps: true
-});
+    wiki: { type: String, default: '' },
+    help: { type: String, default: '' }
+}, { timestamps: true });
 
-// Indexes for performance
 powerSchema.index({ name: 1 });
 powerSchema.index({ section: 1, subid: 1 });
 powerSchema.index({ cost: 1 });
@@ -220,7 +137,6 @@ powerSchema.index({ status: 1 });
 powerSchema.index({ category: 1 });
 powerSchema.index({ 'requirements.minRank': 1 });
 
-// Instance methods
 powerSchema.methods.isAvailable = function() {
     if (!['Available', 'active'].includes(this.status)) return false;
     if (this.endDate && this.endDate < new Date()) return false;
@@ -232,33 +148,22 @@ powerSchema.methods.canBePurchasedBy = function(user) {
     if (!this.isAvailable()) return false;
     if (user.xats < this.cost) return false;
     if (user.days < this.requirements.minDays) return false;
-    
-    const rankHierarchy = {
-        'guest': 0,
-        'member': 1,
-        'moderator': 2,
-        'owner': 3,
-        'mainowner': 4
-    };
-    
+    const rankHierarchy = { 'guest': 0, 'member': 1, 'moderator': 2, 'owner': 3, 'mainowner': 4 };
     return rankHierarchy[user.rank] >= rankHierarchy[this.requirements.minRank];
 };
 
 powerSchema.methods.getBitwiseValue = function() {
-    // Convert section and subid to bitwise value for compatibility
-    const sectionIndex = parseInt(this.section.substring(1));
-    return Math.pow(2, this.subid - 1);
+    const sectionIndex = parseInt(this.section.substring(1)) || 0;
+    return 1 << (this.subid - 1);
 };
 
 powerSchema.methods.getFullBitwiseValue = function() {
-    // Get full bitwise value including section
-    const sectionIndex = parseInt(this.section.substring(1));
+    const sectionIndex = parseInt(this.section.substring(1)) || 0;
     return (sectionIndex << 32) | this.getBitwiseValue();
 };
 
-// Static methods
 powerSchema.statics.findBySection = function(section) {
-    return this.find({ section: section }).sort({ subid: 1 });
+    return this.find({ section }).sort({ subid: 1 });
 };
 
 powerSchema.statics.findAvailable = function() {
@@ -266,19 +171,15 @@ powerSchema.statics.findAvailable = function() {
 };
 
 powerSchema.statics.findByCategory = function(category) {
-    return this.find({ category: category });
+    return this.find({ category });
 };
 
 powerSchema.statics.findByCostRange = function(minCost, maxCost) {
-    return this.find({
-        cost: { $gte: minCost, $lte: maxCost }
-    });
+    return this.find({ cost: { $gte: minCost, $lte: maxCost } });
 };
 
 powerSchema.statics.findByRank = function(rank) {
-    return this.find({
-        'requirements.minRank': { $lte: rank }
-    });
+    return this.find({ 'requirements.minRank': { $lte: rank } });
 };
 
 powerSchema.statics.getPowerStats = async function() {
@@ -295,7 +196,6 @@ powerSchema.statics.getPowerStats = async function() {
             }
         }
     ]);
-    
     return stats[0] || {
         totalPowers: 0,
         totalCost: 0,
@@ -316,39 +216,20 @@ powerSchema.statics.getPowersBySection = async function() {
                 totalCost: { $sum: '$cost' }
             }
         },
-        {
-            $sort: { _id: 1 }
-        }
+        { $sort: { _id: 1 } }
     ]);
 };
 
-// Virtual fields
-powerSchema.virtual('isEpic').get(function() {
-    return this.epic;
-});
-
-powerSchema.virtual('isGame').get(function() {
-    return this.game;
-});
-
-powerSchema.virtual('isGroup').get(function() {
-    return this.group;
-});
-
-powerSchema.virtual('isLimited').get(function() {
-    return this.limited || this.amount > 0;
-});
-
-powerSchema.virtual('isUnlimited').get(function() {
-    return this.amount === -1;
-});
-
+powerSchema.virtual('isEpic').get(function() { return this.epic; });
+powerSchema.virtual('isGame').get(function() { return this.game; });
+powerSchema.virtual('isGroup').get(function() { return this.group; });
+powerSchema.virtual('isLimited').get(function() { return this.limited || this.amount > 0; });
+powerSchema.virtual('isUnlimited').get(function() { return this.amount === -1; });
 powerSchema.virtual('remainingAmount').get(function() {
     if (this.amount === -1) return 'Unlimited';
     return Math.max(0, this.amount - this.totalSold);
 });
 
-// JSON serialization
 powerSchema.methods.toJSON = function() {
     const power = this.toObject();
     power.bitwiseValue = this.getBitwiseValue();

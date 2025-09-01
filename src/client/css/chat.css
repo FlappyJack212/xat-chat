@@ -519,3 +519,30 @@
   padding: 1rem;
   font-style: italic;
 }
+
+
+/* */
+
+body {
+    font-family: Arial, sans-serif;
+}
+.table { display: table; }
+.row { display: table-row; }
+.cell { display: table-cell; }
+.full-size { width: 100%; height: 100%; }
+.frame { border: 1px solid #ccc; padding: 10px; }
+.smileyBar { display: flex; gap: 5px; }
+.textentry { min-height: 40px; outline: none; }
+.tabcontent { height: 100%; }
+.tab { display: flex; gap: 5px; }
+.listlinks { padding: 8px; cursor: pointer; }
+.listlinks.active { background-color: #4a90e2; color: white; }
+.svgBack { width: 32px; height: 32px; background-size: contain; }
+.smline { border-bottom: 1px solid #ccc; }
+.butcontainer { margin-top: 10px; }
+.mainButtons { padding: 8px 16px; cursor: pointer; }
+.input-container { display: flex; gap: 10px; }
+#messagesContainer { max-height: 500px; overflow-y: auto; }
+#messages li { padding: 8px; border-radius: 5px; }
+#idvisitors li, #idfriends li { display: flex; justify-content: space-between; align-items: center; }
+.hidden { display: none; }
