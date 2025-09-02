@@ -1,0 +1,89 @@
+<svg width="300" height="80" viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Glowing gradient -->
+    <radialGradient id="glowGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#00ffff;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#0080ff;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#0000ff;stop-opacity:0.1" />
+    </radialGradient>
+    
+    <!-- Neon text gradient -->
+    <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00ffff;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#0080ff;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8000ff;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#ff0080;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff4000;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Shadow gradient -->
+    <linearGradient id="shadowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:0.9" />
+      <stop offset="50%" style="stop-color:#1a0a2e;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:0.9" />
+    </linearGradient>
+    
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Matrix rain effect -->
+    <pattern id="matrixRain" x="0" y="0" width="20" height="100" patternUnits="userSpaceOnUse">
+      <rect width="2" height="100" fill="#00ff00" opacity="0.1">
+        <animate attributeName="opacity" values="0.1;0.8;0.1" dur="2s" repeatCount="indefinite"/>
+      </rect>
+    </pattern>
+  </defs>
+  
+  <!-- Background with matrix effect -->
+  <rect width="300" height="80" fill="url(#shadowGradient)"/>
+  <rect width="300" height="80" fill="url(#matrixRain)" opacity="0.3"/>
+  
+  <!-- Glowing background circle -->
+  <circle cx="40" cy="40" r="35" fill="url(#glowGradient)" opacity="0.3" filter="url(#glow)"/>
+  
+  <!-- Cyber hexagon -->
+  <polygon points="40,15 55,25 55,45 40,55 25,45 25,25" 
+           fill="none" 
+           stroke="url(#neonGradient)" 
+           stroke-width="2" 
+           filter="url(#glow)"/>
+  
+  <!-- Inner hexagon -->
+  <polygon points="40,20 50,27 50,37 40,44 30,37 30,27" 
+           fill="url(#neonGradient)" 
+           opacity="0.3"/>
+  
+  <!-- Network nodes -->
+  <circle cx="40" cy="40" r="3" fill="#00ffff" filter="url(#glow)"/>
+  <circle cx="30" cy="30" r="2" fill="#ff0080" filter="url(#glow)"/>
+  <circle cx="50" cy="30" r="2" fill="#ff0080" filter="url(#glow)"/>
+  <circle cx="30" cy="50" r="2" fill="#ff0080" filter="url(#glow)"/>
+  <circle cx="50" cy="50" r="2" fill="#ff0080" filter="url(#glow)"/>
+  
+  <!-- Connection lines -->
+  <line x1="40" y1="40" x2="30" y2="30" stroke="#00ffff" stroke-width="1" opacity="0.6" filter="url(#glow)"/>
+  <line x1="40" y1="40" x2="50" y2="30" stroke="#00ffff" stroke-width="1" opacity="0.6" filter="url(#glow)"/>
+  <line x1="40" y1="40" x2="30" y2="50" stroke="#00ffff" stroke-width="1" opacity="0.6" filter="url(#glow)"/>
+  <line x1="40" y1="40" x2="50" y2="50" stroke="#00ffff" stroke-width="1" opacity="0.6" filter="url(#glow)"/>
+  
+  <!-- Main logo text -->
+  <text x="90" y="35" font-family="'Courier New', monospace" font-size="28" font-weight="bold" 
+        fill="url(#neonGradient)" filter="url(#glow)">SHADOW</text>
+  <text x="90" y="60" font-family="'Courier New', monospace" font-size="28" font-weight="bold" 
+        fill="url(#neonGradient)" filter="url(#glow)">NET</text>
+  
+  <!-- Cyber accent lines -->
+  <line x1="85" y1="25" x2="280" y2="25" stroke="url(#neonGradient)" stroke-width="1" opacity="0.4"/>
+  <line x1="85" y1="70" x2="280" y2="70" stroke="url(#neonGradient)" stroke-width="1" opacity="0.4"/>
+  
+  <!-- Binary code accent -->
+  <text x="90" y="75" font-family="'Courier New', monospace" font-size="8" fill="#00ff00" opacity="0.6">
+    01001000 01100001 01100011 01101011 01100101 01110010
+  </text>
+</svg>

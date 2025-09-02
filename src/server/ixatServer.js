@@ -13,6 +13,7 @@ const User = require('./models/User');
 const Room = require('./models/Room');
 const Message = require('./models/Message');
 const Power = require('./models/Power');
+const UserPower = require('./models/UserPower');
 
 class IxatServer {
   constructor() {
@@ -64,7 +65,7 @@ class IxatServer {
     async loadConfiguration() {
         try {
             // Load powers count
-            this.config.pcount = await Power.distinct('section').countDocuments();
+            this.config.pcount = await Power.countDocuments();
             
             // Load staff members (admins)
             const staffUsers = await User.find({ rank: 2 }); // Admin rank
@@ -97,6 +98,7 @@ class IxatServer {
         
         // Serve JS files
     this.app.use('/js', express.static('js'));
+    this.app.use('/svg', express.static('svg'));
     
     // Serve test files
     this.app.get('/test-new-interface', (req, res) => {
@@ -127,6 +129,11 @@ class IxatServer {
   }
   
   setupRoutes() {
+        // Redirect root to chat.html (main interface)
+        this.app.get('/', (req, res) => {
+            res.redirect('/chat.html');
+        });
+        
         // Health check
         this.app.get('/health', (req, res) => {
             res.json({
@@ -134,6 +141,23 @@ class IxatServer {
                 dbConnected: this.dbConnected,
                 uptime: Math.round(process.uptime()),
                 pcount: this.config.pcount
+            });
+        });
+        
+        // Debug endpoint to check current users
+        this.app.get('/api/debug/users', (req, res) => {
+            const users = Array.from(this.users.values()).map(u => ({
+                id: u.id,
+                nickname: u.nickname,
+                guest: u.guest,
+                chat: u.chat,
+                online: u.online,
+                guestLevel: u.guestLevel,
+                persistent: !!u.dbId
+            }));
+            res.json({ 
+                totalUsers: this.users.size,
+                users: users 
             });
         });
     
@@ -151,6 +175,7 @@ class IxatServer {
     this.app.post('/api/auth/register', this.handleRegister.bind(this));
     this.app.post('/api/auth/logout', this.handleLogout.bind(this));
         this.app.get('/api/auth/status', this.handleAuthStatus.bind(this));
+        this.app.get('/api/auth/verify-email', this.handleVerifyEmail.bind(this));
         
         // Test endpoint to create a test user
         this.app.post('/api/test/create-user', async (req, res) => {
@@ -370,6 +395,11 @@ class IxatServer {
                 this.handlePrivateMessage(socket, data);
             });
             
+            // Handle private messages (alternative event name)
+            socket.on('private_message', (data) => {
+                this.handlePrivateMessagePacket(socket, data);
+            });
+            
             // Handle friend requests
             socket.on('friendRequest', (data) => {
                 this.handleFriendRequest(socket, data);
@@ -406,38 +436,139 @@ class IxatServer {
         console.log('🎭 [SERVER] Authentication attempt:', data);
         
         if (data.guest) {
-            // Guest authentication (matching Ixat Files)
-            user.id = Math.floor(Math.random() * 1000000);
-            user.nickname = data.nickname || `Guest${user.id}`;
-            user.username = '';
-            user.avatar = Math.floor(Math.random() * 1760).toString(); // 0-1759 avatars
-            user.rank = 5; // Guest rank
-            user.guest = true;
-            user.authenticated = true;
-            user.online = true;
-            user.dx = 0;
-            user.d1 = 0;
+            // Enhanced guest user authentication with persistent accounts
+            const guestName = data.nickname || `Guest${Math.floor(Math.random() * 1000)}`;
             
-            // Generate login key for guest
-            user.loginKey = Math.floor(Math.random() * 90000000) + 10000000;
-            user.loginTime = Math.floor(Date.now() / 1000);
-            user.loginShift = Math.floor(Math.random() * 4) + 2;
-            
-            socket.emit('authenticated', {
-        user: {
-                    id: user.id,
-          nickname: user.nickname,
-          avatar: user.avatar,
-                    rank: user.rank,
-                    guest: true,
-                    loginKey: user.loginKey,
-                    loginTime: user.loginTime,
-                    loginShift: user.loginShift
+            try {
+                // Check if guest already exists by session or create new one
+                let guestUser = null;
+                const sessionId = data.sessionId;
+                
+                if (sessionId) {
+                    // Try to find existing guest by session
+                    guestUser = await User.findOne({ 
+                        guestSessionId: sessionId, 
+                        isGuest: true 
+                    });
                 }
-            });
-            
-            console.log(`🎭 [SERVER] Guest joined: ${user.nickname} (Avatar: ${user.avatar})`);
-            
+                
+                if (!guestUser) {
+                    // Create new persistent guest account
+                    guestUser = new User({
+                        isGuest: true,
+                        username: null, // Explicitly set to null for guests
+                        email: null,    // Explicitly set to null for guests
+                        password: null, // Explicitly set to null for guests
+                        nickname: guestName,
+                        avatar: Math.floor(Math.random() * 1760).toString(),
+                        rank: 'guest',
+                        xats: 100, // Starting xats for guests
+                        days: 0,
+                        enabled: true,
+                        guestPowers: [
+                            { powerId: 1, active: true }, // Basic color power
+                            { powerId: 2, active: true }  // Basic smiley power
+                        ],
+                        guestLevel: 1,
+                        guestExperience: 0,
+                        guestLastActive: new Date(),
+                        guestUpgradePrompted: false
+                    });
+                    
+                    // Generate unique IDs
+                    guestUser.generateGuestId();
+                    guestUser.generateGuestSessionId();
+                    
+                    try {
+                        await guestUser.save();
+                        console.log(`🎭 [SERVER] Created new persistent guest account: ${guestUser.guestId}`);
+                    } catch (saveError) {
+                        console.error('🎭 [SERVER] Failed to save guest user:', saveError);
+                        // Fallback to temporary guest without database storage
+                        guestUser = null;
+                    }
+                } else {
+                    // Update existing guest activity
+                    guestUser.guestLastActive = new Date();
+                    guestUser.nickname = guestName; // Allow nickname changes
+                    await guestUser.save();
+                    console.log(`🎭 [SERVER] Reconnected existing guest: ${guestUser.guestId}`);
+                }
+                
+                // Create session user object
+                if (guestUser) {
+                    // Database-backed guest
+                    user.id = guestUser._id.toString();
+                    user.dbId = guestUser._id;
+                    user.nickname = guestUser.nickname;
+                    user.username = guestUser.nickname;
+                    user.avatar = guestUser.avatar;
+                    user.rank = 5; // Guest rank
+                    user.guest = true;
+                    user.authenticated = true;
+                    user.online = true;
+                    user.xats = guestUser.xats;
+                    user.days = guestUser.days;
+                    user.powers = guestUser.guestPowers || [];
+                    user.guestId = guestUser.guestId;
+                    user.guestSessionId = guestUser.guestSessionId;
+                    user.guestLevel = guestUser.guestLevel;
+                    user.guestExperience = guestUser.guestExperience;
+                    user.canUpgrade = guestUser.canUpgradeToMember();
+                } else {
+                    // Fallback temporary guest
+                    user.id = Math.floor(Math.random() * 1000000);
+                    user.dbId = null;
+                    user.nickname = guestName;
+                    user.username = guestName;
+                    user.avatar = Math.floor(Math.random() * 1760).toString();
+                    user.rank = 5; // Guest rank
+                    user.guest = true;
+                    user.authenticated = true;
+                    user.online = true;
+                    user.xats = 100;
+                    user.days = 0;
+                    user.powers = [];
+                    user.guestId = 'temp_' + Date.now();
+                    user.guestSessionId = 'temp_' + Date.now();
+                    user.guestLevel = 1;
+                    user.guestExperience = 0;
+                    user.canUpgrade = false;
+                    console.log(`🎭 [SERVER] Created temporary guest: ${user.nickname}`);
+                }
+                
+                // Generate login key for guest
+                user.loginKey = Math.floor(Math.random() * 90000000) + 10000000;
+                user.loginTime = Math.floor(Date.now() / 1000);
+                user.loginShift = Math.floor(Math.random() * 4) + 2;
+                
+                socket.emit('authenticated', {
+                    user: {
+                        id: user.id,
+                        nickname: user.nickname,
+                        avatar: user.avatar,
+                        rank: user.rank,
+                        guest: true,
+                        loginKey: user.loginKey,
+                        loginTime: user.loginTime,
+                        loginShift: user.loginShift,
+                        guestId: user.guestId,
+                        guestLevel: user.guestLevel,
+                        guestExperience: user.guestExperience,
+                        canUpgrade: user.canUpgrade,
+                        xats: user.xats,
+                        persistent: !!user.dbId // Indicates if guest is database-backed
+                    },
+                    sessionId: user.guestSessionId
+                });
+                
+                console.log(`🎭 [SERVER] Guest joined: ${user.nickname} (Level: ${user.guestLevel}, Avatar: ${user.avatar})`);
+                
+            } catch (error) {
+                console.error('🎭 [SERVER] Guest authentication error:', error);
+                socket.emit('authError', { message: 'Guest authentication failed' });
+                return;
+            }
         } else if (data.token && data.token !== 'undefined' && data.token !== 'null' && data.token.trim() !== '') {
             // Registered user authentication
             console.log('🎭 [SERVER] Processing registered user authentication with token:', data.token);
@@ -527,50 +658,44 @@ class IxatServer {
     
     async loadUserPowers(user, dbUser) {
         try {
-            // Get all powers from database
-            const allPowers = await Power.find({});
-            const powerMap = {};
-            
-            // Create power mapping (matching Ixat Files structure)
-            allPowers.forEach(power => {
-                powerMap[power.id] = {
-                    section: power.section,
-                    subid: power.subid
-                };
-            });
+            // Import UserPower model
+            const UserPower = require('./models/UserPower');
             
             // Initialize power sections
             user.powers = {};
             user.powerO = '';
             user.dO = '';
             
-            // Load user's powers from database
-            if (dbUser.powers && dbUser.powers.length > 0) {
-                const userPowers = dbUser.powers;
-                
+            // Load user's powers from UserPower collection
+            const userPowers = await UserPower.find({ 
+                user: dbUser._id, 
+                active: true 
+            }).populate('power');
+            
+            if (userPowers && userPowers.length > 0) {
                 userPowers.forEach(userPower => {
-                    const power = powerMap[userPower.powerid];
-                    if (power && userPower.count >= 1) {
+                    const power = userPower.power;
+                    if (power && userPower.purchasedFor >= 1) {
                         // Initialize section if not exists
                         if (!user.powers[power.section]) {
                             user.powers[power.section] = 0;
                         }
                         
-                        // Add power value using bitwise operations
-                        user.powers[power.section] += power.subid;
+                        // Add power value using bitwise OR (not addition!)
+                        user.powers[power.section] |= power.subid;
                         
                         // Build power strings (matching Ixat Files format)
-                        const powerStr = `${userPower.powerid}=${userPower.count > 1 ? (userPower.count - 1) : 1}|`;
+                        const powerStr = `${power.id}=${userPower.purchasedFor > 1 ? (userPower.purchasedFor - 1) : 1}|`;
                         user.dO += powerStr;
                         
-                        if (userPower.count > 1) {
+                        if (userPower.purchasedFor > 1) {
                             user.powerO += powerStr;
                         }
-      }
-    });
-  }
-  
-            console.log(`🎭 [SERVER] Loaded powers for ${user.nickname}:`, user.powers);
+                    }
+                });
+            }
+            
+            console.log(`🎭 [SERVER] Loaded ${userPowers.length} powers for ${user.nickname}:`, user.powers);
         } catch (error) {
             console.error('🎭 [SERVER] Failed to load user powers:', error);
         }
@@ -661,18 +786,29 @@ class IxatServer {
                     pool: u.pool,
                     xats: u.xats,
                     days: u.days,
-                    bride: u.bride
+                    bride: u.bride,
+                    guestLevel: u.guestLevel,
+                    guestExperience: u.guestExperience,
+                    persistent: !!u.dbId,
+                    rankPool: this.getUserRankPool(u)
                 }))
             });
             
-            // Notify other users
+                        // Notify other users
             socket.to(room.name).emit('userJoined', {
                 id: user.id,
-          nickname: user.nickname,
-          avatar: user.avatar,
+                nickname: user.nickname,
+                avatar: user.avatar,
                 rank: user.rank,
                 guest: user.guest,
-                pool: user.pool
+                pool: user.pool,
+                xats: user.xats,
+                days: user.days,
+                bride: user.bride,
+                guestLevel: user.guestLevel,
+                guestExperience: user.guestExperience,
+                persistent: !!user.dbId,
+                rankPool: this.getUserRankPool(user)
             });
             
             console.log(`🎭 [SERVER] User ${user.nickname} joined room ${room.name}`);
@@ -877,6 +1013,80 @@ class IxatServer {
                 }
     } catch (error) {
                 console.error('🎭 [SERVER] Failed to save message:', error);
+            }
+        } else {
+            // Handle guest experience and leveling
+            try {
+                if (user.dbId) {
+                    // Database-backed guest
+                    const guestUser = await User.findById(user.dbId);
+                    if (guestUser && guestUser.isGuest) {
+                        // Award experience for messaging (1-3 XP based on message length)
+                        const experienceGain = Math.min(Math.floor(message.length / 10) + 1, 3);
+                        const levelResult = guestUser.addGuestExperience(experienceGain);
+                        
+                        // Update user object with new values
+                        user.guestExperience = guestUser.guestExperience;
+                        user.guestLevel = guestUser.guestLevel;
+                        user.xats = guestUser.xats;
+                        
+                        // Update activity
+                        await guestUser.updateGuestActivity();
+                        
+                        // Notify client if leveled up
+                        if (levelResult.leveledUp) {
+                            socket.emit('guestLevelUp', {
+                                newLevel: levelResult.newLevel,
+                                experience: guestUser.guestExperience,
+                                xatsReward: 50
+                            });
+                            
+                            // Broadcast level up to room
+                            this.io.to(user.chat).emit('message', {
+                                user: { id: 0, nickname: 'System' },
+                                message: `🎉 ${user.nickname} leveled up to level ${levelResult.newLevel}!`,
+                                timestamp: Date.now()
+                            });
+                        }
+                        
+                        // Check if guest can upgrade to member
+                        if (guestUser.canUpgradeToMember()) {
+                            socket.emit('upgradePrompt', {
+                                message: 'You can now upgrade to a full member account!',
+                                level: guestUser.guestLevel,
+                                benefits: ['Keep your progress', 'More powers', 'Trading', 'Custom avatar']
+                            });
+                        }
+                    }
+                } else {
+                    // Temporary guest - basic experience tracking in memory
+                    const experienceGain = Math.min(Math.floor(message.length / 10) + 1, 3);
+                    user.guestExperience += experienceGain;
+                    
+                    // Simple level up logic for temporary guests
+                    const experienceNeeded = user.guestLevel * 100;
+                    if (user.guestExperience >= experienceNeeded && user.guestLevel < 10) {
+                        user.guestLevel++;
+                        user.guestExperience -= experienceNeeded;
+                        user.xats += 50; // Reward for leveling up
+                        
+                        // Notify client of level up
+                        socket.emit('guestLevelUp', {
+                            newLevel: user.guestLevel,
+                            experience: user.guestExperience,
+                            xatsReward: 50
+                        });
+                        
+                        // Broadcast level up to room
+                        this.io.to(user.chat).emit('message', {
+                            user: { id: 0, nickname: 'System' },
+                            message: `🎉 ${user.nickname} leveled up to level ${user.guestLevel}!`,
+                            timestamp: Date.now()
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('🎭 [SERVER] Guest experience error:', error);
             }
         }
         
@@ -1112,8 +1322,8 @@ class IxatServer {
 
         if (!targetUsername || !message) {
             socket.emit('error', { message: 'Invalid private message data' });
-        return;
-      }
+            return;
+        }
       
         // Find target user
         const targetUser = Array.from(this.users.values()).find(u => 
@@ -1125,7 +1335,69 @@ class IxatServer {
             return;
         }
 
+        // Create private message data for main chat display
+        const privateMessageData = {
+            id: Date.now(),
+            user: user.nickname,
+            message: `[Private to ${targetUser.nickname}] ${message}`,
+            timestamp: new Date().toLocaleTimeString(),
+            avatar: user.avatar,
+            rank: user.rank,
+            isPrivate: true,
+            privateTo: targetUser.id
+        };
+
+        // Send private message to sender (appears in their main chat)
+        socket.emit('message', privateMessageData);
+
+        // Send private message to recipient (appears in their main chat)
+        targetUser.sock.emit('message', {
+            ...privateMessageData,
+            message: `[Private from ${user.nickname}] ${message}`,
+            privateFrom: user.id
+        });
+
+        console.log(`🎭 [SERVER] Private message from ${user.nickname} to ${targetUser.nickname}: ${message}`);
+    }
+    
+    async handlePrivateMessagePacket(socket, data) {
+        const user = this.users.get(socket.id);
+        if (!user || !user.authenticated) {
+            console.log('🎭 [SERVER] User not authenticated for private message');
+            return;
+        }
+
+        const targetUserId = data.targetUserId;
+        const message = data.message;
+
+        console.log('🎭 [SERVER] Private message packet received:', {
+            from: user.nickname,
+            fromId: user.id,
+            targetUserId: targetUserId,
+            message: message
+        });
+
+        if (!targetUserId || !message) {
+            console.log('🎭 [SERVER] Invalid private message data');
+            socket.emit('error', { message: 'Invalid private message data' });
+            return;
+        }
+        
+        // Find target user by ID
+        const targetUser = Array.from(this.users.values()).find(u => u.id === targetUserId);
+
+        console.log('🎭 [SERVER] All users:', Array.from(this.users.values()).map(u => ({ id: u.id, nickname: u.nickname })));
+        console.log('🎭 [SERVER] Looking for target user ID:', targetUserId);
+        console.log('🎭 [SERVER] Found target user:', targetUser ? { id: targetUser.id, nickname: targetUser.nickname } : 'NOT FOUND');
+
+        if (!targetUser) {
+            console.log('🎭 [SERVER] Target user not found or not online');
+            socket.emit('error', { message: 'User not found or not online' });
+            return;
+        }
+
         // Send private message to target user
+        console.log('🎭 [SERVER] Sending private message to target user socket:', targetUser.sock.id);
         targetUser.sock.emit('privateMessage', {
             from: user.nickname,
             fromId: user.id,
@@ -1140,7 +1412,20 @@ class IxatServer {
             timestamp: Date.now()
         });
 
-        console.log(`🎭 [SERVER] Private message from ${user.nickname} to ${targetUser.nickname}: ${message}`);
+        console.log(`🎭 [SERVER] Private message packet from ${user.nickname} to ${targetUser.nickname}: ${message}`);
+    }
+    
+    getUserRankPool(user) {
+        // Determine which rank pool this user belongs to
+        if (user.rank >= 3) { // Moderator or higher
+            return 'Club';
+        } else if (user.rank === -1 || user.banned) { // Banned users
+            return 'Chum';
+        } else if (user.rank >= 1) { // VIP users
+            return 'VIP';
+        } else {
+            return 'VIP'; // Default for guests and regular users
+        }
     }
     
     async handleFriendRequest(socket, data) {
@@ -1555,9 +1840,28 @@ class IxatServer {
     
     async handleBuyPower(req, res) {
         try {
-            const { powerName, userId } = req.body;
+            const { powerName } = req.body;
+            const token = req.headers.authorization?.replace('Bearer ', '') || req.query.token;
             
-            console.log('🎭 [SERVER] Power purchase attempt:', { powerName, userId });
+            if (!token) {
+                return res.status(401).json({ 
+                    success: false, 
+                    message: 'Authentication required' 
+                });
+            }
+            
+            // Verify user authentication
+            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+            const user = await User.findById(decoded.userId);
+            
+            if (!user || !user.enabled) {
+                return res.status(401).json({ 
+                    success: false, 
+                    message: 'Invalid user' 
+                });
+            }
+            
+            console.log('🎭 [SERVER] Power purchase attempt:', { powerName, userId: user._id, userXats: user.xats });
             
             // Find the power
             const power = await Power.findOne({ name: powerName });
@@ -1568,19 +1872,54 @@ class IxatServer {
                 });
             }
             
-            // For now, allow any purchase (no user authentication check)
-            // TODO: Add proper user authentication and xats balance check
+            // Check if user has enough xats
+            if (user.xats < power.cost) {
+                return res.status(400).json({ 
+                    success: false, 
+                    message: `Insufficient xats. You need ${power.cost} xats but only have ${user.xats}.` 
+                });
+            }
             
-            console.log('🎭 [SERVER] Power purchased successfully:', powerName);
+            // Check if user already has this power
+            const existingUserPower = await UserPower.findOne({ 
+                user: user._id, 
+                power: power._id 
+            });
+            
+            if (existingUserPower) {
+                return res.status(400).json({ 
+                    success: false, 
+                    message: 'You already own this power!' 
+                });
+            }
+            
+            // Deduct xats and create user power
+            user.xats -= power.cost;
+            await user.save();
+            
+            // Create user power relationship
+            const userPower = new UserPower({
+                user: user._id,
+                power: power._id,
+                purchasedAt: new Date(),
+                purchasedFor: 1,
+                active: true
+            });
+            await userPower.save();
+            
+            console.log('🎭 [SERVER] Power purchased successfully:', { powerName, userId: user._id, remainingXats: user.xats });
             
             res.json({
                 success: true,
-                message: `Successfully purchased ${powerName}!`,
+                message: `Successfully purchased ${powerName} for ${power.cost} xats!`,
                 power: {
                     id: power.id,
                     name: power.name,
                     cost: power.cost,
                     description: power.description
+                },
+                user: {
+                    xats: user.xats
                 }
             });
             
@@ -1659,6 +1998,14 @@ class IxatServer {
                 return res.status(401).json({ success: false, message: 'Invalid credentials' });
             }
             
+            // Check if email is verified
+            if (!user.emailVerified) {
+                return res.status(401).json({ 
+                    success: false, 
+                    message: 'Please verify your email before logging in. Check your inbox for a verification link.' 
+                });
+            }
+            
             const isValid = await bcrypt.compare(password, user.password);
             if (!isValid) {
                 return res.status(401).json({ success: false, message: 'Invalid credentials' });
@@ -1714,6 +2061,13 @@ class IxatServer {
             // Hash password
             const hashedPassword = await bcrypt.hash(password, 10);
             
+            // Generate email verification token
+            const emailVerificationToken = jwt.sign(
+                { userId: username, email },
+                process.env.JWT_SECRET || 'your-secret-key',
+                { expiresIn: '24h' }
+            );
+            
             // Create user with email verification
             const user = new User({
                 username,
@@ -1724,8 +2078,9 @@ class IxatServer {
                 xats: 1000, // Starting xats
                 days: 0,
                 rank: 1, // Member rank
-                enabled: true, // Enable by default for now
-                emailVerified: false // Add email verification flag
+                enabled: false, // Disable until email verified
+                emailVerified: false,
+                emailVerificationToken: emailVerificationToken
             });
             
             await user.save();
@@ -1733,6 +2088,8 @@ class IxatServer {
             // For now, auto-verify email to avoid issues
             // In production, you'd send a verification email here
             user.emailVerified = true;
+            user.enabled = true;
+            user.emailVerificationToken = null; // Clear token after verification
             await user.save();
             
             const token = jwt.sign(
@@ -1743,8 +2100,8 @@ class IxatServer {
             
             res.json({
                 success: true,
-                message: 'Registration successful',
-                token,
+                message: 'Account created successfully! Please check your email for verification link.',
+                verificationToken: emailVerificationToken,
                 user: {
                     id: user._id,
                     username: user.username,
@@ -1753,7 +2110,8 @@ class IxatServer {
                     rank: user.rank,
                     xats: user.xats,
                     days: user.days,
-                    email: user.email
+                    email: user.email,
+                    emailVerified: user.emailVerified
                 }
             });
         } catch (error) {
@@ -1804,6 +2162,41 @@ class IxatServer {
     } catch (error) {
             console.error('🎭 [SERVER] Auth status check error:', error);
             res.json({ authenticated: false });
+        }
+    }
+    
+    async handleVerifyEmail(req, res) {
+        try {
+            const { token } = req.query;
+            
+            if (!token) {
+                return res.status(400).json({ success: false, message: 'Verification token required' });
+            }
+            
+            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+            const user = await User.findOne({ 
+                username: decoded.userId,
+                emailVerificationToken: token 
+            });
+            
+            if (!user) {
+                return res.status(400).json({ success: false, message: 'Invalid or expired verification token' });
+            }
+            
+            // Verify the email
+            user.emailVerified = true;
+            user.enabled = true;
+            user.emailVerificationToken = null;
+            await user.save();
+            
+            res.json({ 
+                success: true, 
+                message: 'Email verified successfully! You can now log in.' 
+            });
+            
+        } catch (error) {
+            console.error('🎭 [SERVER] Email verification error:', error);
+            res.status(400).json({ success: false, message: 'Invalid or expired verification token' });
         }
     }
     
@@ -2054,17 +2447,21 @@ class IxatServer {
     // Visitors API handlers
     async handleGetVisitors(req, res) {
         try {
-            // Mock visitors data (in real implementation, this would come from database)
-            const visitors = [
-                { username: 'visitor1', nickname: 'Visitor One', time: '2 hours ago', avatar: 1 },
-                { username: 'visitor2', nickname: 'Visitor Two', time: '5 hours ago', avatar: 2 },
-                { username: 'visitor3', nickname: 'Visitor Three', time: '1 day ago', avatar: 3 }
-            ];
-
+            // Get real visitors data from database
+            const visitors = await User.find({ 
+                lastSeen: { $gte: new Date(Date.now() - 24 * 60 * 60 * 1000) } // Last 24 hours
+            }).select('username nickname avatar lastSeen').limit(10).sort({ lastSeen: -1 });
+            
             const stats = {
-                today: 15,
-                week: 127,
-                month: 543
+                today: await User.countDocuments({ 
+                    lastSeen: { $gte: new Date(Date.now() - 24 * 60 * 60 * 1000) } 
+                }),
+                week: await User.countDocuments({ 
+                    lastSeen: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) } 
+                }),
+                month: await User.countDocuments({ 
+                    lastSeen: { $gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) } 
+                })
             };
 
             res.json({ success: true, visitors, stats });
@@ -2101,14 +2498,17 @@ class IxatServer {
 
     async handleGetRecentChats(req, res) {
         try {
-            // Mock recent chats data
-            const chats = [
-                { name: 'Lobby', users: 25, bg: 'http://oi60.tinypic.com/1r6io9.jpg' },
-                { name: 'Help', users: 12, bg: 'http://oi60.tinypic.com/1r6io9.jpg' },
-                { name: 'General', users: 8, bg: 'http://oi60.tinypic.com/1r6io9.jpg' }
-            ];
+            // Get real recent chats data from database
+            const chats = await Room.find({}).select('name bg').limit(10).sort({ updatedAt: -1 });
+            
+            // Add user count for each room (this would be calculated from active connections in a real implementation)
+            const chatsWithUserCount = chats.map(room => ({
+                name: room.name,
+                users: Math.floor(Math.random() * 20) + 1, // Placeholder until we implement real user counting
+                bg: room.bg
+            }));
 
-            res.json({ success: true, chats });
+            res.json({ success: true, chats: chatsWithUserCount });
         } catch (error) {
             console.error('🎭 [SERVER] Get recent chats error:', error);
             res.status(500).json({ success: false, message: 'Server error' });
@@ -2279,29 +2679,17 @@ class IxatServer {
     
     async handleGetOnlineUsers(req, res) {
         try {
-            // Return mock online users for now
-            const onlineUsers = [
-                {
-                    id: 'guest1',
-                    username: 'Guest1',
-                    nickname: 'Guest1',
-                    avatar: '1',
-                    rank: 5,
-                    guest: true,
-                    xats: 0,
-                    days: 0
-                },
-                {
-                    id: 'guest2',
-                    username: 'Guest2', 
-                    nickname: 'Guest2',
-                    avatar: '2',
-                    rank: 5,
-                    guest: true,
-                    xats: 0,
-                    days: 0
-                }
-            ];
+            // Get real online users from server state
+            const onlineUsers = Array.from(this.users.values()).map(user => ({
+                id: user.id,
+                username: user.username,
+                nickname: user.nickname,
+                avatar: user.avatar,
+                rank: user.rank || 5,
+                guest: user.guest || false,
+                xats: user.xats || 0,
+                days: user.days || 0
+            }));
             
             res.json({ success: true, users: onlineUsers });
         } catch (error) {
@@ -2312,14 +2700,34 @@ class IxatServer {
     
     async handleGetUserPowers(req, res) {
         try {
-            // Return mock user powers for now
-            const userPowers = [
-                { id: 1, name: 'Smile', cost: 100, category: 'Basic' },
-                { id: 2, name: 'Wave', cost: 200, category: 'Basic' },
-                { id: 3, name: 'Dance', cost: 500, category: 'Fun' }
-            ];
+            // Get real user powers from database
+            const token = req.headers.authorization?.replace('Bearer ', '') || req.query.token;
             
-            res.json({ success: true, powers: userPowers });
+            if (!token) {
+                return res.status(401).json({ success: false, message: 'Authentication required' });
+            }
+            
+            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+            const user = await User.findById(decoded.userId);
+            
+            if (!user) {
+                return res.status(404).json({ success: false, message: 'User not found' });
+            }
+            
+            const userPowers = await UserPower.find({ user: user._id, active: true })
+                .populate('power')
+                .select('power purchasedAt purchasedFor');
+            
+            const powers = userPowers.map(up => ({
+                id: up.power.id,
+                name: up.power.name,
+                cost: up.power.cost,
+                category: up.power.section,
+                purchasedAt: up.purchasedAt,
+                purchasedFor: up.purchasedFor
+            }));
+            
+            res.json({ success: true, powers });
         } catch (error) {
             console.error('🎭 [SERVER] Get user powers error:', error);
             res.status(500).json({ success: false, message: 'Server error' });
@@ -2328,14 +2736,14 @@ class IxatServer {
     
     
     async init() {
-        const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/xat-chat';
+        const uri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ixat';
         try {
             // Connect once at startup
             await mongoose.connect(uri, {
                 serverSelectionTimeoutMS: 5000,
             });
             this.dbConnected = true;
-            console.log(`🎭 [SERVER] MongoDB connected at ${uri}`);
+            console.log(`🎭 [SERVER] ShadowNet MongoDB connected at ${uri}`);
             
             // Warm-up: compute powers count (non-fatal if collection missing)
             try {
@@ -2354,7 +2762,7 @@ class IxatServer {
     
     start(port = 8000) {
         this.server.listen(port, () => {
-            console.log(`🎭 [SERVER] Ixat Server running on port ${port}`);
+            console.log(`🎭 [SERVER] ShadowNet Server running on port ${port}`);
             console.log(`🎭 [SERVER] Server hash: ${this.hash}`);
             console.log(`🎭 [SERVER] Powers count: ${this.config.pcount}`);
         });

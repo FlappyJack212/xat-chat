@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const powerSchema = new mongoose.Schema({
+    id: {
+        type: Number,
+        required: true,
+        unique: true
+    },
     name: {
         type: String,
         required: true,
@@ -20,7 +25,7 @@ const powerSchema = new mongoose.Schema({
     section: {
         type: String,
         required: true,
-        enum: ['epic', 'game', 'group', 'moderation', 'chat', 'utility', 'p0', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9'],
+        enum: ['epic', 'game', 'group', 'moderation', 'chat', 'utility', 'p0', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', 'p13', 'p14', 'p15'],
         default: 'p0'
     },
     subid: {
@@ -55,6 +60,10 @@ const powerSchema = new mongoose.Schema({
         default: -1,
         min: -1
     },
+    topsh: {
+        type: String,
+        default: ''
+    },
     allpowers: {
         type: Boolean,
         default: false
@@ -68,6 +77,10 @@ const powerSchema = new mongoose.Schema({
         default: false
     },
     group: {
+        type: String,
+        default: ''
+    },
+    groupPower: {
         type: Boolean,
         default: false
     },

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎭 ixchats - Login & Register</title>
+    <title>🎭 ShadowNet - Login & Register</title>
     <style>
         * {
             box-sizing: border-box;
@@ -490,10 +490,10 @@
                 
                 if (response.ok) {
                     showMessage('success', 'Login successful! Redirecting...');
-                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('authToken', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
                     setTimeout(() => {
-                        window.location.href = '/';
+                        window.location.href = '/chat.html';
                     }, 1500);
                 } else {
                     showMessage('error', data.message || 'Login failed');
@@ -532,10 +532,16 @@
                 const data = await response.json();
                 
                 if (response.ok) {
-                    showMessage('success', 'Account created successfully! Please login.');
+                    showMessage('success', 'Account created successfully! Please check your email for verification link.');
+                    // Show verification link for testing (in production, this would be sent via email)
+                    if (data.verificationToken) {
+                        const verificationUrl = `${window.location.origin}/api/auth/verify-email?token=${data.verificationToken}`;
+                        console.log('🔗 Verification URL:', verificationUrl);
+                        showMessage('success', `Account created! Click here to verify: <a href="${verificationUrl}" target="_blank">Verify Email</a>`);
+                    }
                     setTimeout(() => {
                         switchTab('login');
-                    }, 2000);
+                    }, 3000);
                 } else {
                     showMessage('error', data.message || 'Registration failed');
                 }
@@ -551,15 +557,15 @@
         }
         
         // Check if user is already logged in
-        if (localStorage.getItem('token')) {
-            window.location.href = '/';
+        if (localStorage.getItem('authToken')) {
+            window.location.href = '/chat.html';
         }
 
         // Add logout function
         function logout() {
-            localStorage.removeItem('token');
+            localStorage.removeItem('authToken');
             localStorage.removeItem('user');
-            window.location.href = '/';
+            window.location.href = '/chat.html';
         }
 
         // Make logout available globally

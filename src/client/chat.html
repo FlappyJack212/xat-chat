@@ -3,66 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎭 Xat Recreation Chat</title>
+    <title>🎭 ShadowNet Chat</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            margin: 0;
-            padding: 20px;
-            background: #1a1a1a;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             color: #fff;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
         
+        /* Header Navigation */
         .header {
-            text-align: center;
-            margin-bottom: 20px;
+            background: linear-gradient(90deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            border-bottom: 2px solid #00ffff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 255, 255, 0.3);
         }
         
-        .header h1 {
-            color: #ffcc00;
-            margin: 0;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         
-        .header p {
-            color: #888;
-            margin: 5px 0;
+        .logo img {
+            height: 40px;
+            width: auto;
         }
         
-        #userStatus {
-            margin-top: 10px;
-            font-size: 12px;
-            color: #999;
+        .logo h1 {
+            color: #00ffff;
+            font-size: 24px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
         
-        #userInfo {
-            margin-right: 10px;
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
         }
         
-        #logoutBtn {
-            padding: 5px 10px;
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(0, 255, 255, 0.2);
+            border-color: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #ccc;
+        }
+        
+        .user-info button {
+            padding: 6px 12px;
             background: #dc3545;
             color: white;
             border: none;
-            border-radius: 3px;
+            border-radius: 4px;
             cursor: pointer;
-            display: none;
+            font-size: 12px;
+            transition: background 0.3s ease;
         }
         
-        #logoutBtn:hover {
+        .user-info button:hover {
             background: #c82333;
         }
         
-        .chat-wrapper {
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: rgba(26, 26, 46, 0.9);
+            border-right: 2px solid #00ffff;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .sidebar h3 {
+            color: #00ffff;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+        
+        .room-list {
+            list-style: none;
+        }
+        
+        .room-list li {
+            margin-bottom: 8px;
+        }
+        
+        .room-list a {
+            display: block;
+            padding: 10px 15px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .room-list a:hover {
+            background: rgba(0, 255, 255, 0.2);
+            border-color: #00ffff;
+            box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+        }
+        
+        .room-list a.active {
+            background: rgba(0, 255, 255, 0.3);
+            border-color: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        
+        /* Chat Area */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .chat-header {
+            background: rgba(26, 26, 46, 0.8);
+            border: 2px solid #00ffff;
+            border-radius: 10px 10px 0 0;
+            padding: 15px 20px;
+            margin-bottom: 0;
+        }
+        
+        .chat-header h2 {
+            color: #00ffff;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+        
+        .chat-container-wrapper {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ffff;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 500px;
         }
         
+        #chatContainer {
+            border: 2px solid #00ffff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+        
         .loading {
             text-align: center;
-            color: #ffcc00;
+            color: #00ffff;
             font-size: 18px;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
         }
         
         .error {
@@ -70,32 +193,82 @@
             color: #ff6666;
             font-size: 16px;
             padding: 20px;
-            background: #2a2a2a;
-            border-radius: 5px;
-            margin: 20px;
+            background: rgba(255, 102, 102, 0.1);
+            border: 1px solid #ff6666;
+            border-radius: 8px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header Navigation -->
     <div class="header">
-        <h1>🎭 Xat Recreation Chat</h1>
-        <p>Authentic chat recreation with JavaScript (728x486) - No Flash Required</p>
-        <div id="userStatus">
+        <div class="logo">
+            <img src="/svg/shadownet-logo.svg" alt="ShadowNet Logo">
+            <h1>ShadowNet</h1>
+        </div>
+        
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/powers.html">Powers</a>
+            <a href="/trade.html">Trade</a>
+            <a href="/groups.html">Groups</a>
+            <a href="/help.html">Help</a>
+        </div>
+        
+        <div class="user-info">
             <span id="userInfo">Loading...</span>
-            <button id="logoutBtn" onclick="logout()">Logout</button>
-            <button id="testProfileBtn" onclick="testUserProfile()" style="margin-left: 10px; background: #28a745; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Test Profile</button>
-            <button id="debugBtn" onclick="debugUserList()" style="margin-left: 10px; background: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Debug Users</button>
-            <button id="addTestUserBtn" onclick="addTestUser()" style="margin-left: 10px; background: #ffc107; color: black; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Add Test User</button>
-            <button id="testProfileDisplayBtn" onclick="testProfileDisplay()" style="margin-left: 10px; background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Test Profile Display</button>
+            <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
         </div>
     </div>
 
-    <div class="chat-wrapper">
-        <div id="loading" class="loading">
-            Connecting to chat server...
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Chat Rooms</h3>
+            <ul class="room-list">
+                <li><a href="#" class="active" onclick="switchRoom('Main Chat')">Main Chat</a></li>
+                <li><a href="#" onclick="switchRoom('Lobby')">Lobby</a></li>
+                <li><a href="#" onclick="switchRoom('Help')">Help</a></li>
+                <li><a href="#" onclick="switchRoom('Gaming')">Gaming</a></li>
+                <li><a href="#" onclick="switchRoom('Music')">Music</a></li>
+                <li><a href="#" onclick="switchRoom('Flirt')">Flirt</a></li>
+                <li><a href="#" onclick="switchRoom('Random')">Random</a></li>
+                <li><a href="#" onclick="switchRoom('Test')">Test</a></li>
+            </ul>
         </div>
-        <div id="error" class="error" style="display: none;"></div>
-        <div id="chatContainer"></div>
+
+        <!-- Chat Area -->
+        <div class="chat-area">
+            <div class="chat-header">
+                <h2 id="currentRoom">Main Chat</h2>
+            </div>
+            
+            <div class="chat-container-wrapper">
+                <div id="loading" class="loading">
+                    Connecting to chat server...
+                </div>
+                <div id="error" class="error" style="display: none;"></div>
+                <div id="chatContainer"></div>
+            </div>
+        </div>
     </div>
 
     <!-- Socket.IO client -->
@@ -106,10 +279,11 @@
     
     <script>
         let chatClient = null;
+        let currentRoom = 'Main Chat';
         
         function updateUserStatus() {
             const token = localStorage.getItem('authToken');
-            const userData = localStorage.getItem('userData');
+            const userData = localStorage.getItem('user');
             const userInfo = document.getElementById('userInfo');
             const logoutBtn = document.getElementById('logoutBtn');
             
@@ -137,13 +311,33 @@
         function logout() {
             // Clear authentication data
             localStorage.removeItem('authToken');
-            localStorage.removeItem('userData');
+            localStorage.removeItem('user');
             
             // Update status
             updateUserStatus();
             
             // Redirect to auth page
             window.location.href = '/auth.html';
+        }
+        
+        function switchRoom(roomName) {
+            console.log('🎭 [CHAT] Switching to room:', roomName);
+            
+            // Update active room in sidebar
+            document.querySelectorAll('.room-list a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update room header
+            document.getElementById('currentRoom').textContent = roomName;
+            currentRoom = roomName;
+            
+            // If chat client exists, update room name
+            if (chatClient) {
+                chatClient.config.roomName = roomName;
+                console.log('🎭 [CHAT] Updated room name to:', roomName);
+            }
         }
         
         function testUserProfile() {
@@ -233,52 +427,54 @@
             const roomParam = urlParams.get('room');
             
             // Set room name based on parameter
-            let roomName = 'Main Chat';
             if (roomParam) {
                 switch(roomParam.toLowerCase()) {
                     case 'lobby':
-                        roomName = 'Lobby';
+                        currentRoom = 'Lobby';
                         break;
                     case 'help':
-                        roomName = 'Help';
+                        currentRoom = 'Help';
                         break;
                     case 'test':
-                        roomName = 'Test';
+                        currentRoom = 'Test';
                         break;
                     case 'chat':
-                        roomName = 'Chat';
+                        currentRoom = 'Chat';
                         break;
                     case 'flirt':
-                        roomName = 'Flirt';
+                        currentRoom = 'Flirt';
                         break;
                     case 'gaming':
-                        roomName = 'Gaming';
+                        currentRoom = 'Gaming';
                         break;
                     case 'music':
-                        roomName = 'Music';
+                        currentRoom = 'Music';
                         break;
                     case 'anime':
-                        roomName = 'Anime';
+                        currentRoom = 'Anime';
                         break;
                     case 'random':
-                        roomName = 'Random';
+                        currentRoom = 'Random';
                         break;
                     default:
-                        roomName = roomParam.charAt(0).toUpperCase() + roomParam.slice(1);
+                        currentRoom = roomParam.charAt(0).toUpperCase() + roomParam.slice(1);
                 }
             }
+            
+            // Update room header
+            document.getElementById('currentRoom').textContent = currentRoom;
             
             try {
                 // Create the Ixat client with correct parameters
                 chatClient = createIxatChat('chatContainer', {
                     width: 728,
                     height: 486,
-                    roomName: roomName,
-                    background: 'http://oi60.tinypic.com/1r6io9.jpg',
-                    buttonColor: '#ffcc00'
+                    roomName: currentRoom,
+                    background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+                    buttonColor: '#00ffff'
                 });
                 
-                console.log('🎭 [CHAT] Chat client created successfully for room:', roomName);
+                console.log('🎭 [CHAT] Chat client created successfully for room:', currentRoom);
                 hideLoading();
                 
             } catch (error) {

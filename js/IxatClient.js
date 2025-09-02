@@ -37,7 +37,8 @@ class IxatClient {
         }
         
         this.elements = {};
-        this.users = new Map();
+        this.users = new Map(); // Store user data objects
+        this.userElements = new Map(); // Store DOM elements
         this.socket = null;
         this.authenticated = false;
         this.currentUser = null;
@@ -45,6 +46,9 @@ class IxatClient {
         this.currentTab = 'chat';
         this.pawns = []; // Available pawns/avatars
         this.selectedPawn = null; // Currently selected pawn
+        this.privateMessages = {}; // Initialize private messages storage
+        this.currentPrivateChatTarget = null; // Current private chat target
+
         this.games = [
             { id: 'doodle', name: 'Doodle', icon: '🎨', description: 'Draw and collaborate' },
             { id: 'hangman', name: 'Hangman', icon: '🎯', description: 'Guess the word' },
@@ -343,6 +347,51 @@ class IxatClient {
             padding: 10px;
         `;
         
+        // Chat tabs bar
+        this.elements.chatTabs = document.createElement('div');
+        this.elements.chatTabs.style.cssText = `
+            display: flex;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #444444;
+        `;
+        
+        // Main Chat tab
+        this.elements.mainTab = document.createElement('div');
+        this.elements.mainTab.style.cssText = `
+            padding: 8px 15px;
+            background: #0066cc;
+            color: #ffffff;
+            border: 1px solid #0066cc;
+            border-bottom: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 4px 4px 0 0;
+        `;
+        this.elements.mainTab.textContent = 'Main';
+        this.elements.mainTab.onclick = () => this.switchChatTab('main');
+        this.elements.chatTabs.appendChild(this.elements.mainTab);
+        
+        // Private Chat tab (initially hidden)
+        this.elements.pcTab = document.createElement('div');
+        this.elements.pcTab.style.cssText = `
+            padding: 8px 15px;
+            background: #3a3a3a;
+            color: #cccccc;
+            border: 1px solid #555555;
+            border-bottom: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 4px 4px 0 0;
+            display: none;
+        `;
+        this.elements.pcTab.textContent = 'PC';
+        this.elements.pcTab.onclick = () => this.switchChatTab('pc');
+        this.elements.chatTabs.appendChild(this.elements.pcTab);
+        
+        leftSide.appendChild(this.elements.chatTabs);
+        
         // Main chat display area
         this.elements.chatArea = document.createElement('div');
         this.elements.chatArea.style.cssText = `
@@ -361,6 +410,106 @@ class IxatClient {
             user-select: text;
         `;
         leftSide.appendChild(this.elements.chatArea);
+        
+        // Private chat display area (initially hidden)
+        this.elements.privateChatArea = document.createElement('div');
+        this.elements.privateChatArea.style.cssText = `
+            flex: 1;
+            background: #1a1a1a;
+            border: 1px solid #444444;
+            margin-bottom: 10px;
+            overflow-y: auto;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #ffffff;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+            display: none;
+        `;
+        leftSide.appendChild(this.elements.privateChatArea);
+        
+        // Private chat input area (initially hidden)
+        this.elements.privateChatInput = document.createElement('div');
+        this.elements.privateChatInput.style.cssText = `
+            display: none;
+            align-items: center;
+            margin-bottom: 10px;
+        `;
+        
+        const privateInputField = document.createElement('input');
+        privateInputField.type = 'text';
+        privateInputField.placeholder = 'Type your private message...';
+        privateInputField.style.cssText = `
+            flex: 1;
+            background: #3a3a3a;
+            border: 1px solid #555555;
+            color: #ffffff;
+            padding: 8px;
+            font-size: 12px;
+            outline: none;
+            border-radius: 3px;
+        `;
+        
+        const privateSendButton = document.createElement('button');
+        privateSendButton.textContent = 'Send';
+        privateSendButton.style.cssText = `
+            background: linear-gradient(to bottom, #0066cc 0%, #0052a3 50%, #003d7a 100%);
+            color: #ffffff;
+            border: none;
+            padding: 8px 15px;
+            margin-left: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        `;
+        
+        privateSendButton.onclick = () => {
+            const message = privateInputField.value.trim();
+            if (message && this.currentPrivateChatTarget) {
+                // Create message data
+                const messageData = {
+                    from: this.currentUser?.nickname || 'You',
+                    message: message,
+                    timestamp: new Date().toLocaleTimeString(),
+                    isReceived: false
+                };
+                
+                // Store in message history
+                const chatId = `pm_${this.currentPrivateChatTarget.id}`;
+                if (!this.privateMessages[chatId]) {
+                    this.privateMessages[chatId] = [];
+                }
+                this.privateMessages[chatId].push(messageData);
+                
+                // Limit messages
+                if (this.privateMessages[chatId].length > 25) {
+                    this.privateMessages[chatId].shift();
+                }
+                
+                // Add message to tab
+                this.addPrivateMessageToTab(messageData);
+                
+                // Send to server
+                this.sendPrivateMessagePacket(this.currentPrivateChatTarget.id, message);
+                
+                // Clear input
+                privateInputField.value = '';
+            }
+        };
+        
+        privateInputField.onkeypress = (e) => {
+            if (e.key === 'Enter') {
+                privateSendButton.click();
+            }
+        };
+        
+        this.elements.privateChatInput.appendChild(privateInputField);
+        this.elements.privateChatInput.appendChild(privateSendButton);
+        leftSide.appendChild(this.elements.privateChatInput);
         
         // Chat input area
         const inputArea = document.createElement('div');
@@ -455,36 +604,22 @@ class IxatClient {
             border-left: 1px solid #444444;
         `;
         
-        // Rank Pools (VIP/Club/Chum)
-        const rankPools = document.createElement('div');
-        rankPools.style.cssText = `
-            display: flex;
-            flex-direction: column;
+
+        
+        // User list area (ABOVE the tabs)
+        this.elements.userList = document.createElement('div');
+        this.elements.userList.style.cssText = `
+            flex: 1;
+            background: #1a1a1a;
+            border-top: 1px solid #444444;
             padding: 5px;
+            overflow-y: auto;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
         `;
+        rightSide.appendChild(this.elements.userList);
         
-        const rankPoolButtons = ['VIP', 'Club', 'Chum'];
-        rankPoolButtons.forEach(rank => {
-            const rankBtn = document.createElement('div');
-            rankBtn.style.cssText = `
-                background: #2a2a2a;
-                border: 1px solid #444444;
-                color: #ffffff;
-                padding: 5px 8px;
-                margin-bottom: 2px;
-                font-size: 11px;
-                font-weight: bold;
-                cursor: pointer;
-                text-align: center;
-            `;
-            rankBtn.textContent = rank;
-            rankBtn.onclick = () => this.switchRankPool(rank);
-            rankPools.appendChild(rankBtn);
-        });
-        
-        rightSide.appendChild(rankPools);
-        
-        // Visitors/Friends tabs
+        // Visitors/Friends tabs (BELOW the user list)
         const userTabs = document.createElement('div');
         userTabs.style.cssText = `
             display: flex;
@@ -523,18 +658,7 @@ class IxatClient {
         
         rightSide.appendChild(userTabs);
         
-        // User list area
-        this.elements.userList = document.createElement('div');
-        this.elements.userList.style.cssText = `
-            flex: 1;
-            background: #1a1a1a;
-            border-top: 1px solid #444444;
-            padding: 5px;
-            overflow-y: auto;
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-        `;
-        rightSide.appendChild(this.elements.userList);
+        // User list will be populated when users join
         
         // Bottom buttons
         const bottomButtons = document.createElement('div');
@@ -1011,7 +1135,28 @@ class IxatClient {
             console.log('🎭 [CLIENT] Authenticated:', data);
             this.user = data.user;
             this.authenticated = true;
+            
+            // Store guest session data
+            if (data.user.guest && data.sessionId) {
+                localStorage.setItem('guestSessionId', data.sessionId);
+                localStorage.setItem('guestName', data.user.nickname);
+                localStorage.setItem('guestLevel', data.user.guestLevel || 1);
+                localStorage.setItem('guestExperience', data.user.guestExperience || 0);
+            }
+            
             this.joinRoom();
+        });
+        
+        // Handle guest level up
+        this.socket.on('guestLevelUp', (data) => {
+            console.log('🎭 [CLIENT] Guest leveled up!', data);
+            this.showGuestLevelUp(data);
+        });
+        
+        // Handle upgrade prompt
+        this.socket.on('upgradePrompt', (data) => {
+            console.log('🎭 [CLIENT] Upgrade prompt received:', data);
+            this.showUpgradePrompt(data);
         });
         
         this.socket.on('userList', (data) => {
@@ -1019,9 +1164,36 @@ class IxatClient {
             this.updateUserList(data.users);
         });
         
+        this.socket.on('userJoined', (data) => {
+            console.log('🎭 [CLIENT] User joined:', data);
+            this.addUser(data);
+        });
+        
+        this.socket.on('userLeft', (data) => {
+            console.log('🎭 [CLIENT] User left:', data);
+            this.removeUser(data.id);
+        });
+        
         this.socket.on('message', (data) => {
             console.log('🎭 [CLIENT] Message received:', data);
             this.addMessage(data);
+        });
+        
+        // Handle private messages
+        this.socket.on('privateMessage', (data) => {
+            console.log('🎭 [CLIENT] Private message received:', data);
+            console.log('🎭 [CLIENT] Current user:', this.currentUser);
+            this.handlePrivateMessage(data);
+        });
+        
+        this.socket.on('privateMessageSent', (data) => {
+            console.log('🎭 [CLIENT] Private message sent confirmation:', data);
+            this.showPrivateMessageSent(data);
+        });
+        
+        this.socket.on('error', (data) => {
+            console.log('🎭 [CLIENT] Socket error:', data);
+            alert('Error: ' + data.message);
         });
     }
     
@@ -1030,10 +1202,20 @@ class IxatClient {
         if (token && token !== 'undefined') {
             this.socket.emit('authenticate', { token });
         } else {
-            const guestName = 'Guest' + Math.floor(Math.random() * 1000);
+            // Check for existing guest session
+            let guestSessionId = localStorage.getItem('guestSessionId');
+            let guestName = localStorage.getItem('guestName');
+            
+            // If no existing session, create new guest
+            if (!guestSessionId) {
+                guestName = 'Guest' + Math.floor(Math.random() * 1000);
+                guestSessionId = 'temp_' + Date.now();
+            }
+            
             this.socket.emit('authenticate', {
                 guest: true,
-                nickname: guestName
+                nickname: guestName,
+                sessionId: guestSessionId
             });
         }
     }
@@ -1071,19 +1253,18 @@ class IxatClient {
     startPrivateChat(targetUser) {
         console.log('🎭 [CLIENT] Starting private chat with:', targetUser);
         
-        // Create private chat window if it doesn't exist
-        if (!this.elements.privateChats) {
-            this.elements.privateChats = {};
-        }
+        // Store the current private chat target
+        this.currentPrivateChatTarget = targetUser;
         
-        const chatId = `pm_${targetUser.id}`;
+        // Show the PC tab
+        this.elements.pcTab.style.display = 'block';
+        this.elements.pcTab.textContent = `PC (${targetUser.nickname})`;
         
-        if (!this.elements.privateChats[chatId]) {
-            this.createPrivateChatWindow(targetUser, chatId);
-        }
+        // Switch to PC tab
+        this.switchChatTab('pc');
         
-        // Show the private chat window
-        this.elements.privateChats[chatId].style.display = 'flex';
+        // Load message history
+        this.loadPrivateChatHistory();
     }
     
     createPrivateChatWindow(targetUser, chatId) {
@@ -1146,7 +1327,96 @@ class IxatClient {
         if (!this.privateMessages) {
             this.privateMessages = {};
         }
-        this.privateMessages[chatId] = [];
+        if (!this.privateMessages[chatId]) {
+            this.privateMessages[chatId] = [];
+        }
+    }
+    
+    switchChatTab(tabType) {
+        console.log('🎭 [CLIENT] Switching chat tab to:', tabType);
+        
+        if (tabType === 'main') {
+            // Show main chat
+            this.elements.chatArea.style.display = 'block';
+            this.elements.privateChatArea.style.display = 'none';
+            this.elements.privateChatInput.style.display = 'none';
+            
+            // Update tab styles
+            this.elements.mainTab.style.background = '#0066cc';
+            this.elements.mainTab.style.color = '#ffffff';
+            this.elements.pcTab.style.background = '#3a3a3a';
+            this.elements.pcTab.style.color = '#cccccc';
+        } else if (tabType === 'pc') {
+            // Show private chat
+            this.elements.chatArea.style.display = 'none';
+            this.elements.privateChatArea.style.display = 'block';
+            this.elements.privateChatInput.style.display = 'flex';
+            
+            // Update tab styles
+            this.elements.mainTab.style.background = '#3a3a3a';
+            this.elements.mainTab.style.color = '#cccccc';
+            this.elements.pcTab.style.background = '#0066cc';
+            this.elements.pcTab.style.color = '#ffffff';
+        }
+    }
+    
+    loadPrivateChatHistory() {
+        if (!this.currentPrivateChatTarget) {
+            console.log('🎭 [CLIENT] No private chat target set');
+            return;
+        }
+        
+        const chatId = `pm_${this.currentPrivateChatTarget.id}`;
+        console.log('🎭 [CLIENT] Loading private chat history for:', chatId);
+        console.log('🎭 [CLIENT] Message history:', this.privateMessages[chatId]);
+        
+        // Clear existing messages
+        this.elements.privateChatArea.innerHTML = '';
+        
+        // Initialize privateMessages if it doesn't exist
+        if (!this.privateMessages) {
+            this.privateMessages = {};
+        }
+        
+        // Load all stored messages
+        if (this.privateMessages[chatId] && this.privateMessages[chatId].length > 0) {
+            this.privateMessages[chatId].forEach(messageData => {
+                this.addPrivateMessageToTab(messageData);
+            });
+        } else {
+            // Show welcome message if no history
+            const welcomeMessage = document.createElement('div');
+            welcomeMessage.style.cssText = `
+                text-align: center;
+                color: #888888;
+                font-style: italic;
+                margin-top: 20px;
+            `;
+            welcomeMessage.textContent = `Start a conversation with ${this.currentPrivateChatTarget.nickname}...`;
+            this.elements.privateChatArea.appendChild(welcomeMessage);
+        }
+        
+        // Scroll to bottom
+        this.elements.privateChatArea.scrollTop = this.elements.privateChatArea.scrollHeight;
+    }
+    
+    addPrivateMessageToTab(messageData) {
+        const messageElement = document.createElement('div');
+        messageElement.style.cssText = `
+            margin-bottom: 8px;
+            padding: 5px;
+            background: #2a2a2a;
+            border-radius: 3px;
+        `;
+        
+        messageElement.innerHTML = `
+            <div style="font-size: 11px; color: #888888; margin-bottom: 2px;">${messageData.timestamp}</div>
+            <div style="font-weight: bold; color: #0066cc; margin-bottom: 2px;">${messageData.from}</div>
+            <div style="color: #ffffff; word-wrap: break-word;">${messageData.message}</div>
+        `;
+        
+        this.elements.privateChatArea.appendChild(messageElement);
+        this.elements.privateChatArea.scrollTop = this.elements.privateChatArea.scrollHeight;
     }
     
     sendPrivateMessageToUser(targetUser, chatId) {
@@ -1154,12 +1424,27 @@ class IxatClient {
         const message = inputElement.value.trim();
         
         if (message) {
-            // Add message to local chat
-            this.addPrivateMessage(chatId, {
-                sender: this.currentUser?.nickname || 'You',
+            // Create message data
+            const messageData = {
+                from: this.currentUser?.nickname || 'You',
                 message: message,
-                timestamp: new Date().toLocaleTimeString()
-            });
+                timestamp: new Date().toLocaleTimeString(),
+                isReceived: false
+            };
+            
+            // Store in message history
+            if (!this.privateMessages[chatId]) {
+                this.privateMessages[chatId] = [];
+            }
+            this.privateMessages[chatId].push(messageData);
+            
+            // Limit messages (like iXat did)
+            if (this.privateMessages[chatId].length > 25) {
+                this.privateMessages[chatId].shift();
+            }
+            
+            // Add message to local chat display
+            this.addPrivateMessage(chatId, messageData);
             
             // Send to server (simulate iXat's packet system)
             this.sendPrivateMessagePacket(targetUser.id, message);
@@ -1181,20 +1466,12 @@ class IxatClient {
         
         messageElement.innerHTML = `
             <div style="font-size: 11px; color: #888888; margin-bottom: 2px;">${messageData.timestamp}</div>
-            <div style="font-weight: bold; color: #0066cc; margin-bottom: 2px;">${messageData.sender}</div>
+            <div style="font-weight: bold; color: #0066cc; margin-bottom: 2px;">${messageData.from}</div>
             <div style="color: #ffffff; word-wrap: break-word;">${messageData.message}</div>
         `;
         
         messagesContainer.appendChild(messageElement);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        
-        // Store message in local array
-        this.privateMessages[chatId].push(messageData);
-        
-        // Limit messages (like iXat did)
-        if (this.privateMessages[chatId].length > 25) {
-            this.privateMessages[chatId].shift();
-        }
     }
     
     sendPrivateMessagePacket(targetUserId, message) {
@@ -1207,6 +1484,9 @@ class IxatClient {
         };
         
         console.log('🎭 [CLIENT] Sending private message packet:', packet);
+        console.log('🎭 [CLIENT] Current user:', this.currentUser);
+        console.log('🎭 [CLIENT] Target user ID:', targetUserId);
+        console.log('🎭 [CLIENT] Are they the same?', this.currentUser?.id === targetUserId);
         
         // Send to server via Socket.IO
         if (this.socket) {
@@ -1216,12 +1496,22 @@ class IxatClient {
     
     sendPrivateMessage(targetUser) {
         console.log('🎭 [CLIENT] Sending private message to:', targetUser);
+        console.log('🎭 [CLIENT] Target user ID:', targetUser.id);
+        console.log('🎭 [CLIENT] Current user ID:', this.currentUser?.id);
         
         // Create a simple private message input
         const message = prompt(`Send private message to ${targetUser.nickname || targetUser.username}:`);
         
         if (message && message.trim()) {
-            this.sendPrivateMessagePacket(targetUser.id, message.trim());
+            console.log('🎭 [CLIENT] Sending private message:', message.trim(), 'to user ID:', targetUser.id);
+            
+            // Send private message that appears in main chat but only visible to sender and recipient
+            this.socket.emit('privateMessage', {
+                targetUsername: targetUser.nickname,
+                message: message.trim()
+            });
+            
+            // Show confirmation
             alert(`Private message sent to ${targetUser.nickname || targetUser.username}!`);
         }
     }
@@ -2124,6 +2414,7 @@ class IxatClient {
     updateUserList(users) {
         this.elements.userList.innerHTML = '';
         this.users.clear();
+        this.userElements.clear();
         
         users.forEach(user => {
             this.addUser(user);
@@ -2136,9 +2427,19 @@ class IxatClient {
     }
     
     addUser(user) {
+        console.log('🎭 [CLIENT] Adding user to list:', user);
         const userElement = document.createElement('div');
         userElement.className = 'user-item';
         userElement.dataset.userId = user.id;
+        userElement.dataset.nickname = user.nickname || '';
+        userElement.dataset.username = user.username || '';
+        userElement.dataset.rank = user.rank || 0;
+        userElement.dataset.avatar = user.avatar || 1;
+        userElement.dataset.guest = user.guest || false;
+        userElement.dataset.guestLevel = user.guestLevel || 1;
+        userElement.dataset.xats = user.xats || 0;
+        
+        console.log('🎭 [CLIENT] User element dataset:', userElement.dataset);
         userElement.style.cssText = `
             display: flex;
             align-items: center;
@@ -2154,12 +2455,28 @@ class IxatClient {
         const rankColor = this.getUserColor(user.rank);
         const rankText = this.getRankText(user.rank);
         
+        // Enhanced display for guests
+        let guestInfo = '';
+        if (user.guest) {
+            const level = user.guestLevel || 1;
+            const xats = user.xats || 0;
+            const persistent = user.persistent ? '💾' : '⚡';
+            guestInfo = `
+                <div style="color: #${rankColor}; font-size: 9px;">
+                    ${rankText} Lv.${level} ${persistent}
+                </div>
+                <div style="color: #ffcc00; font-size: 8px;">${xats} xats</div>
+            `;
+        } else {
+            guestInfo = `<div style="color: #${rankColor}; font-size: 9px;">${rankText}</div>`;
+        }
+        
         userElement.innerHTML = `
             <span style="color: #${rankColor}; font-weight: bold; margin-right: 5px;">●</span>
             <img src="/avatars/${user.avatar}.png" style="width: 20px; height: 20px; border-radius: 2px; margin-right: 6px; border: 1px solid #333;">
             <div style="flex: 1;">
                 <div style="color: #ffffff; font-weight: bold; font-size: 11px;">${user.nickname || user.username}</div>
-                <div style="color: #${rankColor}; font-size: 9px;">${rankText}</div>
+                ${guestInfo}
             </div>
         `;
         
@@ -2173,10 +2490,38 @@ class IxatClient {
             userElement.style.borderColor = 'transparent';
             userElement.style.transform = 'translateX(0)';
         };
-        userElement.onclick = () => this.showUserProfile(user);
+        userElement.onclick = () => {
+            console.log('🎭 [CLIENT] User clicked in user list:', user);
+            console.log('🎭 [CLIENT] User ID from click:', user.id);
+            console.log('🎭 [CLIENT] Current user ID:', this.currentUser?.id);
+            this.showUserProfile(user);
+        };
         
+        // Store user data and DOM element separately
+        this.users.set(user.id, user);
+        this.userElements.set(user.id, userElement);
+        
+        // Add to display
         this.elements.userList.appendChild(userElement);
-        this.users.set(user.id, userElement);
+        
+
+    }
+    
+    removeUser(userId) {
+        // Remove from both maps
+        this.users.delete(userId);
+        
+        // Remove DOM element if it exists
+        const userElement = this.userElements.get(userId);
+        if (userElement && userElement.parentNode) {
+            userElement.parentNode.removeChild(userElement);
+        }
+        this.userElements.delete(userId);
+        
+        // Update user count
+        if (this.elements.userCount) {
+            this.elements.userCount.textContent = `Users: ${this.users.size}`;
+        }
     }
     
     getUserColor(rank) {
@@ -2201,12 +2546,45 @@ class IxatClient {
         return ranks[rank] || 'Guest';
     }
     
-    showUserProfile(user) {
-        console.log('🎭 [CLIENT] Showing profile for user:', user);
+    showUserProfile(userOrId) {
+        console.log('🎭 [CLIENT] Showing profile for user:', userOrId);
         
-        // Get current user's rank (for demo purposes, cycle through ranks)
+        // Handle both user object and user ID string
+        let user;
+        if (typeof userOrId === 'string') {
+            // Find user by ID from the user list
+            const userElement = this.users.get(userOrId);
+            if (!userElement) {
+                console.error('🎭 [CLIENT] User not found:', userOrId);
+                return;
+            }
+            // Get user data from the element's dataset
+            user = {
+                id: userElement.dataset.userId,
+                nickname: userElement.dataset.nickname,
+                username: userElement.dataset.username,
+                rank: userElement.dataset.rank,
+                avatar: userElement.dataset.avatar
+            };
+            console.log('🎭 [CLIENT] Found user element:', userElement);
+            console.log('🎭 [CLIENT] User element dataset:', userElement.dataset);
+        } else {
+            user = userOrId;
+        }
+        
+        console.log('🎭 [CLIENT] Resolved user object:', user);
+        console.log('🎭 [CLIENT] Current user for comparison:', this.currentUser);
+        
+        // Get current user's rank
         const currentUserRank = this.getCurrentUserRank();
         
+        // For guests and members, always show regular profile
+        if (currentUserRank === 'guest' || currentUserRank === 'member') {
+            this.showRegularProfile(user);
+            return;
+        }
+        
+        // For higher ranks, show appropriate menu
         switch (currentUserRank) {
             case 'mainowner':
                 this.showMainOwnerMenu(user);
@@ -2217,29 +2595,30 @@ class IxatClient {
             case 'moderator':
                 this.showModeratorMenu(user);
                 break;
-            case 'regular':
-                this.showRegularProfile(user);
-                break;
-            case 'bot':
-                this.showBotMenu(user);
-                break;
             default:
                 this.showRegularProfile(user);
         }
     }
     
     getCurrentUserRank() {
-        // For demo purposes, show regular profile for guests and members
-        const ranks = ['mainowner', 'owner', 'moderator', 'member', 'guest', 'bot'];
-        const rankIndex = Math.floor(Math.random() * ranks.length);
-        const rank = ranks[rankIndex];
-        
-        // Show regular profile for guests and members (like in your image)
-        if (rank === 'guest' || rank === 'member') {
-            return 'regular';
+        // Get the actual current user's rank from the authenticated user data
+        if (this.currentUser) {
+            // If user has a rank property, use it
+            if (this.currentUser.rank !== undefined) {
+                return this.currentUser.rank;
+            }
+            
+            // If user is a guest, return 'guest'
+            if (this.currentUser.isGuest) {
+                return 'guest';
+            }
+            
+            // If user is authenticated but not a guest, they're a member
+            return 'member';
         }
         
-        return rank;
+        // Default to guest if no current user
+        return 'guest';
     }
     
     showMainOwnerMenu(user) {
@@ -3403,11 +3782,19 @@ class IxatClient {
         this.elements.smiliesArea.innerHTML += '</div>';
     }
     
-    switchRankPool(rank) {
-        console.log('🎭 [CLIENT] Switching to rank pool:', rank);
-        // TODO: Implement rank pool switching logic
-        // This would filter users by rank (VIP, Club, Chum, etc.)
-    }
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
     
     switchChatGroup(groupId) {
         console.log('🎭 [CLIENT] Switching chat group to:', groupId);
@@ -3452,6 +3839,218 @@ class IxatClient {
         }
         
         console.log('🎭 [CLIENT] Switched to chat group:', group.name);
+    }
+    
+    showGuestLevelUp(data) {
+        // Create level up notification
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 10000;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            max-width: 300px;
+            animation: slideIn 0.3s ease-out;
+        `;
+        
+        notification.innerHTML = `
+            <div style="font-weight: bold; margin-bottom: 5px;">🎉 Level Up!</div>
+            <div>You reached level ${data.newLevel}!</div>
+            <div style="font-size: 12px; margin-top: 5px; opacity: 0.9;">
+                +${data.xatsReward} xats earned!
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => notification.remove(), 300);
+            }
+        }, 5000);
+        
+        // Update stored level
+        localStorage.setItem('guestLevel', data.newLevel);
+        localStorage.setItem('guestExperience', data.experience);
+    }
+    
+    showUpgradePrompt(data) {
+        // Create upgrade prompt modal
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            font-family: Arial, sans-serif;
+        `;
+        
+        modal.innerHTML = `
+            <div style="background: #2a2a2a; border: 1px solid #444; border-radius: 8px; padding: 20px; max-width: 400px; color: white;">
+                <h3 style="color: #ffcc00; margin-top: 0;">🚀 Ready to Upgrade?</h3>
+                <p>You've reached level ${data.level}! You can now upgrade to a full member account.</p>
+                <div style="margin: 15px 0;">
+                    <strong>Benefits of upgrading:</strong>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        ${data.benefits.map(benefit => `<li>${benefit}</li>`).join('')}
+                    </ul>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                    <button id="upgradeLater" style="background: #666; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                        Maybe Later
+                    </button>
+                    <button id="upgradeNow" style="background: #4CAF50; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                        Upgrade Now
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Handle button clicks
+        modal.querySelector('#upgradeLater').onclick = () => {
+            modal.remove();
+        };
+        
+        modal.querySelector('#upgradeNow').onclick = () => {
+            modal.remove();
+            // Redirect to registration page
+            window.location.href = '/auth.html?upgrade=true';
+        };
+    }
+    
+    handlePrivateMessage(data) {
+        console.log('🎭 [CLIENT] Handling private message:', data);
+        
+        // Show private message notification
+        this.showPrivateMessageNotification(data);
+        
+        // Always store the message in the private messages history
+        const chatId = `pm_${data.fromId}`;
+        if (!this.privateMessages) {
+            this.privateMessages = {};
+        }
+        if (!this.privateMessages[chatId]) {
+            this.privateMessages[chatId] = [];
+        }
+        
+        // Add message to history
+        const messageData = {
+            from: data.from,
+            message: data.message,
+            timestamp: new Date(data.timestamp).toLocaleTimeString(),
+            isReceived: true
+        };
+        
+        this.privateMessages[chatId].push(messageData);
+        
+        // Limit messages (like iXat did)
+        if (this.privateMessages[chatId].length > 25) {
+            this.privateMessages[chatId].shift();
+        }
+        
+        console.log('🎭 [CLIENT] Stored private message in history:', this.privateMessages[chatId]);
+        
+        // If private chat is open for this user, add message to it
+        if (this.currentPrivateChatTarget && this.currentPrivateChatTarget.id === data.fromId) {
+            this.addPrivateMessageToTab(messageData);
+        }
+    }
+    
+    showPrivateMessageNotification(data) {
+        // Create notification for private message
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 10000;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            max-width: 300px;
+            cursor: pointer;
+            animation: slideInLeft 0.3s ease-out;
+        `;
+        
+        notification.innerHTML = `
+            <div style="font-weight: bold; margin-bottom: 5px;">💬 Private Message</div>
+            <div style="font-size: 12px; margin-bottom: 3px;">From: ${data.from}</div>
+            <div style="font-size: 11px; opacity: 0.9;">${data.message}</div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Click to open private chat
+        notification.onclick = () => {
+            notification.remove();
+            // Find the user and open private chat
+            const user = Array.from(this.users.values()).find(u => u.id === data.fromId);
+            if (user) {
+                this.startPrivateChat(user);
+            }
+        };
+        
+        // Auto remove after 10 seconds
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.style.animation = 'slideOutLeft 0.3s ease-in';
+                setTimeout(() => notification.remove(), 300);
+            }
+        }, 10000);
+    }
+    
+    showPrivateMessageSent(data) {
+        // Show confirmation that message was sent
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            z-index: 10000;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            animation: slideIn 0.3s ease-out;
+        `;
+        
+        notification.innerHTML = `
+            <div>✅ Message sent to ${data.to}</div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Auto remove after 3 seconds
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => notification.remove(), 300);
+            }
+        }, 3000);
     }
 }
 
