@@ -1,0 +1,402 @@
+/* xat.com classic chat styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    background: #f0f0f0;
+    overflow: hidden;
+    height: 100vh;
+    zoom: 1;
+    transform: scale(1);
+}
+
+.table {
+    display: table;
+    width: 100%;
+    height: 100vh;
+}
+
+.row {
+    display: table-row;
+}
+
+.cell {
+    display: table-cell;
+    vertical-align: top;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    background: #2c2c2c;
+    color: white;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+.sidebarTitle {
+    padding: 15px;
+    background: #1a1a1a;
+    border-bottom: 1px solid #444;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.SubTitle {
+    padding: 10px 15px;
+    background: #333;
+    border-bottom: 1px solid #444;
+    font-size: 12px;
+    color: #ccc;
+}
+
+.sideBarItems {
+    padding: 10px 0;
+}
+
+.sideBarItems > div {
+    padding: 8px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #444;
+}
+
+.sideBarItems > div:hover {
+    background: #444;
+}
+
+.sideBarFooter {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background: #1a1a1a;
+    border-top: 1px solid #444;
+}
+
+/* Main chat area */
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    z-index: 1;
+}
+
+/* Messages container */
+#messagesContainer {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    margin: 10px;
+    padding: 15px;
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    font-size: 13px;
+}
+
+#messages {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li.message {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+li.message:last-child {
+    border-bottom: none;
+}
+
+/* Visitors container */
+#visitorsContainer {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    margin: 10px;
+    padding: 15px;
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    font-size: 13px;
+}
+
+#idvisitors {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li.friend {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+li.friend:hover {
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+li.friend:last-child {
+    border-bottom: none;
+}
+
+/* Tab styles */
+.tabcontent {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    margin: 10px;
+    padding: 15px;
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    font-size: 13px;
+}
+
+.tab {
+    display: flex;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px 8px 0 0;
+    margin: 10px 10px 0 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tab button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    color: #666;
+    border-bottom: 3px solid transparent;
+}
+
+.tab button.active {
+    color: #333;
+    border-bottom-color: #667eea;
+}
+
+.tab button:hover {
+    background: #f5f5f5;
+}
+
+/* Input area */
+.textentry {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 13px;
+    width: 100%;
+    resize: none;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    min-height: 40px;
+}
+
+.textentry:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+/* Buttons */
+.mainButtons {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 11px;
+    transition: all 0.3s ease;
+}
+
+.mainButtons:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Right bar icons */
+#rightBarIcons {
+    display: flex;
+    gap: 5px;
+    padding: 10px;
+}
+
+.svgBack {
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.svgBack:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Smiley bar */
+.smileyBar {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    margin: 10px;
+    padding: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    max-height: 50px;
+    overflow-y: auto;
+}
+
+#smileyBar {
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+    max-height: 35px;
+    overflow-y: auto;
+}
+
+/* Quickbar button */
+#sideBar {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    width: 35px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#sideBar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#sideBar::before {
+    content: "☰";
+    font-size: 16px;
+    color: #333;
+}
+
+/* Promo banner */
+.swPromo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: shake 2s infinite;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+}
+
+/* Utility classes */
+.d-none {
+    display: none !important;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Fix overlapping issues */
+#background .cell {
+    position: relative;
+    z-index: 1;
+}
+
+#background .cell:first-child {
+    width: 74%;
+    vertical-align: top;
+}
+
+#background .cell:last-child {
+    width: 26%;
+    vertical-align: top;
+}
+
+/* Ensure proper spacing */
+#background .row {
+    height: 100vh;
+}
+
+#background .cell > .table {
+    height: 100%;
+}
+
+#background .cell > .table > .row {
+    height: 100%;
+}
+
+#background .cell > .table > .row > .cell {
+    height: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        left: -100%;
+    }
+    
+    #background .cell {
+        display: block;
+        width: 100% !important;
+    }
+    
+    #background .cell:first-child {
+        height: 70vh;
+    }
+    
+    #background .cell:last-child {
+        height: 30vh;
+    }
+}

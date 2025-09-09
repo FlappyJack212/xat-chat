@@ -1,0 +1,290 @@
+<!-- Navigation Component -->
+<nav class="main-nav">
+    <div class="nav-container">
+        <div class="nav-brand">
+            <a href="/index.html" class="nav-logo">
+                <span class="logo-icon">🌍</span>
+                <span class="logo-text">iXat</span>
+            </a>
+        </div>
+        
+        <div class="nav-menu" id="navMenu">
+            <a href="/index.html" class="nav-link">Home</a>
+            <a href="/chat-interface.html" class="nav-link">Chat</a>
+            <a href="/pages/store.html" class="nav-link">Store</a>
+            <a href="/pages/forum.html" class="nav-link">Forum</a>
+            <a href="/pages/wiki.html" class="nav-link">Wiki</a>
+            <a href="/pages/powers.html" class="nav-link">Powers</a>
+            <a href="/pages/profile.html" class="nav-link">Profile</a>
+        </div>
+        
+        <div class="nav-actions">
+            <div class="user-info" id="userInfo" style="display: none;">
+                <span class="user-name" id="userName">Guest</span>
+                <span class="user-xats" id="userXats">0 xats</span>
+                <button class="btn-logout" id="logoutBtn">Logout</button>
+            </div>
+            <div class="auth-buttons" id="authButtons">
+                <a href="/pages/login.html" class="btn-login">Login</a>
+                <a href="/pages/register.html" class="btn-register">Register</a>
+            </div>
+        </div>
+        
+        <button class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</nav>
+
+<style>
+.main-nav {
+    background: #2c3e50;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    height: 60px;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.logo-icon {
+    margin-right: 0.5rem;
+    font-size: 1.8rem;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #bdc3c7;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: white;
+    background: #34495e;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+}
+
+.user-name {
+    font-weight: 500;
+}
+
+.user-xats {
+    color: #f39c12;
+    font-size: 0.9rem;
+}
+
+.btn-login,
+.btn-register,
+.btn-logout {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-login {
+    color: #3498db;
+    border: 1px solid #3498db;
+}
+
+.btn-login:hover {
+    background: #3498db;
+    color: white;
+}
+
+.btn-register {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-register:hover {
+    background: #c0392b;
+}
+
+.btn-logout {
+    background: #95a5a6;
+    color: white;
+}
+
+.btn-logout:hover {
+    background: #7f8c8d;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.nav-toggle span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 60px;
+        flex-direction: column;
+        background: #2c3e50;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+        padding: 2rem 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+}
+</style>
+
+<script>
+// Navigation functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+    const userInfo = document.getElementById('userInfo');
+    const authButtons = document.getElementById('authButtons');
+    const userName = document.getElementById('userName');
+    const userXats = document.getElementById('userXats');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Toggle mobile menu
+    if (navToggle) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    // Check authentication status
+    function checkAuth() {
+        const token = localStorage.getItem('authToken');
+        const userProfile = localStorage.getItem('userProfile');
+        
+        if (token && userProfile) {
+            try {
+                const user = JSON.parse(userProfile);
+                userName.textContent = user.nickname || user.username || 'User';
+                userXats.textContent = `${user.xats || 0} xats`;
+                userInfo.style.display = 'flex';
+                authButtons.style.display = 'none';
+            } catch (e) {
+                console.error('Error parsing user profile:', e);
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userProfile');
+            }
+        } else {
+            userInfo.style.display = 'none';
+            authButtons.style.display = 'flex';
+        }
+    }
+
+    // Logout functionality
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', async () => {
+            try {
+                const response = await fetch('/api/auth/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                    }
+                });
+                
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userProfile');
+                window.location.href = '/index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userProfile');
+                window.location.href = '/index.html';
+            }
+        });
+    }
+
+    // Set active link based on current page
+    function setActiveLink() {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') && currentPath.includes(link.getAttribute('href').replace('../', ''))) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    // Initialize
+    checkAuth();
+    setActiveLink();
+
+    // Listen for auth changes
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'authToken' || e.key === 'userProfile') {
+            checkAuth();
+        }
+    });
+});
+</script>

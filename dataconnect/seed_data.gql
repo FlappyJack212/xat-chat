@@ -1,0 +1,28 @@
+mutation SeedDatabase @auth(level: USER) {
+  movie_insertMany(data: [
+    {
+      title: "Inception",
+      posterUrl: "https://example.com/inception.jpg",
+      runtime: 148,
+      year: 2010,
+      genres: ["sci-fi", "action", "thriller"],
+      summary: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O."
+    },
+    {
+      title: "The Matrix",
+      posterUrl: "https://example.com/matrix.jpg",
+      runtime: 136,
+      year: 1999,
+      genres: ["sci-fi", "action"],
+      summary: "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers."
+    },
+    {
+      title: "Interstellar",
+      posterUrl: "https://example.com/interstellar.jpg",
+      runtime: 169,
+      year: 2014,
+      genres: ["sci-fi", "adventure", "drama"],
+      summary: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
+    }
+  ])
+}

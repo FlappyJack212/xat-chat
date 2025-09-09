@@ -1,874 +1,289 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ixchats</title>
-    <meta name="description" content="ixchats is a fun social networking site, join a group, make friends, create your own chat group">
+    <title>iXat - Chat Platform</title>
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/authentic-xat.css">
+    <link rel="stylesheet" href="css/chat.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        * {
-            box-sizing: border-box;
+        /* Use the new sexy theme from main.css */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #00d4ff 100%);
+            min-height: 100vh;
+            color: #f3f4f6;
+            position: relative;
         }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
-        }
-
-        /* Header */
-        .navbar {
-            background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
-            border-bottom: 3px solid #004080;
-            padding: 10px 0;
-        }
-
-        .navbar-brand img {
-            height: 50px;
-        }
-
-        .header-flex {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.2) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
+            z-index: -1;
         }
 
-        .logoname-flex {
+        @keyframes backgroundShift {
+            0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+            33% { transform: translateX(-20px) translateY(-10px) rotate(1deg); }
+            66% { transform: translateX(20px) translateY(10px) rotate(-1deg); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
             text-align: center;
-            color: white;
+            margin-bottom: 3rem;
         }
-
-        #groupName {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 5px;
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-
-        #groupDescription {
-            font-size: 14px;
-            opacity: 0.9;
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-grey);
+            margin-bottom: 2rem;
         }
-
-        .navbar-nav .nav-link {
-            color: white !important;
-            font-weight: 500;
-            margin: 0 10px;
-            padding: 8px 16px !important;
-            border-radius: 6px;
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .nav-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-        }
-
-        .navbar-nav .nav-link:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff !important;
-            transform: translateY(-1px);
-        }
-
-        .navbar-nav .nav-link.active {
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff !important;
-        }
-
-        /* Hero Section */
-        #hero {
-            padding-top: 80px;
-            padding-bottom: 40px;
-        }
-
-        .xatbox {
-            background: #ffffff;
-            border: 2px solid #0066cc;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.2);
-        }
-
-                 #embedframe {
-             width: 100%;
-             height: 600px;
-             border: none;
-         }
-
-        #newto {
-            padding: 20px;
-        }
-
-        #newtoxat {
-            color: #0066cc;
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        #newtodesc {
-            color: #666;
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #0066cc, #0052a3);
-            border: none;
-            padding: 12px 24px;
-            font-weight: bold;
-            border-radius: 6px;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #0052a3, #004080);
-            transform: translateY(-2px);
-        }
-
-        /* Carousel */
-        .carousel-item {
-            padding: 40px 0;
-        }
-
-        .carousel-item h1 {
-            color: #0066cc;
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .carousel-item p {
-            color: #666;
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .carousel-item img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .xcarousel-control {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 102, 204, 0.8);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
+            border: 2px solid transparent;
             text-decoration: none;
-            z-index: 10;
+            color: inherit;
         }
-
-        .xcarousel-control.xleft {
-            left: 20px;
+        
+        .nav-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: var(--primary-blue);
         }
-
-        .xcarousel-control.xright {
-            right: 20px;
+        
+        .nav-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
-
-        .ximg {
-            width: 20px;
-            height: 20px;
+        
+        .nav-card p {
+            color: var(--secondary-grey);
+            line-height: 1.6;
         }
-
-        /* Groups Section */
-        .groups_page {
-            background: #ffffff;
-            padding: 40px 0;
-            border-top: 1px solid #e9ecef;
+        
+        .nav-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
         }
-
-        .section_header {
-            color: #0066cc;
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 30px;
+        
+        .status-bar {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
         }
-
-        .form-search {
-            max-width: 400px;
-        }
-
-        .homenav {
-            border-bottom: 2px solid #e9ecef;
-            margin-bottom: 30px;
-        }
-
-        .homenav .nav-link {
-            color: #666;
-            border: none;
-            padding: 12px 20px;
-            margin-right: 10px;
-            border-radius: 6px 6px 0 0;
-        }
-
-        .homenav .nav-link.active {
-            background: #0066cc;
-            color: white;
-        }
-
-        .homenav .nav-link:hover {
-            background: #e9ecef;
-            color: #333;
-        }
-
-        .homenav .nav-link.active:hover {
-            background: #0052a3;
-            color: white;
-        }
-
-                 /* Group Cards */
-         .group-card {
-             background: #ffffff;
-             border: 1px solid #e9ecef;
-             border-radius: 8px;
-             padding: 15px;
-             margin-bottom: 20px;
-             transition: all 0.3s ease;
-            cursor: pointer;
-             text-align: center;
-        }
-
-         .group-thumbnail {
-             margin-bottom: 10px;
-        }
-
-         .group-thumbnail img {
-             width: 80px;
-            height: 80px;
-             border-radius: 8px;
-            object-fit: cover;
-             border: 2px solid #e9ecef;
-         }
-
-        .group-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            border-color: #0066cc;
-        }
-
-        .group-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: #0066cc;
-            margin-bottom: 10px;
-        }
-
-        .group-description {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        .group-stats {
+        
+        .status-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 12px;
-            color: #999;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--light-grey);
         }
-
-        .group-users {
-            background: #28a745;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-weight: bold;
+        
+        .status-item:last-child {
+            border-bottom: none;
         }
-
-        /* Footer */
-        #footer {
-            background: #333;
-            color: white;
-            padding: 20px 0;
+        
+        .status-label {
+            font-weight: 500;
+            color: var(--primary-grey);
         }
-
-        .footer-icons {
-            margin: 0 10px;
+        
+        .status-value {
+            color: var(--secondary-grey);
         }
-
-        .footer-icons img {
-            width: 18px;
-            height: 18px;
+        
+        .online {
+            color: var(--accent);
+            font-weight: 600;
         }
-
-        #footer a {
-            color: #ccc;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        #footer a:hover {
-            color: white;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-flex {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-                         #embedframe {
-                 height: 400px;
-             }
-
-            .carousel-item {
-                padding: 20px 0;
-            }
-
-            .carousel-item h1 {
-                font-size: 24px;
-            }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--secondary-grey);
+            border-top: 1px solid var(--light-grey);
+            margin-top: 3rem;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <nav id="navTop" class="navbar navbar-expand-md navbar-dark fixed-top">
-        <div class="container">
-            <div class="header-flex">
-                <div>
-                    <a class="navbar-brand" href="/">
-                        <img id="navLogo" src="https://xat.com/content/web/R00221/img/xatplanet.svg" height="50" alt="logo">
-                    </a>
-                </div>
-                <div class="logoname-flex">
-                    <div id="groupName">ixchats</div>
-                    <div id="groupDescription">Complete iXat recreation with all 325+ authentic powers</div>
-        </div>
-    </div>
-
-            <!-- Navigation Menu -->
-            <div class="navbar-nav ml-auto">
-                <a class="nav-link" href="/">Home</a>
-                <a class="nav-link" href="/chat.html">Main Chat</a>
-                <a class="nav-link" href="/powers.html">Powers</a>
-                <a class="nav-link" href="/auth.html" id="authLink">Register/Login</a>
-                <a class="nav-link" href="/profile.html" id="profileLink" style="display: none;">Profile</a>
-                <a class="nav-link" href="/lobby.html">Lobby</a>
-                <a class="nav-link" href="/help.html">Help</a>
-                <a class="nav-link" href="/test.html">Test</a>
-                <a class="nav-link" href="/chat-edit.html">Edit Chat</a>
-            </div>
-        </div>
-        <span id="statnav"></span>
-    </nav>
-
-    <!-- Hero Section with Carousel -->
-    <div id="hero">
-        <div class="container">
-            <div class="row">
-                <div>
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-                        <div class="carousel-inner">
-                            <!-- Main Chat Slide -->
-                            <div class="carousel-item active">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm">
-                                            <div id="xatbox">
-                                                <div class="xatbox">
-                                                                                                         <iframe name="box" title="chat" width="728" height="600" id="embedframe" src="/chat-interface.html"></iframe>
-                                                </div>
-                                                <div id="promo"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div id="newto">
-                                                <h1 id="newtoxat">new to ixchats?</h1>
-                                                <p id="newtodesc">Register an account. Find a chat group that shares your interests. Make your own chat group. Get and trade Powers. Play a multiplayer game. Design your own animated avatar character. Send stickers with custom text.</p>
-                                                <a href="#myCarousel" data-slide="next" class="btn btn-primary btn-large">
-                                                    <img class="mr-2 pb-1" src="https://xat.com/content/web/R00221/img/navbar/help.svg" alt="help" width="19">
-                                                    <span>learn more</span>
-                                                </a>
-                                                <p class="pt-4">
-                                                    <span>Follow ixchats on</span>: 
-                                                    <a href="https://twitter.com/ixchats" rel="noopener" target="_blank">
-                                                        <img class="ml-2 mr-2 mb-1" src="https://xat.com/content/web/R00221/img/navbar/x_b.svg" alt="ixchats x" width="18">
-                                                    </a>
-                                                    <a href="https://facebook.com/ixchats" rel="noopener" target="_blank">
-                                                        <img class="mr-2 mb-1" src="https://xat.com/content/web/R00221/img/navbar/facebook.svg" alt="ixchats facebook" width="22">
-                                                    </a>
-                                                    <a href="https://instagram.com/ixchats" rel="noopener" target="_blank">
-                                                        <img class="mr-2 insta" src="https://xat.com/content/web/R00221/img/navbar/instagram.svg" alt="ixchats instagram" width="22">
-                                                    </a>
-                                                </p>
-                                            </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-
-                            <!-- Create Group Slide -->
-                            <div class="carousel-item">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm">
-                                            <img src="https://xat.com/content/web/R00221/img/home/tourgroup.png" alt="group" loading="lazy" class="img-fluid">
-                    </div>
-                                        <div class="col-sm">
-                                                                                         <h1>create a chat group</h1>
-                                             <p>Your own chat group could be for particular subject (e.g. music, anime, video games), for the visitors to your site or just for you and your friends. You can use it on ixchats or embed it on your site. Groups are fully customizable and can be members only if you want to restrict it to your friends.</p>
-                                             <a href="/groups.html" class="btn btn-primary btn-large">
-                                                 <img class="mr-2 pb-1" src="https://xat.com/content/web/R00221/img/navbar/community.svg" alt="community">
-                                                 <span>create chat group</span>
-                                             </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                            <!-- Powers Slide -->
-                            <div class="carousel-item">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm">
-                                                                                         <h1>powers</h1>
-                                             <p>You can use your xats and days to buy special powers for the chat box. These include sets of custom smilies, special effects and abilities and group powers which add extra features to your chat group. Learn more about all the available powers on the <a href="https://xat.wiki/Powers">iXat wiki</a>.</p>
-                                            <a href="/powers.html" class="btn btn-primary btn-large">
-                                                <img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/powers.svg" alt="powers">
-                                                <span>get powers</span>
-                                            </a>
-                                        </div>
-                                        <div class="col-sm">
-                                            <img src="https://xat.com/content/web/R00221/img/home/tourpowers.png" loading="lazy" alt="powers" class="img-fluid pt-1">
-                                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                            <!-- Trade Slide -->
-                            <div class="carousel-item">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm">
-                                                                                         <h1>trade powers</h1>
-                                             <p>You can trade powers with other ixchats users. If you are skillful you can earn a profit, buy low and sell high. <a href="/trade.html">ixchats trade</a> is a stock exchange where traders meet.</p>
-                                            <a href="/trade.html" class="btn btn-primary btn-large">
-                                                <img class="mr-2 pb-1" src="https://xat.com/content/web/R00221/img/navbar/trade.svg" alt="trade">
-                                                <span>start trading</span>
-                                            </a>
-                    </div>
-                                        <div class="col-sm">
-                                            <img src="https://xat.com/content/web/R00221/img/home/tourtrade.png" loading="lazy" alt="trade" class="img-fluid">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                            <!-- Games Slide -->
-                            <div class="carousel-item">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm">
-                                            <img src="https://xat.com/content/web/R00221/img/home/tourgames.png" loading="lazy" alt="games" class="img-fluid">
-                    </div>
-                                        <div class="col-sm">
-                                            <h1>games</h1>
-                                            <p>Play games against your friends or randoms.<br>Compete to be the fastest in the race games or evade bans with the ban games. <a href="/chat.html?game=doodle">Doodle</a> is a freeform co-operative drawing app. <a href="/chat.html?game=doodlerace">DoodleRace</a> gives you something to draw and then you vote on whose drawing was the best. Also try the new <a href="/chat.html?game=hearts">Hearts</a> card game.</p>
-                                            <a href="/chat.html" class="btn btn-primary btn-large">
-                                                <img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/games.svg" alt="games">
-                                                <span>play now</span>
-                                            </a>
-                    </div>
-                </div>
-                    </div>
-                    </div>
-                </div>
-
-                        <!-- Carousel Controls -->
-                        <a class="xcarousel-control xleft" href="#myCarousel" data-slide="prev">
-                            <img class="ximg p-2" src="https://xat.com/content/web/R00221/img/leftarrow.svg" alt="prev">
-                        </a>
-                        <a class="xcarousel-control xright" href="#myCarousel" data-slide="next">
-                            <img class="ximg p-2" src="https://xat.com/content/web/R00221/img/rightarrow.svg" alt="next">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Groups Section -->
-    <div id="groups" class="groups_page">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                                         <h2 class="section_header left">
-                         <span>chat groups</span>
-                     </h2>
-                </div>
-                <div class="col-lg-8">
-                    <div class="float-right">
-                        <form action="/search" class="form-search form-span inline-center">
-                            <div id="searchdiv" class="input-group mb-3">
-                                <input id="searchBox" name="search" class="form-control" placeholder="find out what people are talking about" aria-label="search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="submit">
-                                        <img class="mr-2 search" src="https://xat.com/content/web/R00221/img/navbar/search.svg" alt="search">
-                                        <span>search</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-4 mb-2">
-                <div class="col-lg-8">
-                    <ul class="nav nav-pills homenav">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="xfeatured" href="#">
-                                <img class="mr-2 pb-1" src="https://xat.com/content/web/R00221/img/navbar/featured.svg" alt="featured">
-                                <span>featured</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="xpopular" href="#">
-                                <img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/popular.svg" alt="popular">
-                                <span>popular</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="xsupported" href="#">
-                                <img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/supported.svg" alt="supported">
-                                <span>supported</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="xgames" href="#">
-                                <img class="mr-2" src="https://xat.com/content/web/R00221/img/navbar/games.svg" alt="games">
-                                <span>games</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-4">
-                    <nav aria-label="" class="float-right">
-                        <ul class="pagination pagination-right">
-                            <li class="page-item">
-                                <a class="page-link" id="prev" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">«</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" id="p1" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" id="p2" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" id="p3" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" id="p4" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" id="p5" href="#">5</a></li>
-                            <li class="page-item">
-                                <a class="page-link" id="next" href="#" aria-label="Next">
-                                    <span aria-hidden="true">»</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-
-            <div class="row">
-                <div id="thumbs" class="span12 w-100">
-                    <!-- Groups will be loaded here dynamically -->
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg">
-                    <nav aria-label="" class="float-right">
-                        <ul class="pagination pagination-right">
-                            <li class="page-item">
-                                <a class="page-link" id="xprev" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">«</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" id="pp1" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" id="pp2" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" id="pp3" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" id="pp4" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" id="pp5" href="#">5</a></li>
-                            <li class="page-item">
-                                <a class="page-link" id="xnext" href="#" aria-label="Next">
-                                    <span aria-hidden="true">»</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="container text-center">
-            <span class="d-flex justify-content-center">
-                                 <a class="nav-link ftright footer-icons footLang" href="https://twitter.com/ixchats" rel="noopener" target="_blank">
-                     <img src="https://xat.com/content/web/R00221/img/navbar/x.svg" width="15" alt="x">
-                 </a>
-                 <a class="nav-link ftright footer-icons footLang" href="https://facebook.com/ixchats" rel="noopener" target="_blank">
-                     <img src="https://xat.com/content/web/R00221/img/navbar/facebook_white.svg" width="18" alt="facebook">
-                 </a>
-                 <a class="nav-link ftlast footer-icons footLang fInsta" href="https://instagram.com/ixchats" rel="noopener" target="_blank">
-                     <img src="https://xat.com/content/web/R00221/img/navbar/instagram_white.svg" width="18" alt="instagram">
-                 </a>
-            </span>
-            <span>
-                <a href="/privacy.html"><span>privacy/cookies</span></a>
-                <span>•</span>
-                <a href="/terms.html" rel="noopener" target="_blank"><span>terms of service</span></a>
-                <span>•</span>
-                <a href="/safety.html" rel="noopener" target="_blank"><span>safety</span></a>
-                <span>•</span>
-                                 <span>© <span id="copyrightyear">2024</span> ixchats</span>
-            </span>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>
+    <!-- Navigation -->
+    <div id="navigation-container"></div>
     
-    <script>
-        // Set copyright year
-        document.getElementById('copyrightyear').textContent = new Date().getFullYear();
-
-        // Real chat groups - only the ones we've actually created
-        const groupsData = [
-            { name: 'Lobby', description: 'Main lobby and welcome room - Join the ixchats community', users: 8, category: 'featured', image: 'https://xat.com/content/web/R00221/img/xatplanet.svg' },
-            { name: 'Help', description: 'Help and support center - Get assistance with ixchats', users: 4, category: 'supported', image: 'https://xat.com/content/web/R00221/img/xatplanet.svg' },
-            { name: 'Test', description: 'Testing and development room - Try out new features', users: 2, category: 'featured', image: 'https://xat.com/content/web/R00221/img/xatplanet.svg' },
-            { name: 'Chat', description: 'General chat and discussion - Join the conversation', users: 5, category: 'popular', image: 'https://xat.com/content/web/R00221/img/xatplanet.svg' }
-        ];
-
-        // Function to render groups
-        function renderGroups(category = 'featured') {
-            const thumbsContainer = document.getElementById('thumbs');
-            const filteredGroups = groupsData.filter(group => group.category === category);
-            
-            thumbsContainer.innerHTML = '';
-            
-                         filteredGroups.forEach(group => {
-                 const groupCard = document.createElement('div');
-                 groupCard.className = 'col-lg-4 col-md-6';
-                 
-                 // All our groups have dedicated pages now
-                 let groupLink = '/' + group.name.toLowerCase() + '.html';
-                 
-                 groupCard.innerHTML = `
-                     <div class="group-card" onclick="window.location.href='${groupLink}'">
-                         <div class="group-thumbnail">
-                             <img src="${group.image}" alt="${group.name}" onerror="this.src='https://xat.com/content/web/R00221/img/xatplanet.svg'">
-                         </div>
-                         <div class="group-name">${group.name}</div>
-                         <div class="group-description">${group.description}</div>
-                         <div class="group-stats">
-                             <span>Active now</span>
-                             <span class="group-users">${group.users}</span>
-                         </div>
-                     </div>
-                 `;
-                 thumbsContainer.appendChild(groupCard);
-             });
-        }
-
-        // Initialize groups
-        renderGroups();
-
-        // Tab switching
-        document.getElementById('xfeatured').addEventListener('click', function(e) {
-            e.preventDefault();
-            setActiveTab('xfeatured');
-            renderGroups('featured');
-        });
-
-        document.getElementById('xpopular').addEventListener('click', function(e) {
-            e.preventDefault();
-            setActiveTab('xpopular');
-            renderGroups('popular');
-        });
-
-        document.getElementById('xsupported').addEventListener('click', function(e) {
-            e.preventDefault();
-            setActiveTab('xsupported');
-            renderGroups('supported');
-        });
-
-        document.getElementById('xgames').addEventListener('click', function(e) {
-            e.preventDefault();
-            setActiveTab('xgames');
-            renderGroups('games');
-        });
-
-        function setActiveTab(activeId) {
-            // Remove active class from all tabs
-            document.querySelectorAll('.homenav .nav-link').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            // Add active class to clicked tab
-            document.getElementById(activeId).classList.add('active');
-        }
-
-                // Search functionality
-        document.getElementById('searchBox').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const allGroups = groupsData.filter(group => 
-                group.name.toLowerCase().includes(searchTerm) || 
-                group.description.toLowerCase().includes(searchTerm)
-            );
-            
-            const thumbsContainer = document.getElementById('thumbs');
-            thumbsContainer.innerHTML = '';
-            
-                         allGroups.forEach(group => {
-                const groupCard = document.createElement('div');
-                groupCard.className = 'col-lg-4 col-md-6';
-                
-                // All our groups have dedicated pages now
-                let groupLink = '/' + group.name.toLowerCase() + '.html';
-                
-                groupCard.innerHTML = `
-                    <div class="group-card" onclick="window.location.href='${groupLink}'">
-                        <div class="group-thumbnail">
-                            <img src="${group.image}" alt="${group.name}" onerror="this.src='https://xat.com/content/web/R00221/img/xatplanet.svg'">
-                        </div>
-                        <div class="group-name">${group.name}</div>
-                        <div class="group-description">${group.description}</div>
-                        <div class="group-stats">
-                            <span>Active now</span>
-                            <span class="group-users">${group.users}</span>
-                        </div>
-                    </div>
-                `;
-                thumbsContainer.appendChild(groupCard);
-            });
-        });
-
-        // Check authentication status and update navbar
-        async function checkAuthStatus() {
-            const token = localStorage.getItem('authToken');
-            const authLink = document.getElementById('authLink');
-            const profileLink = document.getElementById('profileLink');
-            
-            if (token) {
-                try {
-                    const response = await fetch('/api/auth/status?token=' + token);
-                    const data = await response.json();
-                    
-                    if (response.ok && data.user) {
-                        // User is authenticated
-                        if (authLink) authLink.style.display = 'none';
-                        if (profileLink) profileLink.style.display = 'inline-block';
-                        console.log('🎭 [HOME] User authenticated:', data.user.username);
-                        
-                        // Send auth update to iframe
-                        const embedframe = document.getElementById('embedframe');
-                        if (embedframe && embedframe.contentWindow) {
-                            try {
-                                embedframe.contentWindow.postMessage({
-                                    type: 'AUTH_UPDATE',
-                                    token: token,
-                                    user: data.user
-                                }, '*');
-                                console.log('🎭 [HOME] Sent auth update to iframe on page load');
-                            } catch (e) {
-                                console.log('🎭 [HOME] Could not send message to iframe');
-                            }
-                        }
-                    } else {
-                        // Token invalid, remove it
-                        if (authLink) authLink.style.display = 'inline-block';
-                        if (profileLink) profileLink.style.display = 'none';
-                        localStorage.removeItem('authToken');
-                        console.log('🎭 [HOME] Token invalid, removed');
-                    }
-                } catch (error) {
-                    console.error('🎭 [HOME] Auth check error:', error);
-                    if (authLink) authLink.style.display = 'inline-block';
-                    if (profileLink) profileLink.style.display = 'none';
-                    localStorage.removeItem('authToken');
-                }
-            } else {
-                if (authLink) authLink.style.display = 'inline-block';
-                if (profileLink) profileLink.style.display = 'none';
-            }
-        }
-
-        // Check auth status on page load
-        checkAuthStatus();
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">iXat</h1>
+            <p class="subtitle">The Ultimate Chat Experience</p>
+        </header>
         
-        // Listen for authentication messages from iframes
-        window.addEventListener('message', function(event) {
-            if (event.data && event.data.type === 'AUTH_SUCCESS') {
-                console.log('🎭 [HOME] Received auth success from iframe:', event.data);
-                
-                // Store the auth token
-                localStorage.setItem('authToken', event.data.token);
-                
-                // Update the navbar to show user is logged in
-                const authLink = document.getElementById('authLink');
-                const profileLink = document.getElementById('profileLink');
-                
-                if (authLink) authLink.style.display = 'none';
-                if (profileLink) profileLink.style.display = 'inline-block';
-                
-                // Send auth update to all iframes
-                const embedframe = document.getElementById('embedframe');
-                if (embedframe && embedframe.contentWindow) {
-                    try {
-                        embedframe.contentWindow.postMessage({
-                            type: 'AUTH_UPDATE',
-                            token: event.data.token,
-                            user: event.data.user
-                        }, '*');
-                        console.log('🎭 [HOME] Sent auth update to iframe');
-                    } catch (e) {
-                        console.log('🎭 [HOME] Could not send message to iframe');
-                    }
-                }
-                
-                // Refresh the iframe to show authenticated state
-                if (embedframe) {
-                    embedframe.src = embedframe.src;
-                }
-                
-                console.log('🎭 [HOME] Authentication state updated, iframe refreshed');
-            } else if (event.data && event.data.type === 'AUTH_LOGOUT') {
-                console.log('🎭 [HOME] Received logout message from iframe');
-                
-                // Remove the auth token
-                localStorage.removeItem('authToken');
-                
-                // Update the navbar to show user is logged out
-                const authLink = document.getElementById('authLink');
-                const profileLink = document.getElementById('profileLink');
-                
-                if (authLink) authLink.style.display = 'inline-block';
-                if (profileLink) profileLink.style.display = 'none';
-                
-                // Refresh the iframe to show unauthenticated state
-                const embedframe = document.getElementById('embedframe');
-                if (embedframe) {
-                    embedframe.src = embedframe.src;
-                }
-                
-                console.log('🎭 [HOME] Logout processed, iframe refreshed');
-            }
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-label">Server Status</span>
+                <span class="status-value online" id="serverStatus">Online</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Users Online</span>
+                <span class="status-value" id="userCount">Loading...</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Active Rooms</span>
+                <span class="status-value" id="roomCount">Loading...</span>
+            </div>
+        </div>
+        
+        <nav class="nav-grid">
+            <a href="chat-interface.html" class="nav-card">
+                <span class="icon">💬</span>
+                <h3>Chat</h3>
+                <p>Join the conversation in our main chat rooms. Connect with friends and meet new people from around the world.</p>
+            </a>
+            
+            <a href="pages/store.html" class="nav-card">
+                <span class="icon">🛒</span>
+                <h3>Store</h3>
+                <p>Browse powers, auctions, and promotions. Get the latest items and enhance your chat experience.</p>
+            </a>
+            
+            <a href="pages/forum.html" class="nav-card">
+                <span class="icon">📋</span>
+                <h3>Forum</h3>
+                <p>Discuss topics, share ideas, and connect with the community through our forum system.</p>
+            </a>
+            
+            <a href="pages/wiki.html" class="nav-card">
+                <span class="icon">📚</span>
+                <h3>Wiki</h3>
+                <p>Learn about features, powers, and everything you need to know about the iXat platform.</p>
+            </a>
+            
+            <a href="pages/powers.html" class="nav-card">
+                <span class="icon">⚡</span>
+                <h3>Powers</h3>
+                <p>Discover and manage your powers. Trade, collect, and use special abilities in chat.</p>
+            </a>
+            
+            <a href="pages/profile.html" class="nav-card">
+                <span class="icon">👤</span>
+                <h3>Profile</h3>
+                <p>Manage your account, customize your avatar, and update your personal information.</p>
+            </a>
+        </nav>
+        
+        <footer class="footer">
+            <p>&copy; 2024 iXat Platform. All rights reserved. | <a href="privacy.html" style="color: var(--primary-blue);">Privacy</a> | <a href="terms.html" style="color: var(--primary-blue);">Terms</a></p>
+        </footer>
+    </div>
+    
+    <!-- Socket.IO for real-time updates -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="modules/auth-system.js"></script>
+    <script>
+        // Initialize auth system
+        const authSystem = new AuthSystem();
+        
+        // Initialize socket connection
+        const socket = io();
+        
+        // Update server status
+        socket.on('connect', () => {
+            document.getElementById('serverStatus').textContent = 'Online';
+            document.getElementById('serverStatus').className = 'status-value online';
         });
+        
+        socket.on('disconnect', () => {
+            document.getElementById('serverStatus').textContent = 'Offline';
+            document.getElementById('serverStatus').className = 'status-value';
+        });
+        
+        // Update user count
+        socket.on('userCount', (count) => {
+            document.getElementById('userCount').textContent = count;
+        });
+        
+        // Update room count
+        socket.on('roomCount', (count) => {
+            document.getElementById('roomCount').textContent = count;
+        });
+        
+        // Update stats with real data
+        socket.on('stats', (stats) => {
+            document.getElementById('userCount').textContent = stats.totalUsers || '0';
+            document.getElementById('roomCount').textContent = stats.totalRooms || '0';
+        });
+        
+        // Request initial data
+        socket.emit('getStats');
+        
+        // Load real-time stats from API
+        fetch('/api/stats')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('userCount').textContent = data.stats.totalUsers || '0';
+                    document.getElementById('roomCount').textContent = data.stats.totalRooms || '0';
+                }
+            })
+            .catch(error => {
+                console.log('Stats API not available, using socket data');
+            });
+        
+        // Load navigation
+        fetch('/components/navigation.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('navigation-container').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
     </script>
 </body>
 </html>

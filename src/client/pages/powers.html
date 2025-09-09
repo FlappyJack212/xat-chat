@@ -1,0 +1,569 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Powers - iXat</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/authentic-xat.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #00d4ff 100%);
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .powers-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .powers-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .powers-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .powers-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 8px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .powers-tab {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .powers-tab.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .powers-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .powers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .power-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .power-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        }
+
+        .power-card.owned {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        }
+
+        .power-card.owned::before {
+            content: "✓ OWNED";
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: #10b981;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .power-card h3 {
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .power-card .power-icon {
+            font-size: 1.5rem;
+        }
+
+        .power-card p {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+
+        .power-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .power-price {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #059669;
+        }
+
+        .power-uses {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .power-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .user-powers {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .user-powers h3 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .owned-powers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .owned-power-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .owned-power-info h4 {
+            color: #1f2937;
+            margin: 0 0 0.25rem 0;
+            font-size: 0.875rem;
+        }
+
+        .owned-power-info p {
+            color: #6b7280;
+            margin: 0;
+            font-size: 0.75rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+
+        .power-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-filter {
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+
+        .category-filter:hover,
+        .category-filter.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div id="navigation-container"></div>
+
+    <div class="container">
+        <div class="powers-header">
+            <h1>⚡ iXat Powers</h1>
+            <p>Discover and manage your special abilities</p>
+        </div>
+
+        <div class="powers-tabs">
+            <button class="powers-tab active" data-tab="all">All Powers</button>
+            <button class="powers-tab" data-tab="owned">My Powers</button>
+            <button class="powers-tab" data-tab="visual">Visual</button>
+            <button class="powers-tab" data-tab="functional">Functional</button>
+                    </div>
+                    
+        <div class="powers-content">
+            <!-- User's Owned Powers -->
+            <div class="user-powers" id="userPowers" style="display: none;">
+                <h3>Your Powers</h3>
+                <div class="owned-powers-grid" id="ownedPowersGrid">
+                    <div class="loading">Loading your powers...</div>
+                </div>
+                </div>
+
+            <!-- Power Categories -->
+            <div class="power-categories">
+                <button class="category-filter active" data-category="all">All</button>
+                <button class="category-filter" data-category="visual">Visual</button>
+                <button class="category-filter" data-category="functional">Functional</button>
+                <button class="category-filter" data-category="decorative">Decorative</button>
+                <button class="category-filter" data-category="utility">Utility</button>
+    </div>
+
+            <!-- Powers Grid -->
+            <div class="powers-grid" id="powersGrid">
+                <div class="loading">Loading powers...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../modules/auth-system.js"></script>
+    <script>
+        // Initialize auth system
+        const authSystem = new AuthSystem();
+
+        // Powers functionality
+        class Powers {
+            constructor() {
+                this.powers = [];
+                this.ownedPowers = [];
+                this.currentTab = 'all';
+                this.currentCategory = 'all';
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.loadPowers();
+                this.loadOwnedPowers();
+            }
+
+            setupEventListeners() {
+                // Tab switching
+                document.querySelectorAll('.powers-tab').forEach(tab => {
+                    tab.addEventListener('click', (e) => {
+                        this.switchTab(e.target.dataset.tab);
+                    });
+                });
+
+                // Category filtering
+                document.querySelectorAll('.category-filter').forEach(filter => {
+                    filter.addEventListener('click', (e) => {
+                        this.filterByCategory(e.target.dataset.category);
+                    });
+                });
+            }
+
+            switchTab(tabName) {
+                // Update tab buttons
+                document.querySelectorAll('.powers-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+
+                this.currentTab = tabName;
+                this.renderPowers();
+            }
+
+            filterByCategory(category) {
+                // Update category filters
+                document.querySelectorAll('.category-filter').forEach(filter => {
+                    filter.classList.remove('active');
+                });
+                document.querySelector(`[data-category="${category}"]`).classList.add('active');
+
+                this.currentCategory = category;
+                this.renderPowers();
+            }
+
+            async loadPowers() {
+                try {
+                    const response = await fetch('/api/powers');
+                    const data = await response.json();
+
+                    if (data.success) {
+                        this.powers = data.powers;
+                        this.renderPowers();
+                    }
+                } catch (error) {
+                    console.error('Error loading powers:', error);
+                    document.getElementById('powersGrid').innerHTML = '<div class="loading">Error loading powers</div>';
+                }
+            }
+
+            async loadOwnedPowers() {
+                if (!authSystem.isUserAuthenticated()) {
+                    document.getElementById('userPowers').style.display = 'none';
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/api/powers/owned', {
+                        headers: authSystem.getAuthHeaders()
+                    });
+                    const data = await response.json();
+
+                    if (data.success) {
+                        this.ownedPowers = data.powers;
+                        this.renderOwnedPowers();
+                        document.getElementById('userPowers').style.display = 'block';
+                    }
+                } catch (error) {
+                    console.error('Error loading owned powers:', error);
+                }
+            }
+
+            renderPowers() {
+                const grid = document.getElementById('powersGrid');
+                let filteredPowers = this.powers;
+
+                // Filter by tab
+                if (this.currentTab === 'owned') {
+                    filteredPowers = this.ownedPowers;
+                }
+
+                // Filter by category
+                if (this.currentCategory !== 'all') {
+                    filteredPowers = filteredPowers.filter(power => 
+                        power.category === this.currentCategory
+                    );
+                }
+
+                if (filteredPowers.length === 0) {
+                    grid.innerHTML = '<div class="empty-state"><h3>No powers found</h3><p>Try adjusting your filters or check back later for new powers.</p></div>';
+                return;
+            }
+
+                grid.innerHTML = filteredPowers.map(power => {
+                    const isOwned = this.ownedPowers.some(owned => 
+                        owned.powerId === power._id || owned.powerId._id === power._id
+                    );
+
+                    return `
+                        <div class="power-card ${isOwned ? 'owned' : ''}" data-power-id="${power._id}">
+                            <h3>
+                                <span class="power-icon">${this.getPowerIcon(power.category)}</span>
+                                ${power.displayName || power.name}
+                            </h3>
+                            <p>${power.description || 'No description available'}</p>
+                            <div class="power-actions">
+                                <div>
+                                    <div class="power-price">${power.cost || 0} xats</div>
+                                    ${power.maxUses ? `<div class="power-uses">Uses: ${power.uses || 0}/${power.maxUses}</div>` : ''}
+                                </div>
+                                <div class="power-buttons">
+                                    ${isOwned ? 
+                                        `<button class="btn btn-success" onclick="powers.activatePower('${power._id}')">Activate</button>
+                                         <button class="btn btn-secondary" onclick="powers.deactivatePower('${power._id}')">Deactivate</button>` :
+                                        `<button class="btn btn-primary" onclick="powers.buyPower('${power._id}')">Buy</button>`
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            renderOwnedPowers() {
+                const grid = document.getElementById('ownedPowersGrid');
+                
+                if (this.ownedPowers.length === 0) {
+                    grid.innerHTML = '<div class="empty-state"><h3>No powers owned</h3><p>Visit the store to purchase your first power!</p></div>';
+                    return;
+                }
+
+                grid.innerHTML = this.ownedPowers.map(power => `
+                    <div class="owned-power-card">
+                        <div class="owned-power-info">
+                            <h4>${power.name}</h4>
+                            <p>${power.uses || 0} uses</p>
+                        </div>
+                        <div class="power-buttons">
+                            <button class="btn btn-success" onclick="powers.activatePower('${power.powerId}')">Activate</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            async buyPower(powerId) {
+                if (!authSystem.isUserAuthenticated()) {
+                    alert('Please login to purchase powers');
+                    return;
+                }
+
+            try {
+                const response = await fetch('/api/powers/buy', {
+                    method: 'POST',
+                        headers: authSystem.getAuthHeaders(),
+                        body: JSON.stringify({ powerId })
+                });
+
+                const result = await response.json();
+                
+                    if (result.success) {
+                        alert('Power purchased successfully!');
+                        this.loadOwnedPowers();
+                        this.renderPowers();
+                    } else {
+                        alert(result.error || 'Failed to purchase power');
+                    }
+                } catch (error) {
+                    console.error('Error purchasing power:', error);
+                    alert('Failed to purchase power');
+                }
+            }
+
+            async activatePower(powerId) {
+                if (!authSystem.isUserAuthenticated()) {
+                    alert('Please login to activate powers');
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/api/powers/activate', {
+                        method: 'POST',
+                        headers: authSystem.getAuthHeaders(),
+                        body: JSON.stringify({ powerId })
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        alert('Power activated successfully!');
+                        this.loadOwnedPowers();
+                } else {
+                        alert(result.error || 'Failed to activate power');
+                    }
+                } catch (error) {
+                    console.error('Error activating power:', error);
+                    alert('Failed to activate power');
+                }
+            }
+
+            async deactivatePower(powerId) {
+                // This would normally deactivate a power
+                alert('Power deactivated (Demo mode)');
+            }
+
+            getPowerIcon(category) {
+                const icons = {
+                    'epic': '👑',
+                    'special': '✨',
+                    'moderation': '🛡️',
+                    'pawn': '🎭',
+                    'premium': '💎'
+                };
+                return icons[category] || '⚡';
+            }
+        }
+
+        // Initialize powers
+        const powers = new Powers();
+        
+        // Load navigation
+        fetch('/components/navigation.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('navigation-container').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
+</body>
+</html>

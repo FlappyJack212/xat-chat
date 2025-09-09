@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/consolidated.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xat.com - Exact Flash Replica</title>
+    <!-- Styles moved to consolidated.css -->
+</head>
+<body>
+    <!-- EXACT Flash embed replica -->
+    <div id="flashContainer">
+        <div id="chatInterface">
+
+            <!-- Header - exact Flash style -->
+            <div id="chatHeader">
+                <div id="chatTitle">xat.com - Main Chat</div>
+                <div id="userCount">0 users</div>
+            </div>
+
+            <!-- Main chat area -->
+            <div id="chatMain">
+
+                <!-- Messages area -->
+                <div id="messagesArea">
+                    <div class="system-message">*** Welcome to xat.com! Type /help for commands. ***</div>
+                </div>
+
+                <!-- User list -->
+                <div id="userListArea">
+                    <div id="userListHeader">Users Online</div>
+                    <div id="userList" style="color:#666666; font-size:11px; text-align:center; margin-top:20px;">
+                        No users online
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Smiley bar - exact Flash positioning -->
+            <div id="smileyBar">
+                <span class="smiley-btn" onclick="insertSmiley('ðŸ˜Š')" title="smile">ðŸ˜Š</span>
+                <span class="smiley-btn" onclick="insertSmiley('ðŸ˜¢')" title="cry">ðŸ˜¢</span>
+                <span class="smiley-btn" onclick="insertSmiley('ðŸ˜ ')" title="angry">ðŸ˜ </span>
+                <span class="smiley-btn" onclick="insertSmiley('ðŸ˜‰')" title="wink">ðŸ˜‰</span>
+                <span class="smiley-btn" onclick="insertSmiley('ðŸ˜›')" title="tongue">ðŸ˜›</span>
+                <span class="smiley-btn" onclick="insertSmiley('ðŸ˜Ž')" title="cool">ðŸ˜Ž</span>
+                <span class="smiley-btn" onclick="insertSmiley('ðŸ˜³')" title="blush">ðŸ˜³</span>
+                <span class="smiley-btn" onclick="insertSmiley('ðŸ˜•')" title="confused">ðŸ˜•</span>
+                <span class="smiley-btn" onclick="insertSmiley('ðŸ˜´')" title="sleepy">ðŸ˜´</span>
+                <span class="smiley-btn" onclick="insertSmiley('â¤ï¸')" title="heart">â¤ï¸</span>
+                <span class="smiley-btn" onclick="insertSmiley('ðŸ‘')" title="thumbsup">ðŸ‘</span>
+                <span class="smiley-btn" onclick="insertSmiley('ðŸ‘Ž')" title="thumbsdown">ðŸ‘Ž</span>
+                <span class="smiley-btn" onclick="insertSmiley('ðŸ˜œ')" title="silly">ðŸ˜œ</span>
+                <span class="smiley-btn" onclick="insertSmiley('ðŸ˜‡')" title="angel">ðŸ˜‡</span>
+            </div>
+
+            <!-- Input area - exact Flash style -->
+            <div id="inputArea">
+                <input type="text" id="messageInput" placeholder="Type your message..." maxlength="255">
+                <button id="sendButton" onclick="sendMessage()">Send</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loading">
+        <div id="loadingText">Loading...</div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // EXACT replica of original Flash xat.com interface
+        let socket;
+        let currentUser = null;
+        let currentRoom = 'Main Chat';
+
+        // Initialize - exact like Flash
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('ðŸŽ­ [FLASH REPLICA] Initializing exact Flash interface replica...');
+
+            // Connect to server
+            socket = io();
+
+            socket.on('connect', () => {
+                console.log('ðŸ”Œ [FLASH REPLICA] Connected to server');
+                showLoading(false);
+
+                // Auto-join main chat (exact Flash behavior)
+                joinMainChat();
+            });
+
+            socket.on('authenticated', (data) => {
+                console.log('ðŸ” [FLASH REPLICA] Authenticated:', data);
+                if (data.user) {
+                    currentUser = data.user;
+                    updateUI();
+                }
+            });
+
+            socket.on('roomJoined', (data) => {
+                console.log('ðŸšª [FLASH REPLICA] Joined room:', data.room.name);
+                currentRoom = data.room.name;
+                document.getElementById('chatTitle').textContent = `xat.com - ${currentRoom}`;
+            });
+
+            socket.on('userList', (data) => {
+                console.log('ðŸ‘¥ [FLASH REPLICA] User list received:', data.users.length, 'users');
+                displayUsers(data.users);
+            });
+
+            socket.on('userJoined', (data) => {
+                console.log('ðŸ‘‹ [FLASH REPLICA] User joined:', data.nickname);
+                addSystemMessage(`${data.nickname} joined the chat`);
+                updateUserCount();
+            });
+
+            socket.on('userLeft', (data) => {
+                console.log('ðŸ‘‹ [FLASH REPLICA] User left:', data.nickname);
+                addSystemMessage(`${data.nickname} left the chat`);
+                updateUserCount();
+            });
+
+            socket.on('message', (data) => {
+                console.log('ðŸ’¬ [FLASH REPLICA] Message received:', data);
+                addMessage(data.user.nickname, data.message, data.timestamp);
+            });
+
+            socket.on('disconnect', () => {
+                console.log('ðŸ”Œ [FLASH REPLICA] Disconnected from server');
+                addSystemMessage('Disconnected from server');
+            });
+
+            socket.on('error', (data) => {
+                console.error('âŒ [FLASH REPLICA] Error:', data);
+                addSystemMessage(`Error: ${data.message}`);
+            });
+
+            // Auto-authenticate as guest (exact Flash behavior)
+            setTimeout(() => {
+                authenticateAsGuest();
+            }, 500);
+        });
+
+        function authenticateAsGuest() {
+            const guestName = `Guest${Math.floor(Math.random() * 1000)}`;
+            console.log('ðŸ‘¤ [FLASH REPLICA] Authenticating as guest:', guestName);
+
+            if (socket && socket.connected) {
+                socket.emit('authenticate', {
+                    guest: true,
+                    nickname: guestName
+                });
+            }
+        }
+
+        function joinMainChat() {
+            console.log('ðŸšª [FLASH REPLICA] Joining main chat (Flash behavior)');
+
+            if (socket && socket.connected) {
+                socket.emit('joinRoom', { roomName: 'Main Chat' });
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+
+            if (message && socket && currentUser) {
+                socket.emit('message', { message: message });
+                input.value = '';
+
+                // Add own message (exact Flash behavior)
+                addMessage(currentUser.nickname, message, Date.now());
+            }
+        }
+
+        function insertSmiley(smiley) {
+            const input = document.getElementById('messageInput');
+            input.value += smiley;
+            input.focus();
+        }
+
+        function addMessage(username, message, timestamp) {
+            const messagesArea = document.getElementById('messagesArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+
+            const time = timestamp ? new Date(timestamp).toLocaleTimeString() : '';
+            messageDiv.innerHTML = `<span class="username">${username}:</span> ${message} <span class="timestamp">${time}</span>`;
+
+            messagesArea.appendChild(messageDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        function addSystemMessage(message) {
+            const messagesArea = document.getElementById('messagesArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'system-message';
+            messageDiv.textContent = `*** ${message} ***`;
+
+            messagesArea.appendChild(messageDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        function displayUsers(userList) {
+            const userListDiv = document.getElementById('userList');
+            userListDiv.innerHTML = '';
+
+            userList.forEach(user => {
+                const userDiv = document.createElement('div');
+                userDiv.className = `user-item rank-${getRankClass(user.rank)}`;
+                userDiv.textContent = user.nickname || user.username || 'Unknown';
+                userDiv.onclick = () => showUserProfile(user);
+                userListDiv.appendChild(userDiv);
+            });
+
+            updateUserCount();
+        }
+
+        function updateUserCount() {
+            const userListDiv = document.getElementById('userList');
+            const count = userListDiv.children.length;
+            document.getElementById('userCount').textContent = `${count} users`;
+        }
+
+        function getRankClass(rank) {
+            const rankClasses = {
+                0: 'guest',
+                1: 'member',
+                2: 'moderator',
+                3: 'owner',
+                4: 'mainowner',
+                5: 'guest'
+            };
+            return rankClasses[rank] || 'guest';
+        }
+
+        function showUserProfile(user) {
+            // Exact Flash-style profile popup
+            alert(`${user.nickname || user.username}\nRank: ${getRankName(user.rank)}\nXats: ${user.xats || 0}\nDays: ${user.days || 0}`);
+        }
+
+        function getRankName(rank) {
+            const rankNames = {
+                0: 'Banned',
+                1: 'Member',
+                2: 'Moderator',
+                3: 'Owner',
+                4: 'Main Owner',
+                5: 'Guest'
+            };
+            return rankNames[rank] || 'Guest';
+        }
+
+        function updateUI() {
+            if (currentUser) {
+                // Update interface with user info
+                console.log('ðŸ‘¤ [FLASH REPLICA] User authenticated:', currentUser.nickname);
+            }
+        }
+
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'flex' : 'none';
+        }
+
+        // Handle Enter key (exact Flash behavior)
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        console.log('âœ… [FLASH REPLICA] Exact Flash interface replica loaded');
+    </script>
+</body>
+</html>

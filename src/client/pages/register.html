@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - iXat</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/authentic-xat.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #00d4ff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .register-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            margin: 1rem;
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .register-header h1 {
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+
+        .register-header p {
+            color: #6b7280;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .register-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .register-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .login-link a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            background: #fef2f2;
+            color: #dc2626;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            border: 1px solid #fecaca;
+        }
+
+        .success-message {
+            background: #f0fdf4;
+            color: #16a34a;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            border: 1px solid #bbf7d0;
+        }
+
+        .password-requirements {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-header">
+            <h1>Join iXat</h1>
+            <p>Create your account and start chatting</p>
+        </div>
+
+        <div id="messageContainer"></div>
+
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required minlength="3" maxlength="20">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nickname">Nickname (Optional)</label>
+                <input type="text" id="nickname" name="nickname" maxlength="255">
+                <div class="password-requirements">Leave blank to use username as nickname</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required minlength="6">
+                <div class="password-requirements">Must be at least 6 characters long</div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+
+            <button type="submit" class="register-btn" id="registerBtn">
+                <span id="registerBtnText">Create Account</span>
+            </button>
+        </form>
+
+        <div class="login-link">
+            <p>Already have an account? <a href="login.html">Sign in here</a></p>
+        </div>
+    </div>
+
+    <script src="../modules/auth-system.js"></script>
+    <script>
+        // Initialize auth system
+        const authSystem = new AuthSystem();
+
+        // Handle form submission
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const registerBtn = document.getElementById('registerBtn');
+            const registerBtnText = document.getElementById('registerBtnText');
+            const messageContainer = document.getElementById('messageContainer');
+            
+            // Get form data
+            const formData = new FormData(e.target);
+            const password = formData.get('password');
+            const confirmPassword = formData.get('confirmPassword');
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                messageContainer.innerHTML = '<div class="error-message">Passwords do not match</div>';
+                return;
+            }
+            
+            // Validate password strength
+            if (password.length < 6) {
+                messageContainer.innerHTML = '<div class="error-message">Password must be at least 6 characters long</div>';
+                return;
+            }
+            
+            // Disable button and show loading
+            registerBtn.disabled = true;
+            registerBtnText.textContent = 'Creating Account...';
+            
+            try {
+                const registerData = {
+                    username: formData.get('username'),
+                    email: formData.get('email'),
+                    password: password,
+                    nickname: formData.get('nickname') || formData.get('username')
+                };
+
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(registerData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Show success message
+                    messageContainer.innerHTML = '<div class="success-message">Account created successfully! Redirecting to login...</div>';
+                    
+                    // Redirect to login page
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 2000);
+                } else {
+                    messageContainer.innerHTML = `<div class="error-message">${result.message || 'Registration failed'}</div>`;
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                messageContainer.innerHTML = '<div class="error-message">Registration failed. Please try again.</div>';
+            } finally {
+                // Re-enable button
+                registerBtn.disabled = false;
+                registerBtnText.textContent = 'Create Account';
+            }
+        });
+    </script>
+</body>
+</html>

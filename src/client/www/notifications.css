@@ -1,0 +1,208 @@
+/* Notification System Styles */
+.notifications-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+    pointer-events: none;
+}
+
+.notification {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    min-width: 300px;
+    max-width: 400px;
+    pointer-events: all;
+    animation: slideInRight 0.3s ease;
+    border-left: 4px solid #667eea;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+}
+
+.notification-message {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.notification-close:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+/* Notification Types */
+.notification-info {
+    border-left-color: #3498db;
+}
+
+.notification-success {
+    border-left-color: #27ae60;
+}
+
+.notification-warning {
+    border-left-color: #f39c12;
+}
+
+.notification-error {
+    border-left-color: #e74c3c;
+}
+
+/* Notification Icons */
+.notification-info::before {
+    content: "ℹ️";
+    margin-right: 10px;
+}
+
+.notification-success::before {
+    content: "✅";
+    margin-right: 10px;
+}
+
+.notification-warning::before {
+    content: "⚠️";
+    margin-right: 10px;
+}
+
+.notification-error::before {
+    content: "❌";
+    margin-right: 10px;
+}
+
+/* Notification Animations */
+.notification {
+    animation: slideInRight 0.3s ease, fadeOut 0.3s ease 4.7s forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .notifications-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+    }
+    
+    .notification {
+        min-width: auto;
+        max-width: none;
+        width: 100%;
+    }
+    
+    .notification-content {
+        padding: 12px 15px;
+    }
+    
+    .notification-message {
+        font-size: 13px;
+    }
+}
+
+/* Notification Stack */
+.notification:nth-child(1) {
+    z-index: 2000;
+}
+
+.notification:nth-child(2) {
+    z-index: 1999;
+}
+
+.notification:nth-child(3) {
+    z-index: 1998;
+}
+
+.notification:nth-child(4) {
+    z-index: 1997;
+}
+
+.notification:nth-child(5) {
+    z-index: 1996;
+}
+
+/* Hover Effects */
+.notification:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Notification Progress Bar */
+.notification::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: currentColor;
+    border-radius: 0 0 10px 10px;
+    animation: progressBar 5s linear forwards;
+}
+
+@keyframes progressBar {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+/* Notification Close Animation */
+.notification.closing {
+    animation: slideOutRight 0.3s ease forwards;
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}

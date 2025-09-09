@@ -1,0 +1,140 @@
+/* Profile Modal Styles */
+.profile-modal {
+    max-width: 600px;
+    width: 90%;
+}
+
+.profile-container {
+    padding: 20px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #444444;
+}
+
+.profile-avatar-section {
+    margin-right: 20px;
+    text-align: center;
+}
+
+.profile-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+    color: white;
+}
+
+.profile-badges {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+.profile-badge {
+    font-size: 16px;
+    cursor: help;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    margin: 0 0 5px 0;
+    color: #ffffff;
+    font-size: 24px;
+}
+
+.profile-id {
+    margin: 0 0 5px 0;
+    color: #888888;
+    font-size: 14px;
+}
+
+.profile-status {
+    margin: 0 0 10px 0;
+    color: #cccccc;
+    font-style: italic;
+}
+
+.profile-location {
+    color: #888888;
+    font-size: 12px;
+}
+
+.profile-wallet {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #2a2a2a;
+    border-radius: 8px;
+}
+
+.wallet-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wallet-item img {
+    width: 18px;
+    height: 18px;
+}
+
+.wallet-item span {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.profile-powers {
+    margin-bottom: 20px;
+}
+
+.profile-powers h4 {
+    margin: 0 0 10px 0;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.powers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+}
+
+.power-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background: #2a2a2a;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.power-item:hover {
+    background: #3a3a3a;
+}
+
+.power-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.power-name {
+    font-size: 11px;
+    color: #cccccc;
+    text-align: center;
+}

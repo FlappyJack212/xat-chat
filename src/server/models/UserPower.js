@@ -1,405 +1,252 @@
+/**
+ * UserPower Model
+ * Represents powers owned by users
+ */
+
 const mongoose = require('mongoose');
 
 const userPowerSchema = new mongoose.Schema({
-    // User and Power references
-    user: {
+    // Relationships
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
-    power: {
+
+    powerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Power',
         required: true
     },
-    
-    // Purchase information
-    purchasedAt: {
+
+    // Power ownership details
+    count: {
+        type: Number,
+        default: 1,
+        min: 0
+    },
+
+    purchased: {
         type: Date,
         default: Date.now
     },
-    purchasedFor: {
-        type: Number,
-        required: true
-    },
-    purchasedFrom: {
-        type: String,
-        enum: ['store', 'gift', 'transfer', 'reward', 'admin'],
-        default: 'store'
-    },
-    
-    // Power status and usage
-    active: {
-        type: Boolean,
-        default: true
-    },
-    usageCount: {
-        type: Number,
-        default: 0
-    },
-    lastUsed: {
-        type: Date,
-        default: null
-    },
-    
-    // Power expiration and limitations
+
+    // For limited edition powers
     expiresAt: {
         type: Date,
         default: null
     },
-    maxUses: {
+
+    // Usage tracking
+    lastUsed: {
+        type: Date,
+        default: null
+    },
+
+    totalUses: {
         type: Number,
-        default: -1 // -1 means unlimited
+        default: 0
     },
-    
-    // Power customization
-    customName: {
-        type: String,
-        default: ''
+
+    // Power status
+    isActive: {
+        type: Boolean,
+        default: true
     },
-    customDescription: {
-        type: String,
-        default: ''
+
+    // For transferable powers
+    isTransferable: {
+        type: Boolean,
+        default: true
     },
-    
-    // Power settings and configuration
-    settings: {
+
+    // Metadata
+    metadata: {
         type: mongoose.Schema.Types.Mixed,
         default: {}
-    },
-    
-    // Power cooldowns
-    cooldown: {
-        lastActivation: {
-            type: Date,
-            default: null
-        },
-        duration: {
-            type: Number,
-            default: 0 // in seconds
-        }
-    },
-    
-    // Power sharing and permissions
-    shareable: {
-        type: Boolean,
-        default: false
-    },
-    sharedWith: [{
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        sharedAt: {
-            type: Date,
-            default: Date.now
-        },
-        permissions: [{
-            type: String,
-            enum: ['use', 'configure', 'share']
-        }]
-    }],
-    
-    // Power history and logs
-    history: [{
-        action: {
-            type: String,
-            enum: ['purchased', 'activated', 'deactivated', 'configured', 'shared', 'expired']
-        },
-        timestamp: {
-            type: Date,
-            default: Date.now
-        },
-        details: mongoose.Schema.Types.Mixed
-    }],
-    
-    // Power metadata
-    notes: {
-        type: String,
-        default: ''
-    },
-    tags: [String],
-    
-    // Power status flags
-    flags: {
-        featured: { type: Boolean, default: false },
-        hidden: { type: Boolean, default: false },
-        locked: { type: Boolean, default: false },
-        maintenance: { type: Boolean, default: false }
     }
 }, {
     timestamps: true
 });
 
-// Compound index for unique user-power combinations
-userPowerSchema.index({ user: 1, power: 1 }, { unique: true });
-
 // Indexes for performance
-userPowerSchema.index({ user: 1, active: 1 });
-userPowerSchema.index({ power: 1, active: 1 });
+userPowerSchema.index({ userId: 1, powerId: 1 }, { unique: true });
+userPowerSchema.index({ userId: 1 });
+userPowerSchema.index({ powerId: 1 });
 userPowerSchema.index({ expiresAt: 1 });
-userPowerSchema.index({ 'flags.hidden': 1 });
-userPowerSchema.index({ purchasedAt: -1 });
+userPowerSchema.index({ isActive: 1 });
 
 // Instance methods
-userPowerSchema.methods.isExpired = function() {
+userPowerSchema.methods.use = function() {
+    if (this.count > 0) {
+        this.count -= 1;
+        this.lastUsed = new Date();
+        this.totalUses += 1;
+        return this.save();
+    }
+    throw new Error('No uses remaining');
+};
+
+userPowerSchema.methods.addUses = function(amount) {
+    this.count += amount;
+    return this.save();
+};
+
+userPowerSchema.methods.removeUses = function(amount) {
+    this.count = Math.max(0, this.count - amount);
+    return this.save();
+};
+
+userPowerSchema.methods.checkIfExpired = function() {
     return this.expiresAt && this.expiresAt < new Date();
 };
 
 userPowerSchema.methods.canUse = function() {
-    if (!this.active) return false;
-    if (this.isExpired()) return false;
-    if (this.flags.locked) return false;
-    if (this.flags.maintenance) return false;
-    if (this.maxUses > 0 && this.usageCount >= this.maxUses) return false;
-    
-    // Check cooldown
-    if (this.cooldown.duration > 0 && this.cooldown.lastActivation) {
-        const timeSinceLastUse = (new Date() - this.cooldown.lastActivation) / 1000;
-        if (timeSinceLastUse < this.cooldown.duration) return false;
-    }
-    
-    return true;
+    return this.isActive && !this.checkIfExpired() && this.count > 0;
 };
 
-userPowerSchema.methods.use = function() {
-    if (!this.canUse()) {
-        throw new Error('Power cannot be used at this time');
-    }
-    
-    this.usageCount++;
-    this.lastUsed = new Date();
-    this.cooldown.lastActivation = new Date();
-    
-    // Add to history
-    this.history.push({
-        action: 'activated',
-        timestamp: new Date(),
-        details: { usageCount: this.usageCount }
-    });
-    
+userPowerSchema.methods.deactivate = function() {
+    this.isActive = false;
     return this.save();
 };
 
 userPowerSchema.methods.activate = function() {
-    return this.use();
-};
-
-userPowerSchema.methods.deactivate = function() {
-    this.active = false;
-    
-    this.history.push({
-        action: 'deactivated',
-        timestamp: new Date(),
-        details: { reason: 'manual' }
-    });
-    
+    this.isActive = true;
     return this.save();
-};
-
-userPowerSchema.methods.reactivate = function() {
-    this.active = true;
-    
-    this.history.push({
-        action: 'activated',
-        timestamp: new Date(),
-        details: { reason: 'manual' }
-    });
-    
-    return this.save();
-};
-
-userPowerSchema.methods.extend = function(duration) {
-    if (this.expiresAt) {
-        this.expiresAt = new Date(this.expiresAt.getTime() + duration * 1000);
-    } else {
-        this.expiresAt = new Date(Date.now() + duration * 1000);
-    }
-    
-    this.history.push({
-        action: 'extended',
-        timestamp: new Date(),
-        details: { duration: duration }
-    });
-    
-    return this.save();
-};
-
-userPowerSchema.methods.share = function(targetUser, permissions = ['use']) {
-    if (!this.shareable) {
-        throw new Error('This power cannot be shared');
-    }
-    
-    // Check if already shared with this user
-    const existingShare = this.sharedWith.find(share => 
-        share.user.toString() === targetUser._id.toString()
-    );
-    
-    if (existingShare) {
-        // Update permissions
-        existingShare.permissions = permissions;
-        existingShare.sharedAt = new Date();
-    } else {
-        // Add new share
-        this.sharedWith.push({
-            user: targetUser._id,
-            sharedAt: new Date(),
-            permissions: permissions
-        });
-    }
-    
-    this.history.push({
-        action: 'shared',
-        timestamp: new Date(),
-        details: { 
-            targetUser: targetUser.username,
-            permissions: permissions
-        }
-    });
-    
-    return this.save();
-};
-
-userPowerSchema.methods.unshare = function(targetUserId) {
-    this.sharedWith = this.sharedWith.filter(share => 
-        share.user.toString() !== targetUserId.toString()
-    );
-    
-    this.history.push({
-        action: 'unshared',
-        timestamp: new Date(),
-        details: { targetUserId: targetUserId }
-    });
-    
-    return this.save();
-};
-
-userPowerSchema.methods.configure = function(newSettings) {
-    this.settings = { ...this.settings, ...newSettings };
-    
-    this.history.push({
-        action: 'configured',
-        timestamp: new Date(),
-        details: { settings: newSettings }
-    });
-    
-    return this.save();
-};
-
-userPowerSchema.methods.getCooldownRemaining = function() {
-    if (!this.cooldown.duration || !this.cooldown.lastActivation) return 0;
-    
-    const timeSinceLastUse = (new Date() - this.cooldown.lastActivation) / 1000;
-    const remaining = this.cooldown.duration - timeSinceLastUse;
-    
-    return Math.max(0, remaining);
 };
 
 // Static methods
-userPowerSchema.statics.findByUser = function(userId, options = {}) {
-    const query = { user: userId };
-    
-    if (options.active !== undefined) {
-        query.active = options.active;
-    }
-    
-    if (options.power) {
-        query.power = options.power;
-    }
-    
-    return this.find(query)
-        .populate('power', 'name description cost effects')
-        .sort({ purchasedAt: -1 });
+userPowerSchema.statics.findByUser = function(userId) {
+    return this.find({ userId, isActive: true })
+        .populate('powerId')
+        .sort({ 'powerId.name': 1 });
 };
 
-userPowerSchema.statics.findActiveByUser = function(userId) {
+userPowerSchema.statics.findByPower = function(powerId) {
+    return this.find({ powerId, isActive: true })
+        .populate('userId', 'nickname username')
+        .sort({ purchased: -1 });
+};
+
+userPowerSchema.statics.findExpired = function() {
     return this.find({
-        user: userId,
-        active: true,
-        $or: [
-            { expiresAt: null },
-            { expiresAt: { $gt: new Date() } }
-        ]
-    }).populate('power', 'name description cost effects');
-};
-
-userPowerSchema.statics.findExpiredByUser = function(userId) {
-    return this.find({
-        user: userId,
-        expiresAt: { $lt: new Date() }
-    }).populate('power', 'name description cost effects');
-};
-
-userPowerSchema.statics.findByPower = function(powerId, options = {}) {
-    const query = { power: powerId };
-    
-    if (options.active !== undefined) {
-        query.active = options.active;
-    }
-    
-    return this.find(query)
-        .populate('user', 'username rank avatar')
-        .sort({ purchasedAt: -1 });
+        expiresAt: { $lt: new Date() },
+        isActive: true
+    });
 };
 
 userPowerSchema.statics.getUserPowerStats = async function(userId) {
     const stats = await this.aggregate([
-        { $match: { user: mongoose.Types.ObjectId(userId) } },
+        { $match: { userId: mongoose.Types.ObjectId(userId), isActive: true } },
         {
             $group: {
                 _id: null,
                 totalPowers: { $sum: 1 },
-                activePowers: { $sum: { $cond: ['$active', 1, 0] } },
-                totalSpent: { $sum: '$purchasedFor' },
-                totalUsage: { $sum: '$usageCount' },
-                uniquePowers: { $addToSet: '$power' }
-            }
-        },
-        {
-            $project: {
-                totalPowers: 1,
-                activePowers: 1,
-                totalSpent: 1,
-                totalUsage: 1,
-                uniquePowerCount: { $size: '$uniquePowers' }
+                totalUses: { $sum: '$totalUses' },
+                availableUses: { $sum: '$count' },
+                expiredPowers: {
+                    $sum: {
+                        $cond: [
+                            { $and: [
+                                { $ne: ['$expiresAt', null] },
+                                { $lt: ['$expiresAt', new Date()] }
+                            ]},
+                            1,
+                            0
+                        ]
+                    }
+                }
             }
         }
     ]);
-    
+
     return stats[0] || {
         totalPowers: 0,
-        activePowers: 0,
-        totalSpent: 0,
-        totalUsage: 0,
-        uniquePowerCount: 0
+        totalUses: 0,
+        availableUses: 0,
+        expiredPowers: 0
     };
 };
 
+userPowerSchema.statics.getPowerUsageStats = async function(powerId) {
+    const stats = await this.aggregate([
+        { $match: { powerId: mongoose.Types.ObjectId(powerId), isActive: true } },
+        {
+            $group: {
+                _id: null,
+                totalOwners: { $sum: 1 },
+                totalUses: { $sum: '$totalUses' },
+                totalAvailable: { $sum: '$count' }
+            }
+        }
+    ]);
+
+    return stats[0] || {
+        totalOwners: 0,
+        totalUses: 0,
+        totalAvailable: 0
+    };
+};
+
+userPowerSchema.statics.transferPower = async function(fromUserId, toUserId, powerId, amount = 1) {
+    const fromUserPower = await this.findOne({ userId: fromUserId, powerId });
+    if (!fromUserPower || fromUserPower.count < amount) {
+        throw new Error('Insufficient power count to transfer');
+    }
+
+    // Find or create recipient's power entry
+    let toUserPower = await this.findOne({ userId: toUserId, powerId });
+
+    if (toUserPower) {
+        toUserPower.count += amount;
+        await toUserPower.save();
+    } else {
+        toUserPower = new this({
+            userId: toUserId,
+            powerId,
+            count: amount,
+            purchased: new Date()
+        });
+        await toUserPower.save();
+    }
+
+    // Update sender's power count
+    fromUserPower.count -= amount;
+    if (fromUserPower.count <= 0) {
+        await this.findByIdAndDelete(fromUserPower._id);
+    } else {
+        await fromUserPower.save();
+    }
+
+    return { fromUserPower, toUserPower };
+};
+
 // Virtual fields
-userPowerSchema.virtual('isExpiredVirtual').get(function() {
-    return this.isExpired();
+userPowerSchema.virtual('isExpired').get(function() {
+    return this.expiresAt && this.expiresAt < new Date();
 });
 
-userPowerSchema.virtual('canUseVirtual').get(function() {
-    return this.canUse();
+userPowerSchema.virtual('isUnlimited').get(function() {
+    return this.count === -1;
 });
 
-userPowerSchema.virtual('cooldownRemainingVirtual').get(function() {
-    return this.getCooldownRemaining();
+userPowerSchema.virtual('hasUses').get(function() {
+    return this.isUnlimited || this.count > 0;
 });
 
-userPowerSchema.virtual('timeUntilExpiry').get(function() {
+userPowerSchema.virtual('daysUntilExpiry').get(function() {
     if (!this.expiresAt) return null;
-    return Math.max(0, this.expiresAt - new Date());
+    const now = new Date();
+    const diffTime = this.expiresAt - now;
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 });
 
 // JSON serialization
 userPowerSchema.methods.toJSON = function() {
     const userPower = this.toObject();
-    userPower.isExpired = this.isExpired();
-    userPower.canUse = this.canUse();
-    userPower.cooldownRemaining = this.getCooldownRemaining();
-    userPower.timeUntilExpiry = this.timeUntilExpiry;
+    userPower.id = userPower._id;
+    delete userPower._id;
+    delete userPower.__v;
     return userPower;
 };
 

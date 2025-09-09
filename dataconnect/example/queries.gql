@@ -1,0 +1,25 @@
+mutation AddNewSocialInteraction @auth(level: USER) {
+  socialInteraction_insert(data: {userId_expr: "auth.uid", interactionType: "comment", commentText: "This is a great movie!"})
+}
+
+query ListPublicMovies @auth(level: PUBLIC) {
+  movies(where: {year: {gt: 2000}}) {
+    id
+    title
+    year
+    posterUrl
+  }
+}
+
+mutation UpdateMyBio($bio: String!) @auth(level: USER) {
+  user_update(key: {id_expr: "auth.uid"}, data: {bio: $bio})
+}
+
+query GetMyLists @auth(level: USER) {
+  lists(where: {userId_expr: "auth.uid"}) {
+    id
+    name
+    description
+    isPublic
+  }
+}

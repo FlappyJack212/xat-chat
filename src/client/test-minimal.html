@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Minimal Chat</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #1a1a1a; color: white; }
+        .test-section { margin: 20px 0; padding: 15px; background: #2a2a2a; border-radius: 8px; }
+        .test-button { padding: 10px 20px; margin: 5px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .test-button:hover { background: #45a049; }
+        .status { margin: 10px 0; padding: 10px; border-radius: 4px; }
+        .success { background: #4CAF50; }
+        .error { background: #f44336; }
+        .info { background: #2196F3; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Chat Interface Test</h1>
+    
+    <div class="test-section">
+        <h3>📁 File Loading Tests</h3>
+        <button class="test-button" onclick="testFileLoading()">Test File Loading</button>
+        <div id="fileStatus"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>🔌 Socket Connection Test</h3>
+        <button class="test-button" onclick="testSocketConnection()">Test Socket</button>
+        <div id="socketStatus"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>🎯 Quickbar Test</h3>
+        <button class="test-button" onclick="testQuickbar()">Test Quickbar</button>
+        <div id="quickbarStatus"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>💬 Message Test</h3>
+        <button class="test-button" onclick="testMessages()">Test Messages</button>
+        <div id="messageStatus"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>🚀 Full Interface Test</h3>
+        <button class="test-button" onclick="window.open('chat-interface.html', '_blank')">Open Full Interface</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        function addStatus(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+        
+        function testFileLoading() {
+            addStatus('fileStatus', 'Testing file loading...', 'info');
+            
+            const files = [
+                'css/normalize.css',
+                'css/chat-interface.css',
+                'js/chat-interface.js',
+                'quickbar.html'
+            ];
+            
+            let loaded = 0;
+            let errors = 0;
+            
+            files.forEach(file => {
+                fetch(file)
+                    .then(response => {
+                        if (response.ok) {
+                            loaded++;
+                            if (loaded + errors === files.length) {
+                                addStatus('fileStatus', `✅ ${loaded}/${files.length} files loaded successfully`, 'success');
+                            }
+                        } else {
+                            errors++;
+                            if (loaded + errors === files.length) {
+                                addStatus('fileStatus', `❌ ${errors}/${files.length} files failed to load`, 'error');
+                            }
+                        }
+                    })
+                    .catch(() => {
+                        errors++;
+                        if (loaded + errors === files.length) {
+                            addStatus('fileStatus', `❌ ${errors}/${files.length} files failed to load`, 'error');
+                        }
+                    });
+            });
+        }
+        
+        function testSocketConnection() {
+            addStatus('socketStatus', 'Testing socket connection...', 'info');
+            
+            try {
+                const socket = io();
+                socket.on('connect', () => {
+                    addStatus('socketStatus', '✅ Socket connected successfully!', 'success');
+                    socket.disconnect();
+                });
+                socket.on('connect_error', () => {
+                    addStatus('socketStatus', '❌ Socket connection failed', 'error');
+                });
+            } catch (error) {
+                addStatus('socketStatus', `❌ Socket error: ${error.message}`, 'error');
+            }
+        }
+        
+        function testQuickbar() {
+            addStatus('quickbarStatus', 'Testing quickbar loading...', 'info');
+            
+            fetch('quickbar.html')
+                .then(response => response.text())
+                .then(html => {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = html;
+                    
+                    const buttons = tempDiv.querySelectorAll('button[id]');
+                    const hasToggle = tempDiv.querySelector('#quickbarToggle');
+                    const hasQuickbar = tempDiv.querySelector('#quickbar');
+                    
+                    if (buttons.length > 0 && hasToggle && hasQuickbar) {
+                        addStatus('quickbarStatus', `✅ Quickbar loaded with ${buttons.length} buttons`, 'success');
+                    } else {
+                        addStatus('quickbarStatus', '❌ Quickbar structure incomplete', 'error');
+                    }
+                })
+                .catch(error => {
+                    addStatus('quickbarStatus', `❌ Quickbar loading failed: ${error.message}`, 'error');
+                });
+        }
+        
+        function testMessages() {
+            addStatus('messageStatus', 'Testing message functions...', 'info');
+            
+            // Test if message functions exist
+            const functions = ['addMessage', 'sendMessage', 'toggleVisitorsList', 'toggleNightMode'];
+            const missing = functions.filter(fn => typeof window[fn] !== 'function');
+            
+            if (missing.length === 0) {
+                addStatus('messageStatus', '✅ All message functions available', 'success');
+            } else {
+                addStatus('messageStatus', `❌ Missing functions: ${missing.join(', ')}`, 'error');
+            }
+        }
+        
+        // Auto-run tests on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                testFileLoading();
+                testSocketConnection();
+                testQuickbar();
+                testMessages();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

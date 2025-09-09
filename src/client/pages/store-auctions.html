@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iXat Store - Auctions</title>
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/authentic-xat.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --light-blue: #dbeafe;
+            --dark-blue: #1e3a8a;
+            --primary-grey: #374151;
+            --secondary-grey: #6b7280;
+            --light-grey: #f3f4f6;
+            --dark-grey: #111827;
+            --accent: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--light-grey) 0%, var(--light-blue) 100%);
+            min-height: 100vh;
+            color: var(--dark-grey);
+        }
+        
+        .header {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--dark-grey);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-grey);
+            margin-bottom: 1rem;
+        }
+        
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-grey);
+            margin-bottom: 2rem;
+        }
+        
+        .user-balance {
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .balance-item {
+            display: inline-block;
+            margin: 0 1rem;
+            text-align: center;
+        }
+        
+        .balance-label {
+            font-size: 0.9rem;
+            color: var(--secondary-grey);
+            margin-bottom: 0.5rem;
+        }
+        
+        .balance-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .auction-tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .auction-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: white;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .auction-tab.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .auction-tab:hover:not(.active) {
+            background: var(--light-grey);
+        }
+        
+        .filters {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .filter-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .filter-label {
+            font-weight: 600;
+            color: var(--dark-grey);
+        }
+        
+        .filter-input, .filter-select {
+            padding: 0.5rem;
+            border: 2px solid var(--light-grey);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        .filter-input:focus, .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+        
+        .auctions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .auction-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        
+        .auction-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .auction-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-active {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .status-ending {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .status-ended {
+            background: var(--secondary-grey);
+            color: white;
+        }
+        
+        .auction-header {
+            padding: 1rem;
+            background: var(--light-blue);
+        }
+        
+        .auction-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-grey);
+            margin-bottom: 0.5rem;
+        }
+        
+        .auction-type {
+            font-size: 0.9rem;
+            color: var(--secondary-grey);
+            background: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            display: inline-block;
+        }
+        
+        .auction-body {
+            padding: 1rem;
+        }
+        
+        .auction-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .auction-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .auction-info h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-grey);
+            margin-bottom: 0.25rem;
+        }
+        
+        .auction-description {
+            color: var(--secondary-grey);
+            font-size: 0.9rem;
+        }
+        
+        .auction-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 0.5rem;
+            background: var(--light-grey);
+            border-radius: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--secondary-grey);
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-value {
+            font-weight: 600;
+            color: var(--dark-grey);
+        }
+        
+        .current-bid {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .time-remaining {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .auction-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            flex: 1;
+        }
+        
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--dark-blue);
+        }
+        
+        .btn-secondary {
+            background: var(--light-grey);
+            color: var(--dark-grey);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--secondary-grey);
+            color: white;
+        }
+        
+        .btn-success {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #0d8f6b;
+        }
+        
+        .bid-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 2px solid var(--light-grey);
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .bid-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--secondary-grey);
+        }
+        
+        .error {
+            background: #fee;
+            color: var(--danger);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        
+        .countdown {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">iXat</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="store-powers.html">Powers</a></li>
+                    <li><a href="store-auctions.html">Auctions</a></li>
+                    <li><a href="store-buy.html">Buy Coins</a></li>
+                    <li><a href="store-shortname.html">Short Names</a></li>
+                    <li><a href="store-promotion.html">Promotion</a></li>
+                    <li><a href="store-ads.html">Ads</a></li>
+                    <li><a href="store-groups.html">Groups</a></li>
+                    <li><a href="../embed.html">Chat</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">iXat Auctions</h1>
+            <p class="page-subtitle">Bid on rare powers, short names, and exclusive items</p>
+            
+            <div class="user-balance">
+                <div class="balance-item">
+                    <div class="balance-label">Xats</div>
+                    <div class="balance-value" id="userXats">0</div>
+                </div>
+                <div class="balance-item">
+                    <div class="balance-label">Days</div>
+                    <div class="balance-value" id="userDays">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="auction-tabs">
+            <button class="auction-tab active" data-tab="active">Active Auctions</button>
+            <button class="auction-tab" data-tab="ending">Ending Soon</button>
+            <button class="auction-tab" data-tab="ended">Ended</button>
+            <button class="auction-tab" data-tab="my-bids">My Bids</button>
+        </div>
+
+        <div class="filters">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label class="filter-label">Search Items</label>
+                    <input type="text" id="searchInput" class="filter-input" placeholder="Search by name or description...">
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Item Type</label>
+                    <select id="typeFilter" class="filter-select">
+                        <option value="">All Types</option>
+                        <option value="power">Powers</option>
+                        <option value="shortname">Short Names</option>
+                        <option value="group">Groups</option>
+                        <option value="special">Special Items</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Price Range</label>
+                    <select id="priceFilter" class="filter-select">
+                        <option value="">All Prices</option>
+                        <option value="0-1000">0 - 1,000 xats</option>
+                        <option value="1000-5000">1,000 - 5,000 xats</option>
+                        <option value="5000-10000">5,000 - 10,000 xats</option>
+                        <option value="10000+">10,000+ xats</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Sort By</label>
+                    <select id="sortFilter" class="filter-select">
+                        <option value="ending">Ending Soon</option>
+                        <option value="price-low">Price Low-High</option>
+                        <option value="price-high">Price High-Low</option>
+                        <option value="newest">Newest</option>
+                        <option value="bids">Most Bids</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="auctionsContainer" class="auctions-grid">
+            <div class="loading">Loading auctions...</div>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Socket.IO -->
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <!-- Core modules -->
+    <script src="../js/www/common.js"></script>
+    <script src="../js/www/translator.js"></script>
+    <script src="../js/www/ui-utils.js"></script>
+    <script src="../js/www/store.js"></script>
+    
+    <script>
+        class AuctionsStore {
+            constructor() {
+                this.socket = io();
+                this.auctions = [];
+                this.filteredAuctions = [];
+                this.currentTab = 'active';
+                this.userBalance = { xats: 0, days: 0 };
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.loadUserBalance();
+                this.loadAuctions();
+            }
+            
+            setupEventListeners() {
+                // Tab switching
+                document.querySelectorAll('.auction-tab').forEach(tab => {
+                    tab.addEventListener('click', (e) => {
+                        this.switchTab(e.target.dataset.tab);
+                    });
+                });
+                
+                // Search functionality
+                document.getElementById('searchInput').addEventListener('input', (e) => {
+                    this.filterAuctions();
+                });
+                
+                // Filter functionality
+                document.getElementById('typeFilter').addEventListener('change', () => {
+                    this.filterAuctions();
+                });
+                
+                document.getElementById('priceFilter').addEventListener('change', () => {
+                    this.filterAuctions();
+                });
+                
+                document.getElementById('sortFilter').addEventListener('change', () => {
+                    this.sortAuctions();
+                });
+                
+                // Socket events
+                this.socket.on('userBalance', (balance) => {
+                    this.userBalance = balance;
+                    this.updateBalanceDisplay();
+                });
+                
+                this.socket.on('auctionUpdate', (auction) => {
+                    this.updateAuction(auction);
+                });
+                
+                this.socket.on('bidUpdate', (bid) => {
+                    this.updateBid(bid);
+                });
+            }
+            
+            switchTab(tab) {
+                this.currentTab = tab;
+                
+                // Update tab buttons
+                document.querySelectorAll('.auction-tab').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+                
+                this.filterAuctions();
+            }
+            
+            async loadUserBalance() {
+                try {
+                    const response = await fetch('/api/users/profile', {
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.success) {
+                            this.userBalance = {
+                                xats: data.user.xats || 0,
+                                days: data.user.days || 0
+                            };
+                        }
+                    }
+                } catch (error) {
+                    console.log('Using guest balance');
+                    this.userBalance = { xats: 0, days: 0 };
+                }
+                
+                this.updateBalanceDisplay();
+            }
+            
+            updateBalanceDisplay() {
+                document.getElementById('userXats').textContent = this.userBalance.xats.toLocaleString();
+                document.getElementById('userDays').textContent = this.userBalance.days.toLocaleString();
+            }
+            
+            async loadAuctions() {
+                try {
+                    const response = await fetch('/api/auctions');
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        this.auctions = data.auctions;
+                        this.filterAuctions();
+                    } else {
+                        this.showError('Failed to load auctions: ' + data.message);
+                    }
+                } catch (error) {
+                    this.showError('Error loading auctions: ' + error.message);
+                }
+            }
+            
+            filterAuctions() {
+                const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+                const type = document.getElementById('typeFilter').value;
+                const priceRange = document.getElementById('priceFilter').value;
+                
+                this.filteredAuctions = this.auctions.filter(auction => {
+                    // Tab filter
+                    const now = new Date();
+                    const endTime = new Date(auction.endTime);
+                    
+                    switch (this.currentTab) {
+                        case 'active':
+                            if (endTime <= now) return false;
+                            break;
+                        case 'ending':
+                            if (endTime <= now || endTime > new Date(now.getTime() + 24 * 60 * 60 * 1000)) return false;
+                            break;
+                        case 'ended':
+                            if (endTime > now) return false;
+                            break;
+                        case 'my-bids':
+                            // This would need to be filtered by user's bids
+                            break;
+                    }
+                    
+                    // Search filter
+                    if (searchTerm && !auction.item.name.toLowerCase().includes(searchTerm) && 
+                        !auction.item.description.toLowerCase().includes(searchTerm)) {
+                        return false;
+                    }
+                    
+                    // Type filter
+                    if (type && auction.item.type !== type) {
+                        return false;
+                    }
+                    
+                    // Price filter
+                    if (priceRange) {
+                        const [min, max] = priceRange.split('-').map(p => p === '+' ? Infinity : parseInt(p));
+                        if (auction.currentBid < min || (max !== Infinity && auction.currentBid > max)) {
+                            return false;
+                        }
+                    }
+                    
+                    return true;
+                });
+                
+                this.sortAuctions();
+                this.displayAuctions();
+            }
+            
+            sortAuctions() {
+                const sortBy = document.getElementById('sortFilter').value;
+                
+                this.filteredAuctions.sort((a, b) => {
+                    switch (sortBy) {
+                        case 'ending':
+                            return new Date(a.endTime) - new Date(b.endTime);
+                        case 'price-low':
+                            return a.currentBid - b.currentBid;
+                        case 'price-high':
+                            return b.currentBid - a.currentBid;
+                        case 'newest':
+                            return new Date(b.createdAt) - new Date(a.createdAt);
+                        case 'bids':
+                            return (b.bidCount || 0) - (a.bidCount || 0);
+                        default:
+                            return 0;
+                    }
+                });
+            }
+            
+            displayAuctions() {
+                const container = document.getElementById('auctionsContainer');
+                
+                if (this.filteredAuctions.length === 0) {
+                    container.innerHTML = '<div class="loading">No auctions found matching your criteria.</div>';
+                    return;
+                }
+                
+                container.innerHTML = this.filteredAuctions.map(auction => {
+                    const now = new Date();
+                    const endTime = new Date(auction.endTime);
+                    const timeRemaining = endTime - now;
+                    const isEnded = endTime <= now;
+                    const isEndingSoon = timeRemaining <= 24 * 60 * 60 * 1000 && !isEnded;
+                    
+                    return `
+                        <div class="auction-card">
+                            <div class="auction-status ${isEnded ? 'status-ended' : isEndingSoon ? 'status-ending' : 'status-active'}">
+                                ${isEnded ? 'Ended' : isEndingSoon ? 'Ending Soon' : 'Active'}
+                            </div>
+                            
+                            <div class="auction-header">
+                                <h3 class="auction-title">${auction.item.name}</h3>
+                                <span class="auction-type">${auction.item.type}</span>
+                            </div>
+                            
+                            <div class="auction-body">
+                                <div class="auction-item">
+                                    <div class="auction-icon">${auction.item.icon || '🏆'}</div>
+                                    <div class="auction-info">
+                                        <h4>${auction.item.name}</h4>
+                                        <p class="auction-description">${auction.item.description || 'No description available.'}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="auction-stats">
+                                    <div class="stat-item current-bid">
+                                        <div class="stat-label">Current Bid</div>
+                                        <div class="stat-value">${auction.currentBid.toLocaleString()} xats</div>
+                                    </div>
+                                    <div class="stat-item time-remaining">
+                                        <div class="stat-label">Time Remaining</div>
+                                        <div class="stat-value countdown" id="countdown-${auction._id}">
+                                            ${isEnded ? 'Ended' : this.formatTimeRemaining(timeRemaining)}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="auction-actions">
+                                    ${!isEnded ? `
+                                        <input type="number" class="bid-input" id="bid-${auction._id}" 
+                                               placeholder="Enter bid amount" min="${auction.currentBid + 1}">
+                                        <button class="btn btn-success" onclick="auctionsStore.placeBid('${auction._id}')">
+                                            Place Bid
+                                        </button>
+                                    ` : `
+                                        <button class="btn btn-secondary" onclick="auctionsStore.viewAuctionDetails('${auction._id}')">
+                                            View Details
+                                        </button>
+                                    `}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                // Start countdown timers
+                this.startCountdowns();
+            }
+            
+            startCountdowns() {
+                this.filteredAuctions.forEach(auction => {
+                    const countdownElement = document.getElementById(`countdown-${auction._id}`);
+                    if (!countdownElement) return;
+                    
+                    const updateCountdown = () => {
+                        const now = new Date();
+                        const endTime = new Date(auction.endTime);
+                        const timeRemaining = endTime - now;
+                        
+                        if (timeRemaining <= 0) {
+                            countdownElement.textContent = 'Ended';
+                            return;
+                        }
+                        
+                        countdownElement.textContent = this.formatTimeRemaining(timeRemaining);
+                    };
+                    
+                    updateCountdown();
+                    setInterval(updateCountdown, 1000);
+                });
+            }
+            
+            formatTimeRemaining(milliseconds) {
+                const days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((milliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((milliseconds % (1000 * 60)) / 1000);
+                
+                if (days > 0) {
+                    return `${days}d ${hours}h ${minutes}m`;
+                } else if (hours > 0) {
+                    return `${hours}h ${minutes}m ${seconds}s`;
+                } else if (minutes > 0) {
+                    return `${minutes}m ${seconds}s`;
+                } else {
+                    return `${seconds}s`;
+                }
+            }
+            
+            async placeBid(auctionId) {
+                const bidInput = document.getElementById(`bid-${auctionId}`);
+                const bidAmount = parseInt(bidInput.value);
+                
+                if (!bidAmount || bidAmount <= 0) {
+                    alert('Please enter a valid bid amount.');
+                    return;
+                }
+                
+                const auction = this.auctions.find(a => a._id === auctionId);
+                if (bidAmount <= auction.currentBid) {
+                    alert(`Bid must be higher than current bid of ${auction.currentBid.toLocaleString()} xats.`);
+                    return;
+                }
+                
+                if (this.userBalance.xats < bidAmount) {
+                    alert('Insufficient xats! You need ' + bidAmount.toLocaleString() + ' xats to place this bid.');
+                    return;
+                }
+                
+                if (confirm(`Place bid of ${bidAmount.toLocaleString()} xats on ${auction.item.name}?`)) {
+                    try {
+                        const response = await fetch('/api/auctions/bid', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                            },
+                            body: JSON.stringify({ auctionId, bidAmount })
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (data.success) {
+                            alert('Bid placed successfully!');
+                            this.loadAuctions(); // Refresh the list
+                        } else {
+                            alert('Bid failed: ' + data.message);
+                        }
+                    } catch (error) {
+                        alert('Error placing bid: ' + error.message);
+                    }
+                }
+            }
+            
+            viewAuctionDetails(auctionId) {
+                const auction = this.auctions.find(a => a._id === auctionId);
+                if (!auction) return;
+                
+                alert(`Auction Details:\n\nItem: ${auction.item.name}\nDescription: ${auction.item.description}\nCurrent Bid: ${auction.currentBid.toLocaleString()} xats\nBids: ${auction.bidCount || 0}\nEnd Time: ${new Date(auction.endTime).toLocaleString()}`);
+            }
+            
+            updateAuction(auction) {
+                const index = this.auctions.findIndex(a => a._id === auction._id);
+                if (index !== -1) {
+                    this.auctions[index] = auction;
+                    this.filterAuctions();
+                }
+            }
+            
+            updateBid(bid) {
+                // Update auction with new bid
+                this.loadAuctions();
+            }
+            
+            showError(message) {
+                const container = document.getElementById('auctionsContainer');
+                container.innerHTML = `<div class="error">${message}</div>`;
+            }
+        }
+        
+        // Initialize the store
+        const auctionsStore = new AuctionsStore();
+    </script>
+</body>
+</html>

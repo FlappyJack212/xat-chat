@@ -1,0 +1,411 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum - iXat</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/authentic-xat.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #00d4ff 100%);
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .forum-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .forum-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .forum-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .forum-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .forum-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        }
+
+        .category-card h3 {
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-card p {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+
+        .category-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .recent-posts {
+            margin-top: 2rem;
+        }
+
+        .recent-posts h2 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .post-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .post-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .post-item:hover {
+            background: #f9fafb;
+        }
+
+        .post-title {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .post-meta {
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .create-post-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: background 0.2s;
+        }
+
+        .create-post-btn:hover {
+            background: #2563eb;
+        }
+
+        .create-post-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div id="navigation-container"></div>
+
+    <div class="container">
+        <div class="forum-header">
+            <h1>📋 iXat Forum</h1>
+            <p>Connect, discuss, and share with the community</p>
+        </div>
+
+        <div class="forum-content">
+            <button class="create-post-btn" id="createPostBtn" onclick="openCreatePost()">
+                Create New Post
+            </button>
+
+            <div class="forum-categories">
+                <div class="category-card" onclick="viewCategory('general')">
+                    <h3>💬 General Discussion</h3>
+                    <p>General chat and discussions about iXat and community topics</p>
+                    <div class="category-stats">
+                        <span>Posts: 0</span>
+                        <span>Last: Never</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="viewCategory('support')">
+                    <h3>🆘 Support</h3>
+                    <p>Get help with technical issues, account problems, and general support</p>
+                    <div class="category-stats">
+                        <span>Posts: 0</span>
+                        <span>Last: Never</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="viewCategory('suggestions')">
+                    <h3>💡 Suggestions</h3>
+                    <p>Share your ideas and suggestions for improving iXat</p>
+                    <div class="category-stats">
+                        <span>Posts: 0</span>
+                        <span>Last: Never</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="viewCategory('announcements')">
+                    <h3>📢 Announcements</h3>
+                    <p>Official announcements and updates from the iXat team</p>
+                    <div class="category-stats">
+                        <span>Posts: 0</span>
+                        <span>Last: Never</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="viewCategory('trading')">
+                    <h3>🔄 Trading</h3>
+                    <p>Trade powers, items, and services with other users</p>
+                    <div class="category-stats">
+                        <span>Posts: 0</span>
+                        <span>Last: Never</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="viewCategory('off-topic')">
+                    <h3>🎭 Off-Topic</h3>
+                    <p>Discuss anything that doesn't fit in other categories</p>
+                    <div class="category-stats">
+                        <span>Posts: 0</span>
+                        <span>Last: Never</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-posts">
+                <h2>Recent Posts</h2>
+                <div id="recentPosts">
+                    <div class="empty-state">
+                        <h3>No posts yet</h3>
+                        <p>Be the first to start a discussion!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Post Modal -->
+    <div id="createPostModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border-radius: 8px; padding: 2rem; width: 90%; max-width: 600px;">
+            <h3>Create New Post</h3>
+            <form id="createPostForm">
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Category</label>
+                    <select id="postCategory" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 4px;">
+                        <option value="general">General Discussion</option>
+                        <option value="support">Support</option>
+                        <option value="suggestions">Suggestions</option>
+                        <option value="announcements">Announcements</option>
+                        <option value="trading">Trading</option>
+                        <option value="off-topic">Off-Topic</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Title</label>
+                    <input type="text" id="postTitle" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 4px;" required>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Content</label>
+                    <textarea id="postContent" rows="6" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 4px;" required></textarea>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" onclick="closeCreatePost()" style="padding: 0.5rem 1rem; border: 1px solid #d1d5db; background: white; border-radius: 4px; cursor: pointer;">Cancel</button>
+                    <button type="submit" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">Create Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../modules/auth-system.js"></script>
+    <script>
+        // Initialize auth system
+        const authSystem = new AuthSystem();
+
+        // Forum functionality
+        class Forum {
+            constructor() {
+                this.posts = [];
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.loadRecentPosts();
+                this.updateCreateButton();
+            }
+
+            setupEventListeners() {
+                document.getElementById('createPostForm').addEventListener('submit', (e) => {
+                    this.handleCreatePost(e);
+                });
+            }
+
+            updateCreateButton() {
+                const createBtn = document.getElementById('createPostBtn');
+                if (!authSystem.isUserAuthenticated()) {
+                    createBtn.disabled = true;
+                    createBtn.textContent = 'Login to Create Post';
+                }
+            }
+
+            async loadRecentPosts() {
+                // This would normally load from an API
+                // For now, we'll show empty state
+                this.posts = [];
+                this.renderRecentPosts();
+            }
+
+            renderRecentPosts() {
+                const container = document.getElementById('recentPosts');
+                
+                if (this.posts.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <h3>No posts yet</h3>
+                            <p>Be the first to start a discussion!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = `
+                    <ul class="post-list">
+                        ${this.posts.map(post => `
+                            <li class="post-item">
+                                <div class="post-title">${post.title}</div>
+                                <div class="post-meta">
+                                    <span>By ${post.author}</span>
+                                    <span>${post.category}</span>
+                                    <span>${post.date}</span>
+                                </div>
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+            }
+
+            async handleCreatePost(event) {
+                event.preventDefault();
+                
+                if (!authSystem.isUserAuthenticated()) {
+                    alert('Please login to create a post');
+                    return;
+                }
+
+                const formData = new FormData(event.target);
+                const postData = {
+                    category: document.getElementById('postCategory').value,
+                    title: document.getElementById('postTitle').value,
+                    content: document.getElementById('postContent').value
+                };
+
+                try {
+                    // This would normally save to an API
+                    console.log('Creating post:', postData);
+                    alert('Post created successfully! (Demo mode)');
+                    this.closeCreatePost();
+                    this.loadRecentPosts();
+                } catch (error) {
+                    console.error('Error creating post:', error);
+                    alert('Failed to create post');
+                }
+            }
+
+            closeCreatePost() {
+                document.getElementById('createPostModal').style.display = 'none';
+                document.getElementById('createPostForm').reset();
+            }
+        }
+
+        // Initialize forum
+        const forum = new Forum();
+
+        // Global functions for onclick handlers
+        function openCreatePost() {
+            if (!authSystem.isUserAuthenticated()) {
+                alert('Please login to create a post');
+                return;
+            }
+            document.getElementById('createPostModal').style.display = 'block';
+        }
+
+        function closeCreatePost() {
+            forum.closeCreatePost();
+        }
+
+        function viewCategory(category) {
+            alert(`Viewing ${category} category (Demo mode)`);
+        }
+
+        // Load navigation
+        fetch('/components/navigation.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('navigation-container').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
+</body>
+</html>

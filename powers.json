@@ -1,0 +1,8464 @@
+[
+  {
+    "name": "allpowers",
+    "description": "Use the AllPowers smiley",
+    "subdesc": "Use the AllPowers smiley",
+    "section": "allpowers",
+    "subid": 1,
+    "cost": 0,
+    "xats": 0,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "epic",
+    "status": "Available",
+    "category": "epic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "topman",
+    "description": "Your location on the visitors list will appear higher with this power. $WIKI.",
+    "subdesc": "Appear higher on userlist",
+    "section": "p0",
+    "subid": 2,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": 100,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "subhide",
+    "description": "Star, heart or cross on your pawn appears black while keeping subscriber abilities. $WIKI.",
+    "subdesc": "Black subscriber shape",
+    "section": "p0",
+    "subid": 4,
+    "cost": 100,
+    "xats": 100,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "mod8",
+    "description": "Adds two additional hours to the moderation max ban time. $WIKI.",
+    "subdesc": "Increase ban time",
+    "section": "p0",
+    "subid": 8,
+    "cost": 500,
+    "xats": 500,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "moderation"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "moderation"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "zoom",
+    "description": "Enlarges the avatar by hovering over with mouse for both you and other users. $WIKI.",
+    "subdesc": "Zoom on avatar",
+    "section": "p0",
+    "subid": 16,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "nofollow",
+    "description": "Normally friends can locate you and follow you around from chat to chat. This power allows you to block them from locating and following you.",
+    "subdesc": "Friends cant follow you",
+    "section": "p0",
+    "subid": 32,
+    "cost": 100,
+    "xats": 100,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "invert",
+    "description": "Make almost any smiley upside down by adding #i after the smilie code. $WIKI.",
+    "subdesc": "Upside-down smilies",
+    "section": "p0",
+    "subid": 64,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "mirror",
+    "description": "Mirror flip almost any smiley from left to right by placing #m after a smilie code. $WIKI.",
+    "subdesc": "Mirror flip your smilies",
+    "section": "p0",
+    "subid": 128,
+    "cost": 100,
+    "xats": 100,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "noaudies",
+    "description": "Prevents audies sent by users from being automatically played. Click on the audie if you still want to hear it. $WIKI.",
+    "subdesc": "Turn off audie sounds",
+    "section": "p0",
+    "subid": 256,
+    "cost": 10,
+    "xats": 10,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "sound"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "sound"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "reghide",
+    "description": "Removes the star, heart or cross on your pawn completely. All other subscriber features still work. $WIKI.",
+    "subdesc": "Remove subscriber shape",
+    "section": "p0",
+    "subid": 512,
+    "cost": 100,
+    "xats": 100,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "nopc",
+    "description": "Prevents members and guests not added as a friend from starting a private chat with you. Anyone with a higher rank can always PC you. $WIKI.",
+    "subdesc": "Only have friends PC you",
+    "section": "p0",
+    "subid": 1024,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "tempmod",
+    "description": "Promote guests and members to moderator for any duration of time, up to 24 hours.  $WIKI.",
+    "subdesc": "Temporary moderator",
+    "section": "p0",
+    "subid": 2048,
+    "cost": 50,
+    "xats": 50,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "moderation"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "moderation"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "hat",
+    "description": "Choose from default or power-specific hats. Some hats can be combined and colored. $WIKI.",
+    "subdesc": "Add a hat to your pawn",
+    "section": "p0",
+    "subid": 4096,
+    "cost": 100,
+    "xats": 100,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "red",
+    "description": "Color any yellow smiley red by adding #r after the smiley code. $WIKI.",
+    "subdesc": "Red color smilies",
+    "section": "p0",
+    "subid": 8192,
+    "cost": 150,
+    "xats": 150,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "colors",
+    "status": "Available",
+    "category": "effects",
+    "effects": [
+      "color"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "color"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "green",
+    "description": "Color any yellow smiley green by adding #g after the smiley code.  $WIKI.",
+    "subdesc": "Green color smilies",
+    "section": "p0",
+    "subid": 16384,
+    "cost": 150,
+    "xats": 150,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "colors",
+    "status": "Available",
+    "category": "effects",
+    "effects": [
+      "color"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "color"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "blue",
+    "description": "Color any yellow smiley blue by adding #b after the smiley code.  $WIKI.",
+    "subdesc": "Blue color smilies",
+    "section": "p0",
+    "subid": 32768,
+    "cost": 150,
+    "xats": 150,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "colors",
+    "status": "Available",
+    "category": "effects",
+    "effects": [
+      "color"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "color"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "light",
+    "description": "Make any yellow smiley white, gray or black. Add #--- after the smiley code to make a smiley lighter or #+++ to make it darker. $WIKI.",
+    "subdesc": "Light/Dark smilies",
+    "section": "p0",
+    "subid": 65536,
+    "cost": 150,
+    "xats": 150,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "colors",
+    "status": "Available",
+    "category": "effects",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "heart",
+    "description": "Change the back of any yellow smiley to the shape of a heart by adding #h at the end of a smiley. LIMITED. $WIKI.",
+    "subdesc": "Heart shaped smilies",
+    "section": "p0",
+    "subid": 131072,
+    "cost": 664,
+    "xats": 664,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "shuffle",
+    "description": "Allows you to create a strip of pictures to display as your avatar and one picture is shown randomly with each message. $WIKI.",
+    "subdesc": "Random avatar",
+    "section": "p0",
+    "subid": 262144,
+    "cost": 25,
+    "xats": 25,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "animate",
+    "description": "Set your avatar as a strip of square pictures and an animation will be shown as your avatar. $WIKI.",
+    "subdesc": "Animated avatar",
+    "section": "p0",
+    "subid": 524288,
+    "cost": 400,
+    "xats": 400,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "square",
+    "description": "Give a cyan square shape to any yellow smiley by adding #s to the smiley code. $WIKI.",
+    "subdesc": "Square shaped smilies",
+    "section": "p0",
+    "subid": 1048576,
+    "cost": 100,
+    "xats": 100,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "nameglow",
+    "description": "Add a neon glow effect to your display name. The default color is green. $WIKI.",
+    "subdesc": "Neon glow display name",
+    "section": "p0",
+    "subid": 2097152,
+    "cost": 400,
+    "xats": 400,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "cycle",
+    "description": "Give a cycle of rainbow colors to any yellow smiley. $WIKI.",
+    "subdesc": "Color cycle smilies",
+    "section": "p0",
+    "subid": 4194304,
+    "cost": 500,
+    "xats": 500,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "hexagon",
+    "description": "Give a pink hexagon shape to any yellow smiley. $WIKI.",
+    "subdesc": "Hexagon shaped smilies",
+    "section": "p0",
+    "subid": 8388608,
+    "cost": 100,
+    "xats": 100,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "clear",
+    "description": "Give a clear background to any yellow smiley. LIMITED. $WIKI.",
+    "subdesc": "Clear your smilies",
+    "section": "p0",
+    "subid": 16777216,
+    "cost": 5000,
+    "xats": 5000,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "boot",
+    "description": "Transfer a user to another chatroom. LIMITED. $WIKI.",
+    "subdesc": "Boot a user",
+    "section": "p0",
+    "subid": 33554432,
+    "cost": 10240,
+    "xats": 10240,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "octogram",
+    "description": "Give a light green octogram shape to any yellow smiley by adding #o to the smiley code. $WIKI.",
+    "subdesc": "Octogram shaped smilies",
+    "section": "p0",
+    "subid": 67108864,
+    "cost": 150,
+    "xats": 150,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "show",
+    "description": "Allows other users to see the amount of your xats and days. $WIKI.",
+    "subdesc": "Show your xats and days",
+    "section": "p0",
+    "subid": 134217728,
+    "cost": 50,
+    "xats": 50,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "superkick",
+    "description": "Allows you to kick lower ranks that you normally would not be able to kick. $WIKI.",
+    "subdesc": "Kick lower ranks",
+    "section": "p0",
+    "subid": 268435456,
+    "cost": 15,
+    "xats": 15,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "moderation"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "moderation"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "invisible",
+    "description": "Become invisible as owner, hiding yourself from lower ranks. $WIKI.",
+    "subdesc": "Invisible owner",
+    "section": "p0",
+    "subid": 536870912,
+    "cost": 40,
+    "xats": 40,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "pink",
+    "description": "Turn your guest or member pawn pink (will need flashrank power for other ranks). $WIKI.",
+    "subdesc": "Pink pawn",
+    "section": "p0",
+    "subid": 1073741824,
+    "cost": 500,
+    "xats": 500,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "guestself",
+    "description": "Turn yourself into a guest at any chat where you are currently ranked by typing /g in the chat. $WIKI.",
+    "subdesc": "Make yourself a guest",
+    "section": "p1",
+    "subid": 1,
+    "cost": 250,
+    "xats": 250,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "sinbin",
+    "description": "Remove moderator abilities to kick and ban for seconds or up to 24 hours. Must be owner+. $WIKI.",
+    "subdesc": "Sinbin a moderator",
+    "section": "p1",
+    "subid": 2,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "diamond",
+    "description": "Give a purple diamond shape to any yellow smiley by adding #d to the end of a smiley code. LIMITED. $WIKI.",
+    "subdesc": "Diamond shaped smilies",
+    "section": "p1",
+    "subid": 4,
+    "cost": 820,
+    "xats": 820,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "purple",
+    "description": "Turn your pawn purple. Includes PURP style smilies and a themed HUG. $WIKI.",
+    "subdesc": "Purple pawn",
+    "section": "p1",
+    "subid": 8,
+    "cost": 25000,
+    "xats": 25000,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": true,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "epic",
+    "status": "Available",
+    "category": "epic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "ttth",
+    "description": "Send a giant smiley kiss (for free) and ignore someone you dont want to talk to in one step. Type /t in the message or /tMessage#smiley.",
+    "subdesc": "Talk to the hand",
+    "section": "p1",
+    "subid": 16,
+    "cost": 400,
+    "xats": 400,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "hands",
+    "description": "Give your smilies some hands. Set different actions and mix/match for interesting combinations. $WIKI.",
+    "subdesc": "Add hands to smilies",
+    "section": "p1",
+    "subid": 32,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.119Z",
+    "createdAt": "2025-09-05T20:13:49.119Z",
+    "updatedAt": "2025-09-05T20:13:49.119Z"
+  },
+  {
+    "name": "hairm",
+    "description": "Male hair styles for your smilies. $WIKI.",
+    "subdesc": "Male hair",
+    "section": "p1",
+    "subid": 64,
+    "cost": 150,
+    "xats": 150,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "hairf",
+    "description": "Female hair styles for your smilies. $WIKI.",
+    "subdesc": "Female hair",
+    "section": "p1",
+    "subid": 128,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "fade",
+    "description": "Give a ghost-like fade effect to any yellow smiley by adding #f to the end of a smiley code. LIMITED. $WIKI.",
+    "subdesc": "Fade effect",
+    "section": "p1",
+    "subid": 256,
+    "cost": 1520,
+    "xats": 1520,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "gag",
+    "description": "Allows you to stop guests and members from being able to talk in main chat for a maximum of 1 hour. Must be moderator+. LIMITED. $WIKI.",
+    "subdesc": "Gag a user",
+    "section": "p1",
+    "subid": 512,
+    "cost": 1240,
+    "xats": 1240,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "costumes",
+    "description": "Dress up your smilies with some costumes. $WIKI.",
+    "subdesc": "Costume-themed smilies",
+    "section": "p1",
+    "subid": 1024,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "six",
+    "description": "Turn your yellow smilies into devils.  LIMITED. $WIKI.",
+    "subdesc": "Devil-themed smilies",
+    "section": "p1",
+    "subid": 2048,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "dood",
+    "description": "Allows you to import images into doodle.  $WIKI.",
+    "subdesc": "Import images to doodle",
+    "section": "p1",
+    "subid": 4096,
+    "cost": 250,
+    "xats": 250,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "angel",
+    "description": "Add wings, a halo, a cloud and prayer hands to any smiley. LIMITED. $WIKI.",
+    "subdesc": "Angel smilies",
+    "section": "p1",
+    "subid": 8192,
+    "cost": 13230,
+    "xats": 13230,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "mute",
+    "description": "Allows owners and above to ban a user for up to 1 hour without them knowing. Guests in the chat will not be able to see the ban message. $WIKI.",
+    "subdesc": "Silent ban",
+    "section": "p1",
+    "subid": 16384,
+    "cost": 40,
+    "xats": 40,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "radio",
+    "description": "Take your radio with you to any chat and let other users tune in at any time. $WIKI.",
+    "subdesc": "Personal radio",
+    "section": "p1",
+    "subid": 32768,
+    "cost": 250,
+    "xats": 250,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "fruit",
+    "description": "Give a fruity background to your smilies. LIMITED. $WIKI.",
+    "subdesc": "Fruit smilies",
+    "section": "p1",
+    "subid": 65536,
+    "cost": 711,
+    "xats": 711,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "smiley",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "sport",
+    "description": "Support your team with these sports related smilies. $WIKI.",
+    "subdesc": "Sport smilies",
+    "section": "p1",
+    "subid": 131072,
+    "cost": 400,
+    "xats": 400,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "num",
+    "description": "Add 1-3 letters or numbers to some smilies. $WIKI.",
+    "subdesc": "Annotate smilies",
+    "section": "p1",
+    "subid": 262144,
+    "cost": 400,
+    "xats": 400,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "hush",
+    "description": "Temporarily stop users on a chat from talking so you can make an announcement, up to a maximum 60 seconds. $WIKI.",
+    "subdesc": "Hush a chat",
+    "section": "p1",
+    "subid": 524288,
+    "cost": 25,
+    "xats": 25,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "halloween",
+    "description": "Drop-dead gorgeous Halloween smilies. LIMITED. $WIKI.",
+    "subdesc": "Halloween smilies",
+    "section": "p1",
+    "subid": 1048576,
+    "cost": 667,
+    "xats": 667,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "anime",
+    "description": "Anime smilies, tops, hairstyles and accessories. $WIKI.",
+    "subdesc": "Anime smilies",
+    "section": "p1",
+    "subid": 2097152,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "status",
+    "description": "Show a status message under your name on the user list. $WIKI.",
+    "subdesc": "Status message",
+    "section": "p1",
+    "subid": 4194304,
+    "cost": 400,
+    "xats": 400,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "thanksgiving",
+    "description": "Get your turkey for Thanksgiving! LIMITED. $WIKI.",
+    "subdesc": "Thanksgiving smilies",
+    "section": "p1",
+    "subid": 8388608,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "snowy",
+    "description": "Snowy effects for your smilies and avatar. Additionally, 2 snowy kisses. LIMITED. $WIKI.",
+    "subdesc": "Snowy power",
+    "section": "p1",
+    "subid": 16777216,
+    "cost": 404,
+    "xats": 404,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "christmas",
+    "description": "26 christmas themed smilies and effects. LIMITED. $WIKI.",
+    "subdesc": "Christmas smilies",
+    "section": "p1",
+    "subid": 33554432,
+    "cost": 2290,
+    "xats": 2290,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "count",
+    "description": "Set a countdown to a specific date. This power includes mechanical and LED styles. $WIKI.",
+    "subdesc": "Countdown smilies",
+    "section": "p1",
+    "subid": 67108864,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "stick",
+    "description": "Create your own custom animated stickmen and use it on chat. $WIKI.",
+    "subdesc": "Stickman Animator",
+    "section": "p1",
+    "subid": 134217728,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "dx",
+    "description": "Allows you to convert some of your days to xats. Note when you use the power it goes. <a href=\\\"/DX\\\">Convert now!</a>",
+    "subdesc": "Convert days to xats",
+    "section": "p1",
+    "subid": 268435456,
+    "cost": 7,
+    "xats": 7,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "tempmem",
+    "description": "Promote guests to member for any duration of time, up to 24 hours.  $WIKI.",
+    "subdesc": "Make temporary member",
+    "section": "p1",
+    "subid": 536870912,
+    "cost": 15,
+    "xats": 15,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "valentine",
+    "description": "Valentine smilies, (beat) (bheart) (cupid) (card) (hug2) (hug3) (ilu) (lhand) (ring) (rose) (rose2) (valentine) . $WIKI.",
+    "subdesc": "Valentine smilies",
+    "section": "p1",
+    "subid": 1073741824,
+    "cost": 2900,
+    "xats": 2900,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "blueman",
+    "description": "Turn your pawn dark blue. Must be a guest, member or have Flashrank power enabled for it to be visible. $WIKI.",
+    "subdesc": "Dark blue pawn",
+    "section": "p2",
+    "subid": 1,
+    "cost": 1000,
+    "xats": 1000,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "color"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "color"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "party",
+    "description": "Have a party on xat with some party smilies. $WIKI.",
+    "subdesc": "Party smilies",
+    "section": "p2",
+    "subid": 2,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "irish",
+    "description": "Celebrate St Patricks day with these smilies: (irish) (clover2) (drink) (igirl) (iman) (pot) (rainbow) (shi) (tap). $WIKI.",
+    "subdesc": "irish themed smilies",
+    "section": "p2",
+    "subid": 4,
+    "cost": 800,
+    "xats": 800,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "flashrank",
+    "description": "Makes your pawn fade between the current pawn power you are using and your rank on the chat. $WIKI.",
+    "subdesc": "Flash your pawn",
+    "section": "p2",
+    "subid": 8,
+    "cost": 50,
+    "xats": 50,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "easter",
+    "description": "Hop around xat with some easter-related smilies. LIMITED. $WIKI.",
+    "subdesc": "Easter-themed smilies",
+    "section": "p2",
+    "subid": 16,
+    "cost": 270,
+    "xats": 270,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "nopm",
+    "description": "Blocks private messages from users who you do not have added. Anyone with a higher rank can always PM you. $WIKI.",
+    "subdesc": "Only PM from friends",
+    "section": "p2",
+    "subid": 32,
+    "cost": 150,
+    "xats": 150,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "banish",
+    "description": "Banishes any user that has been banned longer than 1 hour. A banished user will not be able to see messages in the main chat. $WIKI.",
+    "subdesc": "Banish a user",
+    "section": "p2",
+    "subid": 64,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "moderation"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "moderation"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "circus",
+    "description": "Roll up, roll up, the circus is in town. Get your ticket and smilies for the Cirque du xat.  $WIKI.",
+    "subdesc": "Circus smilies",
+    "section": "p2",
+    "subid": 128,
+    "cost": 250,
+    "xats": 250,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "gkaoani",
+    "description": "Assign over 30 gkaoani-style smilies to your group for all users to use.  $WIKI.",
+    "subdesc": "Kaoani group smilies ",
+    "section": "p2",
+    "subid": 256,
+    "cost": 1000,
+    "xats": 1000,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "military",
+    "description": "Salute! Get your military-themed smilies.  LIMITED. $WIKI.",
+    "subdesc": "Military smilies",
+    "section": "p2",
+    "subid": 512,
+    "cost": 594,
+    "xats": 594,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "gline",
+    "description": "Lets chat owners change the smiley line to a set of smilies of their own choice. $WIKI.",
+    "subdesc": "Smiley line",
+    "section": "p2",
+    "subid": 1024,
+    "cost": 900,
+    "xats": 900,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "bump",
+    "description": "Bump is used to draw a friends attention to a private chat tab, by shaking the chat box, playing a sound and turning the padlock red. You can bump friends and if mod or above, people of lower rank.",
+    "subdesc": "Get attention",
+    "section": "p2",
+    "subid": 2048,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "gkaliens",
+    "description": "Use kaoani alien themed smilies on your chat. LIMITED. $WIKI.",
+    "subdesc": "Alien Kaoani smilies",
+    "section": "p2",
+    "subid": 4096,
+    "cost": 3620,
+    "xats": 3620,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "scifi",
+    "description": "Time to live in the xat fantasy world with these science fiction themed smilies. LIMITED. $WIKI.",
+    "subdesc": "Science fiction smilies",
+    "section": "p2",
+    "subid": 8192,
+    "cost": 733,
+    "xats": 733,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "supporter",
+    "description": "Lets you show your support for your favourite chat group. Groups with the most supporters appear on the xat homepage. $WIKI.",
+    "subdesc": "Support a group",
+    "section": "p2",
+    "subid": 16384,
+    "cost": 100,
+    "xats": 100,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "tempown",
+    "description": "Promote a user to owner for any duration of time, up to 24 hours. $WIKI.",
+    "subdesc": "Make a temporary owner",
+    "section": "p2",
+    "subid": 32768,
+    "cost": 25,
+    "xats": 25,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "gcontrol",
+    "description": "Set what rank can promote your chat, can set the scroller, how long mods can ban for and much more. $WIKI.",
+    "subdesc": "Configure your chatroom",
+    "section": "p2",
+    "subid": 65536,
+    "cost": 500,
+    "xats": 500,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "tickle",
+    "description": "Set who can ban who, can set the scroller, how long mods can ban for and much more.",
+    "subdesc": "Tickle",
+    "section": "p2",
+    "subid": 131072,
+    "cost": 0,
+    "xats": 0,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "sea",
+    "description": "Have fun underwater with these sea-themed smilies. $WIKI.",
+    "subdesc": "Sea-themed smilies",
+    "section": "p2",
+    "subid": 262144,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.120Z",
+    "createdAt": "2025-09-05T20:13:49.120Z",
+    "updatedAt": "2025-09-05T20:13:49.120Z"
+  },
+  {
+    "name": "silly",
+    "description": "Silly smilies: (silly) (bonk) (burp) (crazy2) (dopey) (impact) (irked) (itchy) (mischief2) (nose) (raspberry) (rolleye) (spit) (string).  ",
+    "subdesc": "Silly smilies",
+    "section": "p2",
+    "subid": 524288,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "blastpro",
+    "description": "Shows animations when someone on the chat gets promoted in rank. The more Blastpro powers assigned, the more animations unlocked. $WIKI.",
+    "subdesc": "Promotion animations",
+    "section": "p2",
+    "subid": 1048576,
+    "cost": 400,
+    "xats": 400,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "flag",
+    "description": "Over 190 flag animations. Support your team or country. $WIKI.",
+    "subdesc": "Animated Flags",
+    "section": "p2",
+    "subid": 2097152,
+    "cost": 250,
+    "xats": 250,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "blastban",
+    "description": "Shows animations when someone on the chat gets banned. The more Blastban powers assigned, the more animations unlocked. $WIKI.",
+    "subdesc": "Ban animations",
+    "section": "p2",
+    "subid": 4194304,
+    "cost": 500,
+    "xats": 500,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "moderation"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "moderation"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "independence",
+    "description": "Celebrate USA / Independence Day with these smilies. $WIKI.",
+    "subdesc": "independence day smilies",
+    "section": "p2",
+    "subid": 8388608,
+    "cost": 316,
+    "xats": 316,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "blastde",
+    "description": "Shows animations when someone on the chat gets demoted in rank. The more Blastde powers assigned, the more animations unlocked. LIMITED. $WIKI.",
+    "subdesc": "Demotion animations",
+    "section": "p2",
+    "subid": 16777216,
+    "cost": 3080,
+    "xats": 3080,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "summer",
+    "description": "Have fun in the sun with these summer smilies. LIMITED. $WIKI.",
+    "subdesc": "Summer-themed smilies",
+    "section": "p2",
+    "subid": 33554432,
+    "cost": 165,
+    "xats": 165,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "bad",
+    "description": "Allows you to add your own custom bad words to the filter for your chat. Bonus smilies included. $WIKI.",
+    "subdesc": "Custom bad words filter",
+    "section": "p2",
+    "subid": 67108864,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "rapid",
+    "description": "Allows you to carry out various actions such as kicking and banning with one mouse click. $WIKI.",
+    "subdesc": "Rapid actions",
+    "section": "p2",
+    "subid": 134217728,
+    "cost": 20,
+    "xats": 20,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "horror",
+    "description": "Allows you to add flix (animated backgrounds) to your chat. Bonus horror smilies included.  LIMITED. $WIKI.",
+    "subdesc": "Horror flix",
+    "section": "p2",
+    "subid": 268435456,
+    "cost": 340,
+    "xats": 340,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "mint",
+    "description": "Set a minimum transfer amount of xats and days that can be sent to you. Bonus smilies included. $WIKI.",
+    "subdesc": "Minimum transfer",
+    "section": "p2",
+    "subid": 536870912,
+    "cost": 100,
+    "xats": 100,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "blastkick",
+    "description": "Shows animations when someone on the chat gets kicked. The more Blastkick powers assigned, the more animations unlocked. $WIKI.",
+    "subdesc": "Kick animations",
+    "section": "p2",
+    "subid": 1073741824,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "moderation"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "moderation"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "everypower",
+    "description": "",
+    "subdesc": "",
+    "section": "p2",
+    "subid": 2147483648,
+    "cost": 0,
+    "xats": 0,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "epic",
+    "status": "Available",
+    "category": "epic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "winter",
+    "description": "Allows you to add a flix (animated background) to your chat, and also comes with some bonus smilies. $WIKI.",
+    "subdesc": "Winter smilies and flix",
+    "section": "p3",
+    "subid": 1,
+    "cost": 500,
+    "xats": 500,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "adventure",
+    "description": "Explore xat with these adventure-themed smilies. LIMITED. $WIKI.",
+    "subdesc": "Adventure-themed smilies",
+    "section": "p3",
+    "subid": 2,
+    "cost": 1060,
+    "xats": 1060,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "feast",
+    "description": "A feast of over 25 food smilies and up to 4 flix (animated backgrounds). LIMITED. $WIKI.",
+    "subdesc": "Feast smilies and flix",
+    "section": "p3",
+    "subid": 4,
+    "cost": 575,
+    "xats": 575,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "single",
+    "description": "Prevent other users from marrying or BFFing you. Includes broken heart hat: (hat#z). $WIKI.",
+    "subdesc": "Stay single",
+    "section": "p3",
+    "subid": 8,
+    "cost": 150,
+    "xats": 150,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "link",
+    "description": "Create custom links to your chat. $WIKI.",
+    "subdesc": "Custom link words",
+    "section": "p3",
+    "subid": 16,
+    "cost": 400,
+    "xats": 400,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "shocker",
+    "description": "Shocker themed smilies: (duck) (electrocute) (eyepop) (flamed) (lookaround) (scream) (wow) (dazed) (hazey) (drool) (footmouth) (mindblow) (misspeak) (relieved) (uvula) (arc) LIMITED.",
+    "subdesc": "Shocker smilies",
+    "section": "p3",
+    "subid": 32,
+    "cost": 1040,
+    "xats": 1040,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "fairy",
+    "description": "Fairy flix (animated backgrounds) and smilies.  LIMITED. $WIKI.",
+    "subdesc": "Fairy flix and smilies",
+    "section": "p3",
+    "subid": 64,
+    "cost": 3860,
+    "xats": 3860,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "namecolor",
+    "description": "Color your name on the chat box. Nameglow is needed for this power to function.  $WIKI.",
+    "subdesc": "Color your name",
+    "section": "p3",
+    "subid": 128,
+    "cost": 10000,
+    "xats": 10000,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": true,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "epic",
+    "status": "Available",
+    "category": "epic",
+    "effects": [
+      "color"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "color"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "gkbear",
+    "description": "Cute bear smilies for your chat. LIMITED. $WIKI.",
+    "subdesc": "Kaoani bear smilies",
+    "section": "p3",
+    "subid": 256,
+    "cost": 660,
+    "xats": 660,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "angry",
+    "description": "Dont get upset, get the angry power and vent your frustration with these smilies. LIMITED. $WIKI",
+    "subdesc": "Angry smilies",
+    "section": "p3",
+    "subid": 512,
+    "cost": 4430,
+    "xats": 4430,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "gscol",
+    "description": "Change the default color of all of the smilies posted in your chat. $WIKI.",
+    "subdesc": "Default smiley color",
+    "section": "p3",
+    "subid": 1024,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "ugly",
+    "description": "Be different with these ugly style smilies. LIMITED. $WIKI.",
+    "subdesc": "Ugly smilies",
+    "section": "p3",
+    "subid": 2048,
+    "cost": 387,
+    "xats": 387,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "smiley",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "love",
+    "description": "Love smilies and flix (animated backgrounds) for groups. $WIKI.",
+    "subdesc": "Love smilies and flix",
+    "section": "p3",
+    "subid": 4096,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "barge",
+    "description": "Allows owners and mods to move into full pools by barging another user out. $WIKI.",
+    "subdesc": "Barge into pool",
+    "section": "p3",
+    "subid": 8192,
+    "cost": 20,
+    "xats": 20,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "gkkitty",
+    "description": "Kitty-themed smilies for your chat. LIMITED. $WIKI.",
+    "subdesc": "Kaoani kitty smilies",
+    "section": "p3",
+    "subid": 16384,
+    "cost": 416,
+    "xats": 416,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "fantasy",
+    "description": "These smilies are living in the fantasy world. $WIKI.",
+    "subdesc": "Fantasy smilies",
+    "section": "p3",
+    "subid": 32768,
+    "cost": 250,
+    "xats": 250,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "announce",
+    "description": "Create a custom welcome message that will be sent to all users that enter your chat. $WIKI.",
+    "subdesc": "Custom message",
+    "section": "p3",
+    "subid": 65536,
+    "cost": 2000,
+    "xats": 2000,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "hero",
+    "description": "Be the next xat superhero! LIMITED. $WIKI.",
+    "subdesc": "Heroic smilies",
+    "section": "p3",
+    "subid": 131072,
+    "cost": 562,
+    "xats": 562,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "rankpool",
+    "description": "Create a private pool for the rank of your choice. You are able to edit the names of the first two pools as well. $WIKI.",
+    "subdesc": "Private pool for your chat",
+    "section": "p3",
+    "subid": 262144,
+    "cost": 800,
+    "xats": 800,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "group"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "group"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "spin",
+    "description": "Make your smilies spin 360 degrees, in a clockwise or counter-clockwise direction. $WIKI.",
+    "subdesc": "Spin your smilies",
+    "section": "p3",
+    "subid": 524288,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "animal",
+    "description": "Smilies of animals. ",
+    "subdesc": "Animal smilies",
+    "section": "p3",
+    "subid": 1048576,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "music",
+    "description": "Use the side app to make smilies that play music.",
+    "subdesc": "Smilies that play music",
+    "section": "p3",
+    "subid": 2097152,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "gkpanda",
+    "description": "Panda smilies for your chat. LIMITED. $WIKI.",
+    "subdesc": "Kaoani panda smilies",
+    "section": "p3",
+    "subid": 4194304,
+    "cost": 798,
+    "xats": 798,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "unwell",
+    "description": "Unwell themed smilies. N.B. price will decrease over time. LIMITED.",
+    "subdesc": "Sickly smilies",
+    "section": "p3",
+    "subid": 8388608,
+    "cost": 351,
+    "xats": 351,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "events",
+    "description": "See the log of recent actions such as kicking and banning on a chat. $WIKI.",
+    "subdesc": "View chat events",
+    "section": "p3",
+    "subid": 16777216,
+    "cost": 20,
+    "xats": 20,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "zap",
+    "description": "Kick a user and make their chat shake with a sound of your choice. $WIKI.",
+    "subdesc": "Kick with a shake",
+    "section": "p3",
+    "subid": 33554432,
+    "cost": 10,
+    "xats": 10,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "sins",
+    "description": "Which of the seven deadly sins smilies are you? LIMITED. $WIKI.",
+    "subdesc": "Deadly sins smilies",
+    "section": "p3",
+    "subid": 67108864,
+    "cost": 1520,
+    "xats": 1520,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "smiley",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "outfit",
+    "description": "Time to get dressed up! LIMITED. $WIKI.",
+    "subdesc": "Smiley outfits",
+    "section": "p3",
+    "subid": 134217728,
+    "cost": 841,
+    "xats": 841,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "wildwest",
+    "description": "Wild west smilies and two western kisses. LIMITED. $WIKI.",
+    "subdesc": "Western smilies",
+    "section": "p3",
+    "subid": 268435456,
+    "cost": 731,
+    "xats": 731,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "work",
+    "description": "Celebrate work day with this power. Work hard, smile harder. LIMITED. $WIKI.",
+    "subdesc": "Worker smilies",
+    "section": "p3",
+    "subid": 536870912,
+    "cost": 236,
+    "xats": 236,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "banpool",
+    "description": "Create a brown colored pool for banned users. Rankpool is also required to use this power.  $WIKI.",
+    "subdesc": "Pool for banned users",
+    "section": "p3",
+    "subid": 1073741824,
+    "cost": 15,
+    "xats": 15,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "moderation",
+      "group"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "moderation",
+      "group"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "beach",
+    "description": "Fun beach smilies in time for the summer.  LIMITED. $WIKI.",
+    "subdesc": "Fun on the beach",
+    "section": "p4",
+    "subid": 1,
+    "cost": 250,
+    "xats": 250,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": true,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "candy",
+    "description": "Candy-themed smilies including two backs and two hands.  LIMITED. $WIKI.",
+    "subdesc": "Sweet smilies",
+    "section": "p4",
+    "subid": 2,
+    "cost": 454,
+    "xats": 454,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "gback",
+    "description": "Set a default smiley back on your chat. $WIKI.",
+    "subdesc": "Group smiley backs",
+    "section": "p4",
+    "subid": 4,
+    "cost": 15000,
+    "xats": 15000,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": true,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "epic",
+    "status": "Available",
+    "category": "epic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "zodiac",
+    "description": "Which zodiac sign are you? $WIKI.",
+    "subdesc": "Zodiac smilies",
+    "section": "p4",
+    "subid": 8,
+    "cost": 250,
+    "xats": 250,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "flower",
+    "description": "(Flower) can be used as back. (fangry) (fcry) (fcool) (feek) (fconfused) (ftongue) (fredface) (fcrying) (fsleepy) (fbiggrin) (fsad) (fwink)",
+    "subdesc": "Flower themed smilies",
+    "section": "p4",
+    "subid": 16,
+    "cost": 1210,
+    "xats": 1210,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "smiley",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "space",
+    "description": "Ten space themed smilies and a kiss.",
+    "subdesc": "Space age smilies",
+    "section": "p4",
+    "subid": 32,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "snakeban",
+    "description": "Ban a user so that they are required to complete a snake themed mini-game to be unbanned. $WIKI.",
+    "subdesc": "Snake ban",
+    "section": "p4",
+    "subid": 64,
+    "cost": 600,
+    "xats": 600,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "moderation"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "moderation"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "stoneage",
+    "description": "Prehistoric and caveman smilies. A Stoneage kiss is included. LIMITED. $WIKI.",
+    "subdesc": "Stoneage smilies",
+    "section": "p4",
+    "subid": 128,
+    "cost": 77,
+    "xats": 77,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": true,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "spaceban",
+    "description": "Ban a user so that they are required to complete a space themed mini-game to be unbanned. LIMITED. $WIKI.",
+    "subdesc": "Space ban",
+    "section": "p4",
+    "subid": 256,
+    "cost": 1130,
+    "xats": 1130,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "moderation"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "moderation"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "dance",
+    "description": "Get your groove on with these dance-themed smilies. $WIKI.",
+    "subdesc": "Dancing smilies",
+    "section": "p4",
+    "subid": 512,
+    "cost": 150,
+    "xats": 150,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "kpeng",
+    "description": "Waddle around the chat with these kaoani penguin smilies. $WIKI.",
+    "subdesc": "Penguin smilies",
+    "section": "p4",
+    "subid": 1024,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "nerd",
+    "description": "Nerd smilies for all you geeks. LIMITED. $WIKI.",
+    "subdesc": "Nerd smilies",
+    "section": "p4",
+    "subid": 2048,
+    "cost": 218,
+    "xats": 218,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "matchban",
+    "description": "Ban a user so that they are required to complete a matching themed mini-game to be unbanned. LIMITED. $WIKI.",
+    "subdesc": "Match ban",
+    "section": "p4",
+    "subid": 4096,
+    "cost": 1270,
+    "xats": 1270,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "moderation"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "moderation"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "school",
+    "description": "Smilies for the classroom. LIMITED. $WIKI.",
+    "subdesc": "School smilies",
+    "section": "p4",
+    "subid": 8192,
+    "cost": 132,
+    "xats": 132,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": true,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "silentm",
+    "description": "Make a member without the message popping up in the chat. Owners only unless changed by gcontrol. $WIKI.",
+    "subdesc": "Silent member",
+    "section": "p4",
+    "subid": 16384,
+    "cost": 20,
+    "xats": 20,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "punch",
+    "description": "Block all the punches. $WIKI.",
+    "subdesc": "Punching bag smilies",
+    "section": "p4",
+    "subid": 32768,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "smiley",
+    "status": "Available",
+    "category": "effects",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "away",
+    "description": "Let other users know that you are away from the chatroom with an automatic away icon on your pawn. $WIKI.",
+    "subdesc": "Away from chat",
+    "section": "p4",
+    "subid": 65536,
+    "cost": 100,
+    "xats": 100,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "peace",
+    "description": "Get your hippie on! $WIKI.",
+    "subdesc": "Peace-themed smilies",
+    "section": "p4",
+    "subid": 131072,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "kchick",
+    "description": "These smilies are tres chick! LIMITED. $WIKI.",
+    "subdesc": "Chick smilies",
+    "section": "p4",
+    "subid": 262144,
+    "cost": 506,
+    "xats": 506,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "carve",
+    "description": "Show off your carved pumpkins! LIMITED. $WIKI.",
+    "subdesc": "Carved pumpkin smilies",
+    "section": "p4",
+    "subid": 524288,
+    "cost": 268,
+    "xats": 268,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "spooky",
+    "description": "Scare your friends with spooky smilies and flix animations.  LIMITED. $WIKI.",
+    "subdesc": "Spooky power",
+    "section": "p4",
+    "subid": 1048576,
+    "cost": 334,
+    "xats": 334,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "kdog",
+    "description": "Woof woof! Cute kaoani dog smilies. LIMITED. $WIKI.",
+    "subdesc": "Kaoani dog smilies",
+    "section": "p4",
+    "subid": 2097152,
+    "cost": 223,
+    "xats": 223,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "bot",
+    "description": "Allow a bot to access your group plus bonus smilies. $WIKI.",
+    "subdesc": "Add a bot to your chat",
+    "section": "p4",
+    "subid": 4194304,
+    "cost": 1000,
+    "xats": 1000,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "manga",
+    "description": "Over 15 manga-themed smilies. LIMITED. $WIKI.",
+    "subdesc": "Manga smilies",
+    "section": "p4",
+    "subid": 8388608,
+    "cost": 1870,
+    "xats": 1870,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "mazeban",
+    "description": "Ban a user so that they are required to complete a maze to be unbanned. $WIKI.",
+    "subdesc": "Maze ban",
+    "section": "p4",
+    "subid": 16777216,
+    "cost": 400,
+    "xats": 400,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "moderation"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "moderation"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "gold",
+    "description": "Gold pawn plus bonus smilies. LIMITED. $WIKI.",
+    "subdesc": "Gold pawn",
+    "section": "p4",
+    "subid": 33554432,
+    "cost": 500,
+    "xats": 500,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": true,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "epic",
+    "status": "Available",
+    "category": "epic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "snowman",
+    "description": "Build your snowman! LIMITED. $WIKI.",
+    "subdesc": "Snowman smilies",
+    "section": "p4",
+    "subid": 67108864,
+    "cost": 148,
+    "xats": 148,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "reindeer",
+    "description": "Reindeer smilies (reindeer)  (resurprised)  (resmirk)  (resleepy)  (resad)  (reredface)  (relaugh)  ...",
+    "subdesc": "Reindeer smilies",
+    "section": "p4",
+    "subid": 134217728,
+    "cost": 110,
+    "xats": 110,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": true,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "santa",
+    "description": "Ho ho ho! Santa flix (animated backgrounds) and smilies. $WIKI.",
+    "subdesc": "Santa flix and smilies",
+    "section": "p4",
+    "subid": 268435456,
+    "cost": 300,
+    "xats": 300,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "sparta",
+    "description": "This is Sparta! LIMITED. $WIKI.",
+    "subdesc": "Spartan smilies",
+    "section": "p4",
+    "subid": 536870912,
+    "cost": 125,
+    "xats": 125,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": true,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "dunce",
+    "description": "Dunce your friends. Add a dunce cap to their pawn.  $WIKI.",
+    "subdesc": "Dunce power",
+    "section": "p4",
+    "subid": 1073741824,
+    "cost": 250,
+    "xats": 250,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "newyear",
+    "description": "Smilies to help bring in the new year. LIMITED. $WIKI.",
+    "subdesc": "New year smilies",
+    "section": "p5",
+    "subid": 1,
+    "cost": 552,
+    "xats": 552,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "can",
+    "description": "Can-themed smilies. Companion power to Punch power. LIMITED. $WIKI.",
+    "subdesc": "Can smilies",
+    "section": "p5",
+    "subid": 2,
+    "cost": 125,
+    "xats": 125,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": true,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "smiley",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "codeban",
+    "description": "Ban a user so that they are required to complete a code themed mini-game to be unbanned. $WIKI.",
+    "subdesc": "Code Ban",
+    "section": "p5",
+    "subid": 4,
+    "cost": 250,
+    "xats": 250,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "moderation"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "moderation"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "magicfx",
+    "description": "Add glowing effects to any smiley with custom colors! $WIKI.",
+    "subdesc": "Magical effect",
+    "section": "p5",
+    "subid": 8,
+    "cost": 111,
+    "xats": 111,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": true,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "fx",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "effects"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "effects"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "spy",
+    "description": "Turn on the radar, look through the keyhole. With the right espionage methods, you can make the best smilies. LIMITED. $WIKI.",
+    "subdesc": "Spy smilies",
+    "section": "p5",
+    "subid": 16,
+    "cost": 193,
+    "xats": 193,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "kduck",
+    "description": "Quack quack! 13 duck smilies and one back. LIMITED. $WIKI.",
+    "subdesc": "Duck smilies",
+    "section": "p5",
+    "subid": 32,
+    "cost": 789,
+    "xats": 789,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "heartfx",
+    "description": "Add heart-styled glowing effects to smilies. $WIKI.",
+    "subdesc": "Heart FXs",
+    "section": "p5",
+    "subid": 64,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "effects"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "effects"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "carnival",
+    "description": "Get in the carnival spirit! LIMITED. $WIKI.",
+    "subdesc": "Carnival-themed smilies",
+    "section": "p5",
+    "subid": 128,
+    "cost": 275,
+    "xats": 275,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": true,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "topspin",
+    "description": "Add a spin to top and backgrounds of smilies. $WIKI",
+    "subdesc": "Topspin effect",
+    "section": "p5",
+    "subid": 256,
+    "cost": 250,
+    "xats": 250,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "movie",
+    "description": "Lights, camera, action! Welcome to the film industry. LIMITED. $WIKI.",
+    "subdesc": "Movie-themed smilies",
+    "section": "p5",
+    "subid": 512,
+    "cost": 141,
+    "xats": 141,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": true,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "monster",
+    "description": "This power is monstrous! $WIKI.",
+    "subdesc": "Monster smilies",
+    "section": "p5",
+    "subid": 1024,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "smiley",
+    "status": "Available",
+    "category": "effects",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "kat",
+    "description": "The kat is out of the bag LIMITED. $WIKI.",
+    "subdesc": "Kat smilies",
+    "section": "p5",
+    "subid": 2048,
+    "cost": 645,
+    "xats": 645,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "typing",
+    "description": "Show you are typing a message. $WIKI",
+    "subdesc": "Show typing",
+    "section": "p5",
+    "subid": 4096,
+    "cost": 100,
+    "xats": 100,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "utility",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "ksheep",
+    "description": "Baa! Kaoani sheep smilies. LIMITED. $WIKI.",
+    "subdesc": "Sheep smilies",
+    "section": "p5",
+    "subid": 8192,
+    "cost": 175,
+    "xats": 175,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "pulsefx",
+    "description": "Add pulse-styled glowing effects to smilies LIMITED. $WIKI.",
+    "subdesc": "Pulse effect",
+    "section": "p5",
+    "subid": 16384,
+    "cost": 766,
+    "xats": 766,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "fx",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "effects"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "effects"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "blobby",
+    "description": "Feel blobby with these blob-themed smilies. LIMITED. $WIKI.",
+    "subdesc": "Blobby smilies",
+    "section": "p5",
+    "subid": 32768,
+    "cost": 138,
+    "xats": 138,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": true,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "smiley",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "reverse",
+    "description": "Cause a users words to be reversed. $WIKI.",
+    "subdesc": "Reverse ban",
+    "section": "p5",
+    "subid": 65536,
+    "cost": 200,
+    "xats": 200,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "fuzzy",
+    "description": "Feel fuzzier with these fuzzy monster smilies. LIMITED. $WIKI.",
+    "subdesc": "Fuzzy smilies",
+    "section": "p5",
+    "subid": 131072,
+    "cost": 324,
+    "xats": 324,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "smiley",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "spiralfx",
+    "description": "Add spiral effects to smilies. $WIKI.",
+    "subdesc": "Spiral effects",
+    "section": "p5",
+    "subid": 262144,
+    "cost": 222,
+    "xats": 222,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "fx",
+    "status": "Available",
+    "category": "effects",
+    "effects": [
+      "effects"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "effects"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "nursing",
+    "description": "Nursing smilies for nursing week. LIMITED. $WIKI.",
+    "subdesc": "Nursing smilies",
+    "section": "p5",
+    "subid": 524288,
+    "cost": 115,
+    "xats": 115,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "gsound",
+    "description": "Change the sounds on your group.  $WIKI.",
+    "subdesc": "Group sounds",
+    "section": "p5",
+    "subid": 1048576,
+    "cost": 20,
+    "xats": 20,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": true,
+    "newpower": false,
+    "type": "function",
+    "status": "Available",
+    "category": "group",
+    "effects": [
+      "sound"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "sound"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "kbee",
+    "description": "Buzz around with these smilies. LIMITED. $WIKI.",
+    "subdesc": "Kaoani bee smilies",
+    "section": "p5",
+    "subid": 2097152,
+    "cost": 409,
+    "xats": 409,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "utility",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "vortexfx",
+    "description": "Add vortex effects to smilies. LIMITED. $WIKI.",
+    "subdesc": "Vortex effects",
+    "section": "p5",
+    "subid": 4194304,
+    "cost": 764,
+    "xats": 764,
+    "days": 0,
+    "limited": true,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "fx",
+    "status": "Available",
+    "category": "legendary",
+    "effects": [
+      "effects"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "effects"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  },
+  {
+    "name": "jail",
+    "description": "Lock up your smilies. $WIKI.",
+    "subdesc": "Jail smilies",
+    "section": "p5",
+    "subid": 8388608,
+    "cost": 190,
+    "xats": 190,
+    "days": 0,
+    "limited": false,
+    "amount": -1,
+    "allpowers": false,
+    "epic": false,
+    "game": false,
+    "group": false,
+    "newpower": false,
+    "type": "yellow",
+    "status": "Available",
+    "category": "basic",
+    "effects": [
+      "utility"
+    ],
+    "cooldowns": {
+      "personal": 0,
+      "global": 0
+    },
+    "smileys": [],
+    "requirements": {
+      "rank": "guest",
+      "minRank": "guest",
+      "minXats": 0,
+      "minDays": 0
+    },
+    "cooldown": 0,
+    "maxUses": -1,
+    "tags": [
+      "utility"
+    ],
+    "endDate": null,
+    "totalSold": 0,
+    "totalUsed": 0,
+    "wiki": "",
+    "help": "",
+    "releaseDate": "2025-09-05T20:13:49.121Z",
+    "createdAt": "2025-09-05T20:13:49.121Z",
+    "updatedAt": "2025-09-05T20:13:49.121Z"
+  }
+]

@@ -1,0 +1,328 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/consolidated.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xat.com - Authentic Recreation</title>
+    <link rel="stylesheet" href="/css/authentic-xat.css">
+</head>
+<body>
+    <!-- AUTHENTIC xat.com HEADER (exactly like original) -->
+    <div id="header">
+        <div class="wrap0">
+            <a href="/">Home</a>
+            <a href="/chat">Chat</a>
+            <a href="/groups">Groups</a>
+            <a href="/powers">Powers</a>
+            <div class="profile myprofile">
+                <span class="hoverxats">0</span> xats
+                <div class="hoverprofile">
+                    <div>Xats: <span class="hoverxats">0</span></div>
+                    <div>Days: <span class="hoverdays">0</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUTHENTIC xat.com CHAT LAYOUT - 2 PANEL DESIGN -->
+    <div class="wrap1">
+        <!-- Main Chat Container with 2 panels side by side -->
+        <div id="mainChatContainer" style="width:1000px; height:486px; margin:20px auto; display:flex; background:#000000; border:2px solid #333333;">
+            
+            <!-- LEFT PANEL: Chat Area -->
+            <div id="chatPanel" style="width:728px; height:486px; background:#000000; border-right:2px solid #333333;">
+                
+                <!-- Chat Header -->
+                <div style="height:30px; background:#16213e; border-bottom:1px solid #533483; padding:5px;">
+                    <div style="float:left; color:#ffffff; font-family:Arial; font-size:13px;">
+                        xat.com - Main Chat
+                    </div>
+                    <div style="float:right; color:#ffffff; font-family:Arial; font-size:11px;">
+                        <span id="userCount">0 users</span>
+                    </div>
+                </div>
+
+                <!-- Chat Messages Area -->
+                <div id="chatMessages" style="height:350px; overflow-y:auto; background:#000000; padding:10px;">
+                    <div class="message" style="color:#ffffff; font-family:Arial; font-size:12px; margin-bottom:5px;">
+                        <span style="color:#fed327;">System:</span> Welcome to xat.com! Type /help for commands.
+                    </div>
+                </div>
+
+                <!-- Smiley Bar -->
+                <div id="smileyBar" style="height:40px; background:#16213e; border-top:1px solid #533483; padding:5px;">
+                    <span class="smiley" onclick="insertSmiley('ðŸ˜³')" title="Wide-eyed">ðŸ˜³</span>
+                    <span class="smiley" onclick="insertSmiley('ðŸ˜')" title="Grinning">ðŸ˜</span>
+                    <span class="smiley" onclick="insertSmiley('ðŸ˜‰')" title="Winking">ðŸ˜‰</span>
+                    <span class="smiley" onclick="insertSmiley('ðŸ˜®')" title="Surprised">ðŸ˜®</span>
+                    <span class="smiley" onclick="insertSmiley('ðŸ˜›')" title="Tongue out">ðŸ˜›</span>
+                    <span class="smiley" onclick="insertSmiley('ðŸ˜Ž')" title="Cool">ðŸ˜Ž</span>
+                    <span class="smiley" onclick="insertSmiley('ðŸ˜ ')" title="Angry">ðŸ˜ </span>
+                    <span class="smiley" onclick="insertSmiley('ðŸ˜•')" title="Confused">ðŸ˜•</span>
+                    <span class="smiley" onclick="insertSmiley('ðŸ˜Ÿ')" title="Worried">ðŸ˜Ÿ</span>
+                    <span class="smiley" onclick="insertSmiley('ðŸ˜¢')" title="Sad">ðŸ˜¢</span>
+                    <span class="smiley" onclick="insertSmiley('ðŸ˜­')" title="Crying">ðŸ˜­</span>
+                    <span class="smiley" onclick="insertSmiley('ðŸ˜Œ')" title="Content">ðŸ˜Œ</span>
+                    <span class="smiley" onclick="insertSmiley('â¤ï¸')" title="Heart">â¤ï¸</span>
+                    <span class="smiley" onclick="insertSmiley('ðŸ‘')" title="Thumbs up">ðŸ‘</span>
+                    <span class="smiley" onclick="insertSmiley('ðŸ‘Ž')" title="Thumbs down">ðŸ‘Ž</span>
+                </div>
+
+                <!-- Chat Input -->
+                <div style="height:40px; background:#16213e; border-top:1px solid #533483; padding:8px;">
+                    <input type="text" id="messageInput" placeholder="Type your message..." style="width:600px; height:24px; background:#000000; border:1px solid #533483; color:#ffffff; font-family:Arial; font-size:12px; padding:2px 5px;">
+                    <button onclick="sendMessage()" style="width:80px; height:24px; background:#fed327; border:1px solid #533483; color:#000000; font-family:Arial; font-size:11px; cursor:pointer;">Send</button>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL: User List -->
+            <div id="userListPanel" style="width:270px; height:486px; background:#000000;">
+                
+                <!-- User List Header -->
+                <div style="height:30px; background:#16213e; border-bottom:1px solid #533483; padding:5px;">
+                    <div style="color:#ffffff; font-family:Arial; font-size:13px;">
+                        Users Online
+                    </div>
+                </div>
+
+                <!-- User List Content -->
+                <div id="users" style="height:456px; overflow-y:auto; background:#000000; padding:5px;">
+                    <div style="color:#cccccc; font-family:Arial; font-size:11px; text-align:center; margin-top:20px;">
+                        No users online
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUTHENTIC xat.com FOOTER -->
+    <div style="text-align:center; margin:20px; color:#666666; font-family:Arial; font-size:11px;">
+        xat.com - The original chat experience since 2007
+    </div>
+
+    <!-- Loading Overlay (exactly like original) -->
+    <div id="loading" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.75); z-index:9999;">
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#ffffff; font-family:Arial; font-size:14px;">
+            Loading...
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <!-- Integrated Modules -->
+    <script src="js/xconst.js"></script>
+    <script src="js/DOMUtils.js"></script>
+    <script src="js/LanguageManager.js"></script>
+    <script src="js/SettingsManager.js"></script>
+    <script src="js/PowerManager.js"></script>
+    <script src="js/UIComponents.js"></script>
+    <script src="js/MediaPlayer.js"></script>
+    <script src="js/KissEffectsSystem.js"></script>
+    <script src="js/BlastEffectsSystem.js"></script>
+    <script src="js/VisitorsManager.js"></script>
+    <script src="js/TranslatorManager.js"></script>
+    <script src="js/StoreManager.js"></script>
+    <script src="js/SmiliesManager.js"></script>
+    <script src="js/SettingsPageManager.js"></script>
+    <script src="js/SortableManager.js"></script>
+    <script src="js/SelectorManager.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        let socket;
+        let currentUser = null;
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('ðŸš€ [AUTHENTIC XAT] Loading authentic xat.com interface...');
+
+            // Connect to server
+            socket = io();
+
+            socket.on('connect', () => {
+                console.log('ðŸ”Œ [AUTHENTIC XAT] Connected to server');
+
+                // Auto-join as guest (authentic xat behavior)
+                authenticateAsGuest();
+            });
+
+            socket.on('authenticated', (data) => {
+                console.log('ðŸ” [AUTHENTIC XAT] Authenticated:', data);
+                if (data.user) {
+                    currentUser = data.user;
+                    updateUI();
+                }
+                // Auto-join main chat (authentic xat behavior)
+                joinMainChat();
+            });
+
+            socket.on('roomJoined', (data) => {
+                console.log('ðŸšª [AUTHENTIC XAT] Joined room:', data.room.name);
+                document.querySelector('#chatContainer .chat-header').textContent = `xat.com - ${data.room.name}`;
+            });
+
+            socket.on('userList', (data) => {
+                console.log('ðŸ‘¥ [AUTHENTIC XAT] User list received:', data.users.length, 'users');
+                displayUsers(data.users);
+            });
+
+            socket.on('userJoined', (data) => {
+                console.log('ðŸ‘‹ [AUTHENTIC XAT] User joined:', data.nickname);
+                addSystemMessage(`${data.nickname} joined the chat`);
+                updateUserCount();
+            });
+
+            socket.on('userLeft', (data) => {
+                console.log('ðŸ‘‹ [AUTHENTIC XAT] User left:', data.nickname);
+                addSystemMessage(`${data.nickname} left the chat`);
+                updateUserCount();
+            });
+
+            socket.on('message', (data) => {
+                console.log('ðŸ’¬ [AUTHENTIC XAT] Message received:', data);
+                addMessage(data.user.nickname, data.message, data.timestamp);
+            });
+
+            socket.on('disconnect', () => {
+                console.log('ðŸ”Œ [AUTHENTIC XAT] Disconnected from server');
+                addSystemMessage('Disconnected from server');
+            });
+
+            socket.on('error', (data) => {
+                console.error('âŒ [AUTHENTIC XAT] Error:', data);
+                addSystemMessage(`Error: ${data.message}`);
+            });
+        });
+
+        function authenticateAsGuest() {
+            const guestName = `Guest${Math.floor(Math.random() * 1000)}`;
+            console.log('ðŸ‘¤ [AUTHENTIC XAT] Authenticating as guest:', guestName);
+            socket.emit('authenticate', {
+                guest: true,
+                nickname: guestName
+            });
+        }
+
+        function joinMainChat() {
+            console.log('ðŸšª [AUTHENTIC XAT] Joining main chat (authentic xat behavior)');
+            if (socket && socket.connected) {
+                socket.emit('joinRoom', { roomName: 'Main Chat' });
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+
+            if (message && socket) {
+                socket.emit('message', { message: message });
+                input.value = '';
+
+                // Add own message to chat (authentic xat behavior)
+                if (currentUser) {
+                    addMessage(currentUser.nickname, message, Date.now());
+                }
+            }
+        }
+
+        function insertSmiley(smiley) {
+            const input = document.getElementById('messageInput');
+            input.value += smiley;
+            input.focus();
+        }
+
+        function addMessage(username, message, timestamp) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            messageDiv.style.cssText = 'color:#ffffff; font-family:Arial; font-size:12px; margin-bottom:3px; line-height:14px;';
+
+            const time = timestamp ? new Date(timestamp).toLocaleTimeString() : '';
+            messageDiv.innerHTML = `<span style="color:#fed327;">${username}:</span> ${message} <span style="color:#666666; font-size:10px;">${time}</span>`;
+
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addSystemMessage(message) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            messageDiv.style.cssText = 'color:#fed327; font-family:Arial; font-size:11px; margin-bottom:3px; font-style:italic;';
+
+            messageDiv.innerHTML = `*** ${message} ***`;
+
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function displayUsers(userList) {
+            const usersContainer = document.getElementById('users');
+            usersContainer.innerHTML = '';
+
+            userList.forEach(user => {
+                const userDiv = document.createElement('div');
+                userDiv.style.cssText = 'color:#ffffff; font-family:Arial; font-size:11px; margin-bottom:2px; padding:2px; cursor:pointer;';
+                userDiv.textContent = user.nickname || user.username || 'Unknown';
+
+                // Add rank indicator (authentic xat style)
+                if (user.rank === 9) {
+                    userDiv.style.color = '#fed327'; // Main Owner - gold
+                } else if (user.rank === 4) {
+                    userDiv.style.color = '#e74c3c'; // Owner - red
+                } else if (user.rank === 3) {
+                    userDiv.style.color = '#3498db'; // Moderator - blue
+                } else if (user.rank === 2) {
+                    userDiv.style.color = '#27ae60'; // Member - green
+                } else {
+                    userDiv.style.color = '#ffffff'; // Guest - white
+                }
+
+                userDiv.onclick = () => showUserProfile(user);
+                usersContainer.appendChild(userDiv);
+            });
+
+            updateUserCount();
+        }
+
+        function updateUserCount() {
+            const usersContainer = document.getElementById('users');
+            const count = usersContainer.children.length;
+            document.getElementById('userCount').textContent = `${count} users`;
+        }
+
+        function showUserProfile(user) {
+            // Simple profile display (authentic xat style)
+            alert(`${user.nickname || user.username}\nRank: ${getRankName(user.rank)}\nXats: ${user.xats || 0}\nDays: ${user.days || 0}`);
+        }
+
+        function getRankName(rank) {
+            const ranks = {
+                9: 'Main Owner',
+                4: 'Owner',
+                3: 'Moderator',
+                2: 'Member',
+                1: 'Guest'
+            };
+            return ranks[rank] || 'Guest';
+        }
+
+        function updateUI() {
+            if (currentUser) {
+                // Update header with user info
+                document.querySelector('.hoverxats').textContent = currentUser.xats || 0;
+                document.querySelector('.hoverdays').textContent = currentUser.days || 0;
+            }
+        }
+
+        // Handle Enter key in message input
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        console.log('âœ… [AUTHENTIC XAT] Authentic xat.com interface loaded');
+    </script>
+</body>
+</html>

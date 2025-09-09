@@ -1,0 +1,168 @@
+<!-- Quickbar Toggle -->
+<div class="quickbar-toggle" id="quickbarToggle">‹</div>
+
+<!-- Quickbar -->
+<div class="quickbar" id="quickbar">
+    <div style="padding: 20px;">
+        <h3 style="color: white; margin-bottom: 20px;">Quickbar</h3>
+        
+        <!-- Quickbar Menu Items -->
+        <div class="quickbar-menu">
+            <div class="quickbar-item" data-section="favorites">
+                <img src="/www/svg/makefav.svg" alt="favorite" width="14" style="margin-right: 8px;">
+                <span>Favorites</span>
+            </div>
+            <div class="quickbar-item" data-section="smilies">
+                <span style="margin-right: 8px;">😊</span>
+                <span>Smilies</span>
+            </div>
+            <div class="quickbar-item" data-section="gifs">
+                <span style="margin-right: 8px;">🎬</span>
+                <span>GIFs</span>
+            </div>
+            <div class="quickbar-item" data-section="ignored">
+                <span style="margin-right: 8px;">👤</span>
+                <span>Ignored Users</span>
+            </div>
+            <div class="quickbar-item" data-section="blocked">
+                <span style="margin-right: 8px;">🚫</span>
+                <span>Blocked Users</span>
+            </div>
+            <div class="quickbar-item" data-section="vote">
+                <span style="margin-right: 8px;">📊</span>
+                <span>Vote</span>
+            </div>
+        </div>
+        
+        <!-- Quickbar Content Sections -->
+        <div class="quickbar-content">
+            <!-- Favorites Section -->
+            <div class="quickbar-section active" id="favorites-section">
+                <h4 style="color: white; margin-bottom: 15px;">⭐ Favorites</h4>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button class="action-button" id="openProfileBtn">👤 Profile</button>
+                    <button class="action-button" id="toggleVisitorsBtn">👥 Toggle Visitors</button>
+                    <button class="action-button" id="toggleNightModeBtn">🌙 Night Mode</button>
+                    <button class="action-button" id="openTranslatorBtn">🌐 Translator</button>
+                    <button class="action-button" id="showGroupPowersBtn">⚡ Group Powers</button>
+                    <button class="action-button" id="startVoteBtn">📊 Start Vote</button>
+                    <button class="action-button" id="openSettingsBtn">⚙️ Settings</button>
+                </div>
+            </div>
+            
+            <!-- Smilies Section -->
+            <div class="quickbar-section d-none" id="smilies-section">
+                <h4 style="color: white; margin-bottom: 15px;">😊 Smilies</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; max-height: 300px; overflow-y: auto;">
+                    <span class="smiley">😀</span>
+                    <span class="smiley">😃</span>
+                    <span class="smiley">😄</span>
+                    <span class="smiley">😁</span>
+                    <span class="smiley">😆</span>
+                    <span class="smiley">😅</span>
+                    <span class="smiley">😂</span>
+                    <span class="smiley">🤣</span>
+                    <span class="smiley">😊</span>
+                    <span class="smiley">😇</span>
+                    <span class="smiley">🙂</span>
+                    <span class="smiley">🙃</span>
+                    <span class="smiley">😉</span>
+                    <span class="smiley">😌</span>
+                    <span class="smiley">😍</span>
+                    <span class="smiley">🥰</span>
+                    <span class="smiley">😘</span>
+                    <span class="smiley">😗</span>
+                    <span class="smiley">😙</span>
+                    <span class="smiley">😚</span>
+                    <span class="smiley">😋</span>
+                    <span class="smiley">😛</span>
+                    <span class="smiley">😝</span>
+                    <span class="smiley">😜</span>
+                    <span class="smiley">🤪</span>
+                    <span class="smiley">🤨</span>
+                    <span class="smiley">🧐</span>
+                    <span class="smiley">🤓</span>
+                    <span class="smiley">😎</span>
+                    <span class="smiley">🤩</span>
+                    <span class="smiley">👍</span>
+                    <span class="smiley">👎</span>
+                    <span class="smiley">👌</span>
+                    <span class="smiley">✌️</span>
+                    <span class="smiley">🤞</span>
+                    <span class="smiley">🤟</span>
+                    <span class="smiley">🤘</span>
+                    <span class="smiley">🤙</span>
+                    <span class="smiley">👈</span>
+                    <span class="smiley">👉</span>
+                    <span class="smiley">👆</span>
+                    <span class="smiley">👇</span>
+                    <span class="smiley">☝️</span>
+                    <span class="smiley">✋</span>
+                    <span class="smiley">🤚</span>
+                    <span class="smiley">🖐️</span>
+                    <span class="smiley">🖖</span>
+                    <span class="smiley">👋</span>
+                    <span class="smiley">🤝</span>
+                    <span class="smiley">👏</span>
+                    <span class="smiley">❤️</span>
+                    <span class="smiley">🧡</span>
+                    <span class="smiley">💛</span>
+                    <span class="smiley">💚</span>
+                    <span class="smiley">💙</span>
+                    <span class="smiley">💜</span>
+                    <span class="smiley">🖤</span>
+                    <span class="smiley">🤍</span>
+                    <span class="smiley">🤎</span>
+                    <span class="smiley">💔</span>
+                    <span class="smiley">💯</span>
+                    <span class="smiley">💢</span>
+                    <span class="smiley">💥</span>
+                    <span class="smiley">💫</span>
+                    <span class="smiley">💦</span>
+                    <span class="smiley">💨</span>
+                    <span class="smiley">🕳️</span>
+                    <span class="smiley">💣</span>
+                    <span class="smiley">💤</span>
+                </div>
+            </div>
+            
+            <!-- GIFs Section -->
+            <div class="quickbar-section d-none" id="gifs-section">
+                <h4 style="color: white; margin-bottom: 15px;">🎬 GIFs</h4>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <input type="text" placeholder="Search GIFs..." style="padding: 8px; border-radius: 4px; border: 1px solid #34495e; background: #2c3e50; color: white;">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+                        <div style="background: #2c3e50; padding: 10px; border-radius: 4px; text-align: center;">GIF 1</div>
+                        <div style="background: #2c3e50; padding: 10px; border-radius: 4px; text-align: center;">GIF 2</div>
+                        <div style="background: #2c3e50; padding: 10px; border-radius: 4px; text-align: center;">GIF 3</div>
+                        <div style="background: #2c3e50; padding: 10px; border-radius: 4px; text-align: center;">GIF 4</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ignored Users Section -->
+            <div class="quickbar-section d-none" id="ignored-section">
+                <h4 style="color: white; margin-bottom: 15px;">👤 Ignored Users</h4>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="background: #2c3e50; padding: 10px; border-radius: 4px;">No ignored users</div>
+                </div>
+            </div>
+            
+            <!-- Blocked Users Section -->
+            <div class="quickbar-section d-none" id="blocked-section">
+                <h4 style="color: white; margin-bottom: 15px;">🚫 Blocked Users</h4>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="background: #2c3e50; padding: 10px; border-radius: 4px;">No blocked users</div>
+                </div>
+            </div>
+            
+            <!-- Vote Section -->
+            <div class="quickbar-section d-none" id="vote-section">
+                <h4 style="color: white; margin-bottom: 15px;">📊 Vote</h4>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="background: #2c3e50; padding: 10px; border-radius: 4px; text-align: center;">No vote running</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

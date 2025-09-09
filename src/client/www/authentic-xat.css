@@ -1,0 +1,349 @@
+/* AUTHENTIC xat.com CSS - Based on Original 2014 Files */
+
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-color: #000000;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+}
+
+/* HEADER - Exactly like original */
+#header {
+    width: 100%;
+    height: 30px;
+    font-size: 0px;
+    background: #16213e;
+    border-bottom: 1px solid #533483;
+}
+
+.wrap0 {
+    margin: 0px 30px;
+}
+
+.wrap0 a,
+.wrap0 .a {
+    display: inline-block;
+    font-size: 13px;
+    color: #cccccc;
+    text-decoration: none;
+    font-family: Arial;
+    padding: 7px 12px;
+    cursor: pointer;
+}
+
+.wrap0 a:hover,
+.wrap0 .a:hover {
+    color: #ffffff;
+}
+
+.wrap0 .profile {
+    float: right;
+    vertical-align: top;
+    padding-left: 30px;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    display: inline-block;
+    height: 100%;
+}
+
+/* MAIN CONTENT */
+.wrap1 {
+    margin: 0px 10%;
+    padding: 20px 0;
+}
+
+/* CHAT CONTAINER - Exact Flash dimensions */
+#chatContainer {
+    width: 728px;
+    height: 486px;
+    margin: 20px auto;
+    background: #000000;
+    border: 2px solid #333333;
+    position: relative;
+}
+
+/* USER LIST - Right side */
+#userList {
+    width: 200px;
+    height: 486px;
+    margin: 20px 0 20px 20px;
+    background: #000000;
+    border: 2px solid #333333;
+    float: right;
+}
+
+/* CHAT HEADER */
+#chatContainer .chat-header {
+    height: 30px;
+    background: #16213e;
+    border-bottom: 1px solid #533483;
+    padding: 5px;
+    font-family: Arial;
+    font-size: 13px;
+    color: #ffffff;
+}
+
+/* USER LIST HEADER */
+#userList .user-list-header {
+    height: 30px;
+    background: #16213e;
+    border-bottom: 1px solid #533483;
+    padding: 5px;
+    font-family: Arial;
+    font-size: 13px;
+    color: #ffffff;
+}
+
+/* CHAT MESSAGES */
+#chatMessages {
+    height: 350px;
+    overflow-y: auto;
+    background: #000000;
+    padding: 10px;
+    font-family: Arial;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.message {
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 12px;
+    margin-bottom: 3px;
+    line-height: 14px;
+}
+
+/* SMILEY BAR */
+#smileyBar {
+    height: 40px;
+    background: #16213e;
+    border-top: 1px solid #533483;
+    padding: 5px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.smiley {
+    cursor: pointer;
+    font-size: 16px;
+    padding: 2px;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+.smiley:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* CHAT INPUT */
+#chatContainer .chat-input {
+    height: 40px;
+    background: #16213e;
+    border-top: 1px solid #533483;
+    padding: 8px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+#messageInput {
+    flex: 1;
+    height: 24px;
+    background: #000000;
+    border: 1px solid #533483;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 12px;
+    padding: 2px 5px;
+}
+
+#messageInput:focus {
+    outline: none;
+    border-color: #fed327;
+}
+
+button {
+    height: 24px;
+    background: #fed327;
+    border: 1px solid #533483;
+    color: #000000;
+    font-family: Arial;
+    font-size: 11px;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+button:hover {
+    background: #e6c026;
+}
+
+/* USER LIST CONTENT */
+#users {
+    height: 456px;
+    overflow-y: auto;
+    background: #000000;
+    padding: 5px;
+}
+
+.user-item {
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 11px;
+    margin-bottom: 2px;
+    padding: 2px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.user-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* RANK COLORS - Authentic xat.com */
+.rank-mainowner { color: #fed327; } /* Gold */
+.rank-owner { color: #e74c3c; }     /* Red */
+.rank-moderator { color: #3498db; } /* Blue */
+.rank-member { color: #27ae60; }   /* Green */
+.rank-guest { color: #ffffff; }    /* White */
+
+/* LOADING OVERLAY */
+#loading {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 9999;
+    text-align: center;
+    padding-top: 200px;
+    font-family: Arial;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+/* FOOTER */
+#footer {
+    text-align: center;
+    margin: 20px;
+    color: #666666;
+    font-family: Arial;
+    font-size: 11px;
+    clear: both;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+    .wrap1 {
+        margin: 0px 5%;
+    }
+
+    #chatContainer {
+        width: 100%;
+        max-width: 728px;
+    }
+
+    #userList {
+        width: 100%;
+        max-width: 200px;
+        float: none;
+        margin: 20px auto;
+    }
+}
+
+@media (max-width: 768px) {
+    #header .wrap0 {
+        margin: 0px 10px;
+    }
+
+    .wrap1 {
+        margin: 0px 2%;
+    }
+
+    #chatContainer,
+    #userList {
+        width: 100%;
+        max-width: none;
+        float: none;
+        margin: 10px 0;
+    }
+
+    #smileyBar {
+        height: auto;
+        flex-wrap: wrap;
+    }
+
+    #chatContainer .chat-input {
+        flex-direction: column;
+        height: auto;
+        gap: 5px;
+    }
+
+    #messageInput {
+        width: 100%;
+    }
+}
+
+/* UTILITY CLASSES */
+.clear {
+    clear: both;
+}
+
+.tc { text-align: center; }
+.tl { text-align: left; }
+.tr { text-align: right; }
+.fr { float: right; }
+.f0px { font-size: 0px; }
+.pnt { cursor: pointer; }
+
+/* HOVER PROFILE - Like original */
+.hoverprofile {
+    position: fixed;
+    right: 0px;
+    top: 30px;
+    padding: 5px;
+    background-color: #333333;
+    width: 200px;
+    display: none;
+    color: #ffffff;
+    font-family: Arial;
+    border: 1px solid #533483;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.message {
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* SCROLLBAR STYLING */
+#chatMessages::-webkit-scrollbar,
+#users::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chatMessages::-webkit-scrollbar-track,
+#users::-webkit-scrollbar-track {
+    background: #16213e;
+}
+
+#chatMessages::-webkit-scrollbar-thumb,
+#users::-webkit-scrollbar-thumb {
+    background: #533483;
+    border-radius: 4px;
+}
+
+#chatMessages::-webkit-scrollbar-thumb:hover,
+#users::-webkit-scrollbar-thumb:hover {
+    background: #fed327;
+}

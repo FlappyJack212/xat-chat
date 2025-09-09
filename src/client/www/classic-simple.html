@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Xat Chat</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="platform.css">
+    <link rel="stylesheet" href="xat.css">
+    <style>
+        body {
+            margin: 0;
+            font-size: .93333rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .table { display: table; width: 100%; height: 100%; }
+        .row { display: table-row; }
+        .cell { display: table-cell; vertical-align: top; }
+        
+        #messagesContainer {
+            height: 100%;
+            width: 100%;
+            padding: 12px;
+            overflow-y: auto;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        #visitorsContainer {
+            height: 100%;
+            width: 100%;
+            padding: 12px;
+            overflow-y: auto;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .message {
+            background: rgba(255,255,255,0.2);
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 8px;
+            color: white;
+        }
+        
+        .visitor {
+            background: rgba(255,255,255,0.1);
+            margin: 4px 0;
+            padding: 8px;
+            border-radius: 4px;
+            color: white;
+        }
+        
+        .textentry {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 4px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 14px;
+        }
+        
+        .textentry::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .sendBtn {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="table">
+        <div class="row">
+            <div class="cell" style="width: 74%;">
+                <div class="table">
+                    <div class="row" style="height: 75%;">
+                        <div class="cell" style="padding: 12px;">
+                            <div id="messagesContainer">
+                                <div class="message">
+                                    <strong>System:</strong> Welcome to Xat Chat!
+                                </div>
+                                <div class="message">
+                                    <strong>Alice:</strong> Hello everyone! 👋
+                                </div>
+                                <div class="message">
+                                    <strong>Bob:</strong> Hey Alice! How are you?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 25%;">
+                        <div class="cell" style="padding: 12px;">
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" class="textentry" id="messageInput" placeholder="Type your message here...">
+                                <button class="sendBtn" onclick="sendMessage()">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cell" style="width: 26%;">
+                <div class="table">
+                    <div class="row" style="height: 75%;">
+                        <div class="cell" style="padding: 12px;">
+                            <div id="visitorsContainer">
+                                <div class="visitor">👤 You (online)</div>
+                                <div class="visitor">👩 Alice (online)</div>
+                                <div class="visitor">👨 Bob (away)</div>
+                                <div class="visitor">🧑 Charlie (online)</div>
+                                <div class="visitor">👩‍💼 Diana (busy)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 25%;">
+                        <div class="cell" style="padding: 12px;">
+                            <button class="sendBtn" style="width: 100%;">Get a Chat Box</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            const container = document.getElementById('messagesContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            messageDiv.innerHTML = `<strong>You:</strong> ${message}`;
+            container.appendChild(messageDiv);
+            
+            input.value = '';
+            container.scrollTop = container.scrollHeight;
+            
+            // Simulate response
+            setTimeout(() => {
+                const responses = [
+                    'That\'s interesting!',
+                    'I agree with you',
+                    'What do you think about this?',
+                    'Thanks for sharing!',
+                    'Good point!'
+                ];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                const randomUser = ['Alice', 'Bob', 'Charlie', 'Diana'][Math.floor(Math.random() * 4)];
+                
+                const responseDiv = document.createElement('div');
+                responseDiv.className = 'message';
+                responseDiv.innerHTML = `<strong>${randomUser}:</strong> ${randomResponse}`;
+                container.appendChild(responseDiv);
+                container.scrollTop = container.scrollHeight;
+            }, 1000 + Math.random() * 2000);
+        }
+        
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

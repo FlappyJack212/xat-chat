@@ -1,0 +1,530 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/consolidated.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xat.com - Real Interface</title>
+    <!-- Styles moved to consolidated.css -->
+</head>
+<body>
+    <!-- Real xat.com interface -->
+    <div id="xatContainer">
+        
+        <!-- Top bar -->
+        <div id="topBar">
+            <div id="roomInfo">Main - xat.com</div>
+            <div id="roomStats">
+                <span id="userCount">0 users</span> | 
+                <span id="guestCount">0 guests</span>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div id="mainContent">
+            
+            <!-- Chat area -->
+            <div id="chatArea">
+                
+                <!-- Chat messages -->
+                <div id="chatMessages">
+                    <div class="system-message">*** Welcome to xat.com! ***</div>
+                </div>
+
+                <!-- Chat input -->
+                <div id="chatInput">
+                    <input type="text" id="messageInput" placeholder="Type your message..." maxlength="255">
+                    <button id="sendButton" onclick="sendMessage()">Send</button>
+                </div>
+
+            </div>
+
+            <!-- User area -->
+            <div id="userArea">
+                
+                <!-- User header -->
+                <div id="userHeader">Users Online</div>
+
+                <!-- User list -->
+                <div id="userList">
+                    <div style="color:#666666; font-size:11px; text-align:center; margin-top:20px;">
+                        No users online
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Smiley panel -->
+        <div id="smileyPanel">
+            <span class="smiley" onclick="insertSmiley('ðŸ˜Š')" title="smile">ðŸ˜Š</span>
+            <span class="smiley" onclick="insertSmiley('ðŸ˜¢')" title="cry">ðŸ˜¢</span>
+            <span class="smiley" onclick="insertSmiley('ðŸ˜ ')" title="angry">ðŸ˜ </span>
+            <span class="smiley" onclick="insertSmiley('ðŸ˜‰')" title="wink">ðŸ˜‰</span>
+            <span class="smiley" onclick="insertSmiley('ðŸ˜›')" title="tongue">ðŸ˜›</span>
+            <span class="smiley" onclick="insertSmiley('ðŸ˜Ž')" title="cool">ðŸ˜Ž</span>
+            <span class="smiley" onclick="insertSmiley('ðŸ˜³')" title="blush">ðŸ˜³</span>
+            <span class="smiley" onclick="insertSmiley('ðŸ˜•')" title="confused">ðŸ˜•</span>
+            <span class="smiley" onclick="insertSmiley('ðŸ˜´')" title="sleepy">ðŸ˜´</span>
+            <span class="smiley" onclick="insertSmiley('â¤ï¸')" title="heart">â¤ï¸</span>
+            <span class="smiley" onclick="insertSmiley('ðŸ‘')" title="thumbsup">ðŸ‘</span>
+            <span class="smiley" onclick="insertSmiley('ðŸ‘Ž')" title="thumbsdown">ðŸ‘Ž</span>
+        </div>
+
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loading">
+        <div id="loadingText">Connecting to xat.com...</div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // REAL xat.com interface JavaScript
+        let socket;
+        let currentUser = null;
+        let currentRoom = 'Main';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('ðŸŽ­ [REAL XAT] Initializing real xat.com interface...');
+            showLoading(true);
+
+            // Connect to server
+            socket = io();
+
+            socket.on('connect', () => {
+                console.log('ðŸ”Œ [REAL XAT] Connected to server');
+                showLoading(false);
+                authenticateAsGuest();
+            });
+
+            socket.on('authenticated', (data) => {
+                console.log('ðŸ” [REAL XAT] Authenticated:', data);
+                if (data.user) {
+                    currentUser = data.user;
+                    joinMainRoom();
+                }
+            });
+
+            socket.on('roomJoined', (data) => {
+                console.log('ðŸšª [REAL XAT] Joined room:', data.room.name);
+                currentRoom = data.room.name;
+                document.getElementById('roomInfo').textContent = `${currentRoom} - xat.com`;
+            });
+
+            socket.on('userList', (data) => {
+                console.log('ðŸ‘¥ [REAL XAT] User list received:', data.users.length, 'users');
+                displayUsers(data.users);
+            });
+
+            socket.on('userJoined', (data) => {
+                console.log('ðŸ‘‹ [REAL XAT] User joined:', data.nickname);
+                addSystemMessage(`${data.nickname} joined the chat`);
+            });
+
+            socket.on('userLeft', (data) => {
+                console.log('ðŸ‘‹ [REAL XAT] User left:', data.nickname);
+                addSystemMessage(`${data.nickname} left the chat`);
+            });
+
+            socket.on('message', (data) => {
+                console.log('ðŸ’¬ [REAL XAT] Message received:', data);
+                addMessage(data.user.nickname, data.message, data.timestamp, data.user.avatar);
+            });
+
+            socket.on('disconnect', () => {
+                console.log('ðŸ”Œ [REAL XAT] Disconnected from server');
+                addSystemMessage('Disconnected from server');
+            });
+
+            socket.on('error', (data) => {
+                console.error('âŒ [REAL XAT] Error:', data);
+                addSystemMessage(`Error: ${data.message}`);
+            });
+
+            // Private messaging events
+            socket.on('privateMessage', (data) => {
+                console.log('ðŸ’¬ [REAL XAT] Private message received:', data);
+                showPrivateMessage(data.from.nickname, data.message, data.timestamp);
+            });
+
+            socket.on('privateMessageSent', (data) => {
+                console.log('âœ… [REAL XAT] Private message sent:', data);
+                // Show confirmation in PC window
+            });
+        });
+
+        function authenticateAsGuest() {
+            const guestName = `Guest${Math.floor(Math.random() * 1000)}`;
+            console.log('ðŸ‘¤ [REAL XAT] Authenticating as guest:', guestName);
+
+            if (socket && socket.connected) {
+                socket.emit('authenticate', {
+                    guest: true,
+                    nickname: guestName
+                });
+            }
+        }
+
+        function joinMainRoom() {
+            console.log('ðŸšª [REAL XAT] Joining main room');
+            if (socket && socket.connected) {
+                socket.emit('joinRoom', { roomName: 'Main' });
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+
+            if (message && socket && currentUser) {
+                socket.emit('message', { message: message });
+                input.value = '';
+            }
+        }
+
+        function insertSmiley(smiley) {
+            const input = document.getElementById('messageInput');
+            input.value += smiley;
+            input.focus();
+        }
+
+        function addMessage(username, message, timestamp, avatarId) {
+            const messagesArea = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+
+            const time = timestamp ? new Date(timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '';
+            const avatar = avatarId || 1;
+            
+            // Format message with xat powers
+            const formattedMessage = formatMessage(message);
+            
+            messageDiv.innerHTML = `
+                <span class="avatar" style="background-image: url('/avatars/${avatar}.png')"></span>
+                <span class="username">${username}:</span>
+                <span class="text">${formattedMessage}</span>
+                <span class="time">${time}</span>
+            `;
+
+            messagesArea.appendChild(messageDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        // xat.com message formatting
+        function formatMessage(message) {
+            let formatted = message;
+            
+            // Bold text: (b)text(b)
+            formatted = formatted.replace(/\(b\)(.*?)\(b\)/g, '<strong>$1</strong>');
+            
+            // Italic text: (i)text(i)
+            formatted = formatted.replace(/\(i\)(.*?)\(i\)/g, '<em>$1</em>');
+            
+            // Underline text: (u)text(u)
+            formatted = formatted.replace(/\(u\)(.*?)\(u\)/g, '<u>$1</u>');
+            
+            // Color text: (color=#ff0000)text(color)
+            formatted = formatted.replace(/\(color=(#[0-9a-fA-F]{6})\)(.*?)\(color\)/g, '<span style="color: $1;">$2</span>');
+            
+            // Size text: (size=20)text(size)
+            formatted = formatted.replace(/\(size=(\d+)\)(.*?)\(size\)/g, '<span style="font-size: $1px;">$2</span>');
+            
+            // Glow effect: (glow=#ffff00)text(glow)
+            formatted = formatted.replace(/\(glow=(#[0-9a-fA-F]{6})\)(.*?)\(glow\)/g, '<span style="text-shadow: 0 0 10px $1, 0 0 20px $1; color: $1;">$2</span>');
+            
+            // Gradient effect: (gradient=#ff0000,#0000ff)text(gradient)
+            formatted = formatted.replace(/\(gradient=(#[0-9a-fA-F]{6}),(#[0-9a-fA-F]{6})\)(.*?)\(gradient\)/g, '<span style="background: linear-gradient(45deg, $1, $2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">$3</span>');
+            
+            return formatted;
+        }
+
+        function addSystemMessage(message) {
+            const messagesArea = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'system-message';
+            messageDiv.textContent = `*** ${message} ***`;
+
+            messagesArea.appendChild(messageDiv);
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        function displayUsers(userList) {
+            const userListDiv = document.getElementById('userList');
+            userListDiv.innerHTML = '';
+
+            let userCount = 0;
+            let guestCount = 0;
+
+            userList.forEach(user => {
+                const userDiv = document.createElement('div');
+                userDiv.className = `user rank-${getRankClass(user.rank)}`;
+                
+                const avatar = user.avatar || Math.floor(Math.random() * 100) + 1;
+                
+                userDiv.innerHTML = `
+                    <div class="avatar" style="background-image: url('/avatars/${avatar}.png')"></div>
+                    <div class="name">${user.nickname || user.username || 'Unknown'}</div>
+                    <div class="status"></div>
+                `;
+                
+                // Right-click for PC (private chat)
+                userDiv.oncontextmenu = (e) => {
+                    e.preventDefault();
+                    openPrivateChat(user);
+                    return false;
+                };
+                
+                userDiv.onclick = () => showUserProfile(user);
+                userListDiv.appendChild(userDiv);
+
+                if (user.rank === 5) guestCount++;
+                else userCount++;
+            });
+
+            document.getElementById('userCount').textContent = `${userCount} users`;
+            document.getElementById('guestCount').textContent = `${guestCount} guests`;
+        }
+
+        function getRankClass(rank) {
+            const rankClasses = {
+                0: 'guest',
+                1: 'member',
+                2: 'moderator',
+                3: 'owner',
+                4: 'mainowner',
+                5: 'guest'
+            };
+            return rankClasses[rank] || 'guest';
+        }
+
+        function showUserProfile(user) {
+            if (!currentUser) return;
+            
+            let profileText = `${user.nickname || user.username}\nRank: ${getRankName(user.rank)}\nAvatar: ${user.avatar || 'Default'}`;
+            
+            // Add moderation options for moderators and owners
+            if (currentUser.rank >= 3 && user.rank < currentUser.rank) {
+                const action = prompt(profileText + '\n\nModeration Actions:\n1. Kick\n2. Ban\n3. Cancel\n\nEnter action number:');
+                
+                if (action === '1') {
+                    kickUser(user);
+                } else if (action === '2') {
+                    banUser(user);
+                }
+            } else {
+                alert(profileText);
+            }
+        }
+
+        function kickUser(user) {
+            if (!currentUser || currentUser.rank < 3) {
+                alert('You do not have permission to kick users.');
+                return;
+            }
+            
+            const reason = prompt(`Kick ${user.nickname}?\n\nReason (optional):`);
+            if (reason !== null) {
+                socket.emit('kickUser', {
+                    username: user.nickname,
+                    reason: reason || 'No reason provided'
+                });
+                
+                addSystemMessage(`Attempting to kick ${user.nickname}...`);
+            }
+        }
+
+        function banUser(user) {
+            if (!currentUser || currentUser.rank < 3) {
+                alert('You do not have permission to ban users.');
+                return;
+            }
+            
+            const reason = prompt(`Ban ${user.nickname}?\n\nReason (optional):`);
+            if (reason !== null) {
+                socket.emit('banUser', {
+                    username: user.nickname,
+                    reason: reason || 'No reason provided'
+                });
+                
+                addSystemMessage(`Attempting to ban ${user.nickname}...`);
+            }
+        }
+
+        function getRankName(rank) {
+            const rankNames = {
+                0: 'Banned',
+                1: 'Member',
+                2: 'Moderator',
+                3: 'Owner',
+                4: 'Main Owner',
+                5: 'Guest'
+            };
+            return rankNames[rank] || 'Guest';
+        }
+
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'flex' : 'none';
+        }
+
+        // Handle Enter key
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Private messaging functions
+        function openPrivateChat(user) {
+            const pcWindow = createPCWindow(user);
+            document.body.appendChild(pcWindow);
+        }
+
+        function createPCWindow(user) {
+            const pcWindow = document.createElement('div');
+            pcWindow.id = `pc-${user.id}`;
+            pcWindow.style.cssText = `
+                position: fixed;
+                top: 100px;
+                left: 200px;
+                width: 400px;
+                height: 300px;
+                background: #000000;
+                border: 2px solid #fed327;
+                border-radius: 5px;
+                z-index: 1000;
+                display: flex;
+                flex-direction: column;
+            `;
+
+            pcWindow.innerHTML = `
+                <div style="background: linear-gradient(to bottom, #2a2a2a, #1a1a1a); padding: 5px; border-bottom: 1px solid #444444; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #fed327; font-weight: bold; font-size: 12px;">PC with ${user.nickname}</span>
+                    <button onclick="closePCWindow('${user.id}')" style="background: #ff0000; color: white; border: none; width: 20px; height: 20px; cursor: pointer; border-radius: 3px;">Ã—</button>
+                </div>
+                <div id="pc-messages-${user.id}" style="flex: 1; overflow-y: auto; padding: 5px; background: #000000; color: #ffffff; font-size: 11px;"></div>
+                <div style="padding: 5px; background: linear-gradient(to bottom, #2a2a2a, #1a1a1a); border-top: 1px solid #444444; display: flex; gap: 5px;">
+                    <input type="text" id="pc-input-${user.id}" placeholder="Type private message..." style="flex: 1; background: #000000; border: 1px solid #444444; color: #ffffff; padding: 3px; font-size: 11px;" maxlength="255">
+                    <button onclick="sendPrivateMessage('${user.id}', '${user.nickname}')" style="background: #fed327; color: #000000; border: 1px solid #444444; padding: 3px 8px; cursor: pointer; font-size: 10px; font-weight: bold;">Send</button>
+                </div>
+            `;
+
+            // Make draggable
+            makeDraggable(pcWindow);
+
+            // Handle Enter key
+            const input = pcWindow.querySelector(`#pc-input-${user.id}`);
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendPrivateMessage(user.id, user.nickname);
+                }
+            });
+
+            return pcWindow;
+        }
+
+        function sendPrivateMessage(userId, nickname) {
+            const input = document.getElementById(`pc-input-${userId}`);
+            const message = input.value.trim();
+
+            if (message && socket && currentUser) {
+                socket.emit('privateMessage', {
+                    targetUsername: nickname,
+                    message: message
+                });
+
+                // Add message to PC window
+                addPrivateMessage(userId, currentUser.nickname, message, Date.now(), true);
+                input.value = '';
+            }
+        }
+
+        function addPrivateMessage(userId, username, message, timestamp, isSent = false) {
+            const messagesDiv = document.getElementById(`pc-messages-${userId}`);
+            if (!messagesDiv) return;
+
+            const messageDiv = document.createElement('div');
+            messageDiv.style.cssText = `
+                margin: 2px 0;
+                padding: 2px;
+                ${isSent ? 'text-align: right; color: #fed327;' : 'text-align: left; color: #ffffff;'}
+            `;
+
+            const time = new Date(timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            messageDiv.innerHTML = `<strong>${username}:</strong> ${message} <span style="color: #666666; font-size: 9px;">${time}</span>`;
+
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function showPrivateMessage(fromUsername, message, timestamp) {
+            // Find existing PC window or create new one
+            const fromUser = Array.from(document.querySelectorAll('.user')).find(userDiv => {
+                return userDiv.querySelector('.name').textContent === fromUsername;
+            });
+
+            if (fromUser) {
+                // Extract user data (simplified)
+                const userData = { id: fromUsername, nickname: fromUsername };
+                
+                let pcWindow = document.getElementById(`pc-${userData.id}`);
+                if (!pcWindow) {
+                    pcWindow = createPCWindow(userData);
+                    document.body.appendChild(pcWindow);
+                }
+
+                addPrivateMessage(userData.id, fromUsername, message, timestamp, false);
+                
+                // Flash window to indicate new message
+                pcWindow.style.borderColor = '#ff0000';
+                setTimeout(() => {
+                    pcWindow.style.borderColor = '#fed327';
+                }, 1000);
+            }
+        }
+
+        function closePCWindow(userId) {
+            const pcWindow = document.getElementById(`pc-${userId}`);
+            if (pcWindow) {
+                pcWindow.remove();
+            }
+        }
+
+        function makeDraggable(element) {
+            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            const header = element.querySelector('div');
+            
+            header.onmousedown = dragMouseDown;
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                element.style.top = (element.offsetTop - pos2) + "px";
+                element.style.left = (element.offsetLeft - pos1) + "px";
+            }
+
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+
+        console.log('âœ… [REAL XAT] Real xat.com interface loaded');
+    </script>
+</body>
+</html>

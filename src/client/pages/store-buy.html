@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iXat Store - Buy Coins & Days</title>
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/authentic-xat.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --light-blue: #dbeafe;
+            --dark-blue: #1e3a8a;
+            --primary-grey: #374151;
+            --secondary-grey: #6b7280;
+            --light-grey: #f3f4f6;
+            --dark-grey: #111827;
+            --accent: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--light-grey) 0%, var(--light-blue) 100%);
+            min-height: 100vh;
+            color: var(--dark-grey);
+        }
+        
+        .header {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--dark-grey);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-grey);
+            margin-bottom: 1rem;
+        }
+        
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-grey);
+            margin-bottom: 2rem;
+        }
+        
+        .user-balance {
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .balance-item {
+            display: inline-block;
+            margin: 0 1rem;
+            text-align: center;
+        }
+        
+        .balance-label {
+            font-size: 0.9rem;
+            color: var(--secondary-grey);
+            margin-bottom: 0.5rem;
+        }
+        
+        .balance-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .payment-tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .payment-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: white;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .payment-tab.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .payment-tab:hover:not(.active) {
+            background: var(--light-grey);
+        }
+        
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .package-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        
+        .package-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .package-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .badge-popular {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .badge-best-value {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .badge-limited {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .package-header {
+            padding: 2rem 1rem 1rem;
+            background: var(--light-blue);
+            text-align: center;
+        }
+        
+        .package-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+        
+        .package-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-grey);
+            margin-bottom: 0.5rem;
+        }
+        
+        .package-description {
+            color: var(--secondary-grey);
+            font-size: 0.9rem;
+        }
+        
+        .package-body {
+            padding: 1.5rem;
+        }
+        
+        .package-price {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .price-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-currency {
+            font-size: 1rem;
+            color: var(--secondary-grey);
+        }
+        
+        .package-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .package-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--light-grey);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .package-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        .package-actions {
+            text-align: center;
+        }
+        
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--dark-blue);
+        }
+        
+        .btn-success {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #0d8f6b;
+        }
+        
+        .payment-methods {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .payment-methods h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-grey);
+        }
+        
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .payment-option {
+            padding: 1rem;
+            border: 2px solid var(--light-grey);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .payment-option:hover {
+            border-color: var(--primary-blue);
+        }
+        
+        .payment-option.selected {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+        
+        .payment-option img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .payment-option h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-grey);
+        }
+        
+        .payment-option p {
+            font-size: 0.9rem;
+            color: var(--secondary-grey);
+        }
+        
+        .custom-amount {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .custom-amount h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-grey);
+        }
+        
+        .amount-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .input-group label {
+            font-weight: 600;
+            color: var(--dark-grey);
+        }
+        
+        .input-group input {
+            padding: 0.75rem;
+            border: 2px solid var(--light-grey);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+        
+        .total-cost {
+            background: var(--light-blue);
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--secondary-grey);
+        }
+        
+        .error {
+            background: #fee;
+            color: var(--danger);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        
+        .success {
+            background: #efe;
+            color: var(--accent);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">iXat</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="store-powers.html">Powers</a></li>
+                    <li><a href="store-auctions.html">Auctions</a></li>
+                    <li><a href="store-buy.html">Buy Coins</a></li>
+                    <li><a href="store-shortname.html">Short Names</a></li>
+                    <li><a href="store-promotion.html">Promotion</a></li>
+                    <li><a href="store-ads.html">Ads</a></li>
+                    <li><a href="store-groups.html">Groups</a></li>
+                    <li><a href="../embed.html">Chat</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Buy Coins & Days</h1>
+            <p class="page-subtitle">Purchase xats and days to enhance your iXat experience</p>
+            
+            <div class="user-balance">
+                <div class="balance-item">
+                    <div class="balance-label">Current Xats</div>
+                    <div class="balance-value" id="userXats">0</div>
+                </div>
+                <div class="balance-item">
+                    <div class="balance-label">Current Days</div>
+                    <div class="balance-value" id="userDays">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-tabs">
+            <button class="payment-tab active" data-tab="packages">Packages</button>
+            <button class="payment-tab" data-tab="custom">Custom Amount</button>
+            <button class="payment-tab" data-tab="subscription">Subscription</button>
+        </div>
+
+        <div id="packagesTab" class="tab-content">
+            <div class="packages-grid" id="packagesContainer">
+                <div class="loading">Loading packages...</div>
+            </div>
+        </div>
+
+        <div id="customTab" class="tab-content" style="display: none;">
+            <div class="custom-amount">
+                <h3>Custom Amount</h3>
+                <div class="amount-inputs">
+                    <div class="input-group">
+                        <label for="customXats">Xats Amount</label>
+                        <input type="number" id="customXats" placeholder="Enter xats amount" min="1">
+                    </div>
+                    <div class="input-group">
+                        <label for="customDays">Days Amount</label>
+                        <input type="number" id="customDays" placeholder="Enter days amount" min="1">
+                    </div>
+                </div>
+                <div class="total-cost" id="customTotal">
+                    Total: $0.00 USD
+                </div>
+                <button class="btn btn-primary" onclick="buyStore.purchaseCustom()">
+                    Purchase Custom Amount
+                </button>
+            </div>
+        </div>
+
+        <div id="subscriptionTab" class="tab-content" style="display: none;">
+            <div class="packages-grid" id="subscriptionContainer">
+                <div class="loading">Loading subscriptions...</div>
+            </div>
+        </div>
+
+        <div class="payment-methods">
+            <h3>Payment Methods</h3>
+            <div class="payment-options">
+                <div class="payment-option selected" data-method="paypal">
+                    <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_37x23.jpg" alt="PayPal">
+                    <h4>PayPal</h4>
+                    <p>Secure payment with PayPal</p>
+                </div>
+                <div class="payment-option" data-method="stripe">
+                    <img src="https://js.stripe.com/v3/fingerprinted/img/visa-4d8849f9216caf5b0b0b8b8b8b8b8b8b.png" alt="Stripe">
+                    <h4>Credit Card</h4>
+                    <p>Visa, Mastercard, American Express</p>
+                </div>
+                <div class="payment-option" data-method="crypto">
+                    <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Crypto" style="width: 30px; height: 30px;">
+                    <h4>Cryptocurrency</h4>
+                    <p>Bitcoin, Ethereum, Litecoin</p>
+                </div>
+                <div class="payment-option" data-method="gift">
+                    <img src="https://via.placeholder.com/50x50/10b981/ffffff?text=G" alt="Gift Card">
+                    <h4>Gift Card</h4>
+                    <p>Redeem gift card code</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Socket.IO -->
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <!-- Core modules -->
+    <script src="../js/www/common.js"></script>
+    <script src="../js/www/translator.js"></script>
+    <script src="../js/www/ui-utils.js"></script>
+    <script src="../js/www/store.js"></script>
+    
+    <script>
+        class BuyStore {
+            constructor() {
+                this.socket = io();
+                this.packages = [];
+                this.subscriptions = [];
+                this.userBalance = { xats: 0, days: 0 };
+                this.selectedPaymentMethod = 'paypal';
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.loadUserBalance();
+                this.loadPackages();
+                this.loadSubscriptions();
+            }
+            
+            setupEventListeners() {
+                // Tab switching
+                document.querySelectorAll('.payment-tab').forEach(tab => {
+                    tab.addEventListener('click', (e) => {
+                        this.switchTab(e.target.dataset.tab);
+                    });
+                });
+                
+                // Payment method selection
+                document.querySelectorAll('.payment-option').forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        this.selectPaymentMethod(e.target.closest('.payment-option').dataset.method);
+                    });
+                });
+                
+                // Custom amount calculation
+                document.getElementById('customXats').addEventListener('input', () => {
+                    this.calculateCustomTotal();
+                });
+                
+                document.getElementById('customDays').addEventListener('input', () => {
+                    this.calculateCustomTotal();
+                });
+                
+                // Socket events
+                this.socket.on('userBalance', (balance) => {
+                    this.userBalance = balance;
+                    this.updateBalanceDisplay();
+                });
+            }
+            
+            switchTab(tab) {
+                // Update tab buttons
+                document.querySelectorAll('.payment-tab').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+                
+                // Show/hide tab content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.style.display = 'none';
+                });
+                document.getElementById(`${tab}Tab`).style.display = 'block';
+            }
+            
+            selectPaymentMethod(method) {
+                this.selectedPaymentMethod = method;
+                
+                // Update UI
+                document.querySelectorAll('.payment-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                document.querySelector(`[data-method="${method}"]`).classList.add('selected');
+            }
+            
+            async loadUserBalance() {
+                try {
+                    const response = await fetch('/api/users/profile', {
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.success) {
+                            this.userBalance = {
+                                xats: data.user.xats || 0,
+                                days: data.user.days || 0
+                            };
+                        }
+                    }
+                } catch (error) {
+                    console.log('Using guest balance');
+                    this.userBalance = { xats: 0, days: 0 };
+                }
+                
+                this.updateBalanceDisplay();
+            }
+            
+            updateBalanceDisplay() {
+                document.getElementById('userXats').textContent = this.userBalance.xats.toLocaleString();
+                document.getElementById('userDays').textContent = this.userBalance.days.toLocaleString();
+            }
+            
+            async loadPackages() {
+                try {
+                    const response = await fetch('/api/store/packages');
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        this.packages = data.packages;
+                        this.displayPackages();
+                    } else {
+                        this.showError('Failed to load packages: ' + data.message);
+                    }
+                } catch (error) {
+                    this.showError('Error loading packages: ' + error.message);
+                }
+            }
+            
+            async loadSubscriptions() {
+                try {
+                    const response = await fetch('/api/store/subscriptions');
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        this.subscriptions = data.subscriptions;
+                        this.displaySubscriptions();
+                    } else {
+                        this.showError('Failed to load subscriptions: ' + data.message);
+                    }
+                } catch (error) {
+                    this.showError('Error loading subscriptions: ' + error.message);
+                }
+            }
+            
+            displayPackages() {
+                const container = document.getElementById('packagesContainer');
+                
+                if (this.packages.length === 0) {
+                    container.innerHTML = '<div class="loading">No packages available.</div>';
+                    return;
+                }
+                
+                container.innerHTML = this.packages.map(pkg => `
+                    <div class="package-card">
+                        ${pkg.badge ? `<div class="package-badge badge-${pkg.badge.toLowerCase().replace(' ', '-')}">${pkg.badge}</div>` : ''}
+                        
+                        <div class="package-header">
+                            <div class="package-icon">${pkg.icon || '💰'}</div>
+                            <h3 class="package-name">${pkg.name}</h3>
+                            <p class="package-description">${pkg.description}</p>
+                        </div>
+                        
+                        <div class="package-body">
+                            <div class="package-price">
+                                <div class="price-amount">$${pkg.price}</div>
+                                <div class="price-currency">USD</div>
+                            </div>
+                            
+                            <ul class="package-features">
+                                <li><span class="feature-icon">✓</span> ${pkg.xats.toLocaleString()} xats</li>
+                                <li><span class="feature-icon">✓</span> ${pkg.days} days</li>
+                                ${pkg.bonus ? `<li><span class="feature-icon">🎁</span> ${pkg.bonus}</li>` : ''}
+                                ${pkg.features ? pkg.features.map(feature => `<li><span class="feature-icon">✓</span> ${feature}</li>`).join('') : ''}
+                            </ul>
+                            
+                            <div class="package-actions">
+                                <button class="btn btn-primary" onclick="buyStore.purchasePackage('${pkg._id}')">
+                                    Purchase Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            displaySubscriptions() {
+                const container = document.getElementById('subscriptionContainer');
+                
+                if (this.subscriptions.length === 0) {
+                    container.innerHTML = '<div class="loading">No subscriptions available.</div>';
+                    return;
+                }
+                
+                container.innerHTML = this.subscriptions.map(sub => `
+                    <div class="package-card">
+                        ${sub.badge ? `<div class="package-badge badge-${sub.badge.toLowerCase().replace(' ', '-')}">${sub.badge}</div>` : ''}
+                        
+                        <div class="package-header">
+                            <div class="package-icon">${sub.icon || '🔄'}</div>
+                            <h3 class="package-name">${sub.name}</h3>
+                            <p class="package-description">${sub.description}</p>
+                        </div>
+                        
+                        <div class="package-body">
+                            <div class="package-price">
+                                <div class="price-amount">$${sub.price}</div>
+                                <div class="price-currency">USD / ${sub.period}</div>
+                            </div>
+                            
+                            <ul class="package-features">
+                                <li><span class="feature-icon">✓</span> ${sub.xatsPerDay} xats per day</li>
+                                <li><span class="feature-icon">✓</span> ${sub.daysPerDay} days per day</li>
+                                ${sub.bonus ? `<li><span class="feature-icon">🎁</span> ${sub.bonus}</li>` : ''}
+                                ${sub.features ? sub.features.map(feature => `<li><span class="feature-icon">✓</span> ${feature}</li>`).join('') : ''}
+                            </ul>
+                            
+                            <div class="package-actions">
+                                <button class="btn btn-success" onclick="buyStore.subscribe('${sub._id}')">
+                                    Subscribe
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            calculateCustomTotal() {
+                const xats = parseInt(document.getElementById('customXats').value) || 0;
+                const days = parseInt(document.getElementById('customDays').value) || 0;
+                
+                // Calculate price based on rates (example: 1000 xats = $1, 1 day = $0.50)
+                const xatsPrice = xats * 0.001; // $0.001 per xat
+                const daysPrice = days * 0.50; // $0.50 per day
+                const total = xatsPrice + daysPrice;
+                
+                document.getElementById('customTotal').textContent = `Total: $${total.toFixed(2)} USD`;
+            }
+            
+            async purchasePackage(packageId) {
+                const pkg = this.packages.find(p => p._id === packageId);
+                if (!pkg) return;
+                
+                if (confirm(`Purchase ${pkg.name} for $${pkg.price} USD?`)) {
+                    try {
+                        const response = await fetch('/api/store/purchase', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                            },
+                            body: JSON.stringify({ 
+                                packageId, 
+                                paymentMethod: this.selectedPaymentMethod 
+                            })
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (data.success) {
+                            alert('Purchase successful! Your xats and days have been added to your account.');
+                            this.loadUserBalance(); // Refresh balance
+                        } else {
+                            alert('Purchase failed: ' + data.message);
+                        }
+                    } catch (error) {
+                        alert('Error processing purchase: ' + error.message);
+                    }
+                }
+            }
+            
+            async purchaseCustom() {
+                const xats = parseInt(document.getElementById('customXats').value) || 0;
+                const days = parseInt(document.getElementById('customDays').value) || 0;
+                
+                if (xats <= 0 && days <= 0) {
+                    alert('Please enter a valid amount for xats or days.');
+                    return;
+                }
+                
+                const xatsPrice = xats * 0.001;
+                const daysPrice = days * 0.50;
+                const total = xatsPrice + daysPrice;
+                
+                if (confirm(`Purchase ${xats.toLocaleString()} xats and ${days} days for $${total.toFixed(2)} USD?`)) {
+                    try {
+                        const response = await fetch('/api/store/purchase-custom', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                            },
+                            body: JSON.stringify({ 
+                                xats, 
+                                days, 
+                                paymentMethod: this.selectedPaymentMethod 
+                            })
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (data.success) {
+                            alert('Purchase successful! Your xats and days have been added to your account.');
+                            this.loadUserBalance(); // Refresh balance
+                        } else {
+                            alert('Purchase failed: ' + data.message);
+                        }
+                    } catch (error) {
+                        alert('Error processing purchase: ' + error.message);
+                    }
+                }
+            }
+            
+            async subscribe(subscriptionId) {
+                const sub = this.subscriptions.find(s => s._id === subscriptionId);
+                if (!sub) return;
+                
+                if (confirm(`Subscribe to ${sub.name} for $${sub.price} USD per ${sub.period}?`)) {
+                    try {
+                        const response = await fetch('/api/store/subscribe', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                            },
+                            body: JSON.stringify({ 
+                                subscriptionId, 
+                                paymentMethod: this.selectedPaymentMethod 
+                            })
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (data.success) {
+                            alert('Subscription successful! You will receive daily xats and days.');
+                        } else {
+                            alert('Subscription failed: ' + data.message);
+                        }
+                    } catch (error) {
+                        alert('Error processing subscription: ' + error.message);
+                    }
+                }
+            }
+            
+            showError(message) {
+                const container = document.getElementById('packagesContainer');
+                container.innerHTML = `<div class="error">${message}</div>`;
+            }
+        }
+        
+        // Initialize the store
+        const buyStore = new BuyStore();
+    </script>
+</body>
+</html>

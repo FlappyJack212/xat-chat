@@ -1,2 +1,0 @@
-nohup: ignoring input
-Could not open input file: server.php

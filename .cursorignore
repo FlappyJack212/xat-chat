@@ -1,0 +1,3 @@
+﻿# Cursor ignore file - allow .env files
+# Remove .env from ignore list
+!.env

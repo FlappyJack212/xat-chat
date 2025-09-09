@@ -6,216 +6,195 @@ require('dotenv').config();
 const realPowers = [
     // Epic Powers
     {
+        id: 1,
         name: 'everypower',
+        displayName: 'Every Power',
         description: 'Gives access to all powers temporarily',
-        section: 'epic',
-        subid: 1,
+        category: 'epic',
         cost: 10000,
-        xats: 10000,
-        days: 0,
-        type: 'epic',
         status: 'active',
         effects: ['temporary_all_powers'],
-        requirements: { rank: 'member' },
-        cooldowns: { global: 3600000 }, // 1 hour
-        metadata: { originalId: 1 }
+        requirements: { minRank: 1 },
+        cooldown: 3600, // 1 hour in seconds
+        rarity: 'legendary',
+        epic: true
     },
     {
+        id: 2,
         name: 'setxats',
+        displayName: 'Set Xats',
         description: 'Set xats for any user',
-        section: 'epic',
-        subid: 2,
+        category: 'epic',
         cost: 5000,
-        xats: 5000,
-        days: 0,
-        type: 'epic',
         status: 'active',
         effects: ['modify_xats'],
-        requirements: { rank: 'moderator' },
-        cooldowns: { global: 1800000 }, // 30 minutes
-        metadata: { originalId: 2 }
+        requirements: { minRank: 3 },
+        cooldown: 1800, // 30 minutes
+        rarity: 'legendary',
+        epic: true
     },
     {
+        id: 3,
         name: 'addpower',
+        displayName: 'Add Power',
         description: 'Add any power to any user',
-        section: 'epic',
-        subid: 3,
+        category: 'epic',
         cost: 8000,
-        xats: 8000,
-        days: 0,
-        type: 'epic',
         status: 'active',
         effects: ['grant_power'],
-        requirements: { rank: 'moderator' },
-        cooldowns: { global: 3600000 }, // 1 hour
-        metadata: { originalId: 3 }
+        requirements: { minRank: 3 },
+        cooldown: 3600, // 1 hour
+        rarity: 'legendary',
+        epic: true
     },
 
     // Game Powers
     {
+        id: 101,
         name: '8ball',
+        displayName: 'Magic 8-Ball',
         description: 'Magic 8-ball power for answering questions',
-        section: 'game',
-        subid: 1,
+        category: 'special',
         cost: 100,
-        xats: 100,
-        days: 0,
-        type: 'game',
         status: 'active',
         effects: ['8ball_response'],
-        requirements: { rank: 'guest' },
-        cooldowns: { personal: 30000 }, // 30 seconds
-        metadata: { originalId: 101 }
+        requirements: { minRank: 0 },
+        cooldown: 30, // 30 seconds
+        rarity: 'common',
+        game: true
     },
     {
+        id: 102,
         name: 'radio',
+        displayName: 'Radio',
         description: 'Radio power for playing music',
-        section: 'game',
-        subid: 2,
+        category: 'special',
         cost: 200,
-        xats: 200,
-        days: 0,
-        type: 'game',
         status: 'active',
         effects: ['play_music'],
-        requirements: { rank: 'guest' },
-        cooldowns: { personal: 60000 }, // 1 minute
-        metadata: { originalId: 102 }
+        requirements: { minRank: 0 },
+        cooldown: 60, // 1 minute
+        rarity: 'common',
+        game: true
     },
 
     // Group Powers
     {
+        id: 201,
         name: 'group',
+        displayName: 'Group',
         description: 'Create and manage chat groups',
-        section: 'group',
-        subid: 1,
+        category: 'special',
         cost: 500,
-        xats: 500,
-        days: 0,
-        type: 'group',
         status: 'active',
         effects: ['create_group', 'manage_group'],
-        requirements: { rank: 'member' },
-        cooldowns: { personal: 300000 }, // 5 minutes
-        metadata: { originalId: 201 }
+        requirements: { minRank: 1 },
+        cooldown: 300, // 5 minutes
+        rarity: 'rare'
     },
 
     // Moderation Powers
     {
+        id: 301,
         name: 'kick',
+        displayName: 'Kick',
         description: 'Kick users from chat',
-        section: 'moderation',
-        subid: 1,
+        category: 'moderation',
         cost: 300,
-        xats: 300,
-        days: 0,
-        type: 'moderation',
         status: 'active',
         effects: ['kick_user'],
-        requirements: { rank: 'moderator' },
-        cooldowns: { personal: 60000 }, // 1 minute
-        metadata: { originalId: 301 }
+        requirements: { minRank: 3 },
+        cooldown: 60, // 1 minute
+        rarity: 'common'
     },
     {
+        id: 302,
         name: 'ban',
+        displayName: 'Ban',
         description: 'Ban users from chat',
-        section: 'moderation',
-        subid: 2,
+        category: 'moderation',
         cost: 500,
-        xats: 500,
-        days: 0,
-        type: 'moderation',
         status: 'active',
         effects: ['ban_user'],
-        requirements: { rank: 'moderator' },
-        cooldowns: { personal: 300000 }, // 5 minutes
-        metadata: { originalId: 302 }
+        requirements: { minRank: 3 },
+        cooldown: 300, // 5 minutes
+        rarity: 'rare'
     },
     {
+        id: 303,
         name: 'mute',
+        displayName: 'Mute',
         description: 'Mute users in chat',
-        section: 'moderation',
-        subid: 3,
+        category: 'moderation',
         cost: 200,
-        xats: 200,
-        days: 0,
-        type: 'moderation',
         status: 'active',
         effects: ['mute_user'],
-        requirements: { rank: 'moderator' },
-        cooldowns: { personal: 120000 }, // 2 minutes
-        metadata: { originalId: 303 }
+        requirements: { minRank: 3 },
+        cooldown: 120, // 2 minutes
+        rarity: 'common'
     },
 
     // Chat Powers
     {
+        id: 401,
         name: 'smilies',
+        displayName: 'Smilies',
         description: 'Access to extended smilies',
-        section: 'chat',
-        subid: 1,
+        category: 'pawn',
         cost: 150,
-        xats: 150,
-        days: 0,
-        type: 'chat',
         status: 'active',
         effects: ['extended_smilies'],
-        requirements: { rank: 'guest' },
-        cooldowns: { personal: 0 }, // No cooldown
-        metadata: { originalId: 401 }
+        requirements: { minRank: 0 },
+        cooldown: 0, // No cooldown
+        rarity: 'common'
     },
     {
+        id: 402,
         name: 'colors',
+        displayName: 'Colors',
         description: 'Use colors in chat',
-        section: 'chat',
-        subid: 2,
+        category: 'pawn',
         cost: 100,
-        xats: 100,
-        days: 0,
-        type: 'chat',
         status: 'active',
         effects: ['chat_colors'],
-        requirements: { rank: 'guest' },
-        cooldowns: { personal: 0 }, // No cooldown
-        metadata: { originalId: 402 }
+        requirements: { minRank: 0 },
+        cooldown: 0, // No cooldown
+        rarity: 'common'
     },
 
     // Utility Powers
     {
+        id: 501,
         name: 'transfer',
+        displayName: 'Transfer',
         description: 'Transfer xats to other users',
-        section: 'utility',
-        subid: 1,
+        category: 'special',
         cost: 50,
-        xats: 50,
-        days: 0,
-        type: 'utility',
         status: 'active',
         effects: ['transfer_xats'],
-        requirements: { rank: 'guest' },
-        cooldowns: { personal: 60000 }, // 1 minute
-        metadata: { originalId: 501 }
+        requirements: { minRank: 0 },
+        cooldown: 60, // 1 minute
+        rarity: 'common'
     },
     {
+        id: 502,
         name: 'trade',
+        displayName: 'Trade',
         description: 'Trade items with other users',
-        section: 'utility',
-        subid: 2,
+        category: 'special',
         cost: 75,
-        xats: 75,
-        days: 0,
-        type: 'utility',
         status: 'active',
         effects: ['trade_items'],
-        requirements: { rank: 'guest' },
-        cooldowns: { personal: 30000 }, // 30 seconds
-        metadata: { originalId: 502 }
+        requirements: { minRank: 0 },
+        cooldown: 30, // 30 seconds
+        rarity: 'common'
     }
 ];
 
 async function importPowers() {
     try {
         // Connect to MongoDB
-        const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/ixat_chat';
+        const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/xat-chat';
         await mongoose.connect(mongoUri, {
             useNewUrlParser: true,
             useUnifiedTopology: true

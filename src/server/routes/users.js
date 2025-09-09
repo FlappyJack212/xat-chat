@@ -551,4 +551,56 @@ router.get('/search/:query', async (req, res) => {
     }
 });
 
+// Update user pawn
+router.post('/pawn', authenticateToken, async (req, res) => {
+    try {
+        const { pawn } = req.body;
+        const userId = req.user.id;
+
+        // Validate pawn
+        const validPawns = ['', 'pink', 'purple', 'gold', 'blueman', 'green', 'orange', 'red', 'white', 'yellow', 'cyan', 'magenta'];
+        if (pawn && !validPawns.includes(pawn)) {
+            return res.status(400).json({ message: 'Invalid pawn type' });
+        }
+
+        // Update user pawn
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        user.pawn = pawn || '';
+        
+        // Set pawn color based on pawn type
+        const pawnColors = {
+            'pink': '#ff69b4',
+            'purple': '#8a2be2', 
+            'gold': '#ffd700',
+            'blueman': '#0000cd',
+            'green': '#00ff00',
+            'orange': '#ffa500',
+            'red': '#ff0000',
+            'white': '#ffffff',
+            'yellow': '#ffff00',
+            'cyan': '#00ffff',
+            'magenta': '#ff00ff'
+        };
+        
+        user.pawnColor = pawnColors[pawn] || '#00bfff';
+        
+        await user.save();
+
+        res.json({
+            success: true,
+            message: 'Pawn updated successfully',
+            pawn: user.pawn,
+            pawnColor: user.pawnColor
+        });
+
+    } catch (error) {
+        console.error('Error updating pawn:', error);
+        res.status(500).json({ message: 'Failed to update pawn' });
+    }
+});
+
 module.exports = router;

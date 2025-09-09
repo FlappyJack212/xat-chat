@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/consolidated.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby - ShadowNet</title>
+    <meta name="description" content="Main lobby and welcome room - Join the ShadowNet community">
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    
+    <!-- Styles moved to consolidated.css -->
+</head>
+<body>
+    <!-- Header -->
+    <!-- Navigation -->
+    <div id="navigation-container"></div>
+
+    <!-- Chat Layout -->
+    <div class="chat-layout">
+        <!-- Main Chat Area -->
+        <div class="chat-main">
+            <div class="chat-header">
+                <h2>ShadowNet Chat</h2>
+                <div>
+                    <span id="userCount">0 users</span> | 
+                    <span id="roomName">Lobby</span>
+                </div>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="message">
+                    <div class="username">System</div>
+                    <div class="content">Welcome to ShadowNet Lobby! ðŸš€</div>
+                    <div class="timestamp">Just now</div>
+                </div>
+            </div>
+            
+            <div class="smiley-bar">
+                <span class="emoticon" onclick="insertEmoticon('ðŸ˜Š')">ðŸ˜Š</span>
+                <span class="emoticon" onclick="insertEmoticon('ðŸ˜‚')">ðŸ˜‚</span>
+                <span class="emoticon" onclick="insertEmoticon('â¤ï¸')">â¤ï¸</span>
+                <span class="emoticon" onclick="insertEmoticon('ðŸ‘')">ðŸ‘</span>
+                <span class="emoticon" onclick="insertEmoticon('ðŸŽ‰')">ðŸŽ‰</span>
+                <span class="emoticon" onclick="insertEmoticon('ðŸ”¥')">ðŸ”¥</span>
+                <span class="emoticon" onclick="insertEmoticon('ðŸ’¯')">ðŸ’¯</span>
+                <span class="emoticon" onclick="insertEmoticon('âœ¨')">âœ¨</span>
+            </div>
+            
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+    </div>
+
+        <!-- Users Sidebar -->
+        <div class="chat-sidebar">
+            <div class="users-header">
+                <h3>Online Users</h3>
+                <div>
+                    <span id="totalUsers">0 users online</span>
+                </div>
+            </div>
+            <div class="users-list">
+                <ul id="idvisitors">
+                    <li>Loading users...</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let socket;
+        let currentUser = null;
+        let currentRoom = 'Lobby';
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('ðŸŽ­ [LOBBY] Page loaded, initializing chat...');
+            initializeSocket();
+        });
+        
+        function initializeSocket() {
+            console.log('ðŸ”Œ [LOBBY] Initializing socket connection...');
+            socket = io();
+            
+            socket.on('connect', () => {
+                console.log('ðŸ”Œ [LOBBY] Connected to server, socket ID:', socket.id);
+                authenticateAsGuest();
+            });
+            
+            socket.on('connect_error', (error) => {
+                console.error('ðŸ”Œ [LOBBY] Connection error:', error);
+            });
+            
+            socket.on('authenticated', (data) => {
+                console.log('ðŸ” [LOBBY] Authenticated:', data);
+                if (data.user) {
+                    currentUser = data.user;
+                    localStorage.setItem('user', JSON.stringify(currentUser));
+                }
+                joinRoom(currentRoom);
+            });
+            
+            socket.on('roomJoined', (data) => {
+                console.log('ðŸšª [LOBBY] Joined room:', data);
+                currentRoom = data.room.name;
+                document.getElementById('roomName').textContent = currentRoom;
+            });
+            
+            socket.on('userList', (data) => {
+                console.log('ðŸ‘¥ [LOBBY] Received user list:', data.users.length, 'users');
+                displayUsers(data.users);
+            });
+            
+            socket.on('userJoined', (data) => {
+                console.log('ðŸ‘‹ [LOBBY] User joined:', data.nickname);
+                addMessage('System', `${data.nickname} joined the chat`, 'just now');
+                updateUserCount();
+            });
+            
+            socket.on('userLeft', (data) => {
+                console.log('ðŸ‘‹ [LOBBY] User left:', data.nickname);
+                addMessage('System', `${data.nickname} left the chat`, 'just now');
+                updateUserCount();
+            });
+            
+            socket.on('message', (data) => {
+                console.log('ðŸ’¬ [LOBBY] Message received:', data);
+                addMessage(data.user.nickname, data.message, formatTimestamp(data.timestamp));
+            });
+            
+            socket.on('disconnect', () => {
+                console.log('ðŸ”Œ [LOBBY] Disconnected from server');
+            });
+        }
+        
+        function authenticateAsGuest() {
+            const guestName = `Guest${Math.floor(Math.random() * 1000)}`;
+            console.log('ðŸ‘¤ [LOBBY] Authenticating as guest:', guestName);
+            socket.emit('authenticate', { 
+                guest: true, 
+                nickname: guestName 
+            });
+        }
+        
+        function joinRoom(roomName) {
+            console.log('ðŸšª [LOBBY] Joining room:', roomName);
+            if (socket && socket.connected) {
+                socket.emit('joinRoom', { roomName: roomName });
+            }
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (message && socket) {
+                socket.emit('message', { message: message });
+                input.value = '';
+            }
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        function insertEmoticon(emoticon) {
+            const input = document.getElementById('messageInput');
+            input.value += emoticon;
+            input.focus();
+        }
+        
+        function addMessage(username, content, timestamp) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            messageDiv.innerHTML = `
+                <div class="username">${username}</div>
+                <div class="content">${content}</div>
+                <div class="timestamp">${timestamp}</div>
+            `;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function displayUsers(userList) {
+            const usersContainer = document.getElementById('idvisitors');
+            if (!usersContainer) return;
+
+            usersContainer.innerHTML = '';
+
+            userList.forEach(user => {
+                const userElement = document.createElement('li');
+                const displayName = user.nickname || user.username || 'Unknown';
+                
+                userElement.innerHTML = `
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <div style="width:32px;height:32px;background:#3498db;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px;color:white;">
+                            ${displayName.charAt(0).toUpperCase()}
+                        </div>
+                        <div style="flex:1;">
+                            <div style="display:flex;align-items:center;gap:5px;">
+                                <strong>${displayName}</strong>
+                                <span style="width:8px;height:8px;background:#27ae60;border-radius:50%;display:inline-block;"></span>
+                            </div>
+                            <small style="color:#bdc3c7;">
+                                Guest User
+                            </small>
+                        </div>
+                    </div>
+                `;
+                usersContainer.appendChild(userElement);
+            });
+            
+            updateUserCount();
+        }
+        
+        function updateUserCount() {
+            const userList = document.getElementById('idvisitors');
+            const count = userList.children.length;
+            document.getElementById('userCount').textContent = `${count} users`;
+            document.getElementById('totalUsers').textContent = `${count} users online`;
+        }
+        
+        function formatTimestamp(timestamp) {
+            if (!timestamp) return 'just now';
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diff = now - date;
+            
+            if (diff < 60000) return 'just now';
+            if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
+            if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
+            return date.toLocaleDateString();
+        }
+        
+        // Load navigation
+        fetch('/components/navigation.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('navigation-container').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
+</body>
+</html>
+

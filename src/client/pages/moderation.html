@@ -1,0 +1,476 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/consolidated.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderation Tools - Xat Recreation</title>
+    <!-- Styles moved to consolidated.css -->
+</head>
+<body>
+    <div class="moderation-container">
+        <a href="/" class="back-link">â† Back to Home</a>
+        
+        <div class="moderation-header">
+            <h1>ðŸ›¡ï¸ Moderation Tools</h1>
+            <p>Manage users and maintain chat quality</p>
+        </div>
+
+        <div class="moderation-nav">
+            <button class="nav-btn active" onclick="showSection('users')">Users</button>
+            <button class="nav-btn" onclick="showSection('actions')">Actions</button>
+            <button class="nav-btn" onclick="showSection('history')">History</button>
+            <button class="nav-btn" onclick="showSection('stats')">Statistics</button>
+        </div>
+
+        <div class="moderation-content">
+            <div class="moderation-main">
+                <!-- Users Section -->
+                <div class="moderation-section active" id="users">
+                    <h2 class="section-title">User Management</h2>
+                    
+                    <div class="user-search">
+                        <input type="text" id="userSearch" placeholder="Search users by username or ID...">
+                        <button onclick="searchUsers()">Search</button>
+                    </div>
+
+                    <div class="user-list" id="userList">
+                        <!-- Users will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Actions Section -->
+                <div class="moderation-section" id="actions">
+                    <h2 class="section-title">Quick Actions</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3 id="totalUsers">0</h3>
+                            <p>Total Users</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="onlineUsers">0</h3>
+                            <p>Online Users</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="mutedUsers">0</h3>
+                            <p>Muted Users</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="bannedUsers">0</h3>
+                            <p>Banned Users</p>
+                        </div>
+                    </div>
+
+                    <div class="permission-warning" id="permissionWarning" style="display: none;">
+                        <strong>âš ï¸ Permission Required:</strong> You need moderator or higher permissions to use moderation tools.
+                    </div>
+                </div>
+
+                <!-- History Section -->
+                <div class="moderation-section" id="history">
+                    <h2 class="section-title">Moderation History</h2>
+                    
+                    <div class="history-list" id="historyList">
+                        <!-- History will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Statistics Section -->
+                <div class="moderation-section" id="stats">
+                    <h2 class="section-title">Moderation Statistics</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3 id="totalActions">0</h3>
+                            <p>Total Actions (24h)</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="warningsIssued">0</h3>
+                            <p>Warnings Issued</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="mutesIssued">0</h3>
+                            <p>Mutes Issued</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="kicksIssued">0</h3>
+                            <p>Kicks Issued</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="bansIssued">0</h3>
+                            <p>Bans Issued</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="promotionsIssued">0</h3>
+                            <p>Promotions Issued</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="moderation-sidebar">
+                <div class="sidebar-section">
+                    <h3>Quick Links</h3>
+                    <ul class="sidebar-links">
+                        <li><a href="/embed.html">Chat Interface</a></li>
+                        <li><a href="/powers.html">Powers Store</a></li>
+                        <li><a href="/profile.html">Profile Settings</a></li>
+                        <li><a href="/wiki.html">Wiki</a></li>
+                        <li><a href="/forum.html">Forum</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Moderation Commands</h3>
+                    <ul class="sidebar-links">
+                        <li>!kick username - Kick user</li>
+                        <li>!ban username - Ban user</li>
+                        <li>!mute username - Mute user</li>
+                        <li>!warn username - Warn user</li>
+                        <li>!promote username - Promote user</li>
+                        <li>!demote username - Demote user</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Your Permissions</h3>
+                    <ul class="sidebar-links" id="permissionsList">
+                        <li>Loading...</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Moderation Action Modal -->
+    <div class="modal" id="actionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="actionModalTitle">Moderation Action</h3>
+                <button class="close-btn" onclick="closeActionModal()">&times;</button>
+            </div>
+            <form id="actionForm">
+                <div class="form-group">
+                    <label for="targetUser">Target User</label>
+                    <input type="text" id="targetUser" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="actionType">Action Type</label>
+                    <select id="actionType" required>
+                        <option value="">Select action</option>
+                        <option value="warn">Warn</option>
+                        <option value="mute">Mute</option>
+                        <option value="kick">Kick</option>
+                        <option value="ban">Ban</option>
+                        <option value="promote">Promote</option>
+                        <option value="demote">Demote</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reason">Reason</label>
+                    <textarea id="reason" required placeholder="Enter reason for this action..."></textarea>
+                </div>
+                <div class="form-group" id="durationGroup" style="display: none;">
+                    <label for="duration">Duration (minutes)</label>
+                    <input type="number" id="duration" min="1" max="10080" placeholder="Enter duration in minutes">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Execute Action</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeActionModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+        let currentSection = 'users';
+
+        // Check authentication and permissions
+        document.addEventListener('DOMContentLoaded', async function() {
+            await checkAuth();
+            loadUsers();
+            loadStats();
+            loadHistory();
+        });
+
+        async function checkAuth() {
+            const token = localStorage.getItem('authToken') || localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/auth.html';
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/auth/status?token=' + token);
+                const data = await response.json();
+                
+                if (!data.authenticated) {
+                    localStorage.removeItem('authToken');
+                    localStorage.removeItem('token');
+                    window.location.href = '/auth.html';
+                    return;
+                }
+                
+                currentUser = data.user;
+                updatePermissions();
+            } catch (error) {
+                console.error('Auth check failed:', error);
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('token');
+                window.location.href = '/auth.html';
+            }
+        }
+
+        function updatePermissions() {
+            const permissionsList = document.getElementById('permissionsList');
+            const permissionWarning = document.getElementById('permissionWarning');
+            
+            if (!currentUser || !['moderator', 'owner', 'mainowner'].includes(currentUser.rank)) {
+                permissionWarning.style.display = 'block';
+                permissionsList.innerHTML = '<li>No moderation permissions</li>';
+                return;
+            }
+
+            permissionWarning.style.display = 'none';
+            const permissions = [];
+            
+            if (['moderator', 'owner', 'mainowner'].includes(currentUser.rank)) {
+                permissions.push('Warn users');
+                permissions.push('Mute users');
+                permissions.push('Kick users');
+            }
+            
+            if (['owner', 'mainowner'].includes(currentUser.rank)) {
+                permissions.push('Ban users');
+                permissions.push('Promote users');
+                permissions.push('Demote users');
+            }
+            
+            permissionsList.innerHTML = permissions.map(p => `<li>${p}</li>`).join('');
+        }
+
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.moderation-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            currentSection = sectionId;
+
+            // Load section-specific data
+            switch(sectionId) {
+                case 'users':
+                    loadUsers();
+                    break;
+                case 'actions':
+                    loadStats();
+                    break;
+                case 'history':
+                    loadHistory();
+                    break;
+                case 'stats':
+                    loadStats();
+                    break;
+            }
+        }
+
+        async function loadUsers() {
+            const userList = document.getElementById('userList');
+            userList.innerHTML = '<div style="text-align: center; padding: 20px;">Loading users...</div>';
+
+            try {
+                // In a real implementation, this would fetch from the API
+                const mockUsers = [
+                    { id: 1, username: 'Admin', rank: 'mainowner', status: 'online', muted: false, banned: false },
+                    { id: 2, username: 'Moderator1', rank: 'moderator', status: 'online', muted: false, banned: false },
+                    { id: 3, username: 'User123', rank: 'member', status: 'online', muted: false, banned: false },
+                    { id: 4, username: 'Gamer456', rank: 'member', status: 'offline', muted: true, banned: false },
+                    { id: 5, username: 'Troublemaker', rank: 'member', status: 'offline', muted: false, banned: true }
+                ];
+
+                userList.innerHTML = mockUsers.map(user => `
+                    <div class="user-item">
+                        <div class="user-avatar">${user.username.charAt(0).toUpperCase()}</div>
+                        <div class="user-info">
+                            <h4>${user.username}</h4>
+                            <p>ID: ${user.id}</p>
+                        </div>
+                        <div class="user-rank rank-${user.rank}">${user.rank.toUpperCase()}</div>
+                        <div class="user-status status-${user.status}">${user.status.toUpperCase()}</div>
+                        <div class="action-buttons">
+                            ${getActionButtons(user)}
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                userList.innerHTML = '<div style="text-align: center; padding: 20px; color: #ff6b6b;">Failed to load users</div>';
+            }
+        }
+
+        function getActionButtons(user) {
+            if (!currentUser || !['moderator', 'owner', 'mainowner'].includes(currentUser.rank)) {
+                return '<span style="color: #888;">No permissions</span>';
+            }
+
+            const buttons = [];
+            
+            if (['moderator', 'owner', 'mainowner'].includes(currentUser.rank)) {
+                buttons.push(`<button class="action-btn btn-warn" onclick="openActionModal('${user.username}', 'warn')">Warn</button>`);
+                buttons.push(`<button class="action-btn btn-mute" onclick="openActionModal('${user.username}', 'mute')">Mute</button>`);
+                buttons.push(`<button class="action-btn btn-kick" onclick="openActionModal('${user.username}', 'kick')">Kick</button>`);
+            }
+            
+            if (['owner', 'mainowner'].includes(currentUser.rank)) {
+                buttons.push(`<button class="action-btn btn-ban" onclick="openActionModal('${user.username}', 'ban')">Ban</button>`);
+                buttons.push(`<button class="action-btn btn-promote" onclick="openActionModal('${user.username}', 'promote')">Promote</button>`);
+                buttons.push(`<button class="action-btn btn-demote" onclick="openActionModal('${user.username}', 'demote')">Demote</button>`);
+            }
+
+            return buttons.join('');
+        }
+
+        async function loadStats() {
+            // Update stats cards
+            document.getElementById('totalUsers').textContent = '156';
+            document.getElementById('onlineUsers').textContent = '23';
+            document.getElementById('mutedUsers').textContent = '3';
+            document.getElementById('bannedUsers').textContent = '7';
+            document.getElementById('totalActions').textContent = '45';
+            document.getElementById('warningsIssued').textContent = '12';
+            document.getElementById('mutesIssued').textContent = '8';
+            document.getElementById('kicksIssued').textContent = '15';
+            document.getElementById('bansIssued').textContent = '3';
+            document.getElementById('promotionsIssued').textContent = '2';
+        }
+
+        async function loadHistory() {
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = '<div style="text-align: center; padding: 20px;">Loading history...</div>';
+
+            try {
+                // In a real implementation, this would fetch from the API
+                const mockHistory = [
+                    { action: 'warn', user: 'Troublemaker', moderator: 'Admin', reason: 'Spam', date: '2 hours ago', status: 'active' },
+                    { action: 'mute', user: 'Gamer456', moderator: 'Moderator1', reason: 'Inappropriate language', date: '4 hours ago', status: 'active' },
+                    { action: 'kick', user: 'User123', moderator: 'Moderator1', reason: 'Disruptive behavior', date: '6 hours ago', status: 'expired' },
+                    { action: 'ban', user: 'Spammer', moderator: 'Admin', reason: 'Repeated violations', date: '1 day ago', status: 'active' },
+                    { action: 'promote', user: 'Moderator1', moderator: 'Admin', reason: 'Good behavior', date: '2 days ago', status: 'active' }
+                ];
+
+                historyList.innerHTML = mockHistory.map(item => `
+                    <div class="history-item">
+                        <div class="action-icon action-${item.action}">${item.action.charAt(0).toUpperCase()}</div>
+                        <div class="history-info">
+                            <h4>${item.action.toUpperCase()} - ${item.user}</h4>
+                            <p>By ${item.moderator}: ${item.reason}</p>
+                        </div>
+                        <div class="history-date">${item.date}</div>
+                        <div class="history-status status-${item.status}">${item.status.toUpperCase()}</div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                historyList.innerHTML = '<div style="text-align: center; padding: 20px; color: #ff6b6b;">Failed to load history</div>';
+            }
+        }
+
+        function searchUsers() {
+            const searchTerm = document.getElementById('userSearch').value.toLowerCase();
+            const userItems = document.querySelectorAll('.user-item');
+            
+            userItems.forEach(item => {
+                const username = item.querySelector('h4').textContent.toLowerCase();
+                const userId = item.querySelector('p').textContent.toLowerCase();
+                
+                if (username.includes(searchTerm) || userId.includes(searchTerm)) {
+                    item.style.display = 'grid';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function openActionModal(username, actionType) {
+            document.getElementById('targetUser').value = username;
+            document.getElementById('actionType').value = actionType;
+            document.getElementById('actionModalTitle').textContent = `${actionType.toUpperCase()} User`;
+            
+            // Show/hide duration field based on action type
+            const durationGroup = document.getElementById('durationGroup');
+            if (['mute', 'ban'].includes(actionType)) {
+                durationGroup.style.display = 'block';
+            } else {
+                durationGroup.style.display = 'none';
+            }
+            
+            document.getElementById('actionModal').style.display = 'block';
+        }
+
+        function closeActionModal() {
+            document.getElementById('actionModal').style.display = 'none';
+            document.getElementById('actionForm').reset();
+        }
+
+        // Handle action form submission
+        document.getElementById('actionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const targetUser = document.getElementById('targetUser').value;
+            const actionType = document.getElementById('actionType').value;
+            const reason = document.getElementById('reason').value;
+            const duration = document.getElementById('duration').value;
+            
+            try {
+                const response = await fetch(`/api/moderation/${actionType}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('authToken') || localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify({
+                        targetUserId: targetUser,
+                        chatRoomId: 'main',
+                        reason: reason,
+                        duration: duration ? parseInt(duration) : undefined
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    alert(`Successfully ${actionType}ed ${targetUser}`);
+                    closeActionModal();
+                    loadUsers();
+                    loadHistory();
+                } else {
+                    alert(data.message || `Failed to ${actionType} user`);
+                }
+            } catch (error) {
+                console.error('Action failed:', error);
+                alert('Network error. Please try again.');
+            }
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('actionModal');
+            if (event.target === modal) {
+                closeActionModal();
+            }
+        }
+    </script>
+</body>
+</html>
+

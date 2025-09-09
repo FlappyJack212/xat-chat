@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/consolidated.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xat Chat Test</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <!-- Styles moved to consolidated.css -->
+</head>
+<body>
+    <h1>ðŸ§ª xat Chat Integration Test</h1>
+    
+    <div class="test-section info">
+        <h3>Connection Status</h3>
+        <div id="connectionStatus">Connecting...</div>
+    </div>
+
+    <div class="test-section info">
+        <h3>User Info</h3>
+        <div id="userInfo">Not authenticated</div>
+    </div>
+
+    <div class="test-section info">
+        <h3>Room Info</h3>
+        <div id="roomInfo">Not in room</div>
+    </div>
+
+    <div class="test-section">
+        <h3>Chat Messages</h3>
+        <div id="messages"></div>
+        <input type="text" id="messageInput" placeholder="Type a message..." maxlength="255">
+        <button onclick="sendMessage()">Send Message</button>
+        <button onclick="testPowers()">Test Powers</button>
+    </div>
+
+    <div class="test-section">
+        <h3>Test Results</h3>
+        <div id="testResults">
+            <div>âœ… Socket connection: <span id="socketTest">Testing...</span></div>
+            <div>âœ… Authentication: <span id="authTest">Testing...</span></div>
+            <div>âœ… Room joining: <span id="roomTest">Testing...</span></div>
+            <div>âœ… Message sending: <span id="messageTest">Testing...</span></div>
+            <div>âœ… Powers system: <span id="powersTest">Testing...</span></div>
+        </div>
+    </div>
+
+    <script>
+        let socket;
+        let currentUser = null;
+        let testResults = {
+            socket: false,
+            auth: false,
+            room: false,
+            message: false,
+            powers: false
+        };
+
+        function updateTestResult(test, success) {
+            testResults[test] = success;
+            const element = document.getElementById(test + 'Test');
+            element.textContent = success ? 'PASS' : 'FAIL';
+            element.style.color = success ? '#4caf50' : '#f44336';
+        }
+
+        function addMessage(content, type = 'system') {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            messageDiv.textContent = `[${new Date().toLocaleTimeString()}] ${content}`;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function connectToServer() {
+            addMessage('Connecting to server...', 'system');
+            socket = io();
+
+            socket.on('connect', () => {
+                addMessage('âœ… Connected to server', 'system');
+                updateTestResult('socket', true);
+                document.getElementById('connectionStatus').textContent = 'Connected';
+                
+                // Test guest authentication
+                socket.emit('guest-login', { nickname: 'TestUser' });
+            });
+
+            socket.on('disconnect', () => {
+                addMessage('âŒ Disconnected from server', 'error');
+                document.getElementById('connectionStatus').textContent = 'Disconnected';
+            });
+
+            socket.on('guest-authenticated', (data) => {
+                addMessage('âœ… Guest authentication successful', 'system');
+                updateTestResult('auth', true);
+                currentUser = data.user;
+                document.getElementById('userInfo').textContent = 
+                    `Guest: ${currentUser.nickname} (ID: ${currentUser._id})`;
+                
+                // Test room joining
+                socket.emit('join-room', { roomId: 'Test Room' });
+            });
+
+            socket.on('auth-error', (error) => {
+                addMessage(`âŒ Authentication failed: ${error.message}`, 'error');
+                updateTestResult('auth', false);
+            });
+
+            socket.on('roomJoined', (data) => {
+                addMessage(`âœ… Joined room: ${data.room.name}`, 'system');
+                updateTestResult('room', true);
+                document.getElementById('roomInfo').textContent = 
+                    `Room: ${data.room.name} (ID: ${data.room.id})`;
+            });
+
+            socket.on('userList', (data) => {
+                addMessage(`ðŸ‘¥ Users in room: ${data.users.length}`, 'system');
+                data.users.forEach(user => {
+                    addMessage(`  - ${user.nickname || user.username} (Rank: ${user.rank})`, 'system');
+                });
+            });
+
+            socket.on('userJoined', (data) => {
+                addMessage(`ðŸ‘‹ ${data.user.nickname || data.user.username} joined`, 'system');
+            });
+
+            socket.on('userLeft', (data) => {
+                addMessage(`ðŸ‘‹ ${data.user.nickname || data.user.username} left`, 'system');
+            });
+
+            socket.on('message', (data) => {
+                addMessage(`${data.user.nickname || data.user.username}: ${data.message.content}`, 'user');
+                updateTestResult('message', true);
+            });
+
+            socket.on('error', (error) => {
+                addMessage(`âŒ Error: ${error.message}`, 'error');
+            });
+
+            socket.on('power-activated', (data) => {
+                addMessage(`â­ Power activated: ${data.power.name}`, 'system');
+            });
+
+            socket.on('power-effect', (data) => {
+                addMessage(`âœ¨ Power effect: ${data.effect.type}`, 'system');
+            });
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (message && socket) {
+                socket.emit('send-message', { 
+                    message: message, 
+                    roomId: 'Test Room' 
+                });
+                input.value = '';
+            }
+        }
+
+        function testPowers() {
+            addMessage('Testing powers system...', 'system');
+            
+            // Test getting powers
+            fetch('/api/powers')
+                .then(response => response.json())
+                .then(data => {
+                    addMessage(`âœ… Powers API working: ${data.powers.length} powers available`, 'system');
+                    updateTestResult('powers', true);
+                    
+                    // Show some sample powers
+                    const samplePowers = data.powers.slice(0, 5);
+                    samplePowers.forEach(power => {
+                        addMessage(`  - ${power.name}: ${power.description} (Cost: ${power.cost} xats)`, 'system');
+                    });
+                })
+                .catch(error => {
+                    addMessage(`âŒ Powers API failed: ${error.message}`, 'error');
+                    updateTestResult('powers', false);
+                });
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('messageInput').addEventListener('keypress', handleKeyPress);
+            connectToServer();
+        });
+    </script>
+</body>
+</html>
+

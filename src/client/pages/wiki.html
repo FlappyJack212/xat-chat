@@ -1,0 +1,476 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki - iXat</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/authentic-xat.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #00d4ff 100%);
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .wiki-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .wiki-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .wiki-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .wiki-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+        }
+
+        .wiki-sidebar {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            height: fit-content;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .wiki-content {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .wiki-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .wiki-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .wiki-nav a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #374151;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .wiki-nav a:hover,
+        .wiki-nav a.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .wiki-nav .sub-nav {
+            margin-left: 1rem;
+            margin-top: 0.25rem;
+        }
+
+        .wiki-nav .sub-nav a {
+            font-size: 0.875rem;
+            padding: 0.25rem 0.75rem;
+        }
+
+        .wiki-section {
+            display: none;
+        }
+
+        .wiki-section.active {
+            display: block;
+        }
+
+        .wiki-section h2 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .wiki-section h3 {
+            color: #374151;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        .wiki-section p {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .wiki-section ul {
+            color: #4b5563;
+            margin-bottom: 1rem;
+        }
+
+        .wiki-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .feature-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .feature-card h4 {
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin: 0;
+        }
+
+        .code-block {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .wiki-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .wiki-sidebar {
+                order: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div id="navigation-container"></div>
+
+    <div class="container">
+        <div class="wiki-header">
+            <h1>📚 iXat Wiki</h1>
+            <p>Your complete guide to iXat features and functionality</p>
+        </div>
+
+        <div class="wiki-layout">
+            <div class="wiki-sidebar">
+                <input type="text" class="search-box" placeholder="Search wiki..." id="wikiSearch">
+                
+                <ul class="wiki-nav">
+                    <li><a href="#getting-started" class="nav-link active">Getting Started</a></li>
+                    <li><a href="#chat-features" class="nav-link">Chat Features</a></li>
+                    <li><a href="#powers" class="nav-link">Powers</a></li>
+                    <li><a href="#store" class="nav-link">Store</a></li>
+                    <li><a href="#profile" class="nav-link">Profile & Settings</a></li>
+                    <li><a href="#moderation" class="nav-link">Moderation</a></li>
+                    <li><a href="#troubleshooting" class="nav-link">Troubleshooting</a></li>
+                </ul>
+            </div>
+
+            <div class="wiki-content">
+                <!-- Getting Started Section -->
+                <div id="getting-started" class="wiki-section active">
+                    <h2>Getting Started</h2>
+                    <p>Welcome to iXat! This guide will help you get up and running with all the features our platform has to offer.</p>
+                    
+                    <h3>Creating Your Account</h3>
+                    <p>To get started, you'll need to create an account:</p>
+                    <ul>
+                        <li>Click the "Register" button in the top navigation</li>
+                        <li>Choose a unique username (3-20 characters)</li>
+                        <li>Enter a valid email address</li>
+                        <li>Create a secure password (minimum 6 characters)</li>
+                        <li>Optionally set a display nickname</li>
+                    </ul>
+
+                    <h3>Your First Login</h3>
+                    <p>After registration, you can log in using your username or email address. Once logged in, you'll have access to:</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4>💬 Chat</h4>
+                            <p>Join conversations in real-time</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>🛒 Store</h4>
+                            <p>Purchase powers and items</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>👤 Profile</h4>
+                            <p>Customize your appearance</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>⚡ Powers</h4>
+                            <p>Use special abilities</p>
+                        </div>
+                    </div>
+
+                    <h3>Starting Balance</h3>
+                    <p>New users receive 1,000 xats to get started. You can use these to purchase powers and items from the store.</p>
+                </div>
+
+                <!-- Chat Features Section -->
+                <div id="chat-features" class="wiki-section">
+                    <h2>Chat Features</h2>
+                    <p>iXat offers a rich chat experience with many features to enhance your conversations.</p>
+                    
+                    <h3>Basic Chatting</h3>
+                    <p>To send a message, simply type in the message box and press Enter or click Send. Your messages will appear in the chat with your username and avatar.</p>
+                    
+                    <h3>Message Formatting</h3>
+                    <p>You can format your messages using special codes:</p>
+                    <div class="code-block">
+/bold text/ - Makes text bold
+*italic text* - Makes text italic
+_underlined text_ - Underlines text
+~strikethrough text~ - Strikes through text
+                    </div>
+
+                    <h3>Private Messages</h3>
+                    <p>To send a private message to another user, click on their name in the user list and select "Private Message". Private conversations open in a separate tab.</p>
+
+                    <h3>Emojis and Smilies</h3>
+                    <p>Express yourself with emojis and smilies. Type :smile: for 😊 or use the emoji picker in the chat interface.</p>
+                </div>
+
+                <!-- Powers Section -->
+                <div id="powers" class="wiki-section">
+                    <h2>Powers</h2>
+                    <p>Powers are special abilities that enhance your chat experience. They can be purchased from the store or earned through various activities.</p>
+                    
+                    <h3>Types of Powers</h3>
+                    <ul>
+                        <li><strong>Visual Powers:</strong> Change how your messages appear</li>
+                        <li><strong>Functional Powers:</strong> Add special abilities to your account</li>
+                        <li><strong>Decorative Powers:</strong> Add visual effects and animations</li>
+                        <li><strong>Utility Powers:</strong> Help with moderation or management</li>
+                    </ul>
+
+                    <h3>Using Powers</h3>
+                    <p>Once you own a power, you can activate it from your profile or the powers page. Some powers are automatic, while others require manual activation.</p>
+
+                    <h3>Power Management</h3>
+                    <p>You can view all your owned powers, check their status, and manage their settings from the Powers section of your profile.</p>
+                </div>
+
+                <!-- Store Section -->
+                <div id="store" class="wiki-section">
+                    <h2>Store</h2>
+                    <p>The iXat store is where you can purchase powers, packages, and other items to enhance your experience.</p>
+                    
+                    <h3>Purchasing Items</h3>
+                    <p>To buy items from the store:</p>
+                    <ol>
+                        <li>Navigate to the Store page</li>
+                        <li>Browse available items</li>
+                        <li>Click "Buy" on the item you want</li>
+                        <li>Confirm your purchase</li>
+                    </ol>
+
+                    <h3>Payment Methods</h3>
+                    <p>Currently, all purchases are made using xats (our virtual currency). You can earn xats through various activities or purchase xat packages.</p>
+
+                    <h3>Packages</h3>
+                    <p>Xat packages offer great value for money, providing more xats than purchasing them individually. Check the Packages tab in the store for current offers.</p>
+                </div>
+
+                <!-- Profile Section -->
+                <div id="profile" class="wiki-section">
+                    <h2>Profile & Settings</h2>
+                    <p>Customize your iXat experience by managing your profile and account settings.</p>
+                    
+                    <h3>Profile Information</h3>
+                    <p>Update your profile with:</p>
+                    <ul>
+                        <li>Display nickname</li>
+                        <li>Avatar selection</li>
+                        <li>Personal description</li>
+                        <li>Contact information</li>
+                        <li>Privacy settings</li>
+                    </ul>
+
+                    <h3>Account Settings</h3>
+                    <p>Manage your account preferences including:</p>
+                    <ul>
+                        <li>Password changes</li>
+                        <li>Email notifications</li>
+                        <li>Privacy controls</li>
+                        <li>Language preferences</li>
+                    </ul>
+                </div>
+
+                <!-- Moderation Section -->
+                <div id="moderation" class="wiki-section">
+                    <h2>Moderation</h2>
+                    <p>iXat has a comprehensive moderation system to ensure a safe and enjoyable environment for all users.</p>
+                    
+                    <h3>Reporting Users</h3>
+                    <p>If you encounter inappropriate behavior, you can report users by clicking on their name and selecting "Report". Our moderation team will review all reports.</p>
+
+                    <h3>Moderation Actions</h3>
+                    <p>Moderators and administrators can take various actions including:</p>
+                    <ul>
+                        <li>Warnings</li>
+                        <li>Temporary bans</li>
+                        <li>Permanent bans</li>
+                        <li>Message deletion</li>
+                    </ul>
+
+                    <h3>Appeals Process</h3>
+                    <p>If you believe you've been unfairly moderated, you can appeal the decision through our support system.</p>
+                </div>
+
+                <!-- Troubleshooting Section -->
+                <div id="troubleshooting" class="wiki-section">
+                    <h2>Troubleshooting</h2>
+                    <p>Having issues? Here are some common solutions to help you get back on track.</p>
+                    
+                    <h3>Login Problems</h3>
+                    <p>If you can't log in:</p>
+                    <ul>
+                        <li>Check your username/email and password</li>
+                        <li>Try resetting your password</li>
+                        <li>Clear your browser cache and cookies</li>
+                        <li>Try a different browser</li>
+                    </ul>
+
+                    <h3>Chat Issues</h3>
+                    <p>If chat isn't working properly:</p>
+                    <ul>
+                        <li>Refresh the page</li>
+                        <li>Check your internet connection</li>
+                        <li>Disable browser extensions temporarily</li>
+                        <li>Try incognito/private browsing mode</li>
+                    </ul>
+
+                    <h3>Getting Help</h3>
+                    <p>If you need additional assistance:</p>
+                    <ul>
+                        <li>Visit the Forum for community support</li>
+                        <li>Check our FAQ section</li>
+                        <li>Contact our support team</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../modules/auth-system.js"></script>
+    <script>
+        // Initialize auth system
+        const authSystem = new AuthSystem();
+
+        // Wiki functionality
+        class Wiki {
+            constructor() {
+                this.currentSection = 'getting-started';
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                // Navigation links
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const section = link.getAttribute('href').substring(1);
+                        this.showSection(section);
+                    });
+                });
+
+                // Search functionality
+                document.getElementById('wikiSearch').addEventListener('input', (e) => {
+                    this.searchWiki(e.target.value);
+                });
+            }
+
+            showSection(sectionId) {
+                // Update navigation
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                document.querySelector(`[href="#${sectionId}"]`).classList.add('active');
+
+                // Show section
+                document.querySelectorAll('.wiki-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(sectionId).classList.add('active');
+
+                this.currentSection = sectionId;
+            }
+
+            searchWiki(query) {
+                if (query.length < 2) return;
+
+                // Simple search implementation
+                const sections = document.querySelectorAll('.wiki-section');
+                sections.forEach(section => {
+                    const content = section.textContent.toLowerCase();
+                    const matches = content.includes(query.toLowerCase());
+                    
+                    if (matches) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            }
+        }
+
+        // Initialize wiki
+        const wiki = new Wiki();
+
+        // Load navigation
+        fetch('/components/navigation.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('navigation-container').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
+</body>
+</html>

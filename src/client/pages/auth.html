@@ -1,0 +1,435 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/consolidated.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ðŸŽ­ ShadowNet - Login & Register</title>
+    
+    <!-- Navigation -->
+    <div id="navigation-container"></div>
+    <!-- Styles moved to consolidated.css -->
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1>ðŸŽ­ Welcome to ShadowNet</h1>
+            <p>Join millions of users in the world's most popular chat platform</p>
+        </div>
+        
+        <div class="auth-tabs">
+            <div class="auth-tab active" onclick="switchTab('login')">Login</div>
+            <div class="auth-tab" onclick="switchTab('register')">Register</div>
+        </div>
+        
+        <!-- Success/Error Messages -->
+        <div class="success-message" id="successMessage"></div>
+        <div class="error-message-global" id="errorMessage"></div>
+        
+        <!-- Login Form -->
+        <form class="auth-form active" id="loginForm">
+            <div class="form-group">
+                <label for="loginUsername">Username or Email</label>
+                <input type="text" id="loginUsername" name="username" required>
+                <div class="error-message" id="loginUsernameError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" name="password" required>
+                <div class="error-message" id="loginPasswordError"></div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Login</button>
+            
+            <div class="divider">
+                <span>or</span>
+            </div>
+            
+            <div class="social-login">
+                <a href="#" class="social-btn">Google</a>
+                <a href="#" class="social-btn">Facebook</a>
+            </div>
+            
+            <div class="forgot-password">
+                <a href="#" onclick="showForgotPassword()">Forgot your password?</a>
+            </div>
+        </form>
+        
+        <!-- Register Form -->
+        <form class="auth-form" id="registerForm">
+            <div class="form-group">
+                <label for="registerUsername">Username</label>
+                <input type="text" id="registerUsername" name="username" required>
+                <div class="error-message" id="registerUsernameError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" name="email" required>
+                <div class="error-message" id="registerEmailError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="registerPassword">Password</label>
+                <input type="password" id="registerPassword" name="password" required>
+                <div class="error-message" id="registerPasswordError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="registerConfirmPassword">Confirm Password</label>
+                <input type="password" id="registerConfirmPassword" name="confirmPassword" required>
+                <div class="error-message" id="registerConfirmPasswordError"></div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Create Account</button>
+            
+            <div class="divider">
+                <span>or</span>
+            </div>
+            
+            <div class="social-login">
+                <a href="#" class="social-btn">Google</a>
+                <a href="#" class="social-btn">Facebook</a>
+            </div>
+        </form>
+        
+        <!-- Loading -->
+        <div class="loading" id="loading"></div>
+        
+        <!-- Forgot Password Form -->
+        <form class="auth-form" id="forgotPasswordForm">
+            <div class="form-group">
+                <label for="forgotEmail">Email Address</label>
+                <input type="email" id="forgotEmail" name="email" placeholder="Enter your registered email" required>
+                <div class="error-message" id="forgotEmailError"></div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+                ðŸ” Send Password Reset Link
+            </button>
+            
+            <div class="back-link">
+                <a href="#" onclick="showLoginForm()">â† Back to Login</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Enhanced Auth System -->
+    <script src="/auth-system.js"></script>
+    
+    <script>
+        let currentTab = 'login';
+        let authSystem = null;
+        
+        // Initialize auth system
+        document.addEventListener('DOMContentLoaded', function() {
+            authSystem = new AuthSystem();
+        });
+        
+        function switchTab(tab) {
+            // Update tabs
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update forms
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            if (tab === 'login') {
+                document.getElementById('loginForm').classList.add('active');
+            } else {
+                document.getElementById('registerForm').classList.add('active');
+            }
+            
+            currentTab = tab;
+            hideMessages();
+        }
+        
+        function showMessage(type, message) {
+            hideMessages();
+            if (type === 'success') {
+                document.getElementById('successMessage').textContent = message;
+                document.getElementById('successMessage').style.display = 'block';
+            } else {
+                document.getElementById('errorMessage').textContent = message;
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        }
+        
+        function hideMessages() {
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+        
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+        }
+        
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+        
+        function validateForm(formData) {
+            let isValid = true;
+            
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(e => e.style.display = 'none');
+            document.querySelectorAll('input').forEach(i => i.classList.remove('error'));
+            
+            if (currentTab === 'login') {
+                if (!formData.username) {
+                    document.getElementById('loginUsernameError').textContent = 'Username is required';
+                    document.getElementById('loginUsernameError').style.display = 'block';
+                    document.getElementById('loginUsername').classList.add('error');
+                    isValid = false;
+                }
+                
+                if (!formData.password) {
+                    document.getElementById('loginPasswordError').textContent = 'Password is required';
+                    document.getElementById('loginPasswordError').style.display = 'block';
+                    document.getElementById('loginPassword').classList.add('error');
+                    isValid = false;
+                }
+            } else {
+                if (!formData.username || formData.username.length < 3) {
+                    document.getElementById('registerUsernameError').textContent = 'Username must be at least 3 characters';
+                    document.getElementById('registerUsernameError').style.display = 'block';
+                    document.getElementById('registerUsername').classList.add('error');
+                    isValid = false;
+                }
+                
+                if (!formData.email || !formData.email.includes('@')) {
+                    document.getElementById('registerEmailError').textContent = 'Valid email is required';
+                    document.getElementById('registerEmailError').style.display = 'block';
+                    document.getElementById('registerEmail').classList.add('error');
+                    isValid = false;
+                }
+                
+                if (!formData.password || formData.password.length < 6) {
+                    document.getElementById('registerPasswordError').textContent = 'Password must be at least 6 characters';
+                    document.getElementById('registerPasswordError').style.display = 'block';
+                    document.getElementById('registerPassword').classList.add('error');
+                    isValid = false;
+                }
+                
+                if (formData.password !== formData.confirmPassword) {
+                    document.getElementById('registerConfirmPasswordError').textContent = 'Passwords do not match';
+                    document.getElementById('registerConfirmPasswordError').style.display = 'block';
+                    document.getElementById('registerConfirmPassword').classList.add('error');
+                    isValid = false;
+                }
+            }
+            
+            return isValid;
+        }
+        
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                username: document.getElementById('loginUsername').value,
+                password: document.getElementById('loginPassword').value
+            };
+            
+            if (!validateForm(formData)) return;
+            
+            showLoading();
+            
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showMessage('success', 'Login successful! Redirecting...');
+                    
+                    // Use auth system to handle login
+                    if (authSystem) {
+                        authSystem.authToken = data.token;
+                        authSystem.currentUser = data.user;
+                        authSystem.isAuthenticated = true;
+                        localStorage.setItem('authToken', data.token);
+                    } else {
+                        // Fallback to manual storage
+                        localStorage.setItem('authToken', data.token);
+                        localStorage.setItem('userData', JSON.stringify(data.user));
+                    }
+                    
+                    // Send auth success message to parent window
+                    if (window.parent && window.parent !== window) {
+                        window.parent.postMessage({
+                            type: 'AUTH_SUCCESS',
+                            token: data.token,
+                            user: data.user
+                        }, '*');
+                    }
+                    
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 1500);
+                } else {
+                    showMessage('error', data.message || 'Login failed');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showMessage('error', 'Network error. Please try again.');
+            } finally {
+                hideLoading();
+            }
+        });
+        
+        // Register form handler
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                username: document.getElementById('registerUsername').value,
+                email: document.getElementById('registerEmail').value,
+                password: document.getElementById('registerPassword').value,
+                confirmPassword: document.getElementById('registerConfirmPassword').value
+            };
+            
+            if (!validateForm(formData)) return;
+            
+            showLoading();
+            
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showMessage('success', 'Account created successfully! Please login.');
+                    setTimeout(() => {
+                        switchTab('login');
+                    }, 2000);
+                } else {
+                    showMessage('error', data.message || 'Registration failed');
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                showMessage('error', 'Network error. Please try again.');
+            } finally {
+                hideLoading();
+            }
+        });
+        
+        function showForgotPassword() {
+            // Hide all forms
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            // Show forgot password form
+            document.getElementById('forgotPasswordForm').classList.add('active');
+            // Hide tabs
+            document.querySelectorAll('.auth-tab').forEach(t => t.style.display = 'none');
+            // Update header
+            document.querySelector('.auth-header h1').textContent = 'ðŸ” Reset Password';
+            document.querySelector('.auth-header p').textContent = 'Enter your email to receive a password reset link';
+            hideMessages();
+        }
+        
+        function showLoginForm() {
+            // Show all forms
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            document.getElementById('loginForm').classList.add('active');
+            // Show tabs
+            document.querySelectorAll('.auth-tab').forEach(t => t.style.display = 'block');
+            // Reset header
+            document.querySelector('.auth-header h1').textContent = 'ðŸŽ­ Welcome to ShadowNet';
+            document.querySelector('.auth-header p').textContent = 'Join millions of users in the world\'s most popular chat platform';
+            hideMessages();
+        }
+        
+        // Check if user is already logged in
+        if (localStorage.getItem('authToken')) {
+            window.location.href = '/';
+        }
+
+        // Add logout function
+        function logout() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userData');
+            
+            // Send logout message to parent window
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({
+                    type: 'AUTH_LOGOUT'
+                }, '*');
+            }
+            
+            window.location.href = '/';
+        }
+
+        // Forgot password form handler
+        document.getElementById('forgotPasswordForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('forgotEmail').value;
+            
+            if (!email || !email.includes('@')) {
+                document.getElementById('forgotEmailError').textContent = 'Valid email is required';
+                document.getElementById('forgotEmailError').style.display = 'block';
+                document.getElementById('forgotEmail').classList.add('error');
+                return;
+            }
+            
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(e => e.style.display = 'none');
+            document.querySelectorAll('input').forEach(i => i.classList.remove('error'));
+            
+            showLoading();
+            
+            try {
+                const response = await fetch('/api/auth/forgot-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showMessage('success', 'ðŸŽ‰ Password reset link sent! Check your email and spam folder.');
+                    document.getElementById('forgotPasswordForm').style.display = 'none';
+                    
+                    setTimeout(() => {
+                        showLoginForm();
+                    }, 3000);
+                } else {
+                    showMessage('error', data.message || 'Failed to send reset link');
+                }
+            } catch (error) {
+                console.error('Forgot password error:', error);
+                showMessage('error', 'Network error. Please try again.');
+            } finally {
+                hideLoading();
+            }
+        });
+        
+        // Make logout available globally
+        window.logout = logout;
+        
+        // Load navigation
+        fetch('/components/navigation.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('navigation-container').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
+</body>
+</html>
+

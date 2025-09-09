@@ -1,120 +1,77 @@
 const mongoose = require('mongoose');
 
 const messageSchema = new mongoose.Schema({
+    // Message participants
+    sender: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+        index: true
+    },
+    recipient: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+        index: true
+    },
+    
     // Message content
     content: {
         type: String,
         required: true,
-        maxlength: 1000
+        maxlength: 2000
     },
-    type: {
+    messageType: {
         type: String,
-        enum: ['chat', 'system', 'private', 'command', 'power', 'moderation'],
-        default: 'chat'
+        enum: ['PM', 'PC', 'system'], // PM = Private Message, PC = Private Chat
+        default: 'PM'
     },
     
-    // Message author
-    author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-    
-    // Message target (for private messages, commands, etc.)
-    target: {
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        chat: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Chat'
-        }
-    },
-    
-    // Chat context
-    chat: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Chat',
-        required: true
-    },
-    
-    // Message metadata
-    timestamp: {
-        type: Date,
-        default: Date.now
-    },
-    edited: {
+    // Message status
+    read: {
         type: Boolean,
         default: false
     },
-    editHistory: [{
-        content: String,
-        timestamp: Date,
-        editor: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        }
-    }],
-    
-    // Power effects and formatting
-    effects: {
-        color: String,
-        font: String,
-        size: String,
-        bold: { type: Boolean, default: false },
-        italic: { type: Boolean, default: false },
-        underline: { type: Boolean, default: false },
-        rainbow: { type: Boolean, default: false },
-        glow: { type: Boolean, default: false }
+    readAt: {
+        type: Date,
+        default: null
+    },
+    delivered: {
+        type: Boolean,
+        default: false
+    },
+    deliveredAt: {
+        type: Date,
+        default: null
     },
     
-    // Power information
-    power: {
-        powerId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Power'
-        },
-        name: String,
-        cost: Number
+    // Message metadata
+    isEdited: {
+        type: Boolean,
+        default: false
     },
-    
-    // Message moderation
-    moderation: {
-        flagged: {
-            type: Boolean,
-            default: false
-        },
-        flaggedBy: [{
-            user: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User'
-            },
-            reason: String,
-            timestamp: Date
-        }],
-        hidden: {
-            type: Boolean,
-            default: false
-        },
-        hiddenBy: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        hiddenReason: String,
-        hiddenTimestamp: Date
+    editedAt: {
+        type: Date,
+        default: null
+    },
+    originalContent: {
+        type: String,
+        default: null
     },
     
     // Message reactions
     reactions: [{
-        emoji: String,
-        users: [{
+        user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
-        }],
-        count: {
-            type: Number,
-            default: 0
+        },
+        emoji: {
+            type: String,
+            required: true
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now
         }
     }],
     
@@ -122,7 +79,7 @@ const messageSchema = new mongoose.Schema({
     attachments: [{
         type: {
             type: String,
-            enum: ['image', 'file', 'link', 'audio', 'video']
+            enum: ['image', 'file', 'link', 'power']
         },
         url: String,
         filename: String,
@@ -130,299 +87,255 @@ const messageSchema = new mongoose.Schema({
         mimeType: String
     }],
     
+    // Message flags
+    isDeleted: {
+        type: Boolean,
+        default: false
+    },
+    deletedAt: {
+        type: Date,
+        default: null
+    },
+    isSpam: {
+        type: Boolean,
+        default: false
+    },
+    isReported: {
+        type: Boolean,
+        default: false
+    },
+    
     // Message threading
-    thread: {
-        parent: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Message'
-        },
-        replies: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Message'
-        }],
-        replyCount: {
-            type: Number,
-            default: 0
-        }
+    threadId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Message',
+        default: null
+    },
+    isThreadStart: {
+        type: Boolean,
+        default: false
     },
     
-    // Message visibility
-    visibility: {
-        public: {
-            type: Boolean,
-            default: true
-        },
-        visibleTo: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        }],
-        hiddenFrom: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        }]
+    // Message encryption (for future use)
+    encrypted: {
+        type: Boolean,
+        default: false
     },
-    
-    // Message statistics
-    stats: {
-        views: {
-            type: Number,
-            default: 0
-        },
-        shares: {
-            type: Number,
-            default: 0
-        },
-        bookmarks: {
-            type: Number,
-            default: 0
-        }
-    },
-    
-    // Message tags and categorization
-    tags: [String],
-    category: {
+    encryptionKey: {
         type: String,
-        default: 'general'
-    },
-    
-    // Message status
-    status: {
-        type: String,
-        enum: ['active', 'deleted', 'archived', 'spam'],
-        default: 'active'
+        default: null
     }
 }, {
     timestamps: true
 });
 
 // Indexes for performance
-messageSchema.index({ chat: 1, timestamp: -1 });
-messageSchema.index({ author: 1, timestamp: -1 });
-messageSchema.index({ type: 1 });
-messageSchema.index({ 'moderation.flagged': 1 });
-messageSchema.index({ 'thread.parent': 1 });
-messageSchema.index({ content: 'text' });
+messageSchema.index({ sender: 1, recipient: 1, createdAt: -1 });
+messageSchema.index({ recipient: 1, read: 1, createdAt: -1 });
+messageSchema.index({ threadId: 1, createdAt: 1 });
+messageSchema.index({ createdAt: -1 });
 
 // Instance methods
-messageSchema.methods.isAuthor = function(userId) {
-    return this.author.toString() === userId.toString();
+messageSchema.methods.markAsRead = function() {
+    this.read = true;
+    this.readAt = new Date();
+    return this.save();
 };
 
-messageSchema.methods.canEdit = function(user) {
-    if (this.isAuthor(user._id)) return true;
-    if (user.rank === 'mainowner') return true;
-    if (user.rank === 'owner') return true;
-    if (user.rank === 'moderator') return true;
-    return false;
+messageSchema.methods.markAsDelivered = function() {
+    this.delivered = true;
+    this.deliveredAt = new Date();
+    return this.save();
 };
 
-messageSchema.methods.canDelete = function(user) {
-    if (this.isAuthor(user._id)) return true;
-    if (user.rank === 'mainowner') return true;
-    if (user.rank === 'owner') return true;
-    if (user.rank === 'moderator') return true;
-    return false;
-};
-
-messageSchema.methods.canModerate = function(user) {
-    if (user.rank === 'mainowner') return true;
-    if (user.rank === 'owner') return true;
-    if (user.rank === 'moderator') return true;
-    return false;
-};
-
-messageSchema.methods.edit = function(newContent, editor) {
-    if (!this.canEdit(editor)) {
-        throw new Error('Insufficient permissions to edit this message');
+messageSchema.methods.edit = function(newContent) {
+    if (!this.originalContent) {
+        this.originalContent = this.content;
     }
-    
-    // Save edit history
-    this.editHistory.push({
-        content: this.content,
-        timestamp: new Date(),
-        editor: this.author
-    });
-    
     this.content = newContent;
-    this.edited = true;
-    this.timestamp = new Date();
-    
+    this.isEdited = true;
+    this.editedAt = new Date();
     return this.save();
 };
 
-messageSchema.methods.flag = function(user, reason) {
-    this.moderation.flagged = true;
-    this.moderation.flaggedBy.push({
-        user: user._id,
-        reason: reason,
-        timestamp: new Date()
+messageSchema.methods.delete = function() {
+    this.isDeleted = true;
+    this.deletedAt = new Date();
+    this.content = '[Message deleted]';
+    return this.save();
+};
+
+messageSchema.methods.addReaction = function(userId, emoji) {
+    // Remove existing reaction from this user
+    this.reactions = this.reactions.filter(r => r.user.toString() !== userId.toString());
+    
+    // Add new reaction
+    this.reactions.push({
+        user: userId,
+        emoji: emoji,
+        createdAt: new Date()
     });
     
     return this.save();
 };
 
-messageSchema.methods.hide = function(moderator, reason) {
-    this.moderation.hidden = true;
-    this.moderation.hiddenBy = moderator._id;
-    this.moderation.hiddenReason = reason;
-    this.moderation.hiddenTimestamp = new Date();
-    
-    return this.save();
-};
-
-messageSchema.methods.unhide = function(moderator) {
-    this.moderation.hidden = false;
-    this.moderation.hiddenBy = null;
-    this.moderation.hiddenReason = '';
-    this.moderation.hiddenTimestamp = null;
-    
-    return this.save();
-};
-
-messageSchema.methods.addReaction = function(emoji, user) {
-    let reaction = this.reactions.find(r => r.emoji === emoji);
-    
-    if (!reaction) {
-        reaction = {
-            emoji: emoji,
-            users: [],
-            count: 0
-        };
-        this.reactions.push(reaction);
-    }
-    
-    if (!reaction.users.some(u => u.toString() === user._id.toString())) {
-        reaction.users.push(user._id);
-        reaction.count = reaction.users.length;
-    }
-    
-    return this.save();
-};
-
-messageSchema.methods.removeReaction = function(emoji, user) {
-    const reaction = this.reactions.find(r => r.emoji === emoji);
-    
-    if (reaction) {
-        reaction.users = reaction.users.filter(u => u.toString() !== user._id.toString());
-        reaction.count = reaction.users.length;
-        
-        if (reaction.count === 0) {
-            this.reactions = this.reactions.filter(r => r.emoji !== emoji);
-        }
-    }
-    
-    return this.save();
-};
-
-messageSchema.methods.reply = function(replyMessage) {
-    if (!this.thread.replies) {
-        this.thread.replies = [];
-    }
-    
-    this.thread.replies.push(replyMessage._id);
-    this.thread.replyCount = this.thread.replies.length;
-    
+messageSchema.methods.removeReaction = function(userId, emoji) {
+    this.reactions = this.reactions.filter(r => 
+        !(r.user.toString() === userId.toString() && r.emoji === emoji)
+    );
     return this.save();
 };
 
 // Static methods
-messageSchema.statics.findByChat = function(chatId, limit = 50, skip = 0) {
-    return this.find({ 
-        chat: chatId,
-        status: 'active',
-        'moderation.hidden': false
-    })
-    .sort({ timestamp: -1 })
-    .limit(limit)
-    .skip(skip)
-    .populate('author', 'username rank avatar')
-    .populate('power', 'name description');
-};
-
-messageSchema.statics.findByUser = function(userId, limit = 50) {
-    return this.find({ 
-        author: userId,
-        status: 'active'
-    })
-    .sort({ timestamp: -1 })
-    .limit(limit)
-    .populate('chat', 'name');
-};
-
-messageSchema.statics.findPrivateMessages = function(userId1, userId2, limit = 50) {
+messageSchema.statics.getConversation = function(user1Id, user2Id, limit = 50, offset = 0) {
     return this.find({
-        type: 'private',
         $or: [
-            { author: userId1, 'target.user': userId2 },
-            { author: userId2, 'target.user': userId1 }
+            { sender: user1Id, recipient: user2Id },
+            { sender: user2Id, recipient: user1Id }
         ],
-        status: 'active'
+        isDeleted: false
     })
-    .sort({ timestamp: -1 })
+    .populate('sender', 'username nickname avatar rank')
+    .populate('recipient', 'username nickname avatar rank')
+    .sort({ createdAt: -1 })
     .limit(limit)
-    .populate('author', 'username rank avatar')
-    .populate('target.user', 'username rank avatar');
+    .skip(offset);
 };
 
-messageSchema.statics.getMessageStats = async function(chatId) {
-    const stats = await this.aggregate([
-        { $match: { chat: mongoose.Types.ObjectId(chatId) } },
+messageSchema.statics.getUnreadCount = function(userId) {
+    return this.countDocuments({
+        recipient: userId,
+        read: false,
+        isDeleted: false
+    });
+};
+
+messageSchema.statics.getRecentConversations = function(userId, limit = 20) {
+    return this.aggregate([
+        {
+            $match: {
+                $or: [
+                    { sender: mongoose.Types.ObjectId(userId) },
+                    { recipient: mongoose.Types.ObjectId(userId) }
+                ],
+                isDeleted: false
+            }
+        },
+        {
+            $sort: { createdAt: -1 }
+        },
         {
             $group: {
-                _id: null,
-                totalMessages: { $sum: 1 },
-                totalWords: { $sum: { $strLenCP: '$content' } },
-                averageLength: { $avg: { $strLenCP: '$content' } },
-                messagesToday: {
+                _id: {
+                    $cond: [
+                        { $eq: ['$sender', mongoose.Types.ObjectId(userId)] },
+                        '$recipient',
+                        '$sender'
+                    ]
+                },
+                lastMessage: { $first: '$$ROOT' },
+                unreadCount: {
                     $sum: {
                         $cond: [
-                            { $gte: ['$timestamp', new Date(new Date().setHours(0, 0, 0, 0))] },
+                            { $and: [
+                                { $eq: ['$recipient', mongoose.Types.ObjectId(userId)] },
+                                { $eq: ['$read', false] }
+                            ]},
                             1,
                             0
                         ]
                     }
                 }
             }
+        },
+        {
+            $lookup: {
+                from: 'users',
+                localField: '_id',
+                foreignField: '_id',
+                as: 'user'
+            }
+        },
+        {
+            $unwind: '$user'
+        },
+        {
+            $project: {
+                user: {
+                    _id: 1,
+                    username: 1,
+                    nickname: 1,
+                    avatar: 1,
+                    rank: 1,
+                    isOnline: 1
+                },
+                lastMessage: 1,
+                unreadCount: 1
+            }
+        },
+        {
+            $sort: { 'lastMessage.createdAt': -1 }
+        },
+        {
+            $limit: limit
         }
     ]);
-    
-    return stats[0] || {
-        totalMessages: 0,
-        totalWords: 0,
-        averageLength: 0,
-        messagesToday: 0
-    };
+};
+
+messageSchema.statics.markConversationAsRead = function(user1Id, user2Id) {
+    return this.updateMany({
+        sender: user2Id,
+        recipient: user1Id,
+        read: false
+    }, {
+        $set: {
+            read: true,
+            readAt: new Date()
+        }
+    });
+};
+
+messageSchema.statics.searchMessages = function(userId, query, limit = 50) {
+    return this.find({
+        $or: [
+            { sender: userId },
+            { recipient: userId }
+        ],
+        content: { $regex: query, $options: 'i' },
+        isDeleted: false
+    })
+    .populate('sender', 'username nickname avatar')
+    .populate('recipient', 'username nickname avatar')
+    .sort({ createdAt: -1 })
+    .limit(limit);
 };
 
 // Virtual fields
-messageSchema.virtual('isEdited').get(function() {
-    return this.edited;
+messageSchema.virtual('isRead').get(function() {
+    return this.read;
 });
 
-messageSchema.virtual('isFlagged').get(function() {
-    return this.moderation.flagged;
+messageSchema.virtual('isDelivered').get(function() {
+    return this.delivered;
 });
 
-messageSchema.virtual('isHidden').get(function() {
-    return this.moderation.hidden;
-});
-
-messageSchema.virtual('hasReplies').get(function() {
-    return this.thread && this.thread.replyCount > 0;
-});
-
-messageSchema.virtual('age').get(function() {
-    return Math.floor((new Date() - this.timestamp) / (1000 * 60 * 60 * 1000)); // in hours
+messageSchema.virtual('timeAgo').get(function() {
+    const now = new Date();
+    const diff = now - this.createdAt;
+    const minutes = Math.floor(diff / 60000);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    
+    if (days > 0) return `${days}d ago`;
+    if (hours > 0) return `${hours}h ago`;
+    if (minutes > 0) return `${minutes}m ago`;
+    return 'Just now';
 });
 
 // JSON serialization
 messageSchema.methods.toJSON = function() {
     const message = this.toObject();
-    message.isEdited = this.isEdited;
-    message.isFlagged = this.isFlagged;
-    message.isHidden = this.isHidden;
-    message.hasReplies = this.hasReplies;
-    message.age = this.age;
+    message.timeAgo = this.timeAgo;
     return message;
 };
 

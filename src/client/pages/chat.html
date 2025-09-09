@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ðŸŽ­ Xat Recreation Chat</title>
+    <link rel="stylesheet" href="../css/consolidated.css">
+    <link rel="stylesheet" href="../css/modals.css">
+    <link rel="stylesheet" href="../css/notifications.css">
+        
+        .header {
+            text-align: center;
+            padding: 10px;
+            background: #2a2a2a;
+            border-bottom: 2px solid #0066cc;
+        }
+        
+        .header h1 {
+            color: #ffcc00;
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .header p {
+            color: #888;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        #userStatus {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        #userInfo {
+            margin-right: 10px;
+        }
+        
+        #logoutBtn {
+            padding: 5px 10px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            display: none;
+            margin-left: 10px;
+        }
+        
+        #logoutBtn:hover {
+            background: #c82333;
+        }
+        
+        .chat-container {
+            height: calc(100vh - 100px);
+            background: #000080;
+            border: none;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: none;
+            margin: 0;
+        }
+        
+        #chatFrame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <iframe id="chatFrame" src="/www/classic.html?room=chat"></iframe>
+    </div>
+
+    <script>
+        function updateUserStatus() {
+            const token = localStorage.getItem('authToken');
+            const userData = localStorage.getItem('userData');
+            const userInfo = document.getElementById('userInfo');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            console.log('ðŸŽ­ [CHAT] updateUserStatus - Token:', token);
+            console.log('ðŸŽ­ [CHAT] updateUserStatus - UserData:', userData);
+            
+            if (token && userData) {
+                try {
+                    const user = JSON.parse(userData);
+                    console.log('ðŸŽ­ [CHAT] Parsed user data:', user);
+                    userInfo.textContent = `Logged in as: ${user.nickname} (${user.username}) - Rank: ${user.rank}`;
+                    logoutBtn.style.display = 'inline-block';
+                } catch (e) {
+                    console.error('ðŸŽ­ [CHAT] Error parsing user data:', e);
+                    userInfo.textContent = 'Guest user (parse error)';
+                    logoutBtn.style.display = 'none';
+                }
+            } else {
+                console.log('ðŸŽ­ [CHAT] No token or user data found');
+                userInfo.textContent = 'Guest user';
+                logoutBtn.style.display = 'none';
+            }
+        }
+        
+        function logout() {
+            // Clear authentication data
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userData');
+            
+            // Update status
+            updateUserStatus();
+            
+            // Redirect to auth page
+            window.location.href = '/auth.html';
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUserStatus();
+            
+            // Get room parameter from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const roomParam = urlParams.get('room');
+            
+            // Set room name based on parameter
+            let roomName = 'chat';
+            if (roomParam) {
+                roomName = roomParam.toLowerCase();
+            }
+            
+            // Update iframe source
+            const chatFrame = document.getElementById('chatFrame');
+            chatFrame.src = `/www/classic.html?room=${roomName}`;
+            
+            console.log('ðŸŽ­ [CHAT] Chat interface loaded for room:', roomName);
+        });
+        
+        // Listen for authentication messages from iframe
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'AUTH_SUCCESS') {
+                console.log('ðŸŽ­ [CHAT] Received auth success from iframe:', event.data);
+                
+                // Store the auth token
+                localStorage.setItem('authToken', event.data.token);
+                
+                // Update status
+                updateUserStatus();
+                
+                // Send auth update to iframe
+                const chatFrame = document.getElementById('chatFrame');
+                if (chatFrame && chatFrame.contentWindow) {
+                    try {
+                        chatFrame.contentWindow.postMessage({
+                            type: 'AUTH_UPDATE',
+                            token: event.data.token,
+                            user: event.data.user
+                        }, '*');
+                        console.log('ðŸŽ­ [CHAT] Sent auth update to iframe');
+                    } catch (e) {
+                        console.log('ðŸŽ­ [CHAT] Could not send message to iframe');
+                    }
+                }
+                
+                console.log('ðŸŽ­ [CHAT] Authentication state updated');
+            } else if (event.data && event.data.type === 'AUTH_LOGOUT') {
+                console.log('ðŸŽ­ [CHAT] Received logout message from iframe');
+                
+                // Remove the auth token
+                localStorage.removeItem('authToken');
+                
+                // Update status
+                updateUserStatus();
+                
+                console.log('ðŸŽ­ [CHAT] Logout processed');
+            }
+        });
+        
+        // Check authentication status on page load and send to iframe
+        async function checkAndSendAuth() {
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                try {
+                    const response = await fetch('/api/auth/status?token=' + token);
+                    const data = await response.json();
+                    
+                    if (response.ok && data.user) {
+                        // Send auth update to iframe
+                        const chatFrame = document.getElementById('chatFrame');
+                        if (chatFrame && chatFrame.contentWindow) {
+                            try {
+                                chatFrame.contentWindow.postMessage({
+                                    type: 'AUTH_UPDATE',
+                                    token: token,
+                                    user: data.user
+                                }, '*');
+                                console.log('ðŸŽ­ [CHAT] Sent auth update to iframe on page load');
+                            } catch (e) {
+                                console.log('ðŸŽ­ [CHAT] Could not send message to iframe');
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error('ðŸŽ­ [CHAT] Auth check error:', error);
+                }
+            }
+        }
+        
+        // Check auth status when iframe loads
+        window.addEventListener('load', function() {
+            setTimeout(checkAndSendAuth, 1000); // Wait for iframe to load
+        });
+    </script>
+</body>
+</html>
+
