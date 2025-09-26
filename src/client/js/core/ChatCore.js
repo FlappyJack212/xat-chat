@@ -11,6 +11,10 @@ class ChatCore {
         this.users = [];
         this.currentRoom = 'main';
         this.initialized = false;
+        this.moduleName = 'ChatCore';
+        this.messageBuffer = new Map(); // For message deduplication
+        this.reconnectAttempts = 0;
+        this.maxReconnectAttempts = 5;
     }
 
     /**
@@ -18,18 +22,23 @@ class ChatCore {
      */
     init() {
         if (this.initialized) {
-            console.log('ChatCore already initialized');
+            logger.debug(this.moduleName, 'Already initialized');
             return;
         }
 
+        const startTime = performance.now();
+        
         try {
             this.initializeSocket();
             this.setupEventListeners();
             this.initializeUI();
             this.initialized = true;
-            console.log('✅ ChatCore initialized successfully');
+            
+            logger.timing(this.moduleName, 'Initialization', startTime);
+            logger.info(this.moduleName, 'Initialized successfully');
         } catch (error) {
-            console.error('❌ Error initializing ChatCore:', error);
+            logger.error(this.moduleName, 'Error initializing:', error);
+            throw error;
         }
     }
 
@@ -38,22 +47,38 @@ class ChatCore {
      */
     initializeSocket() {
         if (typeof io === 'undefined') {
-            console.error('Socket.IO not loaded');
-            return;
+            logger.error(this.moduleName, 'Socket.IO not loaded - please include the Socket.IO client library');
+            throw new Error('Socket.IO client library not found');
         }
 
-        this.socket = io();
+        this.socket = io({
+            transports: ['websocket', 'polling'], // Prefer websocket
+            upgrade: true,
+            timeout: 20000,
+            forceNew: true
+        });
         
         this.socket.on('connect', () => {
-            console.log('🔌 Connected to server');
+            logger.info(this.moduleName, 'Connected to server');
             this.isConnected = true;
+            this.reconnectAttempts = 0;
             this.updateConnectionStatus(true);
         });
 
-        this.socket.on('disconnect', () => {
-            console.log('🔌 Disconnected from server');
+        this.socket.on('disconnect', (reason) => {
+            logger.warn(this.moduleName, `Disconnected from server: ${reason}`);
             this.isConnected = false;
             this.updateConnectionStatus(false);
+            
+            // Attempt reconnection for client-side disconnects
+            if (reason === 'io client disconnect') {
+                this.attemptReconnect();
+            }
+        });
+
+        this.socket.on('connect_error', (error) => {
+            logger.error(this.moduleName, 'Connection error:', error);
+            this.attemptReconnect();
         });
 
         this.socket.on('message', (data) => {
