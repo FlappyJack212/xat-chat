@@ -5,6 +5,7 @@
     <title>ixchats - Authentic xat.com Experience</title>
     <link rel="stylesheet" href="css/xat-authentic.css">
     <link rel="stylesheet" href="css/power-effects.css">
+    <link rel="stylesheet" href="assets/css/xat-sprites.css">
     <meta name="viewport" content="width=1024, initial-scale=1.0">
 </head>
 <body>
@@ -63,12 +64,33 @@
 
             <!-- Powers Toolbar -->
             <div class="powers-bar">
-                <div class="power-slot" data-power="rainbow" title="Rainbow text">🌈</div>
-                <div class="power-slot" data-power="glow" title="Glow effect">✨</div>
-                <div class="power-slot" data-power="sparkle" title="Sparkle">💫</div>
-                <div class="power-slot" data-power="bounce" title="Bounce">⚡</div>
-                <div class="power-slot" data-power="spin" title="Spin">🌀</div>
-                <div class="power-slot" data-power="shake" title="Shake">📳</div>
+                <div class="power-slot" data-power="rainbow" title="Rainbow text">
+                    <div class="power-icon rainbow"></div>
+                </div>
+                <div class="power-slot" data-power="glow" title="Glow effect">
+                    <div class="power-icon glow"></div>
+                </div>
+                <div class="power-slot" data-power="sparkle" title="Sparkle">
+                    <div class="power-icon sparkle"></div>
+                </div>
+                <div class="power-slot" data-power="bounce" title="Bounce">
+                    <div class="power-icon bounce"></div>
+                </div>
+                <div class="power-slot" data-power="spin" title="Spin">
+                    <div class="power-icon spin"></div>
+                </div>
+                <div class="power-slot" data-power="shake" title="Shake">
+                    <div class="power-icon shake"></div>
+                </div>
+                <div class="power-slot" data-power="blast" title="Blast">
+                    <div class="power-icon blast"></div>
+                </div>
+                <div class="power-slot" data-power="kiss" title="Kiss">
+                    <div class="power-icon kiss"></div>
+                </div>
+                <div class="power-slot" data-power="hug" title="Hug">
+                    <div class="power-icon hug"></div>
+                </div>
                 <div class="power-slot empty">+</div>
             </div>
 
@@ -81,17 +103,27 @@
                 
                 <!-- Smiley Bar -->
                 <div class="smiley-bar">
-                    <div class="smiley" data-smiley="smile">😊</div>
-                    <div class="smiley" data-smiley="laugh">😂</div>
-                    <div class="smiley" data-smiley="wink">😉</div>
-                    <div class="smiley" data-smiley="cool">😎</div>
-                    <div class="smiley" data-smiley="love">😍</div>
-                    <div class="smiley" data-smiley="cry">😢</div>
-                    <div class="smiley" data-smiley="angry">😠</div>
-                    <div class="smiley" data-smiley="tongue">😛</div>
-                    <div class="smiley" data-smiley="surprised">😮</div>
-                    <div class="smiley" data-smiley="confused">😕</div>
-                    <div class="smiley-more">...</div>
+                    <div class="smiley" data-smiley="smile" title="smile">
+                        <div class="xat-smiley smile"></div>
+                    </div>
+                    <div class="smiley" data-smiley="grin" title="grin">
+                        <div class="xat-smiley grin"></div>
+                    </div>
+                    <div class="smiley" data-smiley="wink" title="wink">
+                        <div class="xat-smiley wink"></div>
+                    </div>
+                    <div class="smiley" data-smiley="sad" title="sad">
+                        <div class="xat-smiley sad"></div>
+                    </div>
+                    <div class="smiley" data-smiley="angry" title="angry">
+                        <div class="xat-smiley angry"></div>
+                    </div>
+                    <div class="smiley" data-smiley="kiss" title="kiss">💋</div>
+                    <div class="smiley" data-smiley="cool" title="cool">😎</div>
+                    <div class="smiley" data-smiley="love" title="love">❤️</div>
+                    <div class="smiley" data-smiley="laugh" title="laugh">😂</div>
+                    <div class="smiley" data-smiley="roll" title="roll">🙄</div>
+                    <div class="smiley-more" onclick="openSmileyPicker()">...</div>
                 </div>
             </div>
         </div>
@@ -178,6 +210,9 @@
     <script src="js/xat/PawnSystem.js"></script>
     <script src="js/xat/AnimationEngine.js"></script>
     <script src="js/xat/ChatSystem.js"></script>
+    <script src="js/xat/UserInterface.js"></script>
+    <script src="js/xat/StoreInterface.js"></script>
+    <script src="js/xat/ModerationInterface.js"></script>
     
     <script>
         // Initialize xat interface

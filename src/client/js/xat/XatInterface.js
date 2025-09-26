@@ -15,6 +15,9 @@ class XatInterface {
         this.powerSystem = null;
         this.pawnSystem = null;
         this.animationEngine = null;
+        this.userInterface = null;
+        this.storeInterface = null;
+        this.moderationInterface = null;
         
         // UI elements
         this.elements = {
@@ -96,6 +99,15 @@ class XatInterface {
         
         // Initialize animation engine
         this.animationEngine = new AnimationEngine(this);
+        
+        // Initialize user interface
+        this.userInterface = new UserInterface(this);
+        
+        // Initialize store interface
+        this.storeInterface = new StoreInterface(this);
+        
+        // Initialize moderation interface
+        this.moderationInterface = new ModerationInterface(this);
         
         logger.debug(this.moduleName, 'All systems initialized');
     }
