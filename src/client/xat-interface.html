@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ixchats - Authentic xat.com Experience</title>
+    <link rel="stylesheet" href="css/xat-authentic.css">
+    <link rel="stylesheet" href="css/power-effects.css">
+    <link rel="stylesheet" href="assets/css/xat-sprites.css">
+    <meta name="viewport" content="width=1024, initial-scale=1.0">
+</head>
+<body>
+    <!-- AUTHENTIC xat.com HEADER -->
+    <div id="xat-header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="assets/images/xat-logo.png" alt="xat" onerror="this.style.display='none'" />
+                <span class="logo-text">ixchats</span>
+            </div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/chat">Chat</a>
+                <a href="/groups">Groups</a>
+                <a href="/powers">Powers</a>
+                <a href="/store">Store</a>
+            </div>
+            <div class="user-profile">
+                <div class="xats-display">
+                    <span id="userXats">0</span> xats
+                </div>
+                <div class="days-display">
+                    <span id="userDays">0</span> days
+                </div>
+                <div class="avatar-display">
+                    <img id="userAvatar" src="assets/images/avatar/0.png" alt="Avatar" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CHAT INTERFACE - Classic xat.com Layout -->
+    <div class="xat-main">
+        <!-- CHAT AREA -->
+        <div id="chat-container" class="xat-chat-container">
+            <!-- Chat Header with Room Info -->
+            <div class="chat-header">
+                <div class="room-info">
+                    <span class="room-name" id="roomName">Main</span>
+                    <span class="user-count" id="userCount">0 users</span>
+                </div>
+                <div class="chat-controls">
+                    <button class="chat-btn" id="settingsBtn">⚙️</button>
+                    <button class="chat-btn" id="fullscreenBtn">⛶</button>
+                </div>
+            </div>
+
+            <!-- Messages Display -->
+            <div id="chat-messages" class="chat-messages">
+                <div class="message system">
+                    <span class="timestamp">[15:30]</span>
+                    <span class="username system">System:</span>
+                    <span class="text">Welcome to ixchats! Type /help for commands.</span>
+                </div>
+            </div>
+
+            <!-- Powers Toolbar -->
+            <div class="powers-bar">
+                <div class="power-slot" data-power="rainbow" title="Rainbow text">
+                    <div class="power-icon rainbow"></div>
+                </div>
+                <div class="power-slot" data-power="glow" title="Glow effect">
+                    <div class="power-icon glow"></div>
+                </div>
+                <div class="power-slot" data-power="sparkle" title="Sparkle">
+                    <div class="power-icon sparkle"></div>
+                </div>
+                <div class="power-slot" data-power="bounce" title="Bounce">
+                    <div class="power-icon bounce"></div>
+                </div>
+                <div class="power-slot" data-power="spin" title="Spin">
+                    <div class="power-icon spin"></div>
+                </div>
+                <div class="power-slot" data-power="shake" title="Shake">
+                    <div class="power-icon shake"></div>
+                </div>
+                <div class="power-slot" data-power="blast" title="Blast">
+                    <div class="power-icon blast"></div>
+                </div>
+                <div class="power-slot" data-power="kiss" title="Kiss">
+                    <div class="power-icon kiss"></div>
+                </div>
+                <div class="power-slot" data-power="hug" title="Hug">
+                    <div class="power-icon hug"></div>
+                </div>
+                <div class="power-slot empty">+</div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="chat-input-area">
+                <div class="input-wrapper">
+                    <input type="text" id="chat-input" placeholder="Type your message..." maxlength="500" />
+                    <button id="send-button" class="send-btn">Send</button>
+                </div>
+                
+                <!-- Smiley Bar -->
+                <div class="smiley-bar">
+                    <div class="smiley" data-smiley="smile" title="smile">
+                        <div class="xat-smiley smile"></div>
+                    </div>
+                    <div class="smiley" data-smiley="grin" title="grin">
+                        <div class="xat-smiley grin"></div>
+                    </div>
+                    <div class="smiley" data-smiley="wink" title="wink">
+                        <div class="xat-smiley wink"></div>
+                    </div>
+                    <div class="smiley" data-smiley="sad" title="sad">
+                        <div class="xat-smiley sad"></div>
+                    </div>
+                    <div class="smiley" data-smiley="angry" title="angry">
+                        <div class="xat-smiley angry"></div>
+                    </div>
+                    <div class="smiley" data-smiley="kiss" title="kiss">💋</div>
+                    <div class="smiley" data-smiley="cool" title="cool">😎</div>
+                    <div class="smiley" data-smiley="love" title="love">❤️</div>
+                    <div class="smiley" data-smiley="laugh" title="laugh">😂</div>
+                    <div class="smiley" data-smiley="roll" title="roll">🙄</div>
+                    <div class="smiley-more" onclick="openSmileyPicker()">...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- USER LIST PANEL -->
+        <div id="user-list" class="xat-user-list">
+            <div class="user-list-header">
+                <span>Users</span>
+                <span id="onlineCount">0</span>
+            </div>
+            
+            <!-- Moderators Section -->
+            <div class="user-section">
+                <div class="section-header owners">👑 Owners</div>
+                <div class="users-container" id="owners-list"></div>
+            </div>
+            
+            <div class="user-section">
+                <div class="section-header moderators">🛡️ Moderators</div>
+                <div class="users-container" id="moderators-list"></div>
+            </div>
+            
+            <div class="user-section">
+                <div class="section-header members">👥 Members</div>
+                <div class="users-container" id="members-list"></div>
+            </div>
+            
+            <div class="user-section">
+                <div class="section-header guests">👤 Guests</div>
+                <div class="users-container" id="guests-list"></div>
+            </div>
+        </div>
+
+        <!-- PAWN DISPLAY AREA -->
+        <div id="pawn-display" class="pawn-display">
+            <div class="pawn-header">Your Pawns</div>
+            <div class="pawn-grid" id="pawnGrid">
+                <div class="pawn-slot empty">+</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALS -->
+    <!-- Powers Modal -->
+    <div id="powers-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Powers Store</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="power-categories">
+                    <div class="category active" data-category="effects">Effects</div>
+                    <div class="category" data-category="pawns">Pawns</div>
+                    <div class="category" data-category="smilies">Smilies</div>
+                    <div class="category" data-category="games">Games</div>
+                </div>
+                <div class="powers-grid" id="powersGrid">
+                    <!-- Powers will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Profile Modal -->
+    <div id="profile-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>User Profile</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body" id="profileContent">
+                <!-- Profile content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/core/SecurityUtils.js"></script>
+    <script src="js/core/Logger.js"></script>
+    <script src="js/xat/XatInterface.js"></script>
+    <script src="js/xat/PowerSystem.js"></script>
+    <script src="js/xat/PawnSystem.js"></script>
+    <script src="js/xat/AnimationEngine.js"></script>
+    <script src="js/xat/ChatSystem.js"></script>
+    <script src="js/xat/UserInterface.js"></script>
+    <script src="js/xat/StoreInterface.js"></script>
+    <script src="js/xat/ModerationInterface.js"></script>
+    
+    <script>
+        // Initialize xat interface
+        document.addEventListener('DOMContentLoaded', function() {
+            window.xat = new XatInterface();
+            window.xat.init();
+        });
+    </script>
+</body>
+</html>

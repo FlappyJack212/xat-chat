@@ -13,7 +13,10 @@ class AuthService {
      */
     static async register(req, res) {
         try {
-            console.log('🔑 [AUTH] Register request body:', req.body);
+            // Remove sensitive logging in production
+            if (process.env.NODE_ENV === 'development') {
+                console.log('🔑 [AUTH] Register request received');
+            }
             
             const { username, email, password } = req.body;
 
@@ -58,7 +61,9 @@ class AuthService {
             console.log('🔑 [AUTH] Generating JWT token...');
             const token = jwt.sign(
                 { userId: user._id },
-                process.env.JWT_SECRET || 'your-secret-key',
+                process.env.JWT_SECRET || (() => {
+                throw new Error('JWT_SECRET environment variable is required for security!');
+            })(),
                 { expiresIn: '7d' }
             );
 
@@ -144,7 +149,9 @@ class AuthService {
             console.log('🔑 [AUTH] Generating JWT token...');
             const token = jwt.sign(
                 { userId: user._id },
-                process.env.JWT_SECRET || 'your-secret-key',
+                process.env.JWT_SECRET || (() => {
+                throw new Error('JWT_SECRET environment variable is required for security!');
+            })(),
                 { expiresIn: '7d' }
             );
 
@@ -198,7 +205,9 @@ class AuthService {
      */
     static async authenticate(token) {
         try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+            const decoded = jwt.verify(token, process.env.JWT_SECRET || (() => {
+                throw new Error('JWT_SECRET environment variable is required for security!');
+            })());
             const user = await User.findById(decoded.userId);
 
             if (user) {
@@ -252,7 +261,9 @@ class AuthService {
         }
 
         try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+            const decoded = jwt.verify(token, process.env.JWT_SECRET || (() => {
+                throw new Error('JWT_SECRET environment variable is required for security!');
+            })());
             req.userId = decoded.userId;
             next();
         } catch (error) {
