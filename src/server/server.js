@@ -57,13 +57,7 @@ class XatServer {
                     defaultSrc: ["'self'"],
                     scriptSrc: [
                         "'self'",
-                        "'unsafe-inline'",
-                        "'unsafe-hashes'",
-                        "'unsafe-eval'",
-                        "https://cdn.socket.io",
-                        "https://www.google-analytics.com",
-                        "https://www.googletagmanager.com",
-                        "https://www.gstatic.com"
+                        "https://cdn.socket.io"
                     ],
                     styleSrc: [
                         "'self'",
@@ -90,7 +84,12 @@ class XatServer {
                 }
             }
         }));
-        this.app.use(cors());
+        this.app.use(cors({
+            origin: process.env.CLIENT_URL || "http://localhost:8000",
+            credentials: true,
+            methods: ['GET', 'POST', 'PUT', 'DELETE'],
+            allowedHeaders: ['Content-Type', 'Authorization']
+        }));
         this.app.use(morgan('combined'));
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));

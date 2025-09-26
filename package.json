@@ -4,14 +4,17 @@
   "description": "Recreation of the xat.com chat platform",
   "main": "src/server/server.js",
   "scripts": {
-    "start": "node src/server/server.js",
-    "dev": "nodemon src/server/server.js",
+    "start": "node src/server/server-improved.js",
+    "start:old": "node src/server/server.js", 
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "nodemon src/server/server-improved.js",
+    "dev:client": "webpack serve --mode development",
     "build": "npm run build:client && npm run build:server",
-    "build:client": "mkdir -p dist && cp -r src/client/* dist/",
+    "build:client": "NODE_ENV=production webpack --mode production",
     "build:server": "mkdir -p dist/server && cp -r src/server dist/",
-    "watch": "npm run watch:client & npm run watch:server",
-    "watch:client": "nodemon --watch src/client --exec 'npm run build:client'",
-    "watch:server": "nodemon src/server/server.js",
+    "watch": "npm run dev",
+    "watch:client": "webpack --mode development --watch",
+    "watch:server": "nodemon src/server/server-improved.js",
     "lint": "eslint src/",
     "test": "jest",
     "init-db": "node scripts/init-db.js",
@@ -53,7 +56,8 @@
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.8.1",
     "compression": "^1.7.4",
-    "express-validator": "^7.0.1"
+    "express-validator": "^7.0.1",
+    "concurrently": "^8.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
