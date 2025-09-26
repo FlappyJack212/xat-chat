@@ -21,6 +21,7 @@
     "import-ixat": "node scripts/sql-to-json-converter.js && node scripts/import-json-to-mongodb.js",
     "setup": "npm install && npm run init-db",
     "serve": "npm run build && node dist/server/server.js",
+    "xat": "node src/server/server-improved.js & open http://localhost:3000/xat-interface.html",
     "email-webhook": "node src/server/scripts/ultra-simple-email.js",
     "send-verification": "node src/server/scripts/send-verification-email.js",
     "verify-email": "node src/server/scripts/verify-email.js"

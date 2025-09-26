@@ -1,0 +1,523 @@
+/**
+ * xat.com Power Effects CSS
+ * Authentic animations and effects for xat-style powers
+ */
+
+/* PAWN COLORS - Exact xat.com pawn system */
+.pawn {
+    display: inline-block;
+    width: 8px;
+    height: 10px;
+    border-radius: 2px;
+    margin: 0 2px;
+    vertical-align: middle;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Basic Pawn Colors */
+.pawn-white { background: #ffffff; }
+.pawn-red { background: #ff0000; }
+.pawn-blue { background: #0080ff; }
+.pawn-green { background: #00ff00; }
+.pawn-yellow { background: #ffff00; }
+.pawn-purple { background: #8000ff; }
+.pawn-orange { background: #ff8000; }
+.pawn-pink { background: #ff00ff; }
+.pawn-brown { background: #8b4513; }
+.pawn-black { background: #000000; }
+
+/* Special Pawn Effects */
+.pawn-gold {
+    background: linear-gradient(45deg, #ffd700, #ffaa00);
+    box-shadow: 0 0 4px rgba(255, 215, 0, 0.8);
+    animation: goldGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes goldGlow {
+    0% { box-shadow: 0 0 4px rgba(255, 215, 0, 0.8); }
+    100% { box-shadow: 0 0 8px rgba(255, 215, 0, 1), 0 0 12px rgba(255, 215, 0, 0.6); }
+}
+
+.pawn-emerald {
+    background: linear-gradient(45deg, #00ff80, #00cc66);
+    box-shadow: 0 0 4px rgba(0, 255, 128, 0.8);
+    animation: emeraldGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes emeraldGlow {
+    0% { box-shadow: 0 0 4px rgba(0, 255, 128, 0.8); }
+    100% { box-shadow: 0 0 8px rgba(0, 255, 128, 1), 0 0 12px rgba(0, 255, 128, 0.6); }
+}
+
+.pawn-ruby {
+    background: linear-gradient(45deg, #ff0040, #cc0033);
+    box-shadow: 0 0 4px rgba(255, 0, 64, 0.8);
+    animation: rubyGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes rubyGlow {
+    0% { box-shadow: 0 0 4px rgba(255, 0, 64, 0.8); }
+    100% { box-shadow: 0 0 8px rgba(255, 0, 64, 1), 0 0 12px rgba(255, 0, 64, 0.6); }
+}
+
+.pawn-sapphire {
+    background: linear-gradient(45deg, #0066ff, #0044cc);
+    box-shadow: 0 0 4px rgba(0, 102, 255, 0.8);
+    animation: sapphireGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes sapphireGlow {
+    0% { box-shadow: 0 0 4px rgba(0, 102, 255, 0.8); }
+    100% { box-shadow: 0 0 8px rgba(0, 102, 255, 1), 0 0 12px rgba(0, 102, 255, 0.6); }
+}
+
+.pawn-diamond {
+    background: linear-gradient(45deg, #ffffff, #e6e6e6, #ffffff);
+    background-size: 200% 200%;
+    animation: diamondShine 3s ease-in-out infinite;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+}
+
+@keyframes diamondShine {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.pawn-rainbow {
+    background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff00ff);
+    background-size: 400% 400%;
+    animation: rainbow 2s linear infinite;
+}
+
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 25% 50%; }
+    50% { background-position: 50% 50%; }
+    75% { background-position: 75% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.pawn-everypower {
+    background: linear-gradient(45deg, #ff0000, #ff4000, #ff8000, #ffbf00, #ffff00, #bfff00, #80ff00, #40ff00, #00ff00, #00ff40, #00ff80, #00ffbf, #00ffff, #00bfff, #0080ff, #0040ff, #0000ff, #4000ff, #8000ff, #bf00ff, #ff00ff, #ff00bf, #ff0080, #ff0040);
+    background-size: 500% 500%;
+    animation: everypower 3s linear infinite;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes everypower {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 500% 50%; }
+}
+
+/* TEXT EFFECTS - xat.com Power Effects */
+.power-effect {
+    position: relative;
+    display: inline;
+}
+
+/* Rainbow Text */
+.effect-rainbow {
+    background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff00ff);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: rainbow 2s linear infinite;
+}
+
+/* Glow Effect */
+.effect-glow {
+    color: #ffffff;
+    text-shadow: 
+        0 0 5px currentColor,
+        0 0 10px currentColor,
+        0 0 15px currentColor,
+        0 0 20px currentColor;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 
+            0 0 5px currentColor,
+            0 0 10px currentColor,
+            0 0 15px currentColor,
+            0 0 20px currentColor;
+    }
+    100% {
+        text-shadow: 
+            0 0 10px currentColor,
+            0 0 20px currentColor,
+            0 0 30px currentColor,
+            0 0 40px currentColor;
+    }
+}
+
+/* Sparkle Effect */
+.effect-sparkle {
+    position: relative;
+    overflow: visible;
+}
+
+.effect-sparkle::before,
+.effect-sparkle::after {
+    content: '✨';
+    position: absolute;
+    top: -10px;
+    animation: sparkle 1.5s ease-in-out infinite;
+    font-size: 12px;
+    z-index: 1;
+}
+
+.effect-sparkle::before {
+    left: -10px;
+    animation-delay: 0s;
+}
+
+.effect-sparkle::after {
+    right: -10px;
+    animation-delay: 0.75s;
+}
+
+@keyframes sparkle {
+    0%, 100% { 
+        opacity: 0; 
+        transform: scale(0.5) rotate(0deg); 
+    }
+    50% { 
+        opacity: 1; 
+        transform: scale(1) rotate(180deg); 
+    }
+}
+
+/* Bounce Effect */
+.effect-bounce {
+    animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-8px); }
+    60% { transform: translateY(-4px); }
+}
+
+/* Shake Effect */
+.effect-shake {
+    animation: shake 0.5s ease-in-out infinite;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+    20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+/* Spin Effect */
+.effect-spin {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Pulse Effect */
+.effect-pulse {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Fade Effect */
+.effect-fade {
+    animation: fade 2s ease-in-out infinite alternate;
+}
+
+@keyframes fade {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* Flip Effect */
+.effect-flip {
+    animation: flip 1s ease-in-out infinite;
+}
+
+@keyframes flip {
+    0% { transform: rotateY(0deg); }
+    50% { transform: rotateY(180deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+/* Zoom Effect */
+.effect-zoom {
+    animation: zoom 1s ease-in-out infinite alternate;
+}
+
+@keyframes zoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+/* Wave Effect */
+.effect-wave {
+    animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% { transform: translateY(0px); }
+    25% { transform: translateY(-3px); }
+    50% { transform: translateY(0px); }
+    75% { transform: translateY(3px); }
+}
+
+/* Neon Effect */
+.effect-neon {
+    color: #00ffff;
+    text-shadow: 
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 15px #00ffff,
+        0 0 20px #00ffff,
+        0 0 35px #00ffff,
+        0 0 40px #00ffff;
+    animation: neon-flicker 2s ease-in-out infinite alternate;
+}
+
+@keyframes neon-flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow: 
+            0 0 5px #00ffff,
+            0 0 10px #00ffff,
+            0 0 15px #00ffff,
+            0 0 20px #00ffff,
+            0 0 35px #00ffff,
+            0 0 40px #00ffff;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
+/* Fire Effect */
+.effect-fire {
+    color: #ff4500;
+    text-shadow: 
+        0 0 5px #ff4500,
+        0 0 10px #ff4500,
+        0 0 15px #ff6500,
+        0 0 20px #ff8500;
+    animation: fire 1s ease-in-out infinite alternate;
+}
+
+@keyframes fire {
+    0% {
+        text-shadow: 
+            0 0 5px #ff4500,
+            0 0 10px #ff4500,
+            0 0 15px #ff6500,
+            0 0 20px #ff8500;
+    }
+    100% {
+        text-shadow: 
+            0 0 8px #ff6500,
+            0 0 15px #ff8500,
+            0 0 20px #ffa500,
+            0 0 25px #ffff00;
+    }
+}
+
+/* Ice Effect */
+.effect-ice {
+    color: #87ceeb;
+    text-shadow: 
+        0 0 5px #87ceeb,
+        0 0 10px #87ceeb,
+        0 0 15px #b0e0e6,
+        0 0 20px #e0f6ff;
+    animation: ice 2s ease-in-out infinite alternate;
+}
+
+@keyframes ice {
+    0% {
+        text-shadow: 
+            0 0 5px #87ceeb,
+            0 0 10px #87ceeb,
+            0 0 15px #b0e0e6,
+            0 0 20px #e0f6ff;
+    }
+    100% {
+        text-shadow: 
+            0 0 8px #b0e0e6,
+            0 0 15px #e0f6ff,
+            0 0 20px #ffffff,
+            0 0 25px #ffffff;
+    }
+}
+
+/* SPECIAL MESSAGE EFFECTS */
+.message-effect-entrance {
+    animation: messageEntrance 0.5s ease-out;
+}
+
+@keyframes messageEntrance {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.message-effect-highlight {
+    background: rgba(254, 211, 39, 0.1);
+    border-left: 3px solid #fed327;
+    padding-left: 5px;
+    animation: highlight 0.5s ease-out;
+}
+
+@keyframes highlight {
+    0% {
+        background: rgba(254, 211, 39, 0.3);
+    }
+    100% {
+        background: rgba(254, 211, 39, 0.1);
+    }
+}
+
+/* POWER ACTIVATION EFFECTS */
+.power-activation {
+    animation: powerActivate 0.6s ease-out;
+}
+
+@keyframes powerActivate {
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    50% {
+        transform: scale(1.2);
+        filter: brightness(1.5);
+    }
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+/* POWER COOLDOWN */
+.power-cooldown {
+    opacity: 0.5;
+    pointer-events: none;
+    position: relative;
+}
+
+.power-cooldown::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+    animation: cooldownSweep 2s ease-in-out;
+}
+
+@keyframes cooldownSweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* USERNAME STYLING BASED ON RANK */
+.username-owner {
+    color: #ff6b6b;
+    font-weight: bold;
+    text-shadow: 0 0 3px rgba(255, 107, 107, 0.5);
+}
+
+.username-moderator {
+    color: #4ecdc4;
+    font-weight: bold;
+    text-shadow: 0 0 3px rgba(78, 205, 196, 0.5);
+}
+
+.username-member {
+    color: #95e1d3;
+    font-weight: bold;
+}
+
+.username-guest {
+    color: #cccccc;
+}
+
+/* CHAT BUBBLE EFFECTS */
+.chat-bubble {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin: 2px 0;
+    position: relative;
+}
+
+.chat-bubble.owner {
+    border-color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
+}
+
+.chat-bubble.moderator {
+    border-color: #4ecdc4;
+    background: rgba(78, 205, 196, 0.1);
+}
+
+.chat-bubble.member {
+    border-color: #95e1d3;
+    background: rgba(149, 225, 211, 0.1);
+}
+
+/* RESPONSIVE POWER EFFECTS */
+@media (prefers-reduced-motion: reduce) {
+    .power-effect,
+    .effect-glow,
+    .effect-rainbow,
+    .effect-sparkle,
+    .effect-bounce,
+    .effect-shake,
+    .effect-spin,
+    .effect-pulse,
+    .effect-fade,
+    .effect-flip,
+    .effect-zoom,
+    .effect-wave,
+    .effect-neon,
+    .effect-fire,
+    .effect-ice,
+    .pawn-gold,
+    .pawn-emerald,
+    .pawn-ruby,
+    .pawn-sapphire,
+    .pawn-diamond,
+    .pawn-rainbow,
+    .pawn-everypower {
+        animation: none !important;
+    }
+}
+
+/* MOBILE OPTIMIZATIONS */
+@media (max-width: 768px) {
+    .effect-sparkle::before,
+    .effect-sparkle::after {
+        display: none;
+    }
+    
+    .power-effect {
+        animation-duration: 1s;
+    }
+}

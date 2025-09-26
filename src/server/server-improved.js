@@ -84,6 +84,11 @@ class ImprovedXatServer {
         this.app.use(express.json({ limit: '10mb' }));
         this.app.use(express.urlencoded({ extended: true, limit: '10mb' }));
         
+        // Serve xat interface as main page
+        this.app.get('/', (req, res) => {
+            res.sendFile(path.join(__dirname, '../client/xat-interface.html'));
+        });
+
         // Static files with caching
         this.app.use(express.static(path.join(__dirname, '../client'), {
             maxAge: process.env.NODE_ENV === 'production' ? '1y' : '0',
