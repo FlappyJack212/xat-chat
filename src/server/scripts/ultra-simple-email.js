@@ -128,7 +128,7 @@ const PORT = process.env.EMAIL_PORT || 3001;
 app.listen(PORT, () => {
     console.log(`🚀 Ultra Simple Email System running on port ${PORT}`);
     console.log(`📧 Send verification: POST http://localhost:${PORT}/send-verification`);
-    console.log(`✅ Verify email: GET http://localhost:${PORT}/verify-email?token=xxx&email=xxx`);
+    console.log(`✅ Verify email: GET http://localhost:${PORT}/verify-email?token=<token>&email=<email>`);
     console.log(`❤️ Health check: GET http://localhost:${PORT}/health`);
     console.log(`\n💡 This system generates verification URLs that you can copy/paste or send via any email service!`);
 });
