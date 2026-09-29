@@ -1731,18 +1731,18 @@ var selector = new function () {
       } else {
         let _0xd62913 = !!selector[String.raw`Mask`];
         let _0x33ad60 = document[String.raw`getElementById`](String.raw`flexy`);
-        _0x33ad60[String.raw`innerHTML`] = "";
         let _0x10e2e1 = _0x4212ce ? "" : String.raw`d-none`;
+        let _0x33ad60_html = "";
         for (let _0x4fcd5e in selector[String.raw`order`]) {
           let _0x1d8481 = 0;
           let _0x276544 = 0;
-          _0x33ad60[String.raw`innerHTML`] += String.raw`<div id="` + _0x4fcd5e + String.raw`Container" class="selectorContainer sectionText ` + _0x10e2e1 + String.raw`" data-sub="` + _0x4fcd5e + "\">" + _0x4fcd5e + String.raw`</div>
-            <div id="` + _0x4fcd5e + String.raw`Category" class="selectorContainer"></div>`;
+          _0x33ad60_html += String.raw`<div id="` + _0x4fcd5e + String.raw`Container" class="selectorContainer sectionText ` + _0x10e2e1 + String.raw`" data-sub="` + _0x4fcd5e + "\">" + _0x4fcd5e + String.raw`</div>
+            <div id="` + _0x4fcd5e + String.raw`Category" class="selectorContainer">`;
           for (let _0x4305b2 in selector[String.raw`categories`][_0x4fcd5e]) {
             let _0x3fd222 = 0;
             let _0x38b19f = 0;
-            document[String.raw`getElementById`](_0x4fcd5e + String.raw`Category`)[String.raw`innerHTML`] += String.raw`<div id="` + _0x4305b2 + String.raw`ScContainer" class="selectorContainer subSectionText" data-sub="` + _0x4305b2 + "\">" + _0x4305b2 + String.raw`</div>
-              <div id="` + _0x4305b2 + String.raw`ScCategory" class="selectorContainer"></div>`;
+            _0x33ad60_html += String.raw`<div id="` + _0x4305b2 + String.raw`ScContainer" class="selectorContainer subSectionText" data-sub="` + _0x4305b2 + "\">" + _0x4305b2 + String.raw`</div>
+              <div id="` + _0x4305b2 + String.raw`ScCategory" class="selectorContainer">`;
             _0x37dadf = "";
             for (let _0x1c0a02 = 3;; _0x1c0a02++) {
               let _0x8a0c01 = parseInt(selector[String.raw`categories`][_0x4fcd5e][_0x4305b2][_0x1c0a02]);
@@ -1770,15 +1770,23 @@ var selector = new function () {
                 }
               }
             }
-            _0xa01436(_0x4305b2 + String.raw`ScCategory`, _0x37dadf);
+            _0x33ad60_html += _0x37dadf + String.raw`</div>`;
             if (_0xd62913) {
-              _0xa01436(_0x4305b2 + String.raw`ScContainer`, " [" + _0x3fd222 + "/" + _0x38b19f + "]");
+              _0x33ad60_html = _0x33ad60_html.replace(
+                String.raw`<div id="` + _0x4305b2 + String.raw`ScContainer" class="selectorContainer subSectionText" data-sub="` + _0x4305b2 + "\">" + _0x4305b2 + String.raw`</div>`,
+                String.raw`<div id="` + _0x4305b2 + String.raw`ScContainer" class="selectorContainer subSectionText" data-sub="` + _0x4305b2 + "\">" + _0x4305b2 + " [" + _0x3fd222 + "/" + _0x38b19f + "]" + String.raw`</div>`
+              );
             }
           }
+          _0x33ad60_html += String.raw`</div>`;
           if (_0xd62913) {
-            _0xa01436(_0x4fcd5e + String.raw`Container`, " [" + _0x1d8481 + "/" + _0x276544 + "]");
+            _0x33ad60_html = _0x33ad60_html.replace(
+              String.raw`<div id="` + _0x4fcd5e + String.raw`Container" class="selectorContainer sectionText ` + _0x10e2e1 + String.raw`" data-sub="` + _0x4fcd5e + "\">" + _0x4fcd5e + String.raw`</div>`,
+              String.raw`<div id="` + _0x4fcd5e + String.raw`Container" class="selectorContainer sectionText ` + _0x10e2e1 + String.raw`" data-sub="` + _0x4fcd5e + "\">" + _0x4fcd5e + " [" + _0x1d8481 + "/" + _0x276544 + "]" + String.raw`</div>`
+            );
           }
         }
+        _0x33ad60[String.raw`innerHTML`] = _0x33ad60_html;
       }
       if (!_0xd65361) {
         addClass(String.raw`d-none`, String.raw`flexy`);
