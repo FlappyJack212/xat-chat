@@ -16,6 +16,13 @@ const path = require('path');
 // Load environment variables
 dotenv.config();
 
+// Require JWT_SECRET to be defined
+if (!process.env.JWT_SECRET) {
+    console.error('❌ FATAL ERROR: JWT_SECRET environment variable is not defined.');
+    console.error('Please set it in your .env file or environment variables.');
+    process.exit(1);
+}
+
 // Import models
 const User = require('./models/User');
 const Power = require('./models/Power');

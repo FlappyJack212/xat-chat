@@ -7,6 +7,10 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
+if (!process.env.JWT_SECRET) {
+    throw new Error('JWT_SECRET environment variable is required');
+}
+
 class AuthService {
     /**
      * Register a new user
@@ -58,7 +62,7 @@ class AuthService {
             console.log('🔑 [AUTH] Generating JWT token...');
             const token = jwt.sign(
                 { userId: user._id },
-                process.env.JWT_SECRET || 'your-secret-key',
+                process.env.JWT_SECRET,
                 { expiresIn: '7d' }
             );
 
@@ -144,7 +148,7 @@ class AuthService {
             console.log('🔑 [AUTH] Generating JWT token...');
             const token = jwt.sign(
                 { userId: user._id },
-                process.env.JWT_SECRET || 'your-secret-key',
+                process.env.JWT_SECRET,
                 { expiresIn: '7d' }
             );
 
@@ -198,7 +202,7 @@ class AuthService {
      */
     static async authenticate(token) {
         try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
             const user = await User.findById(decoded.userId);
 
             if (user) {
@@ -252,7 +256,7 @@ class AuthService {
         }
 
         try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
             req.userId = decoded.userId;
             next();
         } catch (error) {
