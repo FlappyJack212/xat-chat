@@ -1,5 +1,10 @@
 const jwt = require('jsonwebtoken');
 
+if (!process.env.JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable is not set');
+}
+const JWT_SECRET = process.env.JWT_SECRET;
+
 module.exports = (req, res, next) => {
   // Get token from header
   const token = req.header('Authorization')?.replace('Bearer ', '') || req.header('x-auth-token');
@@ -11,7 +16,7 @@ module.exports = (req, res, next) => {
 
   try {
     // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+    const decoded = jwt.verify(token, JWT_SECRET);
     
     // Add user from payload
     req.user = decoded;

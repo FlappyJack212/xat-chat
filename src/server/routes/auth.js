@@ -4,8 +4,11 @@ const jwt = require('jsonwebtoken');
 const { pool } = require('../config/database');
 const router = express.Router();
 
-// JWT secret (should be in environment variables in production)
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-here';
+// JWT secret (must be in environment variables)
+if (!process.env.JWT_SECRET) {
+    throw new Error('JWT_SECRET environment variable is not set');
+}
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Middleware to verify JWT token
 const authenticateToken = async (req, res, next) => {
