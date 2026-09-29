@@ -347,7 +347,7 @@ li.friend:last-child {
     display: none !important;
 }
 
-/* Fix overlapping issues */
+/* Fixed overlapping issues */
 #background .cell {
     position: relative;
     z-index: 1;
