@@ -232,7 +232,7 @@ app.listen(PORT, () => {
     console.log(`🚀 Simple Email API running on port ${PORT}`);
     console.log(`📧 Provider: ${emailAPI.emailProvider}`);
     console.log(`📧 Send verification: POST http://localhost:${PORT}/send-verification`);
-    console.log(`✅ Verify email: GET http://localhost:${PORT}/verify-email?token=xxx&email=xxx`);
+    console.log(`✅ Verify email: GET http://localhost:${PORT}/verify-email?token=YOUR_TOKEN&email=YOUR_EMAIL`);
     console.log(`❤️ Health check: GET http://localhost:${PORT}/health`);
 });
 
